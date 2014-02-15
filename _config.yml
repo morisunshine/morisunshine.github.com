@@ -1,7 +1,7 @@
 markdown: rdiscount
 permalink: /:year/:month/:day/:title/
-url: http://webfrogs.github.com
-author: webfrogs
+url: http://morisunshine.github.com
+author: morisunshine
 pygments: true
 safe: true
 paginate: 16
