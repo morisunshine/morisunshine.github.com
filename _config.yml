@@ -18,3 +18,10 @@ paginate: 20
 truncate: 300 
 about: "这里是我的博客。"
 
+analytics :
+  provider : google
+  google : 
+      tracking_id : 'UA-47868064-1'
+  getclicky :
+    site_id :
+
