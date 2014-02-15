@@ -4,22 +4,22 @@ layout: page
 comments: no
 ---
 
-程序猿一头，目前从事iOS系统的相关开发。	
-热爱编程，开源爱好者，喜欢linux，github等。		
-喜欢干净整洁的代码，轻微代码洁癖。  	
-微博控
+青春过半，一无所长。  
+面对现实，虚构远方。   	
+程序猿一只，目前从事iOS系统的相关开发。		
+喜欢敲键盘的感觉
 
 ----
 
 ###联系方式：        
 
-个人邮箱: [ccf.developer@gmail.com](mailto:ccf.developer@gmail.com)     
-新浪微博: [webfrogs](http://weibo.com/u/1713195262)	 
-豆瓣：[网蛙](http://www.douban.com/people/48235183/)    
-github : [webfrogs](https://github.com/webfrogs)        
-twitter: [Carl Chen](https://twitter.com/CarlOnWeb)
+个人邮箱: [allenwenzhou@gmail.com](mailto:allenwenzhou@gmail.com)     
+新浪微博: [墨日阳光](http://weibo.com/u/1626743220)	 
+豆瓣：[墨日阳光](http://www.douban.com/people/39009519/)    
+github : [morisunshine](https://github.com/morisunshine)        
+twitter: [morisunshine](https://twitter.com/morisunshine)
 
 ----
 
 
-[![新浪微博](http://service.t.sina.com.cn/widget/qmd/1713195262/f78fbcd2/1.png)](http://weibo.com/u/1713195262?s=6uyXnP)
+[![新浪微博](http://service.t.sina.com.cn/widget/qmd/1626743220/f78fbcd2/1.png)](http://weibo.com/u/1626743220?s=6uyXnP)

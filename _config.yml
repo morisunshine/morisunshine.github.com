@@ -1,9 +1,20 @@
 markdown: rdiscount
 permalink: /:year/:month/:day/:title/
-url: http://morisunshine.github.com
+url: http://morisunshine.com
 author: morisunshine
 pygments: true
 safe: true
 paginate: 16
 auto: true
+name: Morisunshine's Blog
+author: morisunshine
+email: allenwenzhou@gmail.com
+duoshuo: morisunshine
+weibo: 1626743220
+github: morisunshine
+pygments: true
+safe: true
+paginate: 20 
+truncate: 300 
+about: "这里是我的博客。"
 
