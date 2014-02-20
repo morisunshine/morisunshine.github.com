@@ -53,9 +53,9 @@ end
 
 
 ```
-➜  cat moonlitsailor.gemspec
+➜  cat moondemo.gemspec
 Gem::Specification.new do |s|
-  s.name        = 'hola'
+  s.name        = 'moondemo'
   s.version     = '0.0.0'
   s.date        = '2014-02-19'
   s.summary     = "moondemo!"
