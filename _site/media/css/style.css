@@ -24,10 +24,21 @@ p{padding:.5em 0;}
 li{padding:.2em 0;}
 ol,ul{list-style-position:inside;}
 ol ul, ul ol, ul ul, ol ol {margin-left:1em;}
-pre code{margin:1em 0;font-size:13px;line-height:1.6;display:block;overflow:auto;}
-blockquote{display:block;text-align:justify;border-left:4px solid #eeeeee;}
-blockquote{margin:1em 0em;padding-left:1.5em;}
-blockquote p{margin:0;padding:.5em 0;}
+/*code{
+font-family:'Century Gothic', "Microsoft Yahei", Monaco, Consolas, "Andale Mono", "DejaVu Sans Mono", monospace;
+}
+code{
+background:url("images/code.gif") no-repeat scroll #f1f1f1;
+margin:10px 0px 10px 0px;
+padding-top:25px;
+padding-left:25px;
+padding-bottom:10px;
+display:block;
+color:#333;
+font-size:13px;
+overflow:auto;
+border:1px solid #DCDCDC;}*/
+pre code{margin:1em 0;font-size:13px;line-height:1.6;display:block;overflow:auto;padding-left:25px;padding-top:25px;padding-bottom:10px;border:1px solid #DCDCDC;}
 #container{width:600px;margin:2em auto;display:block;padding:0 2em;}
 .content{font-size:16px;line-height:24px;}
 .content h1{padding:.5em 0;}
@@ -55,7 +66,7 @@ h2{font-family:"Cuprum","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-siz
 h3{font-family:"Cuprum","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:1.2em;color:#222;}
 h4{font-family:"Cuprum","Hiragino Sans GB","Microsoft YaHei",sans-serif;font-size:1em;color:#333;}
 pre,code{font-family:Menlo,"Andale Mono",Consolas,"Courier New",Monaco,monospace;font-size:13px;}
-code{background-color:#F5F5F5;}
+code{background-color:#F5F5F5;border-radius:5px;}
 embed,object,iframe{display:block;margin:4px auto;}
 .gist{font-size: 12px;line-height:1.6;}
 
@@ -92,7 +103,7 @@ font-size:11.25px;
 font-weight:700;
 color:#fff;
 text-transform:uppercase;
-background-color:#999;
+background-color:#F5F5F5;
 -webkit-border-radius:3px;
 -moz-border-radius:3px;
 border-radius:3px;
