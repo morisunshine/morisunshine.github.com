@@ -1,4 +1,4 @@
-markdown: rdiscount
+markdown: redcarpet
 permalink: /:year/:month/:day/:title/
 url: http://morisunshine.com
 author: morisunshine
@@ -12,8 +12,6 @@ email: allenwenzhou@gmail.com
 duoshuo: morisunshine
 weibo: 1626743220
 github: morisunshine
-pygments: true
-safe: true
 paginate: 20 
 truncate: 300 
 about: "这里是我的博客。"
@@ -24,4 +22,3 @@ analytics :
       tracking_id : 'UA-47868064-1'
   getclicky :
     site_id :
-
