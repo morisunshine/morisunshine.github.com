@@ -9,7 +9,7 @@ tags: [ruby,技术]
 &nbsp;&nbsp;&nbsp;&nbsp;[**什么是Gem？**](#introduce)       
 &nbsp;&nbsp;&nbsp;&nbsp;[**第一个Gem**](#first_gem)  
 &nbsp;&nbsp;&nbsp;&nbsp;[**包含更多文件**](#include_more_files)  
-&nbsp;&nbsp;&nbsp;&nbsp;[**添加脚本**](#adding_an_executable)  
+&nbsp;&nbsp;&nbsp;&nbsp;[**添加可执行文件**](#adding_an_executable)  
 &nbsp;&nbsp;&nbsp;&nbsp;[**测试**](#writing_tests)  
 &nbsp;&nbsp;&nbsp;&nbsp;[**文档**](#documenting_your_code)  
    
@@ -28,7 +28,7 @@ RubyGems是一个方便而强大的Ruby程序包管理器，Ruby的第三方插�
 我们要创建一个名叫`moondemo`的gem，首先，就要创建一个名字为`moondemo_yourname`的目录，这个是为了后面的发布，如果你想发布的话，就要检查一下你的gem名字是否已经被人使用了，如果已经被人使用，那就要换个名字了。    
 然后这个目录里的基本文件结构应该是这样的。 
  
-```
+```ruby
 ➜  tree  
 .  
 ├── moondemo.gemspec    
@@ -39,7 +39,7 @@ RubyGems是一个方便而强大的Ruby程序包管理器，Ruby的第三方插�
 
 gem中的代码被放在`lib`目录中，这里有个约定就是`lib`中必须有个和gem同名的ruby文件，这样当`require 'moondemo'`运行的时候，这个gem就会被加载，这个文件就是负责配置你的gem的代码和API。
 
-```
+```ruby
 ➜  cat lib/moondemo.rb
 class moondemo
   def self.hi
@@ -52,7 +52,7 @@ end
 而`.gemspec`文件是定义了这个gem的信息，比如是这个gem的功能，作者等，并且当这个gem发布的时候，会将这些信息显示到这个gem的主页上(就像[jekyll](http://rubygems.org/gems/jekyll))。
 
 
-```
+```ruby
 ➜  cat moondemo.gemspec
 Gem::Specification.new do |s|
   s.name        = 'moondemo'
@@ -74,7 +74,7 @@ end
 
 当我们创建完成了一个.gemspec，就可以编译出一个gem了，是不是有点小激动啊。但如果想要测试它就必须要在本地安装编译好的gem。
 
-```
+```ruby
 ➜ gem build moondemo.gemspec
   Successfully built RubyGem
   Name: moondemo
@@ -92,7 +92,7 @@ Installing ri documentation for moondemo-0.0.1
 上面这些步骤，只能是在本地已经装好了我们自己的gem，但还没有使用它，
 我们需要`require`这个gem然后根据自己定义的方法来使用它。
 
-```
+```ruby
 
 ➜ irb
 2.0.0-p353 :001 > require 'moondemo'
@@ -103,7 +103,7 @@ Hello world!
 ```
 现在就可以将你的gem发布到Ruby社区上了，当在发布之前需要将你的帐号安装在电脑上，如果你在RubyGems.org上注册了帐号，那就只需要输入一个命令,再输入自己的密码就可以了
 
-```
+```ruby
 ➜ curl -u 你的帐号名 https://rubygems.org/api/v1/api_key.yaml > ~/.gem/credentials; chmod 0600 ~/.gem/credentials
 
 Enter host password for user '你的帐号名':
@@ -112,7 +112,7 @@ Enter host password for user '你的帐号名':
 
 一旦你的用户名已经被安装了，就可以直接发布你的gem了。
 
-```
+```ruby
 ➜ gem push moondemo-0.0.1.gem
 Pushing gem to https://rubygems.org...
 Successfully registered gem: moondemo (0.0.1)
@@ -120,7 +120,7 @@ Successfully registered gem: moondemo (0.0.1)
 ```
 很快的，你的gem就可以被任何人使用了
 
-```
+```ruby
 ➜ gem install moondemo
 Successfully installed moondemo-0.0.1
 Parsing documentation for moondemo-0.0.1
@@ -138,7 +138,7 @@ Parsing documentation for moondemo-0.0.1
 比如我们想在刚才的gem中添加根据不同语言来输出不同语言的"Hello world"。  
 我们就可以添加一个`Translator`文件，刚才提到过，gem的根文件是负责加载代码的，所以其他的功能的文件就需要放在`lib`中和gem同名的目录中，我们可以这样分:
 
-```
+```bash
 ➜ tree
 .
 ├── lib
@@ -151,7 +151,7 @@ Parsing documentation for moondemo-0.0.1
 
 `Translator`中的内容是:
 
-```
+```ruby
 class Translator
   def initialize(language)
     @language = language
@@ -171,7 +171,7 @@ end
 
 所以接下来，`moondemo.rb`中需要加载`Translator`:
 
-```
+```ruby
 class MoonDemo
   def self.hi(language = "english")
     translator = Translator.new(language)
@@ -183,17 +183,17 @@ end
 
 *注意:每次新建了一个目录或者文件，都不要忘记加到.gemspec文件中，就像这样*
 
-```
+```ruby
  s.authors     = ["Sheldon"]
-  s.email       = 'allenwenzhou@gmial.com'
-  s.files       = ["lib/moondemo.rb","lib/moondemo/translator.rb"]
+ s.email       = 'allenwenzhou@gmial.com'
+ s.files       = ["lib/moondemo.rb","lib/moondemo/translator.rb"]
   
 ```
 *如果没有上面的修改的话，这个新建的目录是不会被加载到已安装的gem里的*
 
 让我们再运行一篇
 
-```
+```ruby
 ➜ irb -Ilib -rmoondemo
 2.0.0-p353 :001 > MoonDemo.hi("english")
  => "Hello world!"
@@ -209,29 +209,29 @@ end
 添加更多的目录也都是按照上面一样的步骤，我们要将我们的文件结构分布合理，这样对于我们以后的维护和未来开发人员来说就不会是一件头疼的事儿了。
 
 <a id='adding_an_executable' name='adding_an_executable'> </a>
-##添加脚本
+##添加可执行文件
 
-gem除了可以提供Ruby代码库外，还可以在你的脚本路径里提供很多脚本文件。可能最有名的就是`rake`，
-添加一个脚本文件其实很简单，你只需要将你的脚本文件放在你的gem的`bin`目录下，然后在将这个文件添加到`.gemspec`文件中`executables`的列表里就可以了，让我们试一下:
+gem除了可以提供Ruby代码库外，还可以在你的可执行文件路径里提供很多可执行可执行文件文件。可能最有名的就是`rake`，
+添加一个可执行可执行可执行文件文件其实很简单，你只需要将你的可执行文件放在你的gem的`bin`目录下，然后在将这个文件添加到`.gemspec`文件中`executables`的列表里就可以了，让我们试一下:
 
-```
+```bash
 ➜  mkdir bin
 ➜  touch bin/moondemo
 ➜  chmod a+x bin/moondemo
 
 ```
-这个脚本只需要在开头用[shebang](http://www.catb.org/jargon/html/S/shebang.html)来表明这是用程序来运行的，下面就是这个脚本的内容:
+这个可执行文件只需要在开头用[shebang](http://www.catb.org/jargon/html/S/shebang.html)来表明这是用程序来运行的，下面就是这个可执行文件的内容:
 
-```
+```ruby
 #!/usr/bin/env ruby
 
 require 'moondemo'
 puts MoonDemo.hi(ARGV[0])
 
 ```
-这个脚本的内容很简单，它只是加载了moondemo这个gem，然后在命令行中通过输入一个参数来判断是用哪个国家的语言来说"hello, world"。下面就是运行的例子:
+这个可执行文件的内容很简单，它只是加载了moondemo这个gem，然后在命令行中通过输入一个参数来判断是用哪个国家的语言来说"hello, world"。下面就是运行的例子:
 
-```
+```bash
 ➜  ruby -Ilib ./bin/moondemo
 Hello world!
 ➜  ruby -Ilib ./bin/moondemo chinese
@@ -239,9 +239,9 @@ Hello world!
 
 ```
 
-最后，我们要将这个脚本添加到`.gemspec`
+最后，我们要将这个可执行文件添加到`.gemspec`
 
-```
+```ruby
 s.executables << 'moondemo'
 
 ```
@@ -250,7 +250,7 @@ s.executables << 'moondemo'
 
 在看一下用我们自己定义的命令行吧:
 
-```
+```bash
 
 ➜  ~  moondemo
 Hello world!
@@ -273,7 +273,7 @@ Gems是支持将测试文件添加到程序包中的，所以当gem被下载了�
 
 我们需要在原来的基础上再添加一些文件，一个名为`Rakefile`的文件和一个名为`test`的目录:
 
-```
+```bash
 
 .
 ├── Rakefile
@@ -293,7 +293,7 @@ Gems是支持将测试文件添加到程序包中的，所以当gem被下载了�
 
 `Rakefile`文件是为了实现自动化的测试:
 
-```
+```ruby
 
 require 'rake/testtask'
 
@@ -309,7 +309,7 @@ task :default => :test
 
 下面就是一个简单的测试用例了:
 
-```
+```ruby
 require 'test/unit'
 require 'moondemo'
 
@@ -334,7 +334,7 @@ end
 
 最后，让我们运行这个测试:
 
-```
+```bash
 ➜  rake test
 Run options:
 
