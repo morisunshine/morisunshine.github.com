@@ -3,7 +3,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="author" content="morisunshine" />
-    <title>Categories | morisunshine</title>
+    <title>ReactiveCocoa学习笔记 | morisunshine</title>
     <link rel="shortcut icon" href="/favicon.ico">
     <link href="/feed/" rel="alternate" title="morisunshine" type="application/atom+xml" />
     <link rel="stylesheet" href="/media/css/style.css">
@@ -40,7 +40,7 @@
     <div id="container">
       <div id="main" role="main">
         <header>
-        <h1>Categories</h1>
+        <h1>ReactiveCocoa学习笔记</h1>
         </header>
         <nav>
         <span><a title="home page" class="" href="/">Home</a></span>
@@ -53,69 +53,95 @@
         </nav>
         <article class="content">
         <section class="post">
-<div id='tag_cloud'>
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#introduce_FRP"><strong>什么是FRP</strong></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#introduce_RAC"><strong>介绍RAC</strong></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#Framework"><strong>基本框架</strong></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#important_idea"><strong>重要概念</strong></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#basic_operator"><strong>基本操作</strong></a>  </p>
 
-<a href="#生活" title="生活" rel="1">生活 (1)</a>
+<p>ReactiveCocoa（其简称为RAC）是实现<a href="http://en.wikipedia.org/wiki/Functional_reactive_programming">Functional Reactive Programming</a>的iOS新框架，在<a href="http://www.raywenderlich.com/">Raywenderlich</a>的一个<a href="http://www.raywenderlich.com/55384/ios-7-best-practices-part-1">天气应用的教程</a>里，我第一次接触到了它，教程中虽然没有过多介绍，但只说了一点，我觉得非常有概括性 --- <strong>your code can react to nondeterministic events</strong>(你的代码能对不确定事件做出反应)。</p>
 
-<a href="#折腾" title="折腾" rel="1">折腾 (1)</a>
+<p><a id='introduce' name='introduce_FRP'> </a></p>
 
-<a href="#ruby" title="ruby" rel="1">ruby (1)</a>
+<h2>什么是FRP?</h2>
 
-<a href="#ios" title="ios" rel="1">ios (1)</a>
-
-</div>
-
-<ul class="listing">
-
-  <li class="listing-seperator" id="生活">生活</li>
-
-  <li class="listing-item">
-  <time datetime="2013-01-10">2013-01-10</time>
-  <a href="http://morisunshine.com/2013/01/10/travel-to-qinghai/" title="站在原地, 心存远方">站在原地, 心存远方</a>
-  </li>
-
-
-  <li class="listing-seperator" id="折腾">折腾</li>
-
-  <li class="listing-item">
-  <time datetime="2014-02-15">2014-02-15</time>
-  <a href="http://morisunshine.com/2014/02/15/myfirstblog/" title="第一篇博客">第一篇博客</a>
-  </li>
-
-
-  <li class="listing-seperator" id="ruby">ruby</li>
-
-  <li class="listing-item">
-  <time datetime="2014-02-19">2014-02-19</time>
-  <a href="http://morisunshine.com/2014/02/19/make_your_own_gem/" title="制作自己的Gem">制作自己的Gem</a>
-  </li>
-
-
-  <li class="listing-seperator" id="ios">ios</li>
-
-  <li class="listing-item">
-  <time datetime="2014-02-24">2014-02-24</time>
-  <a href="http://morisunshine.com/2014/02/24/study_with_RAC/" title="ReactiveCocoa学习笔记">ReactiveCocoa学习笔记</a>
-  </li>
-
-
-</ul>
-
-<script src="/media/js/jquery.tagcloud.js" type="text/javascript" charset="utf-8"></script> 
-
-<script language="javascript">
-$.fn.tagcloud.defaults = {
-    size: {start: 1, end: 1, unit: 'em'},
-      color: {start: '#f8e0e6', end: '#ff3333'}
-};
-
-$(function () {
-    $('#tag_cloud a').tagcloud();
-});
-</script>
+<hr>
 
 </section>
+<section class="meta">
 
+<br/>
+<br/>
+<span>
+	<a  href="http://morisunshine.com/2014/02/19/make_your_own_gem/" class="pageNav"  >Previous</a>
+	&nbsp;&nbsp;&nbsp;
+	<a   class="pageNavInvalid"  >Next</a>
+</span>
+<hr>
+<span class="author">
+  <a href="http://morisunshine.github.com">morisunshine</a>
+</span>
+<span class="time">
+  /
+  <time datetime="2014-02-24">2014-02-24</time>
+</span>
+<br />
+<span class="license">
+  Published under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">(CC) BY-NC-SA</a>
+</span>
+
+<span class="categories">
+  in categories
+  
+  <a href="/categories/#ios" title="ios">ios</a>&nbsp;
+  
+</span>
+
+
+<span class="tags">
+  tagged with 
+  
+  <a href="/tags/#iOS" title="iOS">iOS</a>&nbsp;
+  
+  <a href="/tags/#技术" title="技术">技术</a>&nbsp;
+  
+</span>
+
+</section>
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"morisunshne"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+<!--
+<script type="text/javascript">
+$(function(){
+  $(document).keydown(function(e) {
+    var url = false;
+        if (e.which == 37 || e.which == 74) {  // Left arrow and J
+            
+        url = 'http://morisunshine.com/2014/02/19/make_your_own_gem/';
+        
+        }
+        else if (e.which == 39 || e.which == 75) {  // Right arrow and K
+            
+        }
+        if (url) {
+            window.location = url;
+        }
+  });
+})
+</script>
+-->
 
 
         </article>
