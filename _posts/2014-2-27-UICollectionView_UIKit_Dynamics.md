@@ -239,4 +239,160 @@ if (self.dynamicAnimator.behaviors.count == 0) {
 
 让我们仔细查看这个实现的细节。首先我们得到了这个scroll view(这是我们的collection view)，然后计算它的content offset中y的变化(在这个例子中，我们的collection view是垂直滑动的)。一旦我们得到这个增量，我们需要得到用户接触的位置。这是非常重要的，因为我们希望离接触位置比较近的那些物品能移动地更即时，而离接触位置比较远的那些物品则应该落后。
 
+对于dynamic animator 中的每个行为，我们将点击处到该行为的x和y的距离只和除以1500，这个值是实验性决定的。分母越小，这个collection view的的交互就越有弹簧的感觉。一旦我们有了这种“滑动阻力”，我们根据它的增量来移动这个行为物品的中心的y，乘上scrollResistance这个变量。最后，Finally, note that we clamp the product of the delta and scroll resistance by the delta in case the scroll resistance exceeds the delta (这意味着物品可要开始往错误的方向移动了)。如果我们用了这么大的分母，那么这种情况是不可能的，但是在一些更具弹性的collection view 布局中还是需要注意的。
+
+就是这么一回事。以我的经验，这个方法对多大几百个物品的collection view是很有效的。查过这个数量的话，一次性加载所有物品到内存中就会变成很大的负担，当滑动的时候就会开始卡顿了。
+
+![Example](http://f.cl.ly/items/411o450x2E3A3c3m2b3k/springyCollectionView.gif)
+
+#Tiling your Dynamic Behaviors for Performance
+
+当你的collection view中只有几百个cell的时候，他运行的很好，但当数据源超过这个范围会发生什么呢？或者在运行的时候你不能预测你的数据源有多大呢？我们的方法就不管用了。
+
+除了在prepareLayout中加载所有的物品，如果我们能更聪明地知道哪些物品会加载那该多好啊。是的，就是这些显示的或即将显示的物品。这就是我们要采取的最好的办法。
+
+我们需要做的第一件事是跟踪所有dynamic animator中的行为物品的index path。我在collection view 中添加一个属性来做这件事:
+
+```
+@property (nonatomic, strong) NSMutableSet *visibleIndexPathsSet;
+
+```
+
+我们用set是因为它具有constant-time lookup for testing inclusion的功能，并且我们将testing for inclusion a lot。
+
+在我们实现一个全新的prepareLayout方法之前--其中一个问题就是tiles 行为--理解tiling的意思是非常重要的。当我们title行为的时候，我们会在物品离开collection view 的可视范围的时候删除对应的行为，在物品进入可视范围的时候又添加对应的行为。这是一个大麻烦:当我们创建新的行为时，我们需要飞快地创建他们。这就以为着创建它们就好像它们本来就已经在dynamic animator里了一样，并且正在被shouldInvalidateLayoutForBoundsChange:方法修改。
+
+因为我们正在飞快地创建这些新的行为，所有我们需要维持现在collection view 的一些状态。尤其我们需要跟踪最近一次我们边界变化的增量。这个状态将会被用来很快地创建我们的行为:
+
+```
+
+@property (nonatomic, assign) CGFloat latestDelta;
+
+```
+
+添加完这个属性后，我们将要在shouldInvalidateLayoutForBoundsChange:方法中添加下面这行:
+
+```
+
+self.latestDelta = delta;
+
+```
+
+这就是我们需要修改我们的方法来响应滚动事件。我们的两个方法是为了转达就collection view中物品的布局查询给dynamic animator，叫他们维持不变。事实上，大部分时间，当你的collection view实现了dynamic animator，你都需要实现我们上面提到的两个方法layoutAttributesForElementsInRect:和layoutAttributesForItemAtIndexPath:。
+
+这最难懂的部分就是tiling mechanism。我们将要完全重写我们的prepareLayout。
+
+这个方法的第一步是将那些所代表的物品的index path已经不再屏幕上的行为从dynamic animator上删除。第二步是添加那些即将显示的物品的行为。让我们先看一下第一步。
+
+像以前一样，我们要调用`super prepareLayout`，这样我们就能依赖父类`UICollectionViewFlowLayout`提供的布局信息了。还像以前一样，我们将将我们的父类询问一个矩形内的所有元素的布局属性。不同的是我们不是询问整个collection view 中的元素属性，而只是显示范围。
+
+所以我们需要计算这个显示矩形。但是别着急！有件事要记住。我们的用户可能会滑动collection view 非常快，导致了dynamic animator 不能保持好，所以我们需要稍微扩大显示范围，这样就能包含到那些将要现实的物品了。否则，在滑动很快的时候就会出现频闪现象了。让我们计算显示范围:
+
+```
+
+CGRect originalRect = (CGRect){.origin = self.collectionView.bounds.origin, .size = self.collectionView.frame.size};
+CGRect visibleRect = CGRectInset(originalRect, -100, -100);
+
+```
+
+我决定在真实的显示框上每个方向都缩进100个像素，这样对我的Demo来说是可行的。仔细检查这些值是否适合你们的collection view，尤其是当你们的cell很小的情况下。
+
+接下来我们就需要收集在显示范围内的collection view 布局元素。我们还要收集它们的index path:
+
+```
+
+NSArray *itemsInVisibleRectArray = [super layoutAttributesForElementsInRect:visibleRect];
+
+NSSet *itemsIndexPathsInVisibleRectSet = [NSSet setWithArray:[itemsInVisibleRectArray valueForKey:@"indexPath"]];
+
+```
+
+注意我们是在用一个NSSet。这是因为我们将要testing for inclusion within that set and we want constant-time lookup:
+
+接下来我们要做的就是遍历dynamic animator行为，过滤掉那些已经在itemsIndexPathsInVisibleRectSet中的物品。因为我们已经过滤掉我们的行为，所以我们将要遍历的这些物品都是不在显示范围里的，我们就可以将这些从animator中删除掉(连同visibleIndexPathsSet属性中的index path):
+
+```
+
+NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UIAttachmentBehavior *behaviour, NSDictionary *bindings) {
+    BOOL currentlyVisible = [itemsIndexPathsInVisibleRectSet member:[[[behaviour items] firstObject] indexPath]] != nil;
+    return !currentlyVisible;
+}]
+
+NSArray *noLongerVisibleBehaviours = [self.dynamicAnimator.behaviors filteredArrayUsingPredicate:predicate];
+
+[noLongerVisibleBehaviours enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop) {
+    [self.dynamicAnimator removeBehavior:obj];
+    [self.visibleIndexPathsSet removeObject:[[[obj items] firstObject] indexPath]];
+
+}];
+
+```
+
+下一步就是要算出新出现的UICollectionViewLayoutAttributes列表--就是说，那些他们的index path在itemsIndexPathsInVisibleRectSet却不在visibleIndexPathsSet的属性:
+
+```
+
+NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UICollectionViewLayoutAttributes *item, NSDictionary *bindings) {
+    BOOL currentlyVisible = [self.visibleIndexPathsSet member:item.indexPath] != nil;
+    return !currentlyVisible;
+
+}];
+NSArray *newlyVisibleItems = [itemsInVisibleRectArray filteredArrayUsingPredicate:predicate];
+
+```
+
+因为我们有一些新出现的布局属性，我就可以遍历他们来创建心的行为，并且将他们的index path添加到visibleIndexPathsSet属性中。首先，无论如何，我都需要获取到用户手指触碰的位置。如果它是CGPointZero的话，那就表示这个用户没有在滑动collection view，我就不需要飞库地创建新的行为:
+
+```
+
+CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
+
+```
+
+这是一个潜在的威胁。如果用户很快地滑动了collection view 之后释放了他的手指呢？这个collection view 就会一直滚动，但是我们的方法就不会飞快地创建新的行为了。幸运的是，那也就意味这scroll view滚动太快很难被注意到！好哇！这可能会是个问题，但是，只是针对那些用大量cell的collection view。在这种情况下，增加你的显示范围的界限就可以加载更多物品了。
+
+现在我们需要枚举我们新现实的物品，为他们创建行为，将他们的index path 添加到visibleIndexPathsSet属性。我们也需要做些运算来飞快地创建行为:
+
+```
+
+[newlyVisibleItems enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *item, NSUInteger idx, BOOL *stop) {
+    CGPoint center = item.center;
+    UIAttachmentBehavior *springBehaviour = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:center];
+    
+    springBehaviour.length = 0.0f;
+    springBehaviour.damping = 0.8f;
+    springBehaviour.frequency = 1.0f;
+    
+    if (!CGPointEqualToPoint(CGPointZero, touchLocation)) {
+        CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
+        CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
+        CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1500.0f;
+        
+	if (self.latestDelta < 0) {
+            center.y += MAX(self.latestDelta, self.latestDelta*scrollResistance);
+        
+	}
+	else {
+            center.y += MIN(self.latestDelta, self.latestDelta*scrollResistance);
+        
+	}
+        item.center = center;
+    
+    }
+    
+    [self.dynamicAnimator addBehavior:springBehaviour];
+    [self.visibleIndexPathsSet addObject:item.indexPath];
+
+}];
+
+```
+
+大部分代码看起来还是挺熟悉的。大概有一半是来自没有实现tiling的我们自己实现的prepareLayout。另一半是来自shouldInvalidateLayoutForBoundsChange方法。我们用latestDelta 属性来代替界限变化的增量，适当地调整UICollectionViewLayoutAttributes使这些cell表现地就像被附着行为拉出了一样。
+
+而且，真的！我已经在真机上测试过显示上千个cell，而且它运行非常完美。[去试试吧](https://github.com/objcio/issue-5-springy-collection-view)。
+
+#除了流动布局
+
+一般来说，当我们使用UICollectionView的时候，继承UICollectionViewFlowLayout会比继承UICollectionViewLayout更容易。这是因为flow layout 会为我们做很多事。
+
 
