@@ -393,6 +393,9 @@ CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView
 
 #除了流动布局
 
-一般来说，当我们使用UICollectionView的时候，继承UICollectionViewFlowLayout会比继承UICollectionViewLayout更容易。这是因为flow layout 会为我们做很多事。
+一般来说，当我们使用UICollectionView的时候，继承UICollectionViewFlowLayout会比继承UICollectionViewLayout更容易。这是因为flow layout 会为我们做很多事。然而，flow layouts are restricted to line-based, breaking layouts。如果你有一个布局不能适应这个标准怎么办？好的，如果你已经尝试用UICollectionViewFlowLayout来适应，而且你很确定它不能很好运行，那么就是时间break out the heavy-duty UICollectionViewLayout subclass。
+
+当处理UIKit Dynamic的时候也是真的。
+
 
 
