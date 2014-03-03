@@ -1,8 +1,8 @@
 ---
-layout: post
-title: "UICollectionView+UIKit Dynamics"
-category: iOS
-tags: [iOS, 技术]
+layout: post  
+title: "UICollectionView+UIKit Dynamics"  
+category: iOS  
+tags: [iOS, 技术]  
 
 ---
 
@@ -397,5 +397,60 @@ CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView
 
 当处理UIKit Dynamic的时候也是真的。
 
+让我们继承UICollectionViewLayout。当继承UICollectionViewLayout的时候需要实现collectionViewContentSize方法，这点非诚重要。否则这个collection view就不知道如果去显示自己，也不会有显示任何东西。因为我们想要我们的collection view不要再滑动，我们将会返回我们的collection view的frame的尺寸，减去它的contentInset.top:
 
+```
 
+-(CGSize)collectionViewContentSize 
+{
+    return CGSizeMake(self.collectionView.frame.size.width, 
+        self.collectionView.frame.size.height - self.collectionView.contentInset.top);
+
+}
+
+```
+
+在这个(有教育意义)的例子中，我们的collection view总是会以零个cell开始，物品通过`performBatchUpdates:`添加。这就意味着我们必须使用`-[UICollectionViewLayout prepareForCollectionViewUpdates:]`方法来添加我们的行为(即这个collection view的数据源总是以零开始)。
+
+出了给各个物品添加附着行为外，我们还将保留另外两个行为:重力和碰撞。对于添加在这个collection view中的每个物品来说，我们必须把这些物品添加到我们的碰撞和附着行为中。最后一步就是设置这些物品的初始位置为一些屏幕外的地方，这样就被附着行为拉入到屏幕内:
+
+```
+
+-(void)prepareForCollectionViewUpdates:(NSArray *)updateItems
+{
+    [super prepareForCollectionViewUpdates:updateItems];
+
+    [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger idx, BOOL *stop) {
+	    if (updateItem.updateAction == UICollectionUpdateActionInsert) {
+            UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes 
+                layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+        
+            attributes.frame = CGRectMake(CGRectGetMaxX(self.collectionView.frame) + kItemSize, 300, kItemSize, kItemSize);
+
+            UIAttachmentBehavior *attachmentBehaviour = [[UIAttachmentBehavior alloc] initWithItem:attributes 
+                                                                                  attachedToAnchor:attachmentPoint];
+            attachmentBehaviour.length = 300.0f;
+            attachmentBehaviour.damping = 0.4f;
+            attachmentBehaviour.frequency = 1.0f;
+            [self.dynamicAnimator addBehavior:attachmentBehaviour];
+        
+            [self.gravityBehaviour addItem:attributes];
+            [self.collisionBehaviour addItem:attributes];
+        
+	    }
+    
+    }];
+
+}
+
+```
+
+![Example](http://www.objc.io/images/issue-5/newtonianCollectionView@2x.gif)
+
+删除就更加复杂了。我们希望这些物品有"掉落"的效果而不是简单的消失。这就不仅仅是从collection view 中删除这个cell这么简单了，因为我们希望能保留它直到它离开了屏幕。我已经在代码中实现了这样的效果，但是有点坑爹。
+
+基本上我们要做的是在布局中提供一个方法，它删除附着行为，然后，过两秒之后，将cell从collection view中删除。我们希望在这段时间里，这个cell能掉出屏幕，但是这不一定会发生。如果没有发生，也没关系。只要淡出就行了。然而，我们必须避免在这两秒内没有新的cell被添加，没有旧的cell被删除。(我说过有点坑。)
+
+欢迎提要求。
+
+这个方法是有些限制的。我将cell数量的上限设置为10，但是即使这样，在像iPad2这样比较久的设备中，动画还是运行很慢。然而，这个例子充分地展示你可以自己实现有意思的动力学模拟的方法--这不意外它能解决任何数据集。你的模拟的各个方面，包括它的性能，都是取决于你。
