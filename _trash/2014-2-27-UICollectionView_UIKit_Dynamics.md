@@ -85,6 +85,7 @@ static NSString * CellIdentifier = @"CellIdentifier";
 
 ```
 
+
 注意到当试图被第一次出现的时候，这个布局是被无效的。这是因为没有用Storybards的结果(当使用Storyboards时，调用prepareLayout方法的时机是不同的--或是相同的--在WWDC的视频中他们没有告诉我们这些)。结果，一旦这些试图出现我们就需要手动使这个collection view 布局无效。当我们用tiling的时候，就不需要这样。
 
 让我们创建我们的collection view 布局。我们需要一个指向dynamic animator的强引用，它将推动我们的collection view布局的属性。我们将有一个私有属性被定义在这个实现文件里:
