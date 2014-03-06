@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="author" content="morisunshine" />
+    <title>iOS设计模式学习---装饰模式 | morisunshine</title>
+    <link rel="shortcut icon" href="/favicon.ico">
+    <link href="/feed/" rel="alternate" title="morisunshine" type="application/atom+xml" />
+    <link rel="stylesheet" href="/media/css/style.css">
+    <link rel="stylesheet" href="/media/css/highlight.css">
+    <script type="text/javascript" src="/media/js/jquery-1.7.1.min.js"></script>
+  </head>
+  <script type="text/javascript">
+    function setTimeSpan(){
+    	var date = new Date();
+    	timeSpan.innerText=date.format('yyyy-MM-dd hh:mm:ss');
+    }
+    
+    Date.prototype.format = function(format)
+		{
+    var o =
+    	{
+    	    "M+" : this.getMonth()+1, //month
+    	    "d+" : this.getDate(),    //day
+    	    "h+" : this.getHours(),   //hour
+    	    "m+" : this.getMinutes(), //minute
+    	    "s+" : this.getSeconds(), //second
+    	    "q+" : Math.floor((this.getMonth()+3)/3),  //quarter
+    	    "S" : this.getMilliseconds() //millisecond
+    	}
+    	if(/(y+)/.test(format))
+    	format=format.replace(RegExp.$1,(this.getFullYear()+"").substr(4 - RegExp.$1.length));
+    	for(var k in o)
+    	if(new RegExp("("+ k +")").test(format))
+    	format = format.replace(RegExp.$1,RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
+    	return format;
+		}
+  </script>
+  <body onLoad="setInterval(setTimeSpan,1000);">
+    <div id="container">
+      <div id="main" role="main">
+        <header>
+        <h1>iOS设计模式学习---装饰模式</h1>
+        </header>
+        <nav>
+        <span><a title="home page" class="" href="/">Home</a></span>
+        <span><a title="about" class="" href="/about/">About</a></span>
+        <span><a title="guestbook" class="" href="/guestbook/">Guestbook</a></span>
+        <span><a title="categories" class="" href="/categories/">Categories</a></span>
+        <span><a title="tags" class="" href="/tags/">Tags</a></span>
+        <span><a title="links" class="" href="/links/">Links</a></span>
+        <span><a title="subscribe by RSS" class="" href="/feed/">Subscribe</a></span>
+        </nav>
+        <article class="content">
+        <section class="post">
+<h2>定义</h2>
+
+<p>装饰模式（Decorator），动态地为一个对象添加额外的职责，是继承的替代方案，属于结构型模式。通过装饰模式扩展对象的功能比继承子类方式更灵活，使用继承子类的方式，是在编译时静态决定的，即编译时绑定，而且所有的子类都会继承相同的行为。然而，如果使用组合的方式扩展对象的行为，就可以在运行时动态地进行扩展，将来如果需要也可以动态的撤销，而不会影响原类的行为。<br>
+<img src="/assets/images/2013-7-14.jpg" alt="图片">  </p>
+
+<h2>实例</h2>
+
+<p>接下来，通过Object-C来实践一下，我设想一个场景，用Decorator模式来实现一下对某个手机的GPS和蓝牙功能扩展
+首先，我们需要一个手机的接口或者抽象类，我这里就用抽象类来实现，代码如下：</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="k">@interface</span> <span class="nc">AbstractCellPhone</span> : <span class="nc">NSObject</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">callNumber</span><span class="p">;</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">sendMessage</span><span class="p">;</span>
+<span class="k">@end</span>
+</code></pre></div><div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="cp">#import &quot;AbstractCellPhone.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">AbstractCellPhone</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">callNumber</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="s">@&quot;phone call somebody&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">sendMessage</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="s">@&quot;phone send a message to somebody&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@end</span>
+</code></pre></div>
+<p>AbstractCellPhone也就是结构图中的Component，然后，我再来实现Nokia和Moto的手机类，这类要继承AbstractCellPhone，也就是图中ConcreteComponent类要继承Component，实现代码如下：</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="cp">#import &quot;AbstractCellPhone.h&quot;   </span>
+<span class="k">@interface</span> <span class="nc">NokiaPhone</span> : <span class="nc">AbstractCellPhone</span>
+<span class="k">@end</span>
+</code></pre></div><div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="cp">#import &quot;NokiaPhone.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">NokiaPhone</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">callNumber</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="s">@&quot;NokiaPhone call somebody&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">sendMessage</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="s">@&quot;NokiaPhone send Message to Somebody&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</code></pre></div>
+<p>接下来我需要一个Decorator接口或者抽象类，实现代码如下：</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="cp">#import &quot;AbstractCellPhone.h&quot;</span>
+
+<span class="k">@interface</span> <span class="nc">Decorator</span> : <span class="nc">AbstractCellPhone</span>
+<span class="p">{</span>
+<span class="k">@protected</span> <span class="n">AbstractCellPhone</span> <span class="o">*</span><span class="n">abstractCellPhone</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="o">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">SetComponents</span><span class="o">:</span><span class="p">(</span><span class="n">Components</span><span class="o">*</span><span class="p">)</span><span class="n">component</span><span class="p">;</span>
+<span class="k">@end</span>
+</code></pre></div><div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="cp">#import &quot;Decorator.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">Decorator</span>
+<span class="k">-</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">SetComponents:</span><span class="p">(</span><span class="n">Components</span><span class="o">*</span><span class="p">)</span><span class="nv">component</span><span class="p">{</span>
+    <span class="n">components</span> <span class="o">=</span> <span class="n">component</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">callNumber</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">components</span><span class="p">.</span><span class="n">callNumber</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">sendMessage</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">components</span><span class="p">.</span><span class="n">sendMessage</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@end</span>
+</code></pre></div>
+<p>正如结构图中，这个Decorator即继承了AbstractCellPhone，又包含了一个私有的AbstractCellPhone的对象。这样做的意义是：Decorator类又使用了另外一个Component类。我们可以使用一个或多个Decorator对象来“装饰”一个Component对象，且装饰后的对象仍然是一个Component对象。在下来，我要实现GSP和蓝牙的功能扩展，它们要继承自Decorator，代码如下：</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="cp">#import &quot;Decorator.h&quot;</span>
+
+<span class="k">@interface</span> <span class="nc">DecoratorGPS</span> : <span class="nc">Decorator</span>
+
+<span class="k">@end</span>
+</code></pre></div><div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="cp">#import &quot;DecoratorGPS.h&quot;</span>
+
+<span class="k">@implementation</span> <span class="nc">DecoratorGPS</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">callNumber</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="o">:</span><span class="s">@&quot;%@ with GPS&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">super</span> <span class="n">callNumber</span><span class="p">]];</span>
+<span class="p">}</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">sendMessage</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="o">:</span><span class="s">@&quot;%@ with GPS&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">super</span> <span class="n">sendMessage</span><span class="p">]];</span>
+<span class="p">}</span>
+
+<span class="k">@end</span>
+</code></pre></div>
+<p>最后，用客户端程序验证一下：</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="p">@</span><span class="n">autoreleasepool</span> <span class="p">{</span>
+
+        <span class="n">Components</span> <span class="o">*</span><span class="n">phone</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ConcreteComponent</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">phone</span><span class="p">.</span><span class="n">callNumber</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">phone</span><span class="p">.</span><span class="n">sendMessage</span><span class="p">);</span>
+        <span class="n">ConcreteDecoratorA</span> <span class="o">*</span><span class="n">GPS</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ConcreteDecoratorA</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">GPS</span> <span class="n">SetComponents</span><span class="o">:</span><span class="n">phone</span><span class="p">];</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">GPS</span><span class="p">.</span><span class="n">callNumber</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">GPS</span><span class="p">.</span><span class="n">sendMessage</span><span class="p">);</span>
+        <span class="n">ConcreteDecoratorB</span> <span class="o">*</span><span class="n">bluetooth</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ConcreteDecoratorB</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">bluetooth</span> <span class="n">SetComponents</span><span class="o">:</span><span class="n">phone</span><span class="p">];</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">bluetooth</span><span class="p">.</span><span class="n">callNumber</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">bluetooth</span><span class="p">.</span><span class="n">sendMessage</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>执行结果：</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"> <span class="n">NokiaPhone</span> <span class="n">call</span> <span class="n">somebody</span>
+ <span class="n">NokiaPhone</span> <span class="n">send</span> <span class="n">Message</span> <span class="n">to</span> <span class="n">Somebody</span>
+ <span class="n">NokiaPhone</span> <span class="n">call</span> <span class="n">somebody</span> <span class="n">with</span> <span class="n">GPS</span>
+ <span class="n">NokiaPhone</span> <span class="n">send</span> <span class="n">Message</span> <span class="n">to</span> <span class="n">Somebody</span> <span class="n">with</span> <span class="n">GPS</span>
+ <span class="n">NokiaPhone</span> <span class="n">call</span> <span class="n">somebody</span> <span class="n">with</span> <span class="n">BlueTooth</span>
+ <span class="n">NokiaPhone</span> <span class="n">send</span> <span class="n">Message</span> <span class="n">to</span> <span class="n">Somebody</span> <span class="n">with</span> <span class="n">BlueTooth</span>
+</code></pre></div>
+</section>
+<section class="meta">
+
+<br/>
+<br/>
+<span>
+	<a  href="http://morisunshine.com/2013/01/10/travel-to-qinghai/" class="pageNav"  >Previous</a>
+	&nbsp;&nbsp;&nbsp;
+	<a  href="http://morisunshine.com/2014/02/15/my_first_blog/" class="pageNav"  >Next</a>
+</span>
+<hr>
+<span class="author">
+  <a href="http://morisunshine.github.com">morisunshine</a>
+</span>
+<span class="time">
+  /
+  <time datetime="2013-07-14">2013-07-14</time>
+</span>
+<br />
+<span class="license">
+  Published under <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">(CC) BY-NC-SA</a>
+</span>
+
+<span class="categories">
+  in categories
+  
+  <a href="/categories/#ios" title="ios">ios</a>&nbsp;
+  
+</span>
+
+
+<span class="tags">
+  tagged with 
+  
+  <a href="/tags/#iOS" title="iOS">iOS</a>&nbsp;
+  
+</span>
+
+</section>
+<!-- Duoshuo Comment BEGIN -->
+	<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"morisunshne"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+<!--
+<script type="text/javascript">
+$(function(){
+  $(document).keydown(function(e) {
+    var url = false;
+        if (e.which == 37 || e.which == 74) {  // Left arrow and J
+            
+        url = 'http://morisunshine.com/2013/01/10/travel-to-qinghai/';
+        
+        }
+        else if (e.which == 39 || e.which == 75) {  // Right arrow and K
+            
+        url = 'http://morisunshine.com/2014/02/15/my_first_blog/';
+        
+        }
+        if (url) {
+            window.location = url;
+        }
+  });
+})
+</script>
+-->
+
+
+        </article>
+      </div>
+
+    <footer>
+        <p><small>Powered by <a href="https://github.com/mojombo/jekyll">Jekyll</a> & <a href="http://pages.github.com">GitHub</a> | Copyright 2012 - 2014 by <a href="/about/">morisunshine</a> | <span class="label label-info" id="timeSpan"></span></small></p>
+    </footer>
+
+    </div>
+
+    <script type="text/javascript">
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;
+        i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
+      a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];
+      a.async=1;
+      a.src=g;
+      m.parentNode.insertBefore(a,m)}
+      )
+      (window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-47868064-1', 'morisunshine.com');
+      ga('send', 'pageview');
+
+    </script>
+
+    <!-- Baidu Button BEGIN -->
+		<script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=4&amp;pos=right&amp;uid=541841" ></script>
+		<script type="text/javascript" id="bdshell_js"></script>
+		<script type="text/javascript">
+		var bds_config={"bdTop":170};
+		document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
+		</script>
+		<!-- Baidu Button END -->
+  </body>
+</html>
