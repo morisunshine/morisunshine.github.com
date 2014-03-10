@@ -6,7 +6,9 @@ tags: [iOS, 技术]
 
 ---
 
-本文有[morisunshine](www.morisunshine.com)译自[objc.io](http://www.objc.io/issue-5/collection-views-and-uidynamics.html),原文作者[Ash Furrow](https://twitter.com/ashfurrow)。转载请注明出处！
+[原文](http://www.objc.io/issue-5/collection-views-and-uidynamics.html)作者[Ash Furrow](https://twitter.com/ashfurrow)。转载请注明出处！
+
+感谢[破土](http://blog.codingcoder.com/)参与翻译。
 
 UIKit Dynamics 是iOS7中基于物理动画引擎的一个新功能--它被特别设计使其能很好地与collection Views配合工作，collection view是在iOS6中才被引入的新特性。接下来，我们要好好看看如何将这两个特性结合在一起。 
 
@@ -268,7 +270,8 @@ if (self.dynamicAnimator.behaviors.count == 0) {
 我们需要做的第一件事就是是跟踪dynamic animator中的所有behavior物体的index path。我在collection view 中添加一个property来做这件事:
 
 
-```
+```objc
+
 @property (nonatomic, strong) NSMutableSet *visibleIndexPathsSet;
 
 ```
@@ -281,7 +284,7 @@ if (self.dynamicAnimator.behaviors.count == 0) {
 因为我们是在滚动中创建这些新的behavior，所以我们需要维持现在collection view 的一些状态。尤其我们需要跟踪最近一次我们`bound`变化的增量。我们会在滚动时用这个状态去创建我们的behavior:
 
 
-```
+```objc
 
 @property (nonatomic, assign) CGFloat latestDelta;
 
@@ -290,7 +293,7 @@ if (self.dynamicAnimator.behaviors.count == 0) {
 添加完这个property后，我们将要在`shouldInvalidateLayoutForBoundsChange:`方法中添加下面这行代码:
 
 
-```
+```objc
 
 self.latestDelta = delta;
 
@@ -308,7 +311,7 @@ self.latestDelta = delta;
 
 所以我们需要计算这个显示矩形。但是别着急！有件事要记住。我们的用户可能会非常快地滑动collection view，导致了dynamic animator不能跟上，所以我们需要稍微扩大显示范围，这样就能包含到那些将要显示的物体了。否则，在滑动很快的时候就会出现频闪现象了。让我们计算一下显示范围:
 
-```
+```objc
 
 CGRect originalRect = (CGRect){.origin = self.collectionView.bounds.origin, .size = self.collectionView.frame.size};
 CGRect visibleRect = CGRectInset(originalRect, -100, -100);
@@ -319,7 +322,7 @@ CGRect visibleRect = CGRectInset(originalRect, -100, -100);
 
 接下来我们就需要收集在显示范围内的collection view layout attributes。还有它们的index paths:
 
-```
+```objc
 
 NSArray *itemsInVisibleRectArray = [super layoutAttributesForElementsInRect:visibleRect];
 
@@ -332,7 +335,7 @@ NSSet *itemsIndexPathsInVisibleRectSet = [NSSet setWithArray:[itemsInVisibleRect
 接下来我们要做的就是遍历dynamic animator 的behaviors，过滤掉那些已经在`itemsIndexPathsInVisibleRectSet`中的item。因为我们已经过滤掉我们的behavior，所以我们将要遍历的这些item都是不在显示范围里的，我们就可以将这些item从animator中删除掉(连同`visibleIndexPathsSet`属性中的index path):
 
 
-```
+```objc
 
 NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UIAttachmentBehavior *behaviour, NSDictionary *bindings) {
     BOOL currentlyVisible = [itemsIndexPathsInVisibleRectSet member:[[[behaviour items] firstObject] indexPath]] != nil;
@@ -351,7 +354,7 @@ NSArray *noLongerVisibleBehaviours = [self.dynamicAnimator.behaviors filteredArr
 
 下一步就是要得到新出现item的`UICollectionViewLayoutAttributes`数组--那些item的index path在`itemsIndexPathsInVisibleRectSet`而不在`visibleIndexPathsSet`:
 
-```
+```objc
 
 NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UICollectionViewLayoutAttributes *item, NSDictionary *bindings) {
     BOOL currentlyVisible = [self.visibleIndexPathsSet member:item.indexPath] != nil;
@@ -364,7 +367,7 @@ NSArray *newlyVisibleItems = [itemsInVisibleRectArray filteredArrayUsingPredicat
 
 一旦我们有新的layout attribute出现，我就可以遍历他们来创建新的behavior，并且将他们的index path添加到`visibleIndexPathsSet`中。首先，无论如何，我都需要获取到用户手指触碰的位置。如果它是`CGPointZero`的话，那就表示这个用户没有在滑动collection view，我就不需要在滚动时创建新的behavior:
 
-```
+```objc
 
 CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
 
@@ -374,7 +377,7 @@ CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView
 
 现在我们需要枚举我们刚显示的item，为他们创建behavior，再将他们的index path 添加到`visibleIndexPathsSet`。我们还需要在滚动时做些运算来创建behavior:
 
-```
+```objc
 
 [newlyVisibleItems enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *item, NSUInteger idx, BOOL *stop) {
     CGPoint center = item.center;
@@ -420,7 +423,7 @@ CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView
 
 让我们继承`UICollectionViewLayout`。当继承`UICollectionViewLayout`的时候需要实现`collectionViewContentSize`方法，这点非常重要。否则这个collection view就不知道如果去显示自己，也不会有显示任何东西。因为我们想要我们的collection view不要再滑动，我们将会返回我们的collection view的frame的尺寸，减去它的`contentInset.top`:
 
-```
+```objc
 
 -(CGSize)collectionViewContentSize 
 {
@@ -435,7 +438,7 @@ CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView
 
 除了给各个物体添加附着behavior外，我们还将保留另外两个behavior:重力和碰撞。对于添加在这个collection view中的每个item来说，我们必须把这些item添加到我们的碰撞和附着behavior中。最后一步就是设置这些item的初始位置为屏幕外的某些地方，这样就有被附着behavior拉入到屏幕内的效果了:
 
-```
+```objc
 
 -(void)prepareForCollectionViewUpdates:(NSArray *)updateItems
 {
