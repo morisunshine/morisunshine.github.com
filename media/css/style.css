@@ -15,7 +15,7 @@
 body{font-size:14px;word-spacing:1px;
 	margin-left:auto;
 margin-right:auto;
-	font-family:"Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;color:#666666;background-color:#ffffff;}
+	font-family:"Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Sans Unicode",Verdana,sans-serif;color:#666666;background-color:#ffffff;}
 *{padding:0;margin: 0;border:none;outline:none;}
 a{color:#CDB380;text-decoration:none;}
 a:hover{color:#333333;text-decoration:underline;}
@@ -24,7 +24,7 @@ p{padding:.5em 0;}
 li{padding:.2em 0;}
 ol,ul{list-style-position:inside;}
 ol ul, ul ol, ul ul, ol ol {margin-left:1em;}
-pre code{margin:1em 0;font-size:13px;line-height:1.6;display:block;overflow:auto;padding-left:20px;padding-top:20px;padding-bottom:20px;border:1px solid #DCDCDC;}
+pre code{margin:1em 0;font-size:13px;line-height:1.6;display:block;overflow:auto;padding-left:20px;padding-top:20px;padding-bottom:20px;border:1px solid #F5F5F5;}
 #container{width:600px;margin:2em auto;display:block;padding:0 2em;}
 .content{font-size:16px;line-height:24px;}
 .content h1{padding:.5em 0;}
@@ -52,7 +52,9 @@ h2{font-family:Monaco,sans-serif;font-size:1.4em;color:#111;}
 h3{font-family:Monaco,sans-serif;font-size:1.2em;color:#222;}
 h4{font-family:Monaco,sans-serif;font-size:1em;color:#333;}
 pre,code{font-family:Monaco,monospace;font-size:13px;}
-code{background-color:#F5F5F5;border-radius:5px;}
+code{background-color:#F5F5F5;border-radius:5px;
+padding:2px 3px 2px 2px;
+margin:4px auto}
 embed,object,iframe{display:block;margin:4px auto;}
 .gist{font-size: 12px;line-height:1.6;}
 
