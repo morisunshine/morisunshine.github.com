@@ -11,14 +11,13 @@
 
 @import url(http://fonts.googleapis.com/css?family=Galdeano);
 @import url(http://fonts.googleapis.com/css?family=Electrolize);
-@import url(http://fonts.googleapis.com/css?family=Cuprum);
 
 body{font-size:14px;word-spacing:1px;
 	margin-left:auto;
 margin-right:auto;
 	font-family:"Galdeano","Hiragino Sans GB","Microsoft YaHei",Trebuchet,"Trebuchet MS",Tahoma,"Lucida Grande","Lucida Sans Unicode",Verdana,sans-serif;color:#666666;background-color:#ffffff;}
 *{padding:0;margin: 0;border:none;outline:none;}
-a{color:#dd0000;text-decoration:none;}
+a{color:#CDB380;text-decoration:none;}
 a:hover{color:#333333;text-decoration:underline;}
 hr{margin:.7em 0;border-top:1px dashed #d0d0d0;border-bottom:1px dashed #f9f9f9;}
 p{padding:.5em 0;}
@@ -42,11 +41,11 @@ pre code{margin:1em 0;font-size:13px;line-height:1.6;display:block;overflow:auto
 .listing-seperator{font-weight:bold;}
 .meta{text-align:right;font-size:12px;}
 .pageNav{font-weight:bold;font-size:17px;}
-.pageNavInvalid{font-weight:bold;font-size:17px;color:#D0D0D0;}
+.pageNavInvalid{font-weight:bold;font-size:17px;color:#32C9C9;}
 header{padding:.5em 0;border-bottom: 1px solid #cccccc;}
 nav{font-family:"Electrolize",sans-serif;font-size:1.1em;text-transform:uppercase;float:left;margin-left:-12em;width:9em;text-align:right;}
 nav a{display:block;padding:.7em 1em;color:#000000;}
-nav a:hover{background-color:#ff0000;text-decoration:none;color:#f9f9f9;-webkit-transition:color .2s linear;}
+nav a:hover{background-color:#32C9C9;text-decoration:none;color:#CDB380;-webkit-transition:color .2s linear;}
 .post{padding:.5em 0em;}
 h1{font-family:Monaco,sans-serif;font-size:1.6em;color:#000;}
 h2{font-family:Monaco,sans-serif;font-size:1.4em;color:#111;}
@@ -71,7 +70,7 @@ footer a {
 margin: 1px;
 border: 1px solid rgba(1,1,1,0);
 border-bottom: 1px dashed #BBB;
-color: #B9221F;
+color: #64D2D2;
 text-decoration: none;
 }
 
@@ -129,7 +128,7 @@ text-decoration: none;
 
 .paginator .current-page {
 color: white;
-background: #ff0000;
+background: #32C9C9;
 }
 
 .paginator a:hover{
