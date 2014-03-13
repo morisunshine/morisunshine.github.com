@@ -11,8 +11,7 @@ comments: no
 ----
 
 ###联系方式：        
-
-个人邮箱: [allenwenzhou@gmail.com](mailto:allenwenzhou@gmail.com)     
+个人邮箱: [sheldon.zen@gmail.com](mailto:sheldon.zen@gmail.com)     
 新浪微博: [墨日阳光](http://weibo.com/u/1626743220)	 
 豆瓣：[墨日阳光](http://www.douban.com/people/39009519/)    
 github : [morisunshine](https://github.com/morisunshine)        
