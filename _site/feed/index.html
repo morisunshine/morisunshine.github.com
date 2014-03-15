@@ -7,89 +7,63 @@
     <title>morisunshine</title>
     <link href="http://morisunshine.com/feed/" rel="self" />
     <link href="http://morisunshine.com" />
-    <lastBuildDate>2014-03-15T04:48:37+08:00</lastBuildDate>
+    <lastBuildDate>2014-03-15T17:07:09+08:00</lastBuildDate>
     <webMaster>sheldon.zen@gmail.com</webMaster>
     
     <item>
-      <title>你不知道的Objective-C</title>
+      <title>你不知道的Objective-C(如果你觉得你是Ruby开发者)</title>
       <link href="http://morisunshine.com/2014/03/13/objc_is_not_what_you_think_it_is/"/>
       <pubDate>2014-03-13T00:00:00+08:00</pubDate>
       <author>morisunshine</author>
       <guid>http://morisunshine.com/2014/03/13/objc_is_not_what_you_think_it_is</guid>
-      <content:encoded><![CDATA[<p>Ruby and Objective-C look like opposites: one is dynamic, the other&#39;s static; one is interpreted and the other&#39;s compiled; one has concise syntax and the other [isALittle wordierInIts:syntacticStyle]. Aesthetics aside, Ruby seems to afford you a freedom of expression that you give up with Objective-C.</p>
+      <content:encoded><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#message_in_a_bottle"><strong>消息的控制</strong></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#getting_metaer_and_metaer"><strong>Getting meta-er and meta-er</strong></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#introspection"><strong>内省</strong></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#cashing_in"><strong>Cashing in</strong></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#what_is_comepielur"><strong>什么是编译器？</strong></a>  </p>
 
 <p>Ruby 和 Objective-C 这两种语言看上去好像天南地北：一种是动态语言，另一种则是静态语言；一种是解释型语言，另一种是编译型语言；一种有简洁的语法，另一种则是有点冗长的语法。从优雅的角度来看，Ruby似乎更能给我们一种自由的编程体验，所以很多人都放弃了Objective-C。</p>
 
-<p>But that&#39;s an unfortunate caricature. Objective-C is no straightjacket; it is, like Ruby, a descendant of Smalltalk, and many of the language features beloved by Rubyists — dynamic method lookup, duck typing, open classes, and in general a highly mutable runtime — are also available in Objective-C, even if some of these techniques are less well-known. And it does it all with an IDE and compiler that keep your worst instincts in check.</p>
-
 <p>但这是一个不幸的笑话。Objective-C其实并不像别人认为的那样是件紧身衣，它和Ruby一样都受Smalltalk影响，它拥有很多Ruby开发者都喜爱的语言功能–动态方法查找、鸭子类型、开放的类和通常情况下高度可变的runtime等这些功能在Objective-C中同样存在，即使那些不出名的技术也是一样。Objective-C的这些功能都要归功于它的IDE和编译器，但也是因为它们才使你不能自由地编写代码</p>
 
-<hr>
-
-<h2>But wait, how can Objective-C be dynamic, given that it&#39;s built on C?</h2>
-
-<h2>但是等一下，怎么能说Objective-C是动态语言呢？难道它不是建立在C语言的基础上？</h2>
-
-<p>You can include all the C or C++ code you like in Objective-C, but that’s not to say that Objective-C is limited to C or C++ code. All of the interesting class manipulation and object introspection in the language comes from what’s called the Objective-C Runtime. The Objective-C runtime is comparable to the Ruby interpreter. It contains all the important elements necessary for highly-leveraged metaprogramming.    </p>
+<p>但是等一下，怎么能说Objective-C是动态语言呢？难道它不是建立在C语言的基础上？</p>
 
 <p>你可以在Objective-C代码中包含任何C或C++的代码，但这不意味着Objective-C仅限于C或C++代码。Objective-C中所有有意思的类操作和对象内省都是来自于一个叫Objective-C Runtime的东西。这个Objective-C Runtime可以和Ruby解释器相媲美。它包含了强大的元编程里所需要的所有重要特性。</p>
-
-<p>Just like Ruby itself, these facilities are backed by real C, with methods like <code>property_getAttributes</code> or <code>method_getImplementation</code>, which do the hard work of mapping selectors to implementations (a selector is a handle to a method), determining if an object will respond to a selector, and traversing the subclass tree. The most important of all these methods is <code>objc_msgSend</code>, the C function that backs every single message-send in your app.</p>
 
 <p>真实的C就像Ruby一样是支持这些特性的，用<code>property_getAttributes</code>或<code>method_getImplementation</code>方法能实现将selector映射到implementation这样艰巨的任务(一个selector处理一个方法)，<em>并判断一个对象是否能对这个selector做出反应，并遍历子类树。</em>在众多方法中最重要的就是<code>objc_msgSend</code>,是它推动了你应用中的每次消息发送。</p>
 
 <hr>
 
-<h2>Message in a bottle</h2>
+<p><a id='message_in_a_bottle' name='message_in_a_bottle'> </a></p>
 
 <h2>消息的控制</h2>
 
-<p>Smalltalk was the first truly truly object-oriented programming language, in the sense that it replaced the notion of “calling functions” with the notion of “sending messages from one object to another.”</p>
-
 <p>Smalltalk实在应该是第一种面向对象语言，它用“从一个对象发送信息给另一个对象”的概念取代了“调用函数”的概念，对后面的语言发展产生了深远的影响。</p>
-
-<p>In Ruby, the way you do this is by writing:</p>
 
 <p>要实现消息的发送，你可以在Ruby中这样写：</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">receiver.the_message argument
 </code></pre></div>
-<p>And in Objective-C it&#39;s exactly the same:</p>
-
 <p>在Objective-C里，也差不多是一样的：</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">[receiver theMessage:argument];
 </code></pre></div>
-<p>These messages enable duck-typing, meaning that the type or class of the object doesn&#39;t matter: all that matters is whether or not an object can respond to a message.</p>
-
 <p>这些消息能实现鸭子类型，也就是说关注的不是这个对象的类型或类本身，而是这个对象能否对一个消息做出反应。</p>
-
-<p>Sending messages is pretty cool, but its usefulness increases greatly as soon as the messages themselves start being passed around like data:</p>
 
 <p>发送消息真的是非常棒，但是只有当它有传送数据时，它的价值才会发挥地更大：</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">receiver.send(:the_message, argument)
 </code></pre></div>
-<p>and</p>
-
 <p>和</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">[receiver performSelector:@selector(theMessage:) 
 withObject:argument];
 </code></pre></div>
-<p>Just as methods in Ruby are backed by symbols, selectors in Objective-C are backed by strings. (We don&#39;t have symbols in Objective-C.) This allows you to pass a handle to a method around, and use it in a dynamic fashion. You can even build a selector from a string with <code>NSSelectorFromString</code>, and perform that on an object; this parallels building a string or a symbol in Ruby, and passing it to <code>Object#send</code>.</p>
-
 <p>正如Ruby中symbol支持了方法一样，Objective-C中string支持了selector。（在Objective-C中没有symbol。）这允许你通过一个处理方法，并以动态的方式使用它。你甚至可以通过<code>NSSelectorFromString</code>方法通过string创建一个selector，并在一个对象里执行它。同样的，我们可以在Ruby中创建一个string或symbol，并把传给<code>Object#send</code>方法。</p>
 
-<p>Of course, in either language, if you try to send a message that some object can’t respond to, the default behavior is to throw an exception, which will cause your app to crash.</p>
-
 <p>当然，无论是哪种语言，一旦你将一个消息发送给不能处理该消息的对象，那么默认情况下会抛出一个异常，这会导致的应用崩溃。</p>
-
-<p>If you need to check if an object will be able to perform a method before actually calling the method, you might use Ruby’s <code>respond_to?</code>:</p>
 
 <p>当你想在调用一个方法前判断一下这个对象是否能够执行这个方法，你可以用Ruby中的<code>respond_to？</code>这个方法来检查：</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">if receiver.respond_to? :the_message
   receiver.the_message argument
 end
 </code></pre></div>
-<p>Objective-C has something very similar:</p>
-
 <p>Objective-C中也差不多的方法：</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">if ([receiver respondsToSelector:@selector(theMessage:)]) {
     [receiver theMessage:someThing];
@@ -97,15 +71,11 @@ end
 </code></pre></div>
 <hr>
 
-<h2>Getting meta-er and meta-er</h2>
+<p><a id='getting_metaer_and_metaer' name='getting_metaer_and_metaer'> </a></p>
 
 <h2>Getting meta-er and meta-er</h2>
-
-<p>If you want to add methods to a class that you don’t control, such as a system class, Objective-C’s categories let you do exactly that — much like an “open class” in Ruby.</p>
 
 <p>如果你想在一个你不能做主的类（像系统类）中添加你想要的方法，那么Objective-C里的category一定不会让你失望 -- 很像Ruby中的“开放类”。</p>
-
-<p>For example, if we wanted to add the <code>to_sentence</code> method from Rails, we could tack it onto <code>NSArray</code> pretty easily:</p>
 
 <p>举个例子，如果你想将Rails中的<code>to_sentence</code>方法添加到<code>NSArray</code>类中，我们只需要对这个类进行扩展就好了：</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">@interface NSArray (ToSentence)
@@ -130,15 +100,9 @@ end
 
 @end
 </code></pre></div>
-<p>Categories add new methods at compile time — What about if you want to catch them dynamically at runtime?</p>
-
 <p>category 是在编译的时候将方法添加进去的 -- 如果你想在runtime中动态捕捉它们会怎么样？</p>
 
-<p>Some messages can have data embedded within them, like Rails&#39;s dynamic finders. The Ruby implementation overrides <code>method_missing</code> and <code>respond_to</code>, matches the pattern, and adds a method definition to the object for the new method.</p>
-
 <p>有些消息可以嵌套数据，就像Rails的 dynamic finders。Ruby通过对<code>method_missing</code> 和 <code>respond_to</code>这两个方法的重写，先匹配模式，然后将新方法的定义添加到这个对象中。</p>
-
-<p>The flow in Objective-C is very similar, but instead of overriding <code>doesNotRecognizeSelector:</code> (which would be the analog to Ruby’s method_missing), we catch it in <code>resolveClassMethod:</code>. Assuming we had a class method called <code>+findWhere:equals:</code> that takes a property name and a value, it’s pretty easy to use a regular expression to find the property’s name, and register that selector with a block.</p>
 
 <p>Objective-C中的流程是差不多，但我们不是重写<code>doesNotRecognizeSelector:</code>方法（相当于Ruby中的<code>method_missing</code>方法），而是在<code>resolveClassMethod:</code>方法中捕捉它。假设我们有一个叫<code>+findWhere:equals:</code>的类方法，它可以得到一个property名称和值，那么通过正则表达式就可以很容易实现找到这个property的名字，并通过block来注册这个selector。</p>
 <div class="highlight"><pre><code class="text language-text" data-lang="text">+ (BOOL)resolveClassMethod:(SEL)sel {
@@ -163,47 +127,51 @@ end
     return [super resolveClassMethod:sel];
 }
 </code></pre></div>
-<p>The benefit of this technique is that we don’t need to override <code>respondsToSelector:</code>, since the method is fully registered with the class. We can now call <code>[RGSong findWhereTitleEquals:@“Mercy”]</code>. The first time <code>findWhereTitleEquals:</code> is called, the runtime can’t resolve the method, so it calls <code>resolveClassMethod:</code>, and we dynamically add the implementation. The second time, since it’s already added, won’t call <code>resolveClassMethod:</code>.</p>
-
 <p>这个技巧的优点就是我们不需要去重写<code>respondsToSelector:</code>方法，因为这个方法是类中每个注册过的selector都会去调用的。现在让我们调用<code>[RGSong findWhereTitleEquals:@“Mercy”]</code>。当<code>findWhereTitleEquals:</code>第一次被调用的时候，runtime并不知道这个方法，所以它会调用<code>resolveClassMethod:</code>，这时我们就<code>findWhereTitleEquals:</code>这个方法动态添加进去，当第二次调用<code>findWhereTitleEquals:</code>的时候，因为它已经被添加了，所以我就不会再调用<code>resolveClassMethod:</code>了。</p>
-
-<p>There are a few other ways to catch dynamic methods. You can add a new implementation in <code>resolveClassMethod:</code> and <code>resolveInstanceMethod:</code> (as we did above), forward the message to a different object, or fully take over the &quot;invocation&quot; and do anything you wish to the message before passing it along. These methods each increase in cost, culminating in <code>-forwardInvocation:</code>, which has to instantiate an object to be performed. The default implementation of <code>-forwardInvocation:</code> is what actually calls <code>doesNotRecognizeSelector:</code>, which usually raises an exception and crashes the app.</p>
 
 <p>这里还有一些别的方法来实现捕捉动态方法。你可以通过重写<code>resolveClassMethod:</code> 和 <code>resolveInstanceMethod:</code>方法（就像上面的一样），可以将消息传递给不同的对象或全权接管这个“调用”，并在消息传递之前，做你想这个消息要完成的任何事。这些方法都会导致运行成本的增加，特别在<code>-forwardInvocation:</code>中会打到顶峰，这使我们必须要实例化一个对象才能去执行它们。<code>-forwardInvocation:</code>方法中默认调用<code>doesNotRecognizeSelector</code>方法，这导致了应用的频繁异常或崩溃。</p>
 
 <hr>
 
-<h2>Introspection</h2>
+<p><a id='introspection' name='introspection'> </a></p>
 
-<p>Dynamic method resolution isn’t the only superpower of sick mutable languages like Ruby and Objective-C. You can also query your objects in order to manipulate them in interesting ways at runtime.</p>
+<h2>内省</h2>
 
-<p>The same way you might use <code>MyClass#instance_methods</code> in Ruby, you can get a list of an object&#39;s methods in Objective-C with <code>class_copyMethodList([MyClass class], &amp;numberOfMethods)</code>. You can get a list of the properties of a class with <code>class_copyPropertyList</code>, enabling you to do awesome introspection into your models. In the Rap Genius app, for instance, we use this facility to map JSON dictionaries to our local domain objects.</p>
+<p>动态方法决议并不是像Ruby和Objective-C这样的sick mutable language的唯一靠山。你也可以通过在runtime中用一种有意思的方式去操作这些对象。</p>
 
-<p>(If you love mixins in Ruby, the dynamic powers of Objective-C let you incorporate them too. Vladimir Mitrovic has a library called Objective-Mixin, which lets you copy implementations from one class to another class at runtime.)</p>
+<p>就像在Ruby中调用<code>MyClass#instance_methods</code>一样，你可以在Objective-C中调用<code>class_copyMethodList([MyClass class], &amp;numberOfMethods)</code>来得到一个对象中方法的列表。你还可以通过<code>class_copyPropertyList</code>方法得到一个类中property的列表，<em>它能使你在你的模型中实现不可思议的内省法。</em></p>
+
+<p>（如果你非常喜欢Ruby中的mixins，那么Objective-C的动态支持也能够将他们混合进去。 Vladimir Mitrovic有一个叫<code>Objective-Mixin</code>的库，它能在runtime时将一个类中的实现复制到另一个类中。）</p>
 
 <hr>
+
+<p><a id='cashing_in' name='cashing_in'> </a></p>
 
 <h2>Cashing in</h2>
 
-<p>All of these dynamic tools are leveraged to build things like Core Data, which is a persistent object graph somewhat similar to ActiveRecord. In Core Data, relationships are “faulted”, which means they aren’t loaded until someone tries to access them. The accessors and mutators for each property are overridden at runtime (using the dynamic method resolution discussed above). If the object being accessed isn’t loaded yet, the framework will dynamically load that object from persistent store, and then return it. This keeps memory usage low, and prevents the entire object graph from being loaded into memory when any one object is fetched.</p>
+<p>所有的动态工具都用来创建像Core Data这样的东西，Core Data是一个有点像ActiveRecord的持久化对象图表。在Core Data中，relationship是“有缺陷的”，也就是说他们只有在被别的对像访问时，才会被加载。每个property的accessor和mutator在runtime中都被重写（使用的就是我们上面提到的动态方法决议）。如果我们访问了一个还没有被加载的对象时，框架就会从持久性储存中动态加载这个对象并将它返回。它保持了内存的低利用率，避免了在任何一个物体被获取时，实体对象图表都要被加载到内存中这样情况的发生。</p>
 
-<p>When a mutator for a Core Data entity is called, the framework can mark that object as dirty, without having to override every getter and setter for every property. Metaprogrammers, eat your heart out!</p>
+<p>当Core Data实体中的mutator被调用时，框架会将那个对象标记为需要清理，不需要去重写每个property的getter和setter。</p>
+
+<p>这就是元程序，羡慕吧！</p>
 
 <hr>
 
-<h2>What&#39;s a come-pie-lur?</h2>
+<p><a id='what_is_comepielur' name='what_is_comepielur'> </a></p>
 
-<p>But of course, Objective-C and Ruby aren&#39;t the same language. And by far the biggest difference is that Objective-C has a compiler.</p>
+<h2>什么是编译器？</h2>
 
-<p>This is the big caveat with all of these techniques. At compile time, the compiler checks to make sure that every selector that&#39;s mentioned in your app really exists within the app. If you’re dealing with an object that has type information, it will also check to make sure that that object declares that selector in its header file, preventing you from calling unknown selectors on objects. There are ways to get around these limitations, including just turning off the relevant compiler warnings. If you want to start writing more metaprogrammed Objective-C, this is a great place to start.</p>
+<p>很明显，Objective-C和Ruby并不是同一种语言，目前为止最大的不同就是Objective-C是一种编译型语言。</p>
 
-<p>You can also remove the type information from objects by storing them as anonymous type, or <code>id</code>. Since the compiler doesn&#39;t know its type, it just assumes it can accept any messages your program sends to it (assuming that those messages are declared somewhere in your app and that the relevant compiler flag is turned on).</p>
+<p><em>This is the big caveat with all of these techniques</em>。在编译时，编译器会先确定你应用使用的每个selector是不是都在应用中。如果你处理的这个对象有类型信息，那么编译器也会检查确保这个selector在头文件有声明，这样做就是为了防止在对象中调用未声明的selector。这有些方法可以绕过这些讨厌的限制，包括关闭相关的编译警告。这里就是实践元程序化的Objective-C最好的练习场。</p>
 
-<p>Fair warning: turning off compiler flags and storing objects as type <code>id</code> are both super dangerous! One of the best things about Objective-C (yes, better than metaprogramming) is the compiler. The type checking allows you to write and refactor code much faster and make fewer mistakes while doing it. Since no one else turns off these warnings, it would also be difficult to share your code. Most Objective-C developers would take stronger types over more metaprogramming.</p>
+<p>你可以通过将selector的类型储存为不知道的类型或<code>id</code>来从对象中删除这些类型信息。因为编译器不认识这个类型，所以它只能假设你的程序可以接受发给它的任何消息（假设这些消息在应用中的其他地方被声明了，并且相关的编译标识已经打开）。</p>
 
-<p>So it turns out that Objective-C is more constricting — but only because we choose to make it so, with a compiler that adds lots of safety and speed.</p>
+<p>善意的忠告：关掉编译器标识和把对象保存成<code>id</code>类型都是非常危险的事！其实Objective-C中最好的东西之一就是编译器（是的，比元程序还要好）。类型检查保证了我们更快的写和重构代码，也是我们在编程时少犯错误。因为没有人会关掉那些警告，所以你很难去分享你那些<code>id</code>类型的代码。大部分Objective-C开发者还是更愿意使用更强的类型而不是元程序。</p>
 
-<p>The reality, though, is that these languages are cut from the same cloth, and a Rubyist should feel at home in Objective-C — even if the brackets scare you.</p>
+<p>事实证明Objective-C更受束缚--但因为编译器能给我们提高很多的安全性和速度，所以我们只能选择这样并承担后果。</p>
+
+<p>事实再次告诉我们，这些语言都是差不多的，Ruby开发者应该享受Objective-C--即使那些中括号把你吓到了。</p>
 ]]></content:encoded>
     </item>
     
