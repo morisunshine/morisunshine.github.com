@@ -11,11 +11,11 @@ tags: [iOS, ruby]
 
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;[**消息的传递**](#message_in_a_bottle)       
-&nbsp;&nbsp;&nbsp;&nbsp;[**变得越来越动态**](#getting_metaer_and_metaer)  
-&nbsp;&nbsp;&nbsp;&nbsp;[**内省**](#introspection)  
-&nbsp;&nbsp;&nbsp;&nbsp;[**现学现用**](#cashing_in)  
-&nbsp;&nbsp;&nbsp;&nbsp;[**什么是编译器？**](#what_is_comepielur)  
+&nbsp;[**消息的传递**](#message_in_a_bottle)       
+&nbsp;[**变得越来越动态**](#getting_metaer_and_metaer)  
+&nbsp;[**内省**](#introspection)  
+&nbsp;[**现学现用**](#cashing_in)  
+&nbsp;[**什么是编译器？**](#what_is_comepielur)  
 
 Ruby 和 Objective-C 这两种语言看上去好像天南地北：一种是动态语言，另一种则是静态语言；一种是解释型语言，另一种是编译型语言；一种有简洁的语法，另一种则是有点冗长的语法。从优雅的角度来看，Ruby似乎更能给我们一种自由的编程体验，所以很多人都放弃了Objective-C。
 
