@@ -6,12 +6,12 @@ tags: [ruby,技术]
 
 ---
 
-&nbsp;&nbsp;&nbsp;&nbsp;[**什么是Gem？**](#introduce)       
-&nbsp;&nbsp;&nbsp;&nbsp;[**第一个Gem**](#first_gem)  
-&nbsp;&nbsp;&nbsp;&nbsp;[**包含更多文件**](#include_more_files)  
-&nbsp;&nbsp;&nbsp;&nbsp;[**添加可执行文件**](#adding_an_executable)  
-&nbsp;&nbsp;&nbsp;&nbsp;[**测试**](#writing_tests)  
-&nbsp;&nbsp;&nbsp;&nbsp;[**文档**](#documenting_your_code)  
+&nbsp;[**什么是Gem？**](#introduce)       
+&nbsp;[**第一个Gem**](#first_gem)  
+&nbsp;[**包含更多文件**](#include_more_files)  
+&nbsp;[**添加可执行文件**](#adding_an_executable)  
+&nbsp;[**测试**](#writing_tests)  
+&nbsp;[**文档**](#documenting_your_code)  
    
 
 <a id='introduce' name='introduce'> </a>
