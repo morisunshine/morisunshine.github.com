@@ -7,7 +7,7 @@
     <title>morisunshine</title>
     <link href="http://morisunshine.com/feed/" rel="self" />
     <link href="http://morisunshine.com" />
-    <lastBuildDate>2014-03-17T22:50:12+08:00</lastBuildDate>
+    <lastBuildDate>2014-03-21T12:18:27+08:00</lastBuildDate>
     <webMaster>sheldon.zen@gmail.com</webMaster>
     
     <item>
@@ -16,10 +16,14 @@
       <pubDate>2014-03-13T00:00:00+08:00</pubDate>
       <author>morisunshine</author>
       <guid>http://morisunshine.com/2014/03/13/objc_is_not_what_you_think_it_is</guid>
-      <content:encoded><![CDATA[<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#message_in_a_bottle"><strong>消息的控制</strong></a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#getting_metaer_and_metaer"><strong>变得更加动态</strong></a><br>
+      <content:encoded><![CDATA[<p>本文由<a href="www.morisunshine.com">morisunshine</a>译自<a href="http://news.rapgenius.com/Soroush-khanlou-objective-c-isnt-what-you-think-it-is-if-you-think-like-a-rubyist-annotated">Objective-C isn&#39;t what you think it is</a>。转载请注明出处！</p>
+
+<hr>
+
+<p>&nbsp;&nbsp;&nbsp;&nbsp;<a href="#message_in_a_bottle"><strong>消息的传递</strong></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#getting_metaer_and_metaer"><strong>变得越来越动态</strong></a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#introspection"><strong>内省</strong></a><br>
-&nbsp;&nbsp;&nbsp;&nbsp;<a href="#cashing_in"><strong>Cashing in</strong></a><br>
+&nbsp;&nbsp;&nbsp;&nbsp;<a href="#cashing_in"><strong>现学现用</strong></a><br>
 &nbsp;&nbsp;&nbsp;&nbsp;<a href="#what_is_comepielur"><strong>什么是编译器？</strong></a>  </p>
 
 <p>Ruby 和 Objective-C 这两种语言看上去好像天南地北：一种是动态语言，另一种则是静态语言；一种是解释型语言，另一种是编译型语言；一种有简洁的语法，另一种则是有点冗长的语法。从优雅的角度来看，Ruby似乎更能给我们一种自由的编程体验，所以很多人都放弃了Objective-C。</p>
@@ -36,7 +40,7 @@
 
 <p><a id='message_in_a_bottle' name='message_in_a_bottle'> </a></p>
 
-<h2>漂流瓶</h2>
+<h2>消息的传递</h2>
 
 <p>Smalltalk才是实至名归的第一种面向对象语言，它用“从一个对象发送信息给另一个对象”的新概念取代了“调用函数”的旧概念，对后面的语言发展产生了深远的影响。</p>
 
@@ -137,21 +141,21 @@
 
 <h2>内省</h2>
 
-<p>动态方法决议并不是像Ruby和Objective-C这样的sick mutable language的唯一靠山。你也可以通过在runtime中用一种有意思的方式去操作这些对象。</p>
+<p>动态方法决议并不只是像Ruby和Objective-C这样的语言的技术支持。你也可以通过在runtime中用一种有意思的方式去操作这些对象。</p>
 
-<p>就像在Ruby中调用<code>MyClass#instance_methods</code>一样，你可以在Objective-C中调用<code>class_copyMethodList([MyClass class], &amp;numberOfMethods)</code>来得到一个对象中方法的列表。你还可以通过<code>class_copyPropertyList</code>方法得到一个类中property的列表，<em>它能使你在你的模型中实现不可思议的内省法。</em></p>
+<p>就像在Ruby中调用<code>MyClass#instance_methods</code>一样，你可以在Objective-C中调用<code>class_copyMethodList([MyClass class], &amp;numberOfMethods)</code>来得到一个对象中方法的列表。你还可以通过<code>class_copyPropertyList</code>方法得到一个类中property的列表，它能在你的模型中实现不可思议的内省。比如在这个<code>Rap Genius</code>应用中，我们用这个功能来将JSON中的字典映射到本地对象上。</p>
 
-<p>（如果你非常喜欢Ruby中的mixins，那么Objective-C的动态支持也能够将他们混合进去。 Vladimir Mitrovic有一个叫<code>Objective-Mixin</code>的库，它能在runtime时将一个类中的实现复制到另一个类中。）</p>
+<p>（如果你非常喜欢Ruby中的mixin，那么Objective-C强大的动态支持也能能实现同样的效果。 Vladimir Mitrovic有一个叫<code>Objective-Mixin</code>的库，它能在runtime时将一个类中的实现复制到另一个类中。）</p>
 
 <hr>
 
 <p><a id='cashing_in' name='cashing_in'> </a></p>
 
-<h2>Cashing in</h2>
+<h2>现学现用</h2>
 
-<p>所有的动态工具都用来创建像Core Data这样的东西，Core Data是一个有点像ActiveRecord的持久化对象图表。在Core Data中，relationship是“有缺陷的”，也就是说他们只有在被别的对像访问时，才会被加载。每个property的accessor和mutator在runtime中都被重写（使用的就是我们上面提到的动态方法决议）。如果我们访问了一个还没有被加载的对象时，框架就会从持久性储存中动态加载这个对象并将它返回。它保持了内存的低利用率，避免了在任何一个物体被获取时，实体对象图表都要被加载到内存中这样情况的发生。</p>
+<p>所有的动态工具都可以用来创建像Core Data这样的东西，Core Data是一个有点像ActiveRecord的持久化对象图。在Core Data中，relationship是“有缺陷的”，也就是说他们只有在被别的对象访问时，才会被加载。每个property的accessor和mutator在runtime中都被重写（使用的就是我们上面提到的动态方法决议）。如果我们访问了一个还没有被加载的对象时，框架就会从持久性储存中动态加载这个对象并将它返回。它保持了内存的低利用率，避免了在任何一个物体被获取时，实体对象图表都要被加载到内存中这样情况的发生。</p>
 
-<p>当Core Data实体中的mutator被调用时，框架会将那个对象标记为需要清理，不需要去重写每个property的getter和setter。</p>
+<p>当Core Data实体中的mutator被调用时，系统会将那个对象标记为需要清理，不需要去重写每个property的getter和setter。</p>
 
 <p>这就是元程序，羡慕吧！</p>
 
@@ -163,15 +167,15 @@
 
 <p>很明显，Objective-C和Ruby并不是同一种语言，目前为止最大的不同就是Objective-C是一种编译型语言。</p>
 
-<p><em>This is the big caveat with all of these techniques</em>。在编译时，编译器会先确定你应用使用的每个selector是不是都在应用中。如果你处理的这个对象有类型信息，那么编译器也会检查确保这个selector在头文件有声明，这样做就是为了防止在对象中调用未声明的selector。这有些方法可以绕过这些讨厌的限制，包括关闭相关的编译警告。这里就是实践元程序化的Objective-C最好的练习场。</p>
+<p>这就是这些技术中最需要注意的地方。在编译时，编译器会先确定你应用使用的每个selector是不是都在应用中。如果你处理的这个对象有类型信息，那么编译器也会检查确保这个selector在头文件有声明过，这样做就是为了防止在对象中调用未声明的selector。有些方法可以绕过这些讨厌的限制，包括关闭相关的编译警告。这里就是实践元程序化的Objective-C最好的练习。</p>
 
 <p>你可以通过将selector的类型储存为不知道的类型或<code>id</code>来从对象中删除这些类型信息。因为编译器不认识这个类型，所以它只能假设你的程序可以接受发给它的任何消息（假设这些消息在应用中的其他地方被声明了，并且相关的编译标识已经打开）。</p>
 
-<p>善意的忠告：关掉编译器标识和把对象保存成<code>id</code>类型都是非常危险的事！其实Objective-C中最好的东西之一就是编译器（是的，比元程序还要好）。类型检查保证了我们更快的写和重构代码，也是我们在编程时少犯错误。因为没有人会关掉那些警告，所以你很难去分享你那些<code>id</code>类型的代码。大部分Objective-C开发者还是更愿意使用更强的类型而不是元程序。</p>
+<p>善意的忠告：如果我们关掉编译器标识和把对象保存成<code>id</code>类型，那么将会非常危险的事！其实Objective-C中最好的东西之一就是编译器（是的，比元程序还要好）。类型检查保证了我们更快的写和重构代码，也是我们在编程时少犯错误。因为没有人会关掉那些警告，所以你很难去分享你那些<code>id</code>类型的代码。大部分Objective-C开发者还是更愿意使用更强的类型而不是元程序。</p>
 
-<p>事实证明Objective-C更受束缚--但因为编译器能给我们提高很多的安全性和速度，所以我们只能选择这样并承担后果。</p>
+<p>事实证明Objective-C更受束缚--但因为编译器能提高更多的安全性和速度，所以我们只能选择这样并承担后果。</p>
 
-<p>事实再次告诉我们，这些语言都是差不多的，Ruby开发者应该享受Objective-C--即使那些中括号把你吓到了。</p>
+<p>事实再次告诉我们，这些语言都是差不多的，Ruby开发者应该享受Objective-C--即使那些中括号让我们望而却步。</p>
 ]]></content:encoded>
     </item>
     
