@@ -7,7 +7,7 @@ tags: [iOS, ruby]
 
 ---
 
-本文由[morisunshine](www.morisunshine.com)译自[Objective-C isn't what you think it is](http://news.rapgenius.com/Soroush-khanlou-objective-c-isnt-what-you-think-it-is-if-you-think-like-a-rubyist-annotated)。转载请注明出处！
+本文由[morisunshine](http://morisunshine.com/)译自[Objective-C isn't what you think it is](http://news.rapgenius.com/Soroush-khanlou-objective-c-isnt-what-you-think-it-is-if-you-think-like-a-rubyist-annotated)。转载请注明出处！
 
 ---
 
