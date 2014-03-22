@@ -19,7 +19,7 @@ a{color:#00A3CF;text-decoration:none;}
 a:hover{color:#333333;text-decoration:underline;}
 hr{margin:.7em 0;border-top:1px dashed #d0d0d0;border-bottom:1px dashed #f9f9f9;}
 p{padding:.5em 0;}
-li{padding:.2em 0;}
+li{padding:0.3em 0.2em;}
 ol,ul{list-style-position:inside;}
 ol ul, ul ol, ul ul, ol ol {margin-left:1em;}
 pre code{margin:1em 0;font-size:13px;line-height:1.6;display:block;overflow:auto;padding-left:20px;padding-top:20px;padding-bottom:20px;border:1px solid #ccc;}
