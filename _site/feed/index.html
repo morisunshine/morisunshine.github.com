@@ -7,16 +7,16 @@
     <title>morisunshine</title>
     <link href="http://morisunshine.com/feed/" rel="self" />
     <link href="http://morisunshine.com" />
-    <lastBuildDate>2014-03-22T22:33:24+08:00</lastBuildDate>
+    <lastBuildDate>2014-03-23T20:02:48+08:00</lastBuildDate>
     <webMaster>sheldon.zen@gmail.com</webMaster>
     
     <item>
-      <title>你不知道的Objective-C</title>
+      <title>Objective-C 不是你想的那样</title>
       <link href="http://morisunshine.com/2014/03/13/objc_is_not_what_you_think_it_is/"/>
       <pubDate>2014-03-13T00:00:00+08:00</pubDate>
       <author>morisunshine</author>
       <guid>http://morisunshine.com/2014/03/13/objc_is_not_what_you_think_it_is</guid>
-      <content:encoded><![CDATA[<p>本文由<a href="http://morisunshine.com/">morisunshine</a>译自<a href="http://news.rapgenius.com/Soroush-khanlou-objective-c-isnt-what-you-think-it-is-if-you-think-like-a-rubyist-annotated">Objective-C isn&#39;t what you think it is</a>。转载请注明出处！</p>
+      <content:encoded><![CDATA[<p>本文由<a href="http://morisunshine.com/">morisunshine</a>译自<a href="http://news.rapgenius.com/Soroush-khanlou-objective-c-isnt-what-you-think-it-is-if-you-think-like-a-rubyist-annotated">&quot;Objective-C isn&#39;t what you think it is&quot;</a>。转载请注明出处！</p>
 
 <hr>
 
@@ -92,12 +92,12 @@
 <span class="k">@implementation</span> <span class="nc">NSArray</span> <span class="nl">(ToSentence)</span>
 
 <span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">toSentence</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="s">@&quot;&quot;</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span> <span class="p">@</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;;</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">count</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="k">return</span> <span class="p">[</span><span class="n">self</span> <span class="n">lastObject</span><span class="p">];</span>
     <span class="n">NSArray</span> <span class="o">*</span><span class="n">allButLastObject</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="n">subarrayWithRange</span><span class="o">:</span><span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">self</span><span class="p">.</span><span class="n">count</span><span class="o">-</span><span class="mi">1</span><span class="p">)];</span>
-    <span class="n">NSString</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">allButLastObject</span> <span class="n">componentsJoinedByString</span><span class="o">:</span><span class="s">@&quot;, &quot;</span><span class="p">];</span>
-    <span class="kt">BOOL</span> <span class="n">showComma</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">count</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">;</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span> <span class="n">stringByAppendingFormat</span><span class="o">:</span><span class="s">@&quot;%@ and &quot;</span><span class="p">,</span> <span class="n">showComma</span> <span class="o">?</span> <span class="s">@&quot;,&quot;</span> <span class="o">:</span> <span class="s">@&quot;&quot;</span><span class="p">];</span>
+    <span class="n">NSString</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">allButLastObject</span> <span class="n">componentsJoinedByString</span><span class="o">:</span><span class="p">@</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;,</span> <span class="o">&amp;</span><span class="n">quot</span><span class="p">;];</span>
+    <span class="kt">BOOL</span> <span class="n">showComma</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">count</span> <span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">2</span><span class="p">;</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span> <span class="n">stringByAppendingFormat</span><span class="o">:</span><span class="p">@</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">%</span><span class="p">@</span> <span class="n">and</span> <span class="o">&amp;</span><span class="n">quot</span><span class="p">;,</span> <span class="n">showComma</span> <span class="o">?</span> <span class="p">@</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;,</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span> <span class="o">:</span> <span class="p">@</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;];</span>
     <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span> <span class="n">stringByAppendingString</span><span class="o">:</span><span class="p">[</span><span class="n">self</span> <span class="n">lastObject</span><span class="p">]];</span>
     <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
@@ -112,7 +112,7 @@
 <div class="highlight"><pre><code class="objc language-objc" data-lang="objc"><span class="k">+</span> <span class="p">(</span><span class="kt">BOOL</span><span class="p">)</span><span class="nf">resolveClassMethod:</span><span class="p">(</span><span class="kt">SEL</span><span class="p">)</span><span class="nv">sel</span> <span class="p">{</span>
     <span class="n">NSString</span> <span class="o">*</span><span class="n">selectorName</span> <span class="o">=</span> <span class="n">NSStringFromSelector</span><span class="p">(</span><span class="n">sel</span><span class="p">);</span>
 
-    <span class="n">NSRegularExpression</span> <span class="o">*</span><span class="n">regex</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSRegularExpression</span> <span class="n">regularExpressionWithPattern</span><span class="o">:</span><span class="s">@&quot;^findWhere(</span><span class="se">\\</span><span class="s">w+)Equals:$&quot;</span> <span class="n">options</span><span class="o">:</span><span class="mi">0</span> <span class="n">error</span><span class="o">:</span><span class="nb">nil</span><span class="p">];</span>
+    <span class="n">NSRegularExpression</span> <span class="o">*</span><span class="n">regex</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSRegularExpression</span> <span class="n">regularExpressionWithPattern</span><span class="o">:</span><span class="p">@</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span><span class="o">^</span><span class="n">findWhere</span><span class="p">(</span><span class="err">\\</span><span class="n">w</span><span class="o">+</span><span class="p">)</span><span class="n">Equals</span><span class="o">:</span><span class="err">$</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;</span> <span class="n">options</span><span class="o">:</span><span class="mi">0</span> <span class="n">error</span><span class="o">:</span><span class="nb">nil</span><span class="p">];</span>
     <span class="n">NSTextCheckingResult</span> <span class="o">*</span><span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="n">regex</span> <span class="n">firstMatchInString</span><span class="o">:</span><span class="n">selectorName</span> <span class="n">options</span><span class="o">:</span><span class="mi">0</span> <span class="n">range</span><span class="o">:</span><span class="n">NSMakeRange</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">selectorName</span><span class="p">.</span><span class="n">length</span><span class="p">)];</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">NSRange</span> <span class="n">propertyNameRange</span> <span class="o">=</span> <span class="p">[</span><span class="n">result</span> <span class="n">rangeAtIndex</span><span class="o">:</span><span class="mi">1</span><span class="p">];</span>
@@ -124,7 +124,7 @@
 
         <span class="kt">Class</span> <span class="n">metaClass</span> <span class="o">=</span> <span class="n">object_getClass</span><span class="p">(</span><span class="n">self</span><span class="p">);</span>
 
-        <span class="n">class_addMethod</span><span class="p">(</span><span class="n">metaClass</span><span class="p">,</span> <span class="n">sel</span><span class="p">,</span> <span class="n">implementation</span><span class="p">,</span> <span class="s">&quot;@@:@@&quot;</span><span class="p">);</span>
+        <span class="n">class_addMethod</span><span class="p">(</span><span class="n">metaClass</span><span class="p">,</span> <span class="n">sel</span><span class="p">,</span> <span class="n">implementation</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">quot</span><span class="p">;@@</span><span class="o">:</span><span class="p">@@</span><span class="o">&amp;</span><span class="n">quot</span><span class="p">;);</span>
         <span class="k">return</span> <span class="nb">YES</span><span class="p">;</span>
     <span class="p">}</span>
 
@@ -143,7 +143,7 @@
 
 <p>动态方法决议并不只是像Ruby和Objective-C这样的语言的技术支持。你也可以通过在runtime中用一种有意思的方式去操作这些对象。</p>
 
-<p>就像在Ruby中调用<code>MyClass#instance_methods</code>一样，你可以在Objective-C中调用<code>class_copyMethodList([MyClass class], &amp;numberOfMethods)</code>来得到一个对象中方法的列表。你还可以通过<code>class_copyPropertyList</code>方法得到一个类中property的列表，它能在你的模型中实现不可思议的内省。比如在这个<code>Rap Genius</code>应用中，我们用这个功能来将JSON中的字典映射到本地对象上。</p>
+<p>就像在Ruby中调用<code>MyClass#instance_methods</code>一样，你可以在Objective-C中调用<code>class_copyMethodList([MyClass class], &amp;amp;numberOfMethods)</code>来得到一个对象中方法的列表。你还可以通过<code>class_copyPropertyList</code>方法得到一个类中property的列表，它能在你的模型中实现不可思议的内省。比如在这个<code>Rap Genius</code>应用中，我们用这个功能来将JSON中的字典映射到本地对象上。</p>
 
 <p>（如果你非常喜欢Ruby中的mixin，那么Objective-C强大的动态支持也能能实现同样的效果。 Vladimir Mitrovic有一个叫<code>Objective-Mixin</code>的库，它能在runtime时将一个类中的实现复制到另一个类中。）</p>
 
@@ -175,7 +175,7 @@
 
 <p>事实证明Objective-C更受束缚--但因为编译器能提高更多的安全性和速度，所以我们只能选择这样并承担后果。</p>
 
-<p>事实再次告诉我们，这些语言都是差不多的，Ruby开发者应该享受Objective-C--即使那些中括号让我们望而却步。</p>
+<p>事实再次告诉我们，这些语言都是差不多的，Ruby开发者应该享受Objective-C，即使那些中括号让我们望而却步。</p>
 ]]></content:encoded>
     </item>
     

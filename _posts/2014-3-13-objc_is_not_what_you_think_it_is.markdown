@@ -1,13 +1,13 @@
 ---
 layout: post  
-title: "你不知道的Objective-C"  
+title: "Objective-C 不是你想的那样"  
 description: 如果你觉得你是Ruby开发者   
 category: iOS   
 tags: [iOS, ruby]  
 
 ---
 
-本文由[morisunshine](http://morisunshine.com/)译自[Objective-C isn't what you think it is](http://news.rapgenius.com/Soroush-khanlou-objective-c-isnt-what-you-think-it-is-if-you-think-like-a-rubyist-annotated)。转载请注明出处！
+本文由[morisunshine](http://morisunshine.com/)译自["Objective-C isn't what you think it is"](http://news.rapgenius.com/Soroush-khanlou-objective-c-isnt-what-you-think-it-is-if-you-think-like-a-rubyist-annotated)。转载请注明出处！
 
 ---
 
@@ -40,6 +40,7 @@ Smalltalk才是实至名归的第一种面向对象语言，它用“从一个�
 你可以在Ruby中通过这样写来实现消息的发送：
 
 ```ruby
+
 receiver.the_message argument
 
 ```
@@ -47,6 +48,7 @@ receiver.the_message argument
 Objective-C的实现方式和Ruby的差不多：
 
 ```objc
+
 [receiver theMessage:argument];
 
 ```
@@ -56,12 +58,14 @@ Objective-C的实现方式和Ruby的差不多：
 发送消息真的是非常棒的事，但是只有当消息在传送数据时，它的价值才会被发挥地更大：
 
 ```ruby
+
 receiver.send(:the_message, argument)
 
 ```
 和
 
 ```objc
+
 [receiver performSelector:@selector(theMessage:) 
 withObject:argument];
 
@@ -74,6 +78,7 @@ withObject:argument];
 当你想在调用一个方法前判断一下这个对象是否能够执行这个方法，你可以用Ruby中的`respond_to？`方法来检查：
 
 ```ruby
+
 if receiver.respond_to? :the_message
   receiver.the_message argument
 end
@@ -82,8 +87,8 @@ end
 
 Objective-C中也有差不多的方法：
 
-
 ```objc
+
 if ([receiver respondsToSelector:@selector(theMessage:)]) {
     [receiver theMessage:someThing];
 }
@@ -111,12 +116,12 @@ if ([receiver respondsToSelector:@selector(theMessage:)]) {
 @implementation NSArray (ToSentence)
 
 - (NSString *)toSentence {
-    if (self.count == 0) return @"";
+    if (self.count == 0) return @&quot;&quot;;
     if (self.count == 1) return [self lastObject];
     NSArray *allButLastObject = [self subarrayWithRange:NSMakeRange(0, self.count-1)];
-    NSString *result = [allButLastObject componentsJoinedByString:@", "];
-    BOOL showComma = self.count > 2;
-    result = [result stringByAppendingFormat:@"%@ and ", showComma ? @"," : @""];
+    NSString *result = [allButLastObject componentsJoinedByString:@&quot;, &quot;];
+    BOOL showComma = self.count &gt; 2;
+    result = [result stringByAppendingFormat:@&quot;%@ and &quot;, showComma ? @&quot;,&quot; : @&quot;&quot;];
     result = [result stringByAppendingString:[self lastObject]];
     return result;
 }
@@ -137,7 +142,7 @@ Objective-C中的流程是差不多，但我们不是重写`doesNotRecognizeSele
 + (BOOL)resolveClassMethod:(SEL)sel {
     NSString *selectorName = NSStringFromSelector(sel);
 
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^findWhere(\\w+)Equals:$" options:0 error:nil];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@&quot;^findWhere(\\w+)Equals:$&quot; options:0 error:nil];
     NSTextCheckingResult *result = [regex firstMatchInString:selectorName options:0 range:NSMakeRange(0, selectorName.length)];
     if (result) {
         NSRange propertyNameRange = [result rangeAtIndex:1];
@@ -149,7 +154,7 @@ Objective-C中的流程是差不多，但我们不是重写`doesNotRecognizeSele
 
         Class metaClass = object_getClass(self);
 
-        class_addMethod(metaClass, sel, implementation, "@@:@@");
+        class_addMethod(metaClass, sel, implementation, &quot;@@:@@&quot;);
         return YES;
     }
 
@@ -169,7 +174,7 @@ Objective-C中的流程是差不多，但我们不是重写`doesNotRecognizeSele
 
 动态方法决议并不只是像Ruby和Objective-C这样的语言的技术支持。你也可以通过在runtime中用一种有意思的方式去操作这些对象。
 
-就像在Ruby中调用`MyClass#instance_methods`一样，你可以在Objective-C中调用`class_copyMethodList([MyClass class], &numberOfMethods)`来得到一个对象中方法的列表。你还可以通过`class_copyPropertyList`方法得到一个类中property的列表，它能在你的模型中实现不可思议的内省。比如在这个`Rap Genius`应用中，我们用这个功能来将JSON中的字典映射到本地对象上。
+就像在Ruby中调用`MyClass#instance_methods`一样，你可以在Objective-C中调用`class_copyMethodList([MyClass class], &amp;numberOfMethods)`来得到一个对象中方法的列表。你还可以通过`class_copyPropertyList`方法得到一个类中property的列表，它能在你的模型中实现不可思议的内省。比如在这个`Rap Genius`应用中，我们用这个功能来将JSON中的字典映射到本地对象上。
 
 （如果你非常喜欢Ruby中的mixin，那么Objective-C强大的动态支持也能能实现同样的效果。 Vladimir Mitrovic有一个叫`Objective-Mixin`的库，它能在runtime时将一个类中的实现复制到另一个类中。）
 
@@ -199,5 +204,4 @@ Objective-C中的流程是差不多，但我们不是重写`doesNotRecognizeSele
 
 事实证明Objective-C更受束缚--但因为编译器能提高更多的安全性和速度，所以我们只能选择这样并承担后果。
 
-事实再次告诉我们，这些语言都是差不多的，Ruby开发者应该享受Objective-C--即使那些中括号让我们望而却步。
-
+事实再次告诉我们，这些语言都是差不多的，Ruby开发者应该享受Objective-C，即使那些中括号让我们望而却步。
