@@ -7,8 +7,221 @@
     <title>morisunshine</title>
     <link href="http://morisunshine.com/feed/" rel="self" />
     <link href="http://morisunshine.com" />
-    <lastBuildDate>2014-04-05T14:08:15+08:00</lastBuildDate>
+    <lastBuildDate>2014-04-05T23:49:10+08:00</lastBuildDate>
     <webMaster>sheldon.zen@gmail.com</webMaster>
+    
+    <item>
+      <title>Object-C的命名空间</title>
+      <link href="http://morisunshine.com/2014/04/05/Namespacing/"/>
+      <pubDate>2014-04-05T00:00:00+08:00</pubDate>
+      <author>morisunshine</author>
+      <guid>http://morisunshine.com/2014/04/05/Namespacing</guid>
+      <content:encoded><![CDATA[<h1>Namespacing</h1>
+
+<p>Written by Mattt Thompson on Feb 24th, 2014</p>
+
+<p>Why the hell is everything NS-whatever?</p>
+
+<p>You&#39;ll hear that within the first minute of introducing someone to Objective-C. Guaranteed.</p>
+
+<p>Like a parent faced with the task of explaining the concept of death or the non-existence of Santa, you do your best to be forthcoming with facts, so that they might arrive at a conclusion themselves.</p>
+
+<p>Why, Jimmy, NS stands for NeXTSTEP (well, actually, NeXTSTEP/Sun, but we&#39;ll cover that with &quot;the birds &amp; the bees&quot; talk), and it&#39;s used to...</p>
+
+<p>...but by the time the words have left your mouth, you can already sense the disappointment in their face. Their innocence has been lost, and with an audible sigh of resignation, they start to ask uncomfortable questions about @</p>
+
+<p>Namespacing is the preeminent bugbear of Objective-C. A cosmetic quirk with global implications, the language&#39;s lack of identifier containers remains a source of prodigious quantities of caremad for armchair language critics.</p>
+
+<p>This is all to say: unlike many other languages that are popular today, Objective-C does not provide a module-like mechanism for avoiding class and method name collisions.</p>
+
+<p>Instead, Objective-C relies on prefixes to ensure that functionality in one part of the app doesn&#39;t interfere with similarly named code somewhere else.</p>
+
+<p>We&#39;ll jump into those right after a quick digression into type systems:</p>
+
+<h1>Types in C &amp; Objective-C</h1>
+
+<p>As noted many times in this publication, Objective-C is built directly on top of the C language. One consequence of this is that Objective-C and C share a type system, requiring that identifiers are globally unique.</p>
+
+<p>You can see this for yourself—try defining a new static variable with the same name as an existing @interface, and the compiler will generate an error:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">@interface XXObject : NSObject
+@end
+
+static char * XXObject;  // Redefinition of &quot;XXObject&quot; as different kind of symbol
+</code></pre></div>
+<p>That said, the Objective-C runtime creates a layer of abstraction on top of the C type system, allowing the following code to compile without even a snicker:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">@protocol Foo
+@end
+
+@interface Foo : NSObject &lt;Foo&gt; {
+    id Foo;
+
+}
+
+@property id Foo;
++ (id)Foo;
+- (id)Foo;
+@end
+
+@interface Foo (Foo)
+@end
+
+@implementation Foo
+@synthesize Foo;
+
++ (id)Foo {
+    id Foo = @&quot;Foo&quot;;
+    return Foo;
+
+}
+@end
+</code></pre></div>
+<p>Within the context of the Objective-C runtime, a program is able to differentiate between a class, a protocol, a category, an instance variable, an instance method, and a class method all having the same name.</p>
+
+<p>That a variable can reappropriate the name of an existing method is a consequence of the C type system (which similarly allows for a variable to shadow the name of its containing function)</p>
+
+<h1>Prefixes</h1>
+
+<p>All classes in an Objective-C application must be globally unique. Since many different frameworks are likely have some conceptual overlap—and therefore an overlap in names (users, views, requests / responses, etc.)—convention dictates that class names use 2 or 3 letter prefix.</p>
+
+<h1>Class Prefixes</h1>
+
+<p>Apple recommends that 2-letter prefixes be reserved for first-party libraries and frameworks, while third-party developers (that&#39;s us) opt for 3 letters or more.</p>
+
+<p>A veteran Mac or iOS developer will have likely memorized most if not all of the following abbreviated identifiers:</p>
+
+<h3>Prefix    Frameworks</h3>
+
+<h1></h1>
+
+<p>AB   AddressBook / AddressBookUI<br>
+AC   Accounts<br>
+AD   iAd<br>
+AL   AssetsLibrary<br>
+AU   AudioUnit<br>
+AV   AVFoundation<br>
+CA   CoreAnimation<br>
+CB   CoreBluetooth<br>
+CF   CoreFoundation / CFNetwork<br>
+CG   CoreGraphics / QuartzCore / ImageIO<br>
+CI   CoreImage<br>
+CL   CoreLocation<br>
+CM   CoreMedia / CoreMotion<br>
+CV   CoreVideo<br>
+EA   ExternalAccessory<br>
+EK   EventKit / EventKitUI<br>
+GC   GameController<br>
+GLK*     GLKit<br>
+JS   JavaScriptCore<br>
+MA   MediaAccessibility<br>
+MC   MultipeerConnectivity<br>
+MF   MessageUI*<br>
+MIDI*    CoreMIDI<br>
+MK   MapKit<br>
+MP   MediaPlayer<br>
+NK   NewsstandKit<br>
+NS   Foundation, AppKit, CoreData<br>
+PK   PassKit<br>
+QL   QuickLook<br>
+SC   SystemConfiguration<br>
+Sec*     Security*<br>
+SK   StoreKit / SpriteKit<br>
+SL   Social<br>
+SS   Safari Services<br>
+TW   Twitter<br>
+UI   UIKit<br>
+UT   MobileCoreServices<br>
+3rd-Party Class Prefixes   </p>
+
+<p>Until recently, with the advent of <a href="">CocoaPods</a> and a surge of new iOS developers, the distribution of open source, 3rd-party code had been largely a non-issue for Apple and the rest of the Objective-C community. Apple&#39;s naming guidelines came about recently enough that the advice to adopt 3-letter prefixes is only just becoming accepted practice.</p>
+
+<p>Because of this, many established libraries still use 2-letter prefixes. Consider some of these <a href="">most-starred Objective-C repositories on GitHub</a>.</p>
+
+<h3>Prefix    Frameworks</h3>
+
+<h1></h1>
+
+<p>AF  AFNetworking (&quot;Alamofire&quot;)<br>
+RK  RestKit<br>
+GPU GPUImage<br>
+SD  SDWebImage<br>
+MB  MBProgressHUD<br>
+FB  Facebook SDK<br>
+FM  FMDB (&quot;Flying Meat&quot;)<br>
+JK  JSONKit<br>
+FUI FlatUI<br>
+NI  Nimbus<br>
+RAC  Reactive Cocoa  </p>
+
+<p>Seeing as how <a href="">we&#39;re already seeing prefix overlap among 3rd-party libraries</a>, make sure that you follow a 3+-letter convention in your own code.</p>
+
+<p>For especially future-focused library authors, consider using @compatibility_alias to provide a seamless migration path for existing users in your next major upgrade.</p>
+
+<h1>Method Prefixes</h1>
+
+<p>It&#39;s not just classes that are prone to naming collisions: selectors suffer from this too—in ways that are even more problematic than classes.</p>
+
+<p>Consider the category:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">@interface NSString (PigLatin)
+- (NSString *)pigLatinString;
+@end
+</code></pre></div>
+<p>If -pigLatinString were implemented by another category (or added to the NSString class in a future version of iOS or Mac OS X), any calls to that method would result in undefined behavior, since no guarantee is made as to the order in which methods are defined by the runtime.</p>
+
+<p>This can be guarded against by prefixing the method name, just like the class name (prefixing the category name isn&#39;t a bad idea, either):</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">@interface NSString (XXXPigLatin)
+- (NSString *)xxx_pigLatinString;
+@end
+</code></pre></div>
+<p>Apple&#39;s recommendation that <a href="">all category methods use prefixes</a> is even less widely known or accepted than its policy on class prefixing.</p>
+
+<p>There are many outspoken developers who will passionately argue one side or another. However, weighing the risk of collision against its likelihood, the cost/benefit analysis is not entirely clear-cut:</p>
+
+<p>The main feature of categories is coating useful functionality with syntactic sugar. Any category method could alternatively be implemented as a function taking an explicit argument in place of the implicit self of a method.</p>
+
+<p>Collisions can be detected at compile time by setting the OBJC<em>PRINT</em>REPLACED_METHODS environment variable to YES. In practice, collisions are extremely rare, and when they do occur, they&#39;re usually an indicator of functionality that is needlessly duplicated across dependencies. Although the worst-case scenario is a runtime exception, it&#39;s entirely likely that two methods named the same thing will actually do the same thing, and result in no change in behavior. All of those Swiss Army Knife categories that defined NSArray -firstObject continued to march on once the method was officially added.</p>
+
+<p>Just as with constitutional scholarship, there will be strict and loose interpretations of Apple&#39;s programming guidelines. Those that see it as a living document would point out that... actually, you know what? If you&#39;ve read this far and are still undecided, just prefix your damn category methods. If you choose not to, just be mindful that it could bite you in the ass.</p>
+
+<p>Go ahead and add &quot;category method&quot; to your Tweetbot mute terms. Expiration: 1 Week.</p>
+
+<h1>Swizzling</h1>
+
+<p>The one case where method prefixing (or suffixing) is absolutely necessary is when doing method replacement, as discussed in last week&#39;s article on <a href="">swizzling</a>.</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">@implementation UIViewController (Swizzling)
+
+- (void)xxx_viewDidLoad {
+[self xxx_viewDidLoad];
+
+}
+</code></pre></div>
+<h1>Do We Really Need Namespaces?</h1>
+
+<p>With all of the recent talk about replacing / reinventing / reimagining Objective-C, it&#39;s almost taken as a given that namespacing would be an obvious feature. But what does that actually get us?</p>
+
+<p>Aesthetics? Aside from IETF members and military personnel, nobody likes the visual aesthetic of CLAs. But would ::, /, or an extra . really make matters better? Do we really want to start calling NSArray &quot;Foundation Array&quot;? (And what would I do with NSHipster.com ?!)</p>
+
+<p>Semantics? Start to look closely at any other language, and how they actually use namespaces, and you&#39;ll realize that namespaces don&#39;t magically solve all matters of ambiguity. If anything, the additional context makes things worse.</p>
+
+<p>Not to create a straw man, but an imagined implementation of Objective-C namespaces probably look a lot like this:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">@namespace XX
+    @implementation Object
+
+    @using F: Foundation;
+
+    - (void)foo {
+        F:Array *array = @[@1,@2, @3];
+
+        // ...
+    }
+
+    @end
+@end
+</code></pre></div>
+<p>What we have currently—warts and all—has the notable advantage of non-ambiguity. There is no mistaking NSString for anything other than what it is, either by the compiler or when we talk about it as developers. There are no special contextual considerations to consider when reading through code to understand what actors are at play. And best of all: class names are exceedingly easy to search for.</p>
+
+<p>Either way, if you&#39;re interested in this subject, I&#39;d encourage you to take a look at this namespace feature proposal by Kyle Sluder. It&#39;s a fascinating read.</p>
+]]></content:encoded>
+    </item>
     
     <item>
       <title>我的时间观---活在当下</title>
