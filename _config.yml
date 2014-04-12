@@ -33,12 +33,6 @@ bing_verify:
 
 # Links to include in top navigation
 # For external links add external: true
-links:
-  - title: 
-    url: 
-  - title: 
-    url: 
-    external: true
 
 # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 timezone:    Asia/Shanghai
