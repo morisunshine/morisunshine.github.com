@@ -32,6 +32,7 @@ Ruby 和 Objective-C 这两种语言看上去好像天南地北：一种是动�
 --- 
   
 <a id='message_in_a_bottle' name='message_in_a_bottle'> </a>
+
 ##消息的传递
 
 Smalltalk才是实至名归的第一种面向对象语言，它用“从一个对象发送信息给另一个对象”的新概念取代了“调用函数”的旧概念，对后面的语言发展产生了深远的影响。
@@ -39,37 +40,37 @@ Smalltalk才是实至名归的第一种面向对象语言，它用“从一个�
 
 你可以在Ruby中通过这样写来实现消息的发送：
 
-```ruby
+~~~ruby
 
 receiver.the_message argument
 
-```
+~~~
 
 Objective-C的实现方式和Ruby的差不多：
 
-```objc
+~~~objc
 
 [receiver theMessage:argument];
 
-```
+~~~
 
 这些消息实现了鸭子类型的方式，也就是说关注的不是这个对象的类型或类本身，而是这个对象能否对一个消息做出反应。
 
 发送消息真的是非常棒的事，但是只有当消息在传送数据时，它的价值才会被发挥地更大：
 
-```ruby
+~~~ruby
 
 receiver.send(:the_message, argument)
 
-```
+~~~
 和
 
-```objc
+~~~objc
 
 [receiver performSelector:@selector(theMessage:) 
 withObject:argument];
 
-```
+~~~
 
 正如Ruby中方法需要symbol支持一样，Objective-C中selector也需要string来支持。（在Objective-C中没有symbol。）这样就可以让你通过动态的方式使用一个方法。你甚至可以通过`NSSelectorFromString`方法来使用string创建一个selector，并在一个对象里执行它。同样的，我们可以在Ruby中也可以创建一个string或symbol，并把传给`Object#send`方法。
 
@@ -77,34 +78,35 @@ withObject:argument];
 
 当你想在调用一个方法前判断一下这个对象是否能够执行这个方法，你可以用Ruby中的`respond_to？`方法来检查：
 
-```ruby
+~~~ruby
 
 if receiver.respond_to? :the_message
   receiver.the_message argument
 end
 
-```
+~~~
 
 Objective-C中也有差不多的方法：
 
-```objc
+~~~objc
 
 if ([receiver respondsToSelector:@selector(theMessage:)]) {
     [receiver theMessage:someThing];
 }
 
-```
+~~~
 
 ---
 
 <a id='getting_metaer_and_metaer' name='getting_metaer_and_metaer'> </a>
+
 ##变得越来越动态
 
 如果你想在一个不能修改的类（像系统类）中添加你想要的方法，那么Objective-C里的category一定不会让你失望 -- 很像Ruby中的“开放类”。
 
 举个例子，如果你想将Rails中的`to_sentence`方法添加到`NSArray`类中，我们只需要对`NSArray`这个类进行扩展就好了：
 
-```objc
+~~~objc
 
 @interface NSArray (ToSentence)
 
@@ -128,7 +130,7 @@ if ([receiver respondsToSelector:@selector(theMessage:)]) {
 
 @end
 
-```
+~~~
 
 Category是在编译的时候将方法添加到程序中 -- 让我们在runtime中动态捕捉它们怎么样？
 
@@ -137,7 +139,7 @@ Category是在编译的时候将方法添加到程序中 -- 让我们在runtime�
 
 Objective-C中的流程是差不多，但我们不是重写`doesNotRecognizeSelector:`方法（相当于Ruby中的`method_missing`方法），而是在`resolveClassMethod:`方法中捕捉Category添加的方法。假设我们有一个叫`+findWhere:equals:`的类方法，它可以得到property的名称和值，那么通过正则表达式就可以很容易实现找到property的名字，并通过block来注册这个selector。
 
-```objc
+~~~objc
 
 + (BOOL)resolveClassMethod:(SEL)sel {
     NSString *selectorName = NSStringFromSelector(sel);
@@ -161,7 +163,7 @@ Objective-C中的流程是差不多，但我们不是重写`doesNotRecognizeSele
     return [super resolveClassMethod:sel];
 }
 
-```
+~~~
 
 这个方法的优点就是我们不需要去重写`respondsToSelector:`，因为每个在类中注册过的selector都会去调用这个方法。现在让我们调用`[RGSong findWhereTitleEquals:@“Mercy”]`。当`findWhereTitleEquals:`第一次被调用的时候，runtime并不知道这个方法，所以它会调用`resolveClassMethod:`，这时我们就将`findWhereTitleEquals:`这个方法动态添加进去，当第二次调用`findWhereTitleEquals:`的时候，因为它已经被添加过了，所以就不会再调用`resolveClassMethod:`了。
 
@@ -170,6 +172,7 @@ Objective-C中的流程是差不多，但我们不是重写`doesNotRecognizeSele
 ---
 
 <a id='introspection' name='introspection'> </a>
+
 ##内省  
 
 动态方法决议并不只是像Ruby和Objective-C这样的语言的技术支持。你也可以通过在runtime中用一种有意思的方式去操作这些对象。
@@ -181,6 +184,7 @@ Objective-C中的流程是差不多，但我们不是重写`doesNotRecognizeSele
 ---
 
 <a id='cashing_in' name='cashing_in'> </a>
+
 ##现学现用
 
 所有的动态工具都可以用来创建像Core Data这样的东西，Core Data是一个有点像ActiveRecord的持久化对象图。在Core Data中，relationship是“有缺陷的”，也就是说他们只有在被别的对象访问时，才会被加载。每个property的accessor和mutator在runtime中都被重写（使用的就是我们上面提到的动态方法决议）。如果我们访问了一个还没有被加载的对象时，框架就会从持久性储存中动态加载这个对象并将它返回。它保持了内存的低利用率，避免了在任何一个物体被获取时，实体对象图表都要被加载到内存中这样情况的发生。
@@ -192,6 +196,7 @@ Objective-C中的流程是差不多，但我们不是重写`doesNotRecognizeSele
 ---
 
 <a id='what_is_comepielur' name='what_is_comepielur'> </a>
+
 ##什么是编译器？ 
 
 很明显，Objective-C和Ruby并不是同一种语言，目前为止最大的不同就是Objective-C是一种编译型语言。

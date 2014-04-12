@@ -4,259 +4,13 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml" />
 <link rel="alternate" type="text/html" href="http://localhost:4000" />
-<updated>2014-04-12T17:34:34+08:00</updated>
+<updated>2014-04-12T17:48:15+08:00</updated>
 <id>http://localhost:4000/</id>
 <author>
   <name>Sheldon</name>
   <uri>http://localhost:4000/</uri>
   <email>sheldon.zen@gmail.com</email>
 </author>
-
-
-<entry>
-  <title type="html"><![CDATA[Object-C的命名空间]]></title>
- <link rel="alternate" type="text/html" href="http://localhost:4000/ios/Namespacing/" />
-  <id>http://localhost:4000/ios/Namespacing</id>
-  <published>2014-04-05T00:00:00+08:00</published>
-  <updated>2014-04-05T00:00:00+08:00</updated>
-  <author>
-    <name>Sheldon</name>
-    <uri>http://localhost:4000</uri>
-    <email>sheldon.zen@gmail.com</email>
-  </author>
-  <content type="html">&lt;h1 id=&quot;namespacing&quot;&gt;Namespacing&lt;/h1&gt;
-
-&lt;p&gt;Written by Mattt Thompson on Feb 24th, 2014&lt;/p&gt;
-
-&lt;p&gt;Why the hell is everything NS-whatever?&lt;/p&gt;
-
-&lt;p&gt;You’ll hear that within the first minute of introducing someone to Objective-C. Guaranteed.&lt;/p&gt;
-
-&lt;p&gt;Like a parent faced with the task of explaining the concept of death or the non-existence of Santa, you do your best to be forthcoming with facts, so that they might arrive at a conclusion themselves.&lt;/p&gt;
-
-&lt;p&gt;Why, Jimmy, NS stands for NeXTSTEP (well, actually, NeXTSTEP/Sun, but we’ll cover that with “the birds &amp;amp; the bees” talk), and it’s used to…&lt;/p&gt;
-
-&lt;p&gt;…but by the time the words have left your mouth, you can already sense the disappointment in their face. Their innocence has been lost, and with an audible sigh of resignation, they start to ask uncomfortable questions about @&lt;/p&gt;
-
-&lt;p&gt;Namespacing is the preeminent bugbear of Objective-C. A cosmetic quirk with global implications, the language’s lack of identifier containers remains a source of prodigious quantities of caremad for armchair language critics.&lt;/p&gt;
-
-&lt;p&gt;This is all to say: unlike many other languages that are popular today, Objective-C does not provide a module-like mechanism for avoiding class and method name collisions.&lt;/p&gt;
-
-&lt;p&gt;Instead, Objective-C relies on prefixes to ensure that functionality in one part of the app doesn’t interfere with similarly named code somewhere else.&lt;/p&gt;
-
-&lt;p&gt;We’ll jump into those right after a quick digression into type systems:&lt;/p&gt;
-
-&lt;h1 id=&quot;types-in-c--objective-c&quot;&gt;Types in C &amp;amp; Objective-C&lt;/h1&gt;
-
-&lt;p&gt;As noted many times in this publication, Objective-C is built directly on top of the C language. One consequence of this is that Objective-C and C share a type system, requiring that identifiers are globally unique.&lt;/p&gt;
-
-&lt;p&gt;You can see this for yourself—try defining a new static variable with the same name as an existing @interface, and the compiler will generate an error:&lt;/p&gt;
-
-&lt;p&gt;```objc
-@interface XXObject : NSObject
-@end&lt;/p&gt;
-
-&lt;p&gt;static char * XXObject;  // Redefinition of “XXObject” as different kind of symbol&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;That said, the Objective-C runtime creates a layer of abstraction on top of the C type system, allowing the following code to compile without even a snicker:&lt;/p&gt;
-
-&lt;p&gt;```objc
-@protocol Foo
-@end&lt;/p&gt;
-
-&lt;p&gt;@interface Foo : NSObject &lt;foo&gt; {
-    id Foo;&lt;/foo&gt;&lt;/p&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;@property id Foo;
-+ (id)Foo;
-- (id)Foo;
-@end&lt;/p&gt;
-
-&lt;p&gt;@interface Foo (Foo)
-@end&lt;/p&gt;
-
-&lt;p&gt;@implementation Foo
-@synthesize Foo;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;(id)Foo {
-  id Foo = @”Foo”;
-  return Foo;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;}
-@end&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Within the context of the Objective-C runtime, a program is able to differentiate between a class, a protocol, a category, an instance variable, an instance method, and a class method all having the same name.&lt;/p&gt;
-
-&lt;p&gt;That a variable can reappropriate the name of an existing method is a consequence of the C type system (which similarly allows for a variable to shadow the name of its containing function)&lt;/p&gt;
-
-&lt;h1 id=&quot;prefixes&quot;&gt;Prefixes&lt;/h1&gt;
-
-&lt;p&gt;All classes in an Objective-C application must be globally unique. Since many different frameworks are likely have some conceptual overlap—and therefore an overlap in names (users, views, requests / responses, etc.)—convention dictates that class names use 2 or 3 letter prefix.&lt;/p&gt;
-
-&lt;h1 id=&quot;class-prefixes&quot;&gt;Class Prefixes&lt;/h1&gt;
-
-&lt;p&gt;Apple recommends that 2-letter prefixes be reserved for first-party libraries and frameworks, while third-party developers (that’s us) opt for 3 letters or more.&lt;/p&gt;
-
-&lt;p&gt;A veteran Mac or iOS developer will have likely memorized most if not all of the following abbreviated identifiers:&lt;/p&gt;
-
-&lt;h3 id=&quot;prefix-frameworks&quot;&gt;Prefix	 Frameworks&lt;/h3&gt;
-&lt;p&gt;===
-AB	 AddressBook / AddressBookUI &lt;br /&gt;
-AC	 Accounts &lt;br /&gt;
-AD	 iAd&lt;br /&gt;
-AL	 AssetsLibrary &lt;br /&gt;
-AU	 AudioUnit &lt;br /&gt;
-AV	 AVFoundation &lt;br /&gt;
-CA	 CoreAnimation &lt;br /&gt;
-CB	 CoreBluetooth &lt;br /&gt;
-CF	 CoreFoundation / CFNetwork &lt;br /&gt;
-CG	 CoreGraphics / QuartzCore / ImageIO &lt;br /&gt;
-CI	 CoreImage &lt;br /&gt;
-CL	 CoreLocation &lt;br /&gt;
-CM	 CoreMedia / CoreMotion &lt;br /&gt;
-CV	 CoreVideo &lt;br /&gt;
-EA	 ExternalAccessory &lt;br /&gt;
-EK	 EventKit / EventKitUI &lt;br /&gt;
-GC	 GameController &lt;br /&gt;
-GLK*	 GLKit &lt;br /&gt;
-JS	 JavaScriptCore &lt;br /&gt;
-MA	 MediaAccessibility &lt;br /&gt;
-MC	 MultipeerConnectivity &lt;br /&gt;
-MF	 MessageUI* &lt;br /&gt;
-MIDI*	 CoreMIDI  &lt;br /&gt;
-MK	 MapKit &lt;br /&gt;
-MP	 MediaPlayer &lt;br /&gt;
-NK	 NewsstandKit &lt;br /&gt;
-NS	 Foundation, AppKit, CoreData&lt;br /&gt;
-PK	 PassKit &lt;br /&gt;
-QL	 QuickLook &lt;br /&gt;
-SC	 SystemConfiguration &lt;br /&gt;
-Sec*	 Security* &lt;br /&gt;
-SK	 StoreKit / SpriteKit &lt;br /&gt;
-SL	 Social &lt;br /&gt;
-SS	 Safari Services &lt;br /&gt;
-TW	 Twitter &lt;br /&gt;
-UI	 UIKit &lt;br /&gt;
-UT	 MobileCoreServices &lt;br /&gt;
-3rd-Party Class Prefixes   &lt;/p&gt;
-
-&lt;p&gt;Until recently, with the advent of &lt;a href=&quot;&quot;&gt;CocoaPods&lt;/a&gt; and a surge of new iOS developers, the distribution of open source, 3rd-party code had been largely a non-issue for Apple and the rest of the Objective-C community. Apple’s naming guidelines came about recently enough that the advice to adopt 3-letter prefixes is only just becoming accepted practice.&lt;/p&gt;
-
-&lt;p&gt;Because of this, many established libraries still use 2-letter prefixes. Consider some of these &lt;a href=&quot;&quot;&gt;most-starred Objective-C repositories on GitHub&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h3 id=&quot;prefix-frameworks-1&quot;&gt;Prefix	 Frameworks&lt;/h3&gt;
-&lt;p&gt;===
-AF	AFNetworking (“Alamofire”) &lt;br /&gt;
-RK	RestKit &lt;br /&gt;
-GPU	GPUImage&lt;br /&gt;
-SD	SDWebImage &lt;br /&gt;
-MB	MBProgressHUD &lt;br /&gt;
-FB	Facebook SDK &lt;br /&gt;
-FM	FMDB (“Flying Meat”) &lt;br /&gt;
-JK	JSONKit &lt;br /&gt;
-FUI	FlatUI&lt;br /&gt;
-NI	Nimbus &lt;br /&gt;
-RAC	 Reactive Cocoa  &lt;/p&gt;
-
-&lt;p&gt;Seeing as how &lt;a href=&quot;&quot;&gt;we’re already seeing prefix overlap among 3rd-party libraries&lt;/a&gt;, make sure that you follow a 3+-letter convention in your own code.&lt;/p&gt;
-
-&lt;p&gt;For especially future-focused library authors, consider using @compatibility_alias to provide a seamless migration path for existing users in your next major upgrade.&lt;/p&gt;
-
-&lt;h1 id=&quot;method-prefixes&quot;&gt;Method Prefixes&lt;/h1&gt;
-
-&lt;p&gt;It’s not just classes that are prone to naming collisions: selectors suffer from this too—in ways that are even more problematic than classes.&lt;/p&gt;
-
-&lt;p&gt;Consider the category:&lt;/p&gt;
-
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;@interface NSString (PigLatin)
-- (NSString *)pigLatinString;
-@end&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;If -pigLatinString were implemented by another category (or added to the NSString class in a future version of iOS or Mac OS X), any calls to that method would result in undefined behavior, since no guarantee is made as to the order in which methods are defined by the runtime.&lt;/p&gt;
-
-&lt;p&gt;This can be guarded against by prefixing the method name, just like the class name (prefixing the category name isn’t a bad idea, either):&lt;/p&gt;
-
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;@interface NSString (XXXPigLatin)
-- (NSString *)xxx_pigLatinString;
-@end&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;Apple’s recommendation that &lt;a href=&quot;&quot;&gt;all category methods use prefixes&lt;/a&gt; is even less widely known or accepted than its policy on class prefixing.&lt;/p&gt;
-
-&lt;p&gt;There are many outspoken developers who will passionately argue one side or another. However, weighing the risk of collision against its likelihood, the cost/benefit analysis is not entirely clear-cut:&lt;/p&gt;
-
-&lt;p&gt;The main feature of categories is coating useful functionality with syntactic sugar. Any category method could alternatively be implemented as a function taking an explicit argument in place of the implicit self of a method.&lt;/p&gt;
-
-&lt;p&gt;Collisions can be detected at compile time by setting the OBJC_PRINT_REPLACED_METHODS environment variable to YES. In practice, collisions are extremely rare, and when they do occur, they’re usually an indicator of functionality that is needlessly duplicated across dependencies. Although the worst-case scenario is a runtime exception, it’s entirely likely that two methods named the same thing will actually do the same thing, and result in no change in behavior. All of those Swiss Army Knife categories that defined NSArray -firstObject continued to march on once the method was officially added.&lt;/p&gt;
-
-&lt;p&gt;Just as with constitutional scholarship, there will be strict and loose interpretations of Apple’s programming guidelines. Those that see it as a living document would point out that… actually, you know what? If you’ve read this far and are still undecided, just prefix your damn category methods. If you choose not to, just be mindful that it could bite you in the ass.&lt;/p&gt;
-
-&lt;p&gt;Go ahead and add “category method” to your Tweetbot mute terms. Expiration: 1 Week.&lt;/p&gt;
-
-&lt;h1 id=&quot;swizzling&quot;&gt;Swizzling&lt;/h1&gt;
-
-&lt;p&gt;The one case where method prefixing (or suffixing) is absolutely necessary is when doing method replacement, as discussed in last week’s article on &lt;a href=&quot;&quot;&gt;swizzling&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;```objc
-@implementation UIViewController (Swizzling)&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;(void)xxx_viewDidLoad {
-[self xxx_viewDidLoad];&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;h1 id=&quot;do-we-really-need-namespaces&quot;&gt;Do We Really Need Namespaces?&lt;/h1&gt;
-
-&lt;p&gt;With all of the recent talk about replacing / reinventing / reimagining Objective-C, it’s almost taken as a given that namespacing would be an obvious feature. But what does that actually get us?&lt;/p&gt;
-
-&lt;p&gt;Aesthetics? Aside from IETF members and military personnel, nobody likes the visual aesthetic of CLAs. But would ::, /, or an extra . really make matters better? Do we really want to start calling NSArray “Foundation Array”? (And what would I do with NSHipster.com ?!)&lt;/p&gt;
-
-&lt;p&gt;Semantics? Start to look closely at any other language, and how they actually use namespaces, and you’ll realize that namespaces don’t magically solve all matters of ambiguity. If anything, the additional context makes things worse.&lt;/p&gt;
-
-&lt;p&gt;Not to create a straw man, but an imagined implementation of Objective-C namespaces probably look a lot like this:&lt;/p&gt;
-
-&lt;p&gt;```objc
-@namespace XX
-    @implementation Object&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;@using F: Foundation;
-
-- (void)foo {
-    F:Array *array = @[@1,@2, @3];
-
-    // ...
-}
-
-@end @end
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;What we have currently—warts and all—has the notable advantage of non-ambiguity. There is no mistaking NSString for anything other than what it is, either by the compiler or when we talk about it as developers. There are no special contextual considerations to consider when reading through code to understand what actors are at play. And best of all: class names are exceedingly easy to search for.&lt;/p&gt;
-
-&lt;p&gt;Either way, if you’re interested in this subject, I’d encourage you to take a look at this namespace feature proposal by Kyle Sluder. It’s a fascinating read.&lt;/p&gt;
-
-  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/ios/Namespacing/&quot;&gt;Object-C的命名空间&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 05, 2014.&lt;/p&gt;</content>
-</entry>
 
 
 <entry>
@@ -320,44 +74,41 @@ RAC	 Reactive Cocoa  &lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a id=&quot;message_in_a_bottle&quot; name=&quot;message_in_a_bottle&quot;&gt; &lt;/a&gt;
-##消息的传递&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;message_in_a_bottle&quot; name=&quot;message_in_a_bottle&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;消息的传递&lt;/h2&gt;
 
 &lt;p&gt;Smalltalk才是实至名归的第一种面向对象语言，它用“从一个对象发送信息给另一个对象”的新概念取代了“调用函数”的旧概念，对后面的语言发展产生了深远的影响。&lt;/p&gt;
 
 &lt;p&gt;你可以在Ruby中通过这样写来实现消息的发送：&lt;/p&gt;
 
-&lt;p&gt;```ruby&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;
+receiver.the_message argument
 
-&lt;p&gt;receiver.the_message argument&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Objective-C的实现方式和Ruby的差不多：&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+[receiver theMessage:argument];
 
-&lt;p&gt;[receiver theMessage:argument];&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这些消息实现了鸭子类型的方式，也就是说关注的不是这个对象的类型或类本身，而是这个对象能否对一个消息做出反应。&lt;/p&gt;
 
 &lt;p&gt;发送消息真的是非常棒的事，但是只有当消息在传送数据时，它的价值才会被发挥地更大：&lt;/p&gt;
 
-&lt;p&gt;```ruby&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;
+receiver.send(:the_message, argument)
 
-&lt;p&gt;receiver.send(:the_message, argument)&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;和&lt;/p&gt;
 
-&lt;p&gt;```
-和&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+[receiver performSelector:@selector(theMessage:) 
+withObject:argument];
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;[receiver performSelector:@selector(theMessage:) 
-withObject:argument];&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;正如Ruby中方法需要symbol支持一样，Objective-C中selector也需要string来支持。（在Objective-C中没有symbol。）这样就可以让你通过动态的方式使用一个方法。你甚至可以通过&lt;code&gt;NSSelectorFromString&lt;/code&gt;方法来使用string创建一个selector，并在一个对象里执行它。同样的，我们可以在Ruby中也可以创建一个string或symbol，并把传给&lt;code&gt;Object#send&lt;/code&gt;方法。&lt;/p&gt;
 
@@ -365,61 +116,56 @@ withObject:argument];&lt;/p&gt;
 
 &lt;p&gt;当你想在调用一个方法前判断一下这个对象是否能够执行这个方法，你可以用Ruby中的&lt;code&gt;respond_to？&lt;/code&gt;方法来检查：&lt;/p&gt;
 
-&lt;p&gt;```ruby&lt;/p&gt;
-
-&lt;p&gt;if receiver.respond_to? :the_message
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;
+if receiver.respond_to? :the_message
   receiver.the_message argument
-end&lt;/p&gt;
+end
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Objective-C中也有差不多的方法：&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;if ([receiver respondsToSelector:@selector(theMessage:)]) {
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+if ([receiver respondsToSelector:@selector(theMessage:)]) {
     [receiver theMessage:someThing];
-}&lt;/p&gt;
+}
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a id=&quot;getting_metaer_and_metaer&quot; name=&quot;getting_metaer_and_metaer&quot;&gt; &lt;/a&gt;
-##变得越来越动态&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;getting_metaer_and_metaer&quot; name=&quot;getting_metaer_and_metaer&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;变得越来越动态&lt;/h2&gt;
 
 &lt;p&gt;如果你想在一个不能修改的类（像系统类）中添加你想要的方法，那么Objective-C里的category一定不会让你失望 – 很像Ruby中的“开放类”。&lt;/p&gt;
 
 &lt;p&gt;举个例子，如果你想将Rails中的&lt;code&gt;to_sentence&lt;/code&gt;方法添加到&lt;code&gt;NSArray&lt;/code&gt;类中，我们只需要对&lt;code&gt;NSArray&lt;/code&gt;这个类进行扩展就好了：&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+@interface NSArray (ToSentence)
 
-&lt;p&gt;@interface NSArray (ToSentence)&lt;/p&gt;
+- (NSString *)toSentence;
 
-&lt;ul&gt;
-  &lt;li&gt;(NSString *)toSentence;&lt;/li&gt;
-&lt;/ul&gt;
+@end
 
-&lt;p&gt;@end&lt;/p&gt;
 
-&lt;p&gt;@implementation NSArray (ToSentence)&lt;/p&gt;
+@implementation NSArray (ToSentence)
 
-&lt;ul&gt;
-  &lt;li&gt;(NSString *)toSentence {
-  if (self.count == 0) return @&quot;&quot;;
-  if (self.count == 1) return [self lastObject];
-  NSArray *allButLastObject = [self subarrayWithRange:NSMakeRange(0, self.count-1)];
-  NSString *result = [allButLastObject componentsJoinedByString:@&quot;, &quot;];
-  BOOL showComma = self.count &amp;gt; 2;
-  result = [result stringByAppendingFormat:@&quot;%@ and &quot;, showComma ? @&quot;,&quot; : @&quot;&quot;];
-  result = [result stringByAppendingString:[self lastObject]];
-  return result;
-}&lt;/li&gt;
-&lt;/ul&gt;
+- (NSString *)toSentence {
+    if (self.count == 0) return @&amp;amp;quot;&amp;amp;quot;;
+    if (self.count == 1) return [self lastObject];
+    NSArray *allButLastObject = [self subarrayWithRange:NSMakeRange(0, self.count-1)];
+    NSString *result = [allButLastObject componentsJoinedByString:@&amp;amp;quot;, &amp;amp;quot;];
+    BOOL showComma = self.count &amp;amp;gt; 2;
+    result = [result stringByAppendingFormat:@&amp;amp;quot;%@ and &amp;amp;quot;, showComma ? @&amp;amp;quot;,&amp;amp;quot; : @&amp;amp;quot;&amp;amp;quot;];
+    result = [result stringByAppendingString:[self lastObject]];
+    return result;
+}
 
-&lt;p&gt;@end&lt;/p&gt;
+@end
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;Category是在编译的时候将方法添加到程序中 – 让我们在runtime中动态捕捉它们怎么样？&lt;/p&gt;
 
@@ -427,35 +173,30 @@ end&lt;/p&gt;
 
 &lt;p&gt;Objective-C中的流程是差不多，但我们不是重写&lt;code&gt;doesNotRecognizeSelector:&lt;/code&gt;方法（相当于Ruby中的&lt;code&gt;method_missing&lt;/code&gt;方法），而是在&lt;code&gt;resolveClassMethod:&lt;/code&gt;方法中捕捉Category添加的方法。假设我们有一个叫&lt;code&gt;+findWhere:equals:&lt;/code&gt;的类方法，它可以得到property的名称和值，那么通过正则表达式就可以很容易实现找到property的名字，并通过block来注册这个selector。&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
++ (BOOL)resolveClassMethod:(SEL)sel {
+    NSString *selectorName = NSStringFromSelector(sel);
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;(BOOL)resolveClassMethod:(SEL)sel {
-  NSString *selectorName = NSStringFromSelector(sel);&lt;/p&gt;
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@&amp;amp;quot;^findWhere(\\w+)Equals:$&amp;amp;quot; options:0 error:nil];
+    NSTextCheckingResult *result = [regex firstMatchInString:selectorName options:0 range:NSMakeRange(0, selectorName.length)];
+    if (result) {
+        NSRange propertyNameRange = [result rangeAtIndex:1];
+        NSString *propertyName = [selectorName substringWithRange:propertyNameRange];
 
-    &lt;p&gt;NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@&quot;^findWhere(\w+)Equals:$&quot; options:0 error:nil];
-  NSTextCheckingResult *result = [regex firstMatchInString:selectorName options:0 range:NSMakeRange(0, selectorName.length)];
-  if (result) {
-      NSRange propertyNameRange = [result rangeAtIndex:1];
-      NSString *propertyName = [selectorName substringWithRange:propertyNameRange];&lt;/p&gt;
+        IMP implementation  = imp_implementationWithBlock((id) ^(id self, id arg1) {
+            return [self findWhere:propertyName equals:arg1];
+        });
 
-    &lt;pre&gt;&lt;code&gt;  IMP implementation  = imp_implementationWithBlock((id) ^(id self, id arg1) {
-      return [self findWhere:propertyName equals:arg1];
-  });
+        Class metaClass = object_getClass(self);
 
-  Class metaClass = object_getClass(self);
+        class_addMethod(metaClass, sel, implementation, &amp;amp;quot;@@:@@&amp;amp;quot;);
+        return YES;
+    }
 
-  class_addMethod(metaClass, sel, implementation, &amp;amp;quot;@@:@@&amp;amp;quot;);
-  return YES;   }
+    return [super resolveClassMethod:sel];
+}
+
 &lt;/code&gt;&lt;/pre&gt;
-
-    &lt;p&gt;return [super resolveClassMethod:sel];
-}&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;```&lt;/p&gt;
 
 &lt;p&gt;这个方法的优点就是我们不需要去重写&lt;code&gt;respondsToSelector:&lt;/code&gt;，因为每个在类中注册过的selector都会去调用这个方法。现在让我们调用&lt;code&gt;[RGSong findWhereTitleEquals:@“Mercy”]&lt;/code&gt;。当&lt;code&gt;findWhereTitleEquals:&lt;/code&gt;第一次被调用的时候，runtime并不知道这个方法，所以它会调用&lt;code&gt;resolveClassMethod:&lt;/code&gt;，这时我们就将&lt;code&gt;findWhereTitleEquals:&lt;/code&gt;这个方法动态添加进去，当第二次调用&lt;code&gt;findWhereTitleEquals:&lt;/code&gt;的时候，因为它已经被添加过了，所以就不会再调用&lt;code&gt;resolveClassMethod:&lt;/code&gt;了。&lt;/p&gt;
 
@@ -463,8 +204,9 @@ end&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a id=&quot;introspection&quot; name=&quot;introspection&quot;&gt; &lt;/a&gt;
-##内省  &lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;introspection&quot; name=&quot;introspection&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;内省&lt;/h2&gt;
 
 &lt;p&gt;动态方法决议并不只是像Ruby和Objective-C这样的语言的技术支持。你也可以通过在runtime中用一种有意思的方式去操作这些对象。&lt;/p&gt;
 
@@ -474,8 +216,9 @@ end&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a id=&quot;cashing_in&quot; name=&quot;cashing_in&quot;&gt; &lt;/a&gt;
-##现学现用&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;cashing_in&quot; name=&quot;cashing_in&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;现学现用&lt;/h2&gt;
 
 &lt;p&gt;所有的动态工具都可以用来创建像Core Data这样的东西，Core Data是一个有点像ActiveRecord的持久化对象图。在Core Data中，relationship是“有缺陷的”，也就是说他们只有在被别的对象访问时，才会被加载。每个property的accessor和mutator在runtime中都被重写（使用的就是我们上面提到的动态方法决议）。如果我们访问了一个还没有被加载的对象时，框架就会从持久性储存中动态加载这个对象并将它返回。它保持了内存的低利用率，避免了在任何一个物体被获取时，实体对象图表都要被加载到内存中这样情况的发生。&lt;/p&gt;
 
@@ -485,8 +228,9 @@ end&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a id=&quot;what_is_comepielur&quot; name=&quot;what_is_comepielur&quot;&gt; &lt;/a&gt;
-##什么是编译器？ &lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;what_is_comepielur&quot; name=&quot;what_is_comepielur&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;什么是编译器？&lt;/h2&gt;
 
 &lt;p&gt;很明显，Objective-C和Ruby并不是同一种语言，目前为止最大的不同就是Objective-C是一种编译型语言。&lt;/p&gt;
 
@@ -526,8 +270,9 @@ end&lt;/p&gt;
 
 &lt;p&gt;工作快一年了，参与了一些项目，在项目有崩溃的时候，也有欣喜的时候，我觉得很有必要记录下来，其中，可能是一些理想的化的设想，因为在之前的开发过程并没有实践过，但我觉得是可以一试，并且是有帮助的。&lt;/p&gt;
 
-&lt;p&gt;&lt;a id=&quot;begin&quot; name=&quot;begin&quot;&gt; &lt;/a&gt;
-##项目开始之前&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;begin&quot; name=&quot;begin&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;项目开始之前&lt;/h2&gt;
 
 &lt;p&gt;很多次，我都迫不及待地想马上编写代码，我太喜欢那种写代码的感觉了。可是，越写越觉得不对劲，或者写到一半发现这个功能与需求不一样，然后改了又改，或直接重新开始写。&lt;br /&gt;
 所以，不要急，慢慢来，我们可以先用Mind Map，或者你喜欢的方式将需求分析一下，并对一些功能进行细化。    &lt;br /&gt;
@@ -537,22 +282,25 @@ end&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a id=&quot;specification&quot; name=&quot;specification&quot;&gt; &lt;/a&gt;
-##规范&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;specification&quot; name=&quot;specification&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;规范&lt;/h2&gt;
 
 &lt;p&gt;当我看过去写的代码，真的有种不想认自己的娃的冲动啊，根本不知道在写什么，命名非常幼稚，当然，现在可能也还是这样，但现在应该有一部分已经成年了吧。很多人会觉得规范是件很麻烦的事，因为规范会给限制程序员的自由，但个人觉得规范与自由并没有冲突。规范应该是团队之间的一种的约定的事情，它的目的是为了能够减少因代码问题而导致的沟通成本。&lt;/p&gt;
 
 &lt;p&gt;规范体现在那些地方呢？&lt;/p&gt;
 
-&lt;p&gt;&lt;a id=&quot;code_specification&quot; name=&quot;code_specification&quot;&gt; &lt;/a&gt;
-###代码规范&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;code_specification&quot; name=&quot;code_specification&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;代码规范&lt;/h3&gt;
 
 &lt;p&gt;我觉得每个团队之间的代码规范应该是不一样，代码规范应该是由团队中的每个成员讨论出来的结果，而不是一个人拍案决定，代码规范的目的应该是让你和每个成员都能很好的阅读，把时间专注到更需要时间的地方。 &lt;br /&gt;
 哪些需要规范呢?&lt;br /&gt;
 比如在iOS项目开发中，就可以有文件名的规范，图片名的规范，类名的规范等。这些命名都需要考虑仔细，因为它不是为一个人而起的。你还要确保别人也能看懂它的作用，也许你会觉得注释就好，当然，这会是个好办法，但如果只要能看到名字就能知道它的功能，那不是更好么？&lt;/p&gt;
 
-&lt;p&gt;&lt;a id=&quot;version_specification&quot; name=&quot;version_specification&quot;&gt; &lt;/a&gt;
-###版本控制规范&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;version_specification&quot; name=&quot;version_specification&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;版本控制规范&lt;/h3&gt;
 
 &lt;p&gt;版本控制在开发过程中非常重要，所以版本控制的规范也是非常重要的，以git为例:&lt;/p&gt;
 
@@ -561,27 +309,31 @@ end&lt;/p&gt;
   &lt;li&gt;commit，每一条commit都应该清楚的描述，不能马虎，这不只帮助你未来的查看，也是让开发人员了解代码演化的重要途径之一，另一方面，也不知不觉中养成细化功能的习惯，这样在以后地开发中，你就会对要开发的功能进行细分，当一个子功能开发完成，就写一个commit。(这里可以参考&lt;a href=&quot;https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit&quot;&gt;google开源项目的commit规范&lt;/a&gt;)&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;a id=&quot;document_specification&quot; name=&quot;document_specification&quot;&gt; &lt;/a&gt;
-###文档规范&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;document_specification&quot; name=&quot;document_specification&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;文档规范&lt;/h3&gt;
 
 &lt;p&gt;当开始一个项目时，应该需要一个文档，来跟踪你的项目，其中的内容应该包括，这个项目的文件结构，功能，还有一些类的功能。这些也是对代码可读性的扩展。&lt;/p&gt;
 
 &lt;p&gt;这么多规范很烦吧，程序员的自由在哪儿，但我觉得我们不只是为现在写程序，很多时候，写程序的时间只占开发整个项目的10%，而很多时间都是在测试，调试，解决bug，或者在寻找以前的代码。所以我们要为未来而写，这对于我来说也是一种自我修养吧。&lt;/p&gt;
 
-&lt;p&gt;&lt;a id=&quot;test_specification&quot; name=&quot;test_specification&quot;&gt; &lt;/a&gt;
-###测试规范&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;test_specification&quot; name=&quot;test_specification&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;测试规范&lt;/h3&gt;
 
 &lt;p&gt;测试，听上去很美好，当在我的以往项目中，这总是被遗忘的事情，或者是根本不会提起的事情，只有当问题产生，才会悔不当初，有它该多好。每次下定决心，一定要写一个测试的时候，总是懒于去行动，但励志要成为优秀工程师的我们一定不会忽略它的，所以测试的规范，也是非常重要的，它也让你知道一这段测试的功能与该有的结果，这也是对功能性的一个很好的补充，也为以后的改动带来了很多方便。&lt;/p&gt;
 
 &lt;hr /&gt;
-&lt;p&gt;&lt;a id=&quot;tidy&quot; name=&quot;tidy&quot;&gt; &lt;/a&gt;
-##整理&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;tidy&quot; name=&quot;tidy&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;整理&lt;/h2&gt;
 
 &lt;p&gt;你的项目不会是一尘不变的，他会因为时间的推移而增加更多东西，这时也许你之前的那些管理方式就变得很没有效率，想重新捣腾它，发现牵一发而动全身，真抓狂，早干嘛去了。为了避免这样的悲剧再次重演整理就变得很重要了，整理包括目录结构、资源和代码的整理，文件结构可以参考这篇&lt;a href=&quot;http://blog.jobbole.com/61083/&quot;&gt;博文&lt;/a&gt;,资源和代码整理则是根据上面提到的各种规范，整理的目的应该是让项目清晰和简洁。&lt;/p&gt;
 
 &lt;hr /&gt;
-&lt;p&gt;&lt;a id=&quot;summary&quot; name=&quot;summary&quot;&gt; &lt;/a&gt;
-##总结&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;summary&quot; name=&quot;summary&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-7&quot;&gt;总结&lt;/h2&gt;
 
 &lt;p&gt;写了这么多，其实也是对自己过去的经验的整理，也是对自己的勉励，博客的意义在于分享，而分享又是为了更好的交流，希望能提出一些宝贵的意见，让我们一起成长。&lt;/p&gt;
 
@@ -641,119 +393,109 @@ end&lt;/p&gt;
 
 &lt;p&gt;我们将要创建一个简单的例子来展示如何使用一个带UIkit Dynamic的collection view layout。当然，我们需要做的第一件事就是，创建一个数据源去驱动我们的collection view。我知道以你的能力完全可以独立实现一个数据源，但是为了完整性，我还是提供了一个给你:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+@implementation ASHCollectionViewController
 
-&lt;p&gt;@implementation ASHCollectionViewController&lt;/p&gt;
+static NSString * CellIdentifier = @&quot;CellIdentifier&quot;;
 
-&lt;p&gt;static NSString * CellIdentifier = @”CellIdentifier”;&lt;/p&gt;
-
-&lt;p&gt;-(void)viewDidLoad 
+-(void)viewDidLoad 
 {
     [super viewDidLoad];
     [self.collectionView registerClass:[UICollectionViewCell class] 
-            forCellWithReuseIdentifier:CellIdentifier];&lt;/p&gt;
+            forCellWithReuseIdentifier:CellIdentifier];
 
-&lt;p&gt;}&lt;/p&gt;
+}
 
-&lt;p&gt;-(UIStatusBarStyle)preferredStatusBarStyle 
+-(UIStatusBarStyle)preferredStatusBarStyle 
 {
-    return UIStatusBarStyleLightContent;&lt;/p&gt;
+    return UIStatusBarStyleLightContent;
 
-&lt;p&gt;}&lt;/p&gt;
+}
 
-&lt;p&gt;-(void)viewDidAppear:(BOOL)animated 
+-(void)viewDidAppear:(BOOL)animated 
 {
     [super viewDidAppear:animated];
-    [self.collectionViewLayout invalidateLayout];&lt;/p&gt;
+    [self.collectionViewLayout invalidateLayout];
 
-&lt;p&gt;}&lt;/p&gt;
+}
 
-&lt;h1 id=&quot;pragma-mark---uicollectionview-methods&quot;&gt;pragma mark - UICollectionView Methods&lt;/h1&gt;
+#pragma mark - UICollectionView Methods
 
-&lt;p&gt;-(NSInteger)collectionView:(UICollectionView *)collectionView 
+-(NSInteger)collectionView:(UICollectionView *)collectionView 
     numberOfItemsInSection:(NSInteger)section 
 {
-    return 120;&lt;/p&gt;
+    return 120;
 
-&lt;p&gt;}&lt;/p&gt;
+}
 
-&lt;p&gt;-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView 
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView 
                  cellForItemAtIndexPath:(NSIndexPath *)indexPath 
 {
     UICollectionViewCell *cell = [collectionView 
         dequeueReusableCellWithReuseIdentifier:CellIdentifier 
-                                  forIndexPath:indexPath];&lt;/p&gt;
+                                  forIndexPath:indexPath];
+    
+    cell.backgroundColor = [UIColor orangeColor];
+    return cell;
 
-&lt;pre&gt;&lt;code&gt;cell.backgroundColor = [UIColor orangeColor];
-return cell;
+}
+
+@end
+
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;@end&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
 
 &lt;p&gt;我们注意到当视图第一次出现的时候，这个layout是被无效的。这是因为没有用Storybards的结果(当使用Storyboards时，调用prepareLayout方法的时机是不同的–或是相同的–在WWDC的视频中他们没有告诉我们这些)。所以，当这些试图一出现我们就需要手动使这个collection view layout无效。当我们用tiling的时候，就不需要这样。&lt;/p&gt;
 
 &lt;p&gt;让我们创建我们自己的collection view layout。我们需要强引用一个dynamic animator, 并且使用它来驱动我们的collcetion view layout的attribute。我们在实现文件里定义了一个私有的property:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+@interface ASHSpringyCollectionViewFlowLayout ()
 
-&lt;p&gt;@interface ASHSpringyCollectionViewFlowLayout ()&lt;/p&gt;
+@property (nonatomic, strong) UIDynamicAnimator *dynamicAnimator;
 
-&lt;p&gt;@property (nonatomic, strong) UIDynamicAnimator *dynamicAnimator;&lt;/p&gt;
+@end
 
-&lt;p&gt;@end&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;我们将在layout的初始化方法中初始化我们的dynamic animator。还要设置一些属于父类UICollectionViewFlowLayout中的property:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;(id)init 
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+- (id)init 
 {
-  if (!(self = [super init])) return nil;&lt;/p&gt;
+    if (!(self = [super init])) return nil;
+    
+    self.minimumInteritemSpacing = 10;
+    self.minimumLineSpacing = 10;
+    self.itemSize = CGSizeMake(44, 44);
+    self.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+    
+    self.dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
+    
+    return self;
 
-    &lt;p&gt;self.minimumInteritemSpacing = 10;
-  self.minimumLineSpacing = 10;
-  self.itemSize = CGSizeMake(44, 44);
-  self.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);&lt;/p&gt;
+}
 
-    &lt;p&gt;self.dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];&lt;/p&gt;
-
-    &lt;p&gt;return self;&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;我们将实现的下一个方法是prepareLayout。我们首先需要调用父类的方法。因为我们是继承&lt;code&gt;UICollectionViewFlowLayout&lt;/code&gt;类，所以在调用父类的prepareLayout的时，可以使collection view layout attribute都放置在合适的位置。我们可以依靠基类&lt;code&gt;UICollectionViewFlowLayout&lt;/code&gt;的&lt;code&gt;prepareLayout&lt;/code&gt;方法来提供一个默认的排布，并且能够使用&lt;code&gt;[super layoutAttributesForElementsInRect:visibleRect];&lt;/code&gt;方法得到指定rect内的所有item的layout attributes。&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+[super prepareLayout];
 
-&lt;p&gt;[super prepareLayout];&lt;/p&gt;
-
-&lt;p&gt;CGSize contentSize = self.collectionView.contentSize;
+CGSize contentSize = self.collectionView.contentSize;
 NSArray *items = [super layoutAttributesForElementsInRect:
-    CGRectMake(0.0f, 0.0f, contentSize.width, contentSize.height)];&lt;/p&gt;
+    CGRectMake(0.0f, 0.0f, contentSize.width, contentSize.height)];
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这真的是效率低下的代码。因为我们的collection view中可能会有成千上万个cell，一次性加载所有的cell是一个可能会产生难以置信的内存紧张的操作。我们要在一段时间内遍历所有的元素，这也成为耗时的操作。这真的是效率的双重打击！别担心–我们是负责任的开发者，所以我们会很快解决这个问题的。我们先暂时继续使用简单、粗暴的实现方式。&lt;/p&gt;
 
 &lt;p&gt;当加载完我们所有的collection view layout attribute之后，我们需要检查他们是否都已经被加载到我们的animator里了。如果一个behavior已经在animator中存在，那么我们就不能重新添加，否则就会得到一个非常难懂的运行异常提示:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;&amp;lt;UIDynamicAnimator: 0xa5ba280&amp;gt; (0.004987s) in 
-&amp;lt;ASHSpringyCollectionViewFlowLayout: 0xa5b9e60&amp;gt; {{0, 0}, {0, 0}}: 
-body &lt;pkphysicsbody&gt; type:&lt;rectangle&gt; representedObject:
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+&amp;lt;UIDynamicAnimator: 0xa5ba280&amp;gt; (0.004987s) in 
+&amp;lt;ASHSpringyCollectionViewFlowLayout: 0xa5b9e60&amp;gt; \{\{0, 0}, \{0, 0\}\}: 
+body &amp;lt;PKPhysicsBody&amp;gt; type:&amp;lt;Rectangle&amp;gt; representedObject:
 [&amp;lt;UICollectionViewLayoutAttributes: 0xa281880&amp;gt; 
 index path: (&amp;lt;NSIndexPath: 0xa281850&amp;gt; {length = 2, path = 0 - 0}); 
 frame = (10 10; 300 44); ] 0xa2877c0  
@@ -761,53 +503,50 @@ PO:(159.999985,32.000000) AN:(0.000000) VE:(0.000000,0.000000) AV:(0.000000)
 dy:(1) cc:(0) ar:(1) rs:(0) fr:(0.200000) re:(0.200000) de:(1.054650) gr:(0) 
 without representedObject for item &amp;lt;UICollectionViewLayoutAttributes: 0xa3833e0&amp;gt; 
 index path: (&amp;lt;NSIndexPath: 0xa382410&amp;gt; {length = 2, path = 0 - 0}); 
-frame = (10 10; 300 44);&lt;/rectangle&gt;&lt;/pkphysicsbody&gt;&lt;/p&gt;
+frame = (10 10; 300 44);
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;如果看到了这个错误，那么这基本表明你添加了两个behavior给同一个&lt;code&gt;UICollectionViewLayoutAttribute&lt;/code&gt;，这使得系统不知道该怎么处理。&lt;/p&gt;
 
 &lt;p&gt;无论如何，一旦我们已经检查好我们是否已经将behavior添加到dynamic animator之后，我们就需要遍历每个collection view layout attribute来创建和添加新的dynamic animator:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;if (self.dynamicAnimator.behaviors.count == 0) {
-	[items enumerateObjectsUsingBlock:^(id&lt;uidynamicitem&gt; obj, NSUInteger idx, BOOL *stop) {
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+if (self.dynamicAnimator.behaviors.count == 0) {
+	[items enumerateObjectsUsingBlock:^(id&amp;lt;UIDynamicItem&amp;gt; obj, NSUInteger idx, BOOL *stop) {
         UIAttachmentBehavior *behaviour = [[UIAttachmentBehavior alloc] initWithItem:obj 
-                                                                    attachedToAnchor:[obj center]];&lt;/uidynamicitem&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;    behaviour.length = 0.0f;
-    behaviour.damping = 0.8f;
-    behaviour.frequency = 1.0f;
+                                                                    attachedToAnchor:[obj center]];
+        
+        behaviour.length = 0.0f;
+        behaviour.damping = 0.8f;
+        behaviour.frequency = 1.0f;
+        
+        [self.dynamicAnimator addBehavior:behaviour];
     
-    [self.dynamicAnimator addBehavior:behaviour];
+	}];
 
-}];
+}
+
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
 
 &lt;p&gt;这段代码非常简单。我们为每个item创建了一个以物体的中心为附着点的&lt;code&gt;UIAttachmentBehavior&lt;/code&gt;对象。然后又设置了我们的attachment behavior的length为0以便约束这个cell能一直以behavior的附着点为中心。然后又给&lt;code&gt;damping&lt;/code&gt;和&lt;code&gt;frequency&lt;/code&gt;这两个参数设置一个比较合适的值。&lt;/p&gt;
 
 &lt;p&gt;这就是&lt;code&gt;prepareLayout&lt;/code&gt;。我们现在需要实现&lt;code&gt;layoutAttributesForElementsInRect:&lt;/code&gt; 和 &lt;code&gt;layoutAttributesForItemAtIndexPath:&lt;/code&gt;这两个方法，UIKit会调用它们来询问collection view每一个item的布局信息。我们写的代码会把这些查询交给专门做这些事的dynamic animator:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;-(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect 
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+-(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect 
 {
-    return [self.dynamicAnimator itemsInRect:rect];&lt;/p&gt;
+    return [self.dynamicAnimator itemsInRect:rect];
 
-&lt;p&gt;}&lt;/p&gt;
+}
 
-&lt;p&gt;-(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath 
+-(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath 
 {
-    return [self.dynamicAnimator layoutAttributesForCellAtIndexPath:indexPath];&lt;/p&gt;
+    return [self.dynamicAnimator layoutAttributesForCellAtIndexPath:indexPath];
 
-&lt;p&gt;}&lt;/p&gt;
+}
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h1 id=&quot;section&quot;&gt;响应滚动事件&lt;/h1&gt;
 
@@ -815,42 +554,40 @@ frame = (10 10; 300 44);&lt;/rectangle&gt;&lt;/pkphysicsbody&gt;&lt;/p&gt;
 
 &lt;p&gt;为了使它表现地动态点，我们需要layout和dynamic animator能够对collection view中滑动位置的变化做出反应。幸好这里有个非常适合这个要求的方法&lt;code&gt;shouldInvalidateLayoutForBoundsChange:&lt;/code&gt;。这个方法会在collection view 的bound发生改变的时候被调用，根据最新的&lt;code&gt;content offset&lt;/code&gt;调整我们的dynamic animator中的behaviors的参数。在重新调整这些behavior的item之后，我们在这个方法中返回NO；因为dynamic animator会关心layout的无效问题，所以在这种情况下，它不需要去主动使其无效:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;-(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds 
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+-(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds 
 {
     UIScrollView *scrollView = self.collectionView;
-    CGFloat delta = newBounds.origin.y - scrollView.bounds.origin.y;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
-
-[self.dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
-    CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
-    CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
-    CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1500.0f;
+    CGFloat delta = newBounds.origin.y - scrollView.bounds.origin.y;
     
-    UICollectionViewLayoutAttributes *item = springBehaviour.items.firstObject;
-    CGPoint center = item.center;
-if (delta &amp;lt; 0) {
-        center.y += MAX(delta, delta*scrollResistance);
+    CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
     
+    [self.dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
+        CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
+        CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
+        CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1500.0f;
+        
+        UICollectionViewLayoutAttributes *item = springBehaviour.items.firstObject;
+        CGPoint center = item.center;
+	if (delta &amp;lt; 0) {
+            center.y += MAX(delta, delta*scrollResistance);
+        
+	}
+	else {
+            center.y += MIN(delta, delta*scrollResistance);
+        
+	}
+        item.center = center;
+        
+        [self.dynamicAnimator updateItemUsingCurrentState:item];
+    
+    }];
+    
+    return NO;
+
 }
-else {
-        center.y += MIN(delta, delta*scrollResistance);
-    
-}
-    item.center = center;
-    
-    [self.dynamicAnimator updateItemUsingCurrentState:item];
 
-}];
-
-return NO;
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
 
 &lt;p&gt;让我们仔细查看这个代码的细节。首先我们得到了这个scroll view(这是我们的collection view)，然后计算它的content offset中y的变化(在这个例子中，我们的collection view是垂直滑动的)。一旦我们得到这个增量，我们需要得到用户接触的位置。这是非常重要的，因为我们希望离接触位置比较近的那些物体能移动地更迅速些，而离接触位置比较远的那些物体则应该滞后些。&lt;/p&gt;
 
@@ -868,11 +605,10 @@ return NO;
 
 &lt;p&gt;我们需要做的第一件事就是是跟踪dynamic animator中的所有behavior物体的index path。我在collection view 中添加一个property来做这件事:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+@property (nonatomic, strong) NSMutableSet *visibleIndexPathsSet;
 
-&lt;p&gt;@property (nonatomic, strong) NSMutableSet *visibleIndexPathsSet;&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;我们用set是因为它具有常数复杂度的查找效率，并且我们经常地查找&lt;code&gt;visibleIndexPathsSet&lt;/code&gt;中是否已经包含了某个index path。&lt;/p&gt;
 
@@ -880,19 +616,17 @@ return NO;
 
 &lt;p&gt;因为我们是在滚动中创建这些新的behavior，所以我们需要维持现在collection view 的一些状态。尤其我们需要跟踪最近一次我们&lt;code&gt;bound&lt;/code&gt;变化的增量。我们会在滚动时用这个状态去创建我们的behavior:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+@property (nonatomic, assign) CGFloat latestDelta;
 
-&lt;p&gt;@property (nonatomic, assign) CGFloat latestDelta;&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;添加完这个property后，我们将要在&lt;code&gt;shouldInvalidateLayoutForBoundsChange:&lt;/code&gt;方法中添加下面这行代码:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+self.latestDelta = delta;
 
-&lt;p&gt;self.latestDelta = delta;&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这就是我们需要修改我们的方法来响应滚动事件。我们的这两个方法是为了将collection view中items的layout信息传给dynamic animator，这种方式没有变化。事实上，当你的collection view实现了dynamic animator的大部分情况下，都需要实现我们上面提到的两个方法&lt;code&gt;layoutAttributesForElementsInRect:&lt;/code&gt;和&lt;code&gt;layoutAttributesForItemAtIndexPath:&lt;/code&gt;。&lt;/p&gt;
 
@@ -906,105 +640,98 @@ return NO;
 
 &lt;p&gt;所以我们需要计算这个显示矩形。但是别着急！有件事要记住。我们的用户可能会非常快地滑动collection view，导致了dynamic animator不能跟上，所以我们需要稍微扩大显示范围，这样就能包含到那些将要显示的物体了。否则，在滑动很快的时候就会出现频闪现象了。让我们计算一下显示范围:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+CGRect originalRect = (CGRect){.origin = self.collectionView.bounds.origin, .size = self.collectionView.frame.size};
+CGRect visibleRect = CGRectInset(originalRect, -100, -100);
 
-&lt;p&gt;CGRect originalRect = (CGRect){.origin = self.collectionView.bounds.origin, .size = self.collectionView.frame.size};
-CGRect visibleRect = CGRectInset(originalRect, -100, -100);&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;我确信在实际显示矩形上的每个方向都扩大100个像素对我的demo来说是可行的。仔细查看这些值是否适合你们的collection view，尤其是当你们的cell很小的情况下。&lt;/p&gt;
 
 &lt;p&gt;接下来我们就需要收集在显示范围内的collection view layout attributes。还有它们的index paths:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+NSArray *itemsInVisibleRectArray = [super layoutAttributesForElementsInRect:visibleRect];
 
-&lt;p&gt;NSArray *itemsInVisibleRectArray = [super layoutAttributesForElementsInRect:visibleRect];&lt;/p&gt;
+NSSet *itemsIndexPathsInVisibleRectSet = [NSSet setWithArray:[itemsInVisibleRectArray valueForKey:@&quot;indexPath&quot;]];
 
-&lt;p&gt;NSSet *itemsIndexPathsInVisibleRectSet = [NSSet setWithArray:[itemsInVisibleRectArray valueForKey:@”indexPath”]];&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;注意我们是在用一个NSSet。这是因为它具有常数复杂度的查找效率，并且我们经常的查找visibleIndexPathsSet是否已经包含了某个index path:&lt;/p&gt;
 
 &lt;p&gt;接下来我们要做的就是遍历dynamic animator 的behaviors，过滤掉那些已经在&lt;code&gt;itemsIndexPathsInVisibleRectSet&lt;/code&gt;中的item。因为我们已经过滤掉我们的behavior，所以我们将要遍历的这些item都是不在显示范围里的，我们就可以将这些item从animator中删除掉(连同&lt;code&gt;visibleIndexPathsSet&lt;/code&gt;属性中的index path):&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UIAttachmentBehavior *behaviour, NSDictionary *bindings) {
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UIAttachmentBehavior *behaviour, NSDictionary *bindings) {
     BOOL currentlyVisible = [itemsIndexPathsInVisibleRectSet member:[[[behaviour items] firstObject] indexPath]] != nil;
     return !currentlyVisible;
-}]&lt;/p&gt;
+}]
 
-&lt;p&gt;NSArray *noLongerVisibleBehaviours = [self.dynamicAnimator.behaviors filteredArrayUsingPredicate:predicate];&lt;/p&gt;
+NSArray *noLongerVisibleBehaviours = [self.dynamicAnimator.behaviors filteredArrayUsingPredicate:predicate];
 
-&lt;p&gt;[noLongerVisibleBehaviours enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop) {
+[noLongerVisibleBehaviours enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop) {
     [self.dynamicAnimator removeBehavior:obj];
-    [self.visibleIndexPathsSet removeObject:[[[obj items] firstObject] indexPath]];&lt;/p&gt;
+    [self.visibleIndexPathsSet removeObject:[[[obj items] firstObject] indexPath]];
 
-&lt;p&gt;}];&lt;/p&gt;
+}];
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;下一步就是要得到新出现item的&lt;code&gt;UICollectionViewLayoutAttributes&lt;/code&gt;数组–那些item的index path在&lt;code&gt;itemsIndexPathsInVisibleRectSet&lt;/code&gt;而不在&lt;code&gt;visibleIndexPathsSet&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UICollectionViewLayoutAttributes *item, NSDictionary *bindings) {
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UICollectionViewLayoutAttributes *item, NSDictionary *bindings) {
     BOOL currentlyVisible = [self.visibleIndexPathsSet member:item.indexPath] != nil;
-    return !currentlyVisible;&lt;/p&gt;
+    return !currentlyVisible;
 
-&lt;p&gt;}];
-NSArray *newlyVisibleItems = [itemsInVisibleRectArray filteredArrayUsingPredicate:predicate];&lt;/p&gt;
+}];
+NSArray *newlyVisibleItems = [itemsInVisibleRectArray filteredArrayUsingPredicate:predicate];
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;一旦我们有新的layout attribute出现，我就可以遍历他们来创建新的behavior，并且将他们的index path添加到&lt;code&gt;visibleIndexPathsSet&lt;/code&gt;中。首先，无论如何，我都需要获取到用户手指触碰的位置。如果它是&lt;code&gt;CGPointZero&lt;/code&gt;的话，那就表示这个用户没有在滑动collection view，我就不需要在滚动时创建新的behavior:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
 
-&lt;p&gt;CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这是一个潜在的威胁。如果用户很快地滑动了collection view 之后释放了他的手指呢？这个collection view 就会一直滚动，但是我们的方法就不会在滚动时创建新的behavior了。幸运的是，那也就意味这scroll view滚动太快很难被注意到！好哇！这可能会是个问题，但是，只是针对那些拥有大量cell的collection view。在这种情况下，增加你的显示范围的界限就可以加载更多物体了。&lt;/p&gt;
 
 &lt;p&gt;现在我们需要枚举我们刚显示的item，为他们创建behavior，再将他们的index path 添加到&lt;code&gt;visibleIndexPathsSet&lt;/code&gt;。我们还需要在滚动时做些运算来创建behavior:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;[newlyVisibleItems enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *item, NSUInteger idx, BOOL *stop) {
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+[newlyVisibleItems enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *item, NSUInteger idx, BOOL *stop) {
     CGPoint center = item.center;
-    UIAttachmentBehavior *springBehaviour = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:center];&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;springBehaviour.length = 0.0f;
-springBehaviour.damping = 0.8f;
-springBehaviour.frequency = 1.0f;
-
-if (!CGPointEqualToPoint(CGPointZero, touchLocation)) {
-    CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
-    CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
-    CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1500.0f;
+    UIAttachmentBehavior *springBehaviour = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:center];
     
-if (self.latestDelta &amp;lt; 0) {
-        center.y += MAX(self.latestDelta, self.latestDelta*scrollResistance);
+    springBehaviour.length = 0.0f;
+    springBehaviour.damping = 0.8f;
+    springBehaviour.frequency = 1.0f;
     
-}
-else {
-        center.y += MIN(self.latestDelta, self.latestDelta*scrollResistance);
+    if (!CGPointEqualToPoint(CGPointZero, touchLocation)) {
+        CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
+        CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
+        CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1500.0f;
+        
+	if (self.latestDelta &amp;lt; 0) {
+            center.y += MAX(self.latestDelta, self.latestDelta*scrollResistance);
+        
+	}
+	else {
+            center.y += MIN(self.latestDelta, self.latestDelta*scrollResistance);
+        
+	}
+        item.center = center;
     
-}
-    item.center = center;
+    }
+    
+    [self.dynamicAnimator addBehavior:springBehaviour];
+    [self.visibleIndexPathsSet addObject:item.indexPath];
 
-}
+}];
 
-[self.dynamicAnimator addBehavior:springBehaviour];
-[self.visibleIndexPathsSet addObject:item.indexPath];
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;}];&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
 
 &lt;p&gt;大部分代码看起来还是挺熟悉的。大概有一半是来自没有实现tiling的&lt;code&gt;prepareLayout&lt;/code&gt;。另一半是来自&lt;code&gt;shouldInvalidateLayoutForBoundsChange&lt;/code&gt;方法。我们用latestDelta这个property来表示&lt;code&gt;bound&lt;/code&gt;变化的增量，适当地调整&lt;code&gt;UICollectionViewLayoutAttributes&lt;/code&gt;使这些cell表现地就像被attachment behavior拉着一样。&lt;/p&gt;
 
@@ -1018,52 +745,49 @@ else {
 
 &lt;p&gt;让我们继承&lt;code&gt;UICollectionViewLayout&lt;/code&gt;。当继承&lt;code&gt;UICollectionViewLayout&lt;/code&gt;的时候需要实现&lt;code&gt;collectionViewContentSize&lt;/code&gt;方法，这点非常重要。否则这个collection view就不知道如果去显示自己，也不会有显示任何东西。因为我们想要我们的collection view不要再滑动，我们将会返回我们的collection view的frame的尺寸，减去它的&lt;code&gt;contentInset.top&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;-(CGSize)collectionViewContentSize 
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+-(CGSize)collectionViewContentSize 
 {
     return CGSizeMake(self.collectionView.frame.size.width, 
-        self.collectionView.frame.size.height - self.collectionView.contentInset.top);&lt;/p&gt;
+        self.collectionView.frame.size.height - self.collectionView.contentInset.top);
 
-&lt;p&gt;}&lt;/p&gt;
+}
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;在这个(有教育意义)的例子中，我们的collection view总是会以零个cell开始，物体通过&lt;code&gt;performBatchUpdates:&lt;/code&gt;方法添加。这就意味着我们必须使用&lt;code&gt;-[UICollectionViewLayout prepareForCollectionViewUpdates:]&lt;/code&gt;方法来添加我们的behavior(即这个collection view的数据源总是以零开始)。&lt;/p&gt;
 
 &lt;p&gt;除了给各个物体添加附着behavior外，我们还将保留另外两个behavior:重力和碰撞。对于添加在这个collection view中的每个item来说，我们必须把这些item添加到我们的碰撞和附着behavior中。最后一步就是设置这些item的初始位置为屏幕外的某些地方，这样就有被附着behavior拉入到屏幕内的效果了:&lt;/p&gt;
 
-&lt;p&gt;```objc&lt;/p&gt;
-
-&lt;p&gt;-(void)prepareForCollectionViewUpdates:(NSArray *)updateItems
+&lt;pre&gt;&lt;code class=&quot;language-objc&quot;&gt;
+-(void)prepareForCollectionViewUpdates:(NSArray *)updateItems
 {
-    [super prepareForCollectionViewUpdates:updateItems];&lt;/p&gt;
+    [super prepareForCollectionViewUpdates:updateItems];
 
-&lt;pre&gt;&lt;code&gt;[updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger idx, BOOL *stop) {
-    if (updateItem.updateAction == UICollectionUpdateActionInsert) {
-        UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes 
-            layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
-    
-        attributes.frame = CGRectMake(CGRectGetMaxX(self.collectionView.frame) + kItemSize, 300, kItemSize, kItemSize);
+    [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger idx, BOOL *stop) {
+	    if (updateItem.updateAction == UICollectionUpdateActionInsert) {
+            UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes 
+                layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+        
+            attributes.frame = CGRectMake(CGRectGetMaxX(self.collectionView.frame) + kItemSize, 300, kItemSize, kItemSize);
 
-        UIAttachmentBehavior *attachmentBehaviour = [[UIAttachmentBehavior alloc] initWithItem:attributes 
-                                                                              attachedToAnchor:attachmentPoint];
-        attachmentBehaviour.length = 300.0f;
-        attachmentBehaviour.damping = 0.4f;
-        attachmentBehaviour.frequency = 1.0f;
-        [self.dynamicAnimator addBehavior:attachmentBehaviour];
+            UIAttachmentBehavior *attachmentBehaviour = [[UIAttachmentBehavior alloc] initWithItem:attributes 
+                                                                                  attachedToAnchor:attachmentPoint];
+            attachmentBehaviour.length = 300.0f;
+            attachmentBehaviour.damping = 0.4f;
+            attachmentBehaviour.frequency = 1.0f;
+            [self.dynamicAnimator addBehavior:attachmentBehaviour];
+        
+            [self.gravityBehaviour addItem:attributes];
+            [self.collisionBehaviour addItem:attributes];
+        
+	    }
     
-        [self.gravityBehaviour addItem:attributes];
-        [self.collisionBehaviour addItem:attributes];
-    
-    }
+    }];
 
-}];
+}
+
 &lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;}&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;http://www.objc.io/images/issue-5/newtonianCollectionView@2x.gif&quot; alt=&quot;Example&quot; /&gt;&lt;/p&gt;
 
@@ -1097,191 +821,181 @@ else {
  &lt;a href=&quot;#writing_tests&quot;&gt;&lt;strong&gt;测试&lt;/strong&gt;&lt;/a&gt;&lt;br /&gt;
  &lt;a href=&quot;#documenting_your_code&quot;&gt;&lt;strong&gt;文档&lt;/strong&gt;&lt;/a&gt;  &lt;/p&gt;
 
-&lt;p&gt;&lt;a id=&quot;introduce&quot; name=&quot;introduce&quot;&gt; &lt;/a&gt;
-##什么是Gem?&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;introduce&quot; name=&quot;introduce&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;gem&quot;&gt;什么是Gem?&lt;/h2&gt;
 
 &lt;p&gt;RubyGems是一个方便而强大的Ruby程序包管理器，Ruby的第三方插件是用gem方式来管理，非常容易发布和共享，一个简单的命令就可以安装上第三方的扩展库。特点：能远程安装包，包之间依赖关系的管理，简单可靠的卸载，查询机制，能查询本地和远程服务器的包信息，能保持一个包的不同版本，基于Web的查看接口，能查看你安装的gem的信息。&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a id=&quot;first_gem&quot; name=&quot;first_gem&quot;&gt; &lt;/a&gt;
-##第一个Gem&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;first_gem&quot; name=&quot;first_gem&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;gem-1&quot;&gt;第一个Gem&lt;/h2&gt;
 
 &lt;p&gt;我们要创建一个名叫&lt;code&gt;moondemo&lt;/code&gt;的gem，首先，就要创建一个名字为&lt;code&gt;moondemo_yourname&lt;/code&gt;的目录，这个是为了后面的发布，如果你想发布的话，就要检查一下你的gem名字是否已经被人使用了，如果已经被人使用，那就要换个名字了。  &lt;br /&gt;
 然后这个目录里的基本文件结构应该是这样的。 &lt;/p&gt;
 
-&lt;p&gt;```ruby
-➜  tree&lt;br /&gt;
-.&lt;br /&gt;
-├── moondemo.gemspec  &lt;br /&gt;
-├── lib&lt;br /&gt;
-│   └── moondemo.rb  &lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;➜  tree  
+.  
+├── moondemo.gemspec    
+├── lib  
+│   └── moondemo.rb  
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;gem中的代码被放在&lt;code&gt;lib&lt;/code&gt;目录中，这里有个约定就是&lt;code&gt;lib&lt;/code&gt;中必须有个和gem同名的ruby文件，这样当&lt;code&gt;require &#39;moondemo&#39;&lt;/code&gt;运行的时候，这个gem就会被加载，这个文件就是负责配置你的gem的代码和API。&lt;/p&gt;
 
-&lt;p&gt;```ruby
-➜  cat lib/moondemo.rb
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;➜  cat lib/moondemo.rb
 class moondemo
   def self.hi
-    puts “Hello world!”
+    puts &quot;Hello world!&quot;
   end
-end&lt;/p&gt;
+end
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;而&lt;code&gt;.gemspec&lt;/code&gt;文件是定义了这个gem的信息，比如是这个gem的功能，作者等，并且当这个gem发布的时候，会将这些信息显示到这个gem的主页上(就像&lt;a href=&quot;http://rubygems.org/gems/jekyll&quot;&gt;jekyll&lt;/a&gt;)。&lt;/p&gt;
 
-&lt;p&gt;```ruby
-➜  cat moondemo.gemspec
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;➜  cat moondemo.gemspec
 Gem::Specification.new do |s|
-  s.name        = ‘moondemo’
-  s.version     = ‘0.0.0’
-  s.date        = ‘2014-02-19’
-  s.summary     = “moondemo!”
-  s.description = “A simple hello world gem”
-  s.authors     = [“sheldon huang”]
-  s.email       = ‘allenwenzhou@gmail.com’
-  s.files       = [“lib/moondemo.rb”]
+  s.name        = &#39;moondemo&#39;
+  s.version     = &#39;0.0.0&#39;
+  s.date        = &#39;2014-02-19&#39;
+  s.summary     = &quot;moondemo!&quot;
+  s.description = &quot;A simple hello world gem&quot;
+  s.authors     = [&quot;sheldon huang&quot;]
+  s.email       = &#39;allenwenzhou@gmail.com&#39;
+  s.files       = [&quot;lib/moondemo.rb&quot;]
   s.homepage    =
-    ‘http://rubygems.org/gems/moondemo’
-  s.license       = ‘MIT’
-end&lt;/p&gt;
+    &#39;http://rubygems.org/gems/moondemo&#39;
+  s.license       = &#39;MIT&#39;
+end
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这里有很多选项，一看名字就知道他们是要代表什么内容的，如果你还想知道更多就看一些这个&lt;a href=&quot;http://guides.rubygems.org/specification-reference/&quot;&gt;文档&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;当我们创建完成了一个.gemspec，就可以编译出一个gem了，是不是有点小激动啊。但如果想要测试它就必须要在本地安装编译好的gem。&lt;/p&gt;
 
-&lt;p&gt;```ruby
-➜ gem build moondemo.gemspec
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;➜ gem build moondemo.gemspec
   Successfully built RubyGem
   Name: moondemo
   Version: 0.0.1
-  File: moondemo-0.0.1.gem&lt;/p&gt;
-
-&lt;p&gt;➜ gem install ./moondemo-0.0.1.gem
+  File: moondemo-0.0.1.gem
+  
+➜ gem install ./moondemo-0.0.1.gem
 Successfully installed moondemo-0.0.1
 Parsing documentation for moondemo-0.0.1
 Installing ri documentation for moondemo-0.0.1
-1 gem installed&lt;/p&gt;
+1 gem installed
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;上面这些步骤，只能是在本地已经装好了我们自己的gem，但还没有使用它，
 我们需要&lt;code&gt;require&lt;/code&gt;这个gem然后根据自己定义的方法来使用它。&lt;/p&gt;
 
-&lt;p&gt;```ruby&lt;/p&gt;
-
-&lt;p&gt;➜ irb
-2.0.0-p353 :001 &amp;gt; require ‘moondemo’
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;
+➜ irb
+2.0.0-p353 :001 &amp;gt; require &#39;moondemo&#39;
  =&amp;gt; true
 2.0.0-p353 :002 &amp;gt; MoonDemo.hi
 Hello world!
  =&amp;gt; nil
-```
-现在就可以将你的gem发布到Ruby社区上了，当在发布之前需要将你的帐号安装在电脑上，如果你在RubyGems.org上注册了帐号，那就只需要输入一个命令,再输入自己的密码就可以了&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;现在就可以将你的gem发布到Ruby社区上了，当在发布之前需要将你的帐号安装在电脑上，如果你在RubyGems.org上注册了帐号，那就只需要输入一个命令,再输入自己的密码就可以了&lt;/p&gt;
 
-&lt;p&gt;```ruby
-➜ curl -u 你的帐号名 https://rubygems.org/api/v1/api_key.yaml &amp;gt; ~/.gem/credentials; chmod 0600 ~/.gem/credentials&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;➜ curl -u 你的帐号名 https://rubygems.org/api/v1/api_key.yaml &amp;gt; ~/.gem/credentials; chmod 0600 ~/.gem/credentials
 
-&lt;p&gt;Enter host password for user ‘你的帐号名’:&lt;/p&gt;
+Enter host password for user &#39;你的帐号名&#39;:
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;一旦你的用户名已经被安装了，就可以直接发布你的gem了。&lt;/p&gt;
 
-&lt;p&gt;```ruby
-➜ gem push moondemo-0.0.1.gem
-Pushing gem to https://rubygems.org…
-Successfully registered gem: moondemo (0.0.1)&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;➜ gem push moondemo-0.0.1.gem
+Pushing gem to https://rubygems.org...
+Successfully registered gem: moondemo (0.0.1)
 
-&lt;p&gt;```
-很快的，你的gem就可以被任何人使用了&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;很快的，你的gem就可以被任何人使用了&lt;/p&gt;
 
-&lt;p&gt;```ruby
-➜ gem install moondemo
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;➜ gem install moondemo
 Successfully installed moondemo-0.0.1
 Parsing documentation for moondemo-0.0.1
-1 gem installed&lt;/p&gt;
+1 gem installed
 
-&lt;p&gt;```
-用Ruby和RubyGems来分享代码是不是很简单。&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;用Ruby和RubyGems来分享代码是不是很简单。&lt;/p&gt;
 
 &lt;hr /&gt;
 
-&lt;p&gt;&lt;a id=&quot;include_more_files&quot; name=&quot;include_more_files&quot;&gt; &lt;/a&gt;
-##包含更多文件&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;include_more_files&quot; name=&quot;include_more_files&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;包含更多文件&lt;/h2&gt;
 
 &lt;p&gt;我们以后代码当然不会这么简单，如果代码变得非常多了之后，该怎么办呢，当然是要是要将代码分到不同的文件中了。&lt;br /&gt;
 比如我们想在刚才的gem中添加根据不同语言来输出不同语言的”Hello world”。&lt;br /&gt;
 我们就可以添加一个&lt;code&gt;Translator&lt;/code&gt;文件，刚才提到过，gem的根文件是负责加载代码的，所以其他的功能的文件就需要放在&lt;code&gt;lib&lt;/code&gt;中和gem同名的目录中，我们可以这样分:&lt;/p&gt;
 
-&lt;p&gt;```bash
-➜ tree
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;➜ tree
 .
 ├── lib
 │   ├── moondemo
 │   │   └── translator.rb
 │   └── moondemo.rb
-├── moondemo-0.0.1.gem&lt;/p&gt;
+├── moondemo-0.0.1.gem
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;code&gt;Translator&lt;/code&gt;中的内容是:&lt;/p&gt;
 
-&lt;p&gt;```ruby
-class Translator
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;class Translator
   def initialize(language)
     @language = language
-  end&lt;/p&gt;
+  end
 
-&lt;p&gt;def hi
+  def hi
     case @language
-      when “chinese”
-        “你好，世界!”
+      when &quot;chinese&quot;
+        &quot;你好，世界!&quot;
       else
-        “Hello world!”
+        &quot;Hello world!&quot;
       end
   end
-end&lt;/p&gt;
+end
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;所以接下来，&lt;code&gt;moondemo.rb&lt;/code&gt;中需要加载&lt;code&gt;Translator&lt;/code&gt;:&lt;/p&gt;
 
-&lt;p&gt;```ruby
-class MoonDemo
-  def self.hi(language = “english”)
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;class MoonDemo
+  def self.hi(language = &quot;english&quot;)
     translator = Translator.new(language)
     translator.hi
   end
-end&lt;/p&gt;
+end
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;em&gt;注意:每次新建了一个目录或者文件，都不要忘记加到.gemspec文件中，就像这样&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;```ruby
- s.authors     = [“Sheldon”]
- s.email       = ‘allenwenzhou@gmial.com’
- s.files       = [“lib/moondemo.rb”,”lib/moondemo/translator.rb”]&lt;/p&gt;
-
-&lt;p&gt;```
-&lt;em&gt;如果没有上面的修改的话，这个新建的目录是不会被加载到已安装的gem里的&lt;/em&gt;&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt; s.authors     = [&quot;Sheldon&quot;]
+ s.email       = &#39;allenwenzhou@gmial.com&#39;
+ s.files       = [&quot;lib/moondemo.rb&quot;,&quot;lib/moondemo/translator.rb&quot;]
+  
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;em&gt;如果没有上面的修改的话，这个新建的目录是不会被加载到已安装的gem里的&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;让我们再运行一篇&lt;/p&gt;
 
-&lt;p&gt;```ruby
-➜ irb -Ilib -rmoondemo
-2.0.0-p353 :001 &amp;gt; MoonDemo.hi(“english”)
- =&amp;gt; “Hello world!”
-2.0.0-p353 :002 &amp;gt; MoonDemo.hi(“chinese”)
- =&amp;gt; “你好，世界!”&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;➜ irb -Ilib -rmoondemo
+2.0.0-p353 :001 &amp;gt; MoonDemo.hi(&quot;english&quot;)
+ =&amp;gt; &quot;Hello world!&quot;
+2.0.0-p353 :002 &amp;gt; MoonDemo.hi(&quot;chinese&quot;)
+ =&amp;gt; &quot;你好，世界!&quot;
+ 
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;这里我们使用了一个新的命令行&lt;code&gt;-Ilib&lt;/code&gt;,通常RubyGems会为你包含了&lt;code&gt;lib&lt;/code&gt;路径，所以很多时候，我们不需要去考虑配置它们的加载路径，但是，如果你把代码运行在RubyGems的项目之外，你就要自己去配置这些了。&lt;/p&gt;
 
@@ -1289,61 +1003,58 @@ end&lt;/p&gt;
 
 &lt;p&gt;添加更多的目录也都是按照上面一样的步骤，我们要将我们的文件结构分布合理，这样对于我们以后的维护和未来开发人员来说就不会是一件头疼的事儿了。&lt;/p&gt;
 
-&lt;p&gt;&lt;a id=&quot;adding_an_executable&quot; name=&quot;adding_an_executable&quot;&gt; &lt;/a&gt;
-##添加可执行文件&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;adding_an_executable&quot; name=&quot;adding_an_executable&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;添加可执行文件&lt;/h2&gt;
 
 &lt;p&gt;gem除了可以提供Ruby代码库外，还可以在你的可执行文件路径里提供很多可执行可执行文件文件。可能最有名的就是&lt;code&gt;rake&lt;/code&gt;，
 添加一个可执行可执行可执行文件文件其实很简单，你只需要将你的可执行文件放在你的gem的&lt;code&gt;bin&lt;/code&gt;目录下，然后在将这个文件添加到&lt;code&gt;.gemspec&lt;/code&gt;文件中&lt;code&gt;executables&lt;/code&gt;的列表里就可以了，让我们试一下:&lt;/p&gt;
 
-&lt;p&gt;```bash
-➜  mkdir bin
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;➜  mkdir bin
 ➜  touch bin/moondemo
-➜  chmod a+x bin/moondemo&lt;/p&gt;
+➜  chmod a+x bin/moondemo
 
-&lt;p&gt;```
-这个可执行文件只需要在开头用&lt;a href=&quot;http://www.catb.org/jargon/html/S/shebang.html&quot;&gt;shebang&lt;/a&gt;来表明这是用程序来运行的，下面就是这个可执行文件的内容:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这个可执行文件只需要在开头用&lt;a href=&quot;http://www.catb.org/jargon/html/S/shebang.html&quot;&gt;shebang&lt;/a&gt;来表明这是用程序来运行的，下面就是这个可执行文件的内容:&lt;/p&gt;
 
-&lt;p&gt;```ruby
-#!/usr/bin/env ruby&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;#!/usr/bin/env ruby
 
-&lt;p&gt;require ‘moondemo’
-puts MoonDemo.hi(ARGV[0])&lt;/p&gt;
+require &#39;moondemo&#39;
+puts MoonDemo.hi(ARGV[0])
 
-&lt;p&gt;```
-这个可执行文件的内容很简单，它只是加载了moondemo这个gem，然后在命令行中通过输入一个参数来判断是用哪个国家的语言来说”hello, world”。下面就是运行的例子:&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;这个可执行文件的内容很简单，它只是加载了moondemo这个gem，然后在命令行中通过输入一个参数来判断是用哪个国家的语言来说”hello, world”。下面就是运行的例子:&lt;/p&gt;
 
-&lt;p&gt;```bash
-➜  ruby -Ilib ./bin/moondemo
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;➜  ruby -Ilib ./bin/moondemo
 Hello world!
 ➜  ruby -Ilib ./bin/moondemo chinese
-你好，世界!&lt;/p&gt;
+你好，世界!
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;最后，我们要将这个可执行文件添加到&lt;code&gt;.gemspec&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;```ruby
-s.executables « ‘moondemo’&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;s.executables &amp;lt;&amp;lt; &#39;moondemo&#39;
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;更新你的gem，上传到官网上，这样你就可以在命令行中有自己的命令了，是不是很帅啊。这里要提醒一下，上传新的gem时，要记得修改&lt;code&gt;.gemspec&lt;/code&gt;中的版本号。详情看&lt;a href=&quot;http://guides.rubygems.org/patterns/#semantic-versioning&quot;&gt;这儿&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;在看一下用我们自己定义的命令行吧:&lt;/p&gt;
 
-&lt;p&gt;```bash&lt;/p&gt;
-
-&lt;p&gt;➜  ~  moondemo
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;
+➜  ~  moondemo
 Hello world!
 ➜  ~  moondemo chinese
-你好，世界!&lt;/p&gt;
+你好，世界!
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;世界在向我们招手呢。哈哈哈~~~&lt;/p&gt;
 
-&lt;p&gt;&lt;a id=&quot;writing_tests&quot; name=&quot;writing_tests&quot;&gt; &lt;/a&gt;
-#测试&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;writing_tests&quot; name=&quot;writing_tests&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section-2&quot;&gt;测试&lt;/h1&gt;
 
 &lt;p&gt;测试我们的gem是非常重要的，它不仅保证了这个gem是正常的，也保证了别人能知道你的gem是正常的。当我们评价一个gem的时候，很多Ruby开发者会倾向于通过查看测试用例来做为主要依据。&lt;/p&gt;
 
@@ -1354,9 +1065,8 @@ Hello world!
 
 &lt;p&gt;我们需要在原来的基础上再添加一些文件，一个名为&lt;code&gt;Rakefile&lt;/code&gt;的文件和一个名为&lt;code&gt;test&lt;/code&gt;的目录:&lt;/p&gt;
 
-&lt;p&gt;```bash&lt;/p&gt;
-
-&lt;p&gt;.
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;
+.
 ├── Rakefile
 ├── bin
 │   └── moondemo
@@ -1368,68 +1078,66 @@ Hello world!
 ├── moondemo.gemspec
 ├── npm-debug.log
 └── test
-    └── test_moondemo.rb&lt;/p&gt;
+    └── test_moondemo.rb
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;code&gt;Rakefile&lt;/code&gt;文件是为了实现自动化的测试:&lt;/p&gt;
 
-&lt;p&gt;```ruby&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;
+require &#39;rake/testtask&#39;
 
-&lt;p&gt;require ‘rake/testtask’&lt;/p&gt;
+Rake::TestTask.new do |t|
+        t.libs &amp;lt;&amp;lt; &#39;test&#39;
+end
 
-&lt;p&gt;Rake::TestTask.new do |t|
-        t.libs « ‘test’
-end&lt;/p&gt;
-
-&lt;p&gt;desc “Run tests”
+desc &quot;Run tests&quot;
 task :default =&amp;gt; :test
-~&lt;/p&gt;
+~
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;下面就是一个简单的测试用例了:&lt;/p&gt;
 
-&lt;p&gt;```ruby
-require ‘test/unit’
-require ‘moondemo’&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-ruby&quot;&gt;require &#39;test/unit&#39;
+require &#39;moondemo&#39;
 
-&lt;p&gt;class MoonDemoTest &amp;lt; Test::Unit::TestCase
+class MoonDemoTest &amp;lt; Test::Unit::TestCase
   def test_english_hello
-    assert_equal “Hello world!”,
-      MoonDemo.hi(“english”)
-  end&lt;/p&gt;
-
-&lt;p&gt;def test_any_hello
-    assert_equal “Hello world!”,
-      MoonDemo.hi(“ruby”)
-  end&lt;/p&gt;
-
-&lt;p&gt;def test_spanish_hello
-    assert_equal “你好，世界!”,
-      MoonDemo.hi(“chinese”)
+    assert_equal &quot;Hello world!&quot;,
+      MoonDemo.hi(&quot;english&quot;)
   end
-end&lt;/p&gt;
 
-&lt;p&gt;```&lt;/p&gt;
+  def test_any_hello
+    assert_equal &quot;Hello world!&quot;,
+      MoonDemo.hi(&quot;ruby&quot;)
+  end
+
+  def test_spanish_hello
+    assert_equal &quot;你好，世界!&quot;,
+      MoonDemo.hi(&quot;chinese&quot;)
+  end
+end
+
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;最后，让我们运行这个测试:&lt;/p&gt;
 
-&lt;p&gt;```bash
-➜  rake test
-Run options:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&quot;language-bash&quot;&gt;➜  rake test
+Run options:
 
-&lt;h1 id=&quot;running-tests&quot;&gt;Running tests:&lt;/h1&gt;
+# Running tests:
 
-&lt;p&gt;Finished tests in 0.006151s, 487.7256 tests/s, 487.7256 assertions/s.
-3 tests, 3 assertions, 0 failures, 0 errors, 0 skips&lt;/p&gt;
+Finished tests in 0.006151s, 487.7256 tests/s, 487.7256 assertions/s.
+3 tests, 3 assertions, 0 failures, 0 errors, 0 skips
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;很好，全部都通过了！&lt;/p&gt;
 
-&lt;p&gt;&lt;a id=&quot;documenting_your_code&quot; name=&quot;documenting_your_code&quot;&gt; &lt;/a&gt;
-#文档&lt;/p&gt;
+&lt;p&gt;&lt;a id=&quot;documenting_your_code&quot; name=&quot;documenting_your_code&quot;&gt; &lt;/a&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;section-3&quot;&gt;文档&lt;/h1&gt;
 
 &lt;p&gt;文档和测试是一样重要的，大部分gem都是用RDoc来生成文档的，这里有很多&lt;a href=&quot;http://docs.seattlerb.org/rdoc/RDoc/Markup.html&quot;&gt;教程&lt;/a&gt;.
 很简单，先切换到gem的根目录下，再命令行中输入&lt;code&gt;rdoc&lt;/code&gt;，你就会发现多出了一个名为&lt;code&gt;doc&lt;/code&gt;的目录，里面就是我们的文档了，当然你可以自己再进行一些调整。
