@@ -19,6 +19,8 @@ owner:
   stackexchange:  http://stackoverflow.com/users/2194236/morisunshine
   linkedin:       morisunshine
   instagram:      morisunshine
+  weibo:          1626743220
+  douban:         39009519
   flickr:         
   tumblr:         
   # For Google Authorship https://plus.google.com/authorship
@@ -44,6 +46,14 @@ markdown:    kramdown
 
 # https://github.com/mojombo/jekyll/wiki/Permalinks
 permalink:   /:categories/:title/
+
+coderay:
+    coderay_wrap: div
+    coderay_line_numbers: inline
+    coderay_line_numbers_start: 1
+    coderay_tab_width: 4
+    coderay_bold_every: 10
+    coderay_css: style
 
 # Amount of post to show on home page
 paginate: 5
