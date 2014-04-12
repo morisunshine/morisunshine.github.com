@@ -20,7 +20,7 @@ tags: [iOS]
 首先，我们需要一个手机的接口或者抽象类，我这里就用抽象类来实现，代码如下：
 
 
-~~~objc
+{% highlight objc %}
 
 @interface AbstractCellPhone : NSObject
 - (NSString *)callNumber;
@@ -28,9 +28,9 @@ tags: [iOS]
 @end
 
 
-~~~
+{% endhighlight %}
 
-~~~objc
+{% highlight objc %}
 
 #import "AbstractCellPhone.h"
 
@@ -47,19 +47,19 @@ tags: [iOS]
 }
 @end
 
-~~~
+{% endhighlight %}
 
 AbstractCellPhone也就是结构图中的Component，然后，我再来实现Nokia和Moto的手机类，这类要继承AbstractCellPhone，也就是图中ConcreteComponent类要继承Component，实现代码如下：
 
-~~~objc
+{% highlight objc %}
 
 #import "AbstractCellPhone.h"   
 @interface NokiaPhone : AbstractCellPhone
 @end
 
-~~~
+{% endhighlight %}
 
-~~~objc
+{% highlight objc %}
 
 #import "NokiaPhone.h"
 
@@ -77,11 +77,11 @@ AbstractCellPhone也就是结构图中的Component，然后，我再来实现Nok
 
 @end
 
-~~~
+{% endhighlight %}
 
 接下来我需要一个Decorator接口或者抽象类，实现代码如下：
 
-~~~objc
+{% highlight objc %}
 
 #import "AbstractCellPhone.h"
 
@@ -92,9 +92,9 @@ AbstractCellPhone也就是结构图中的Component，然后，我再来实现Nok
 -(void)SetComponents:(Components*)component;
 @end
 
-~~~
+{% endhighlight %}
 
-~~~objc
+{% highlight objc %}
 
 #import "Decorator.h"
 
@@ -114,11 +114,11 @@ AbstractCellPhone也就是结构图中的Component，然后，我再来实现Nok
 }
 @end
 
-~~~
+{% endhighlight %}
 正如结构图中，这个Decorator即继承了AbstractCellPhone，又包含了一个私有的AbstractCellPhone的对象。这样做的意义是：Decorator类又使用了另外一个Component类。我们可以使用一个或多个Decorator对象来“装饰”一个Component对象，且装饰后的对象仍然是一个Component对象。在下来，我要实现GSP和蓝牙的功能扩展，它们要继承自Decorator，代码如下：
 
 
-~~~objc
+{% highlight objc %}
 
 #import "Decorator.h"
 
@@ -126,9 +126,9 @@ AbstractCellPhone也就是结构图中的Component，然后，我再来实现Nok
 
 @end
 
-~~~
+{% endhighlight %}
 
-~~~objc
+{% highlight objc %}
 
 #import "DecoratorGPS.h"
 
@@ -146,10 +146,10 @@ AbstractCellPhone也就是结构图中的Component，然后，我再来实现Nok
 
 @end
 
-~~~
+{% endhighlight %}
 最后，用客户端程序验证一下：
 
-~~~objc
+{% highlight objc %}
 
 int main(int argc, const char *argv[])
 {
@@ -170,10 +170,10 @@ int main(int argc, const char *argv[])
     return 0;
 }
 
-~~~
+{% endhighlight %}
 执行结果：
 
-~~~objc
+{% highlight objc %}
  NokiaPhone call somebody
  NokiaPhone send Message to Somebody
  NokiaPhone call somebody with GPS
@@ -181,4 +181,4 @@ int main(int argc, const char *argv[])
  NokiaPhone call somebody with BlueTooth
  NokiaPhone send Message to Somebody with BlueTooth
  
-~~~
+{% endhighlight %}

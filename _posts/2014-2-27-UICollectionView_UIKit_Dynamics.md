@@ -45,7 +45,7 @@ UIKit Dynamics 是iOS7中基于物理动画引擎的一个新功能--它被特�
 
 我们将要创建一个简单的例子来展示如何使用一个带UIkit Dynamic的collection view layout。当然，我们需要做的第一件事就是，创建一个数据源去驱动我们的collection view。我知道以你的能力完全可以独立实现一个数据源，但是为了完整性，我还是提供了一个给你:
 
-~~~objc
+{% highlight objc %}
 
 @implementation ASHCollectionViewController
 
@@ -95,13 +95,13 @@ static NSString * CellIdentifier = @"CellIdentifier";
 
 @end
 
-~~~
+{% endhighlight %}
 
 我们注意到当视图第一次出现的时候，这个layout是被无效的。这是因为没有用Storybards的结果(当使用Storyboards时，调用prepareLayout方法的时机是不同的--或是相同的--在WWDC的视频中他们没有告诉我们这些)。所以，当这些试图一出现我们就需要手动使这个collection view layout无效。当我们用tiling的时候，就不需要这样。
 
 让我们创建我们自己的collection view layout。我们需要强引用一个dynamic animator, 并且使用它来驱动我们的collcetion view layout的attribute。我们在实现文件里定义了一个私有的property:
 
-~~~objc
+{% highlight objc %}
 
 @interface ASHSpringyCollectionViewFlowLayout ()
 
@@ -109,11 +109,11 @@ static NSString * CellIdentifier = @"CellIdentifier";
 
 @end
 
-~~~
+{% endhighlight %}
 
 我们将在layout的初始化方法中初始化我们的dynamic animator。还要设置一些属于父类UICollectionViewFlowLayout中的property:
 
-~~~objc
+{% highlight objc %}
 
 - (id)init 
 {
@@ -130,11 +130,11 @@ static NSString * CellIdentifier = @"CellIdentifier";
 
 }
 
-~~~
+{% endhighlight %}
 
 我们将实现的下一个方法是prepareLayout。我们首先需要调用父类的方法。因为我们是继承`UICollectionViewFlowLayout`类，所以在调用父类的prepareLayout的时，可以使collection view layout attribute都放置在合适的位置。我们可以依靠基类`UICollectionViewFlowLayout`的`prepareLayout`方法来提供一个默认的排布，并且能够使用`[super layoutAttributesForElementsInRect:visibleRect];`方法得到指定rect内的所有item的layout attributes。
 
-~~~objc
+{% highlight objc %}
 
 [super prepareLayout];
 
@@ -142,7 +142,7 @@ CGSize contentSize = self.collectionView.contentSize;
 NSArray *items = [super layoutAttributesForElementsInRect:
     CGRectMake(0.0f, 0.0f, contentSize.width, contentSize.height)];
 
-~~~
+{% endhighlight %}
 
 这真的是效率低下的代码。因为我们的collection view中可能会有成千上万个cell，一次性加载所有的cell是一个可能会产生难以置信的内存紧张的操作。我们要在一段时间内遍历所有的元素，这也成为耗时的操作。这真的是效率的双重打击！别担心--我们是负责任的开发者，所以我们会很快解决这个问题的。我们先暂时继续使用简单、粗暴的实现方式。
 
@@ -150,7 +150,7 @@ NSArray *items = [super layoutAttributesForElementsInRect:
 当加载完我们所有的collection view layout attribute之后，我们需要检查他们是否都已经被加载到我们的animator里了。如果一个behavior已经在animator中存在，那么我们就不能重新添加，否则就会得到一个非常难懂的运行异常提示:
 
 
-~~~objc
+{% highlight objc %}
 
 <UIDynamicAnimator: 0xa5ba280> (0.004987s) in 
 <ASHSpringyCollectionViewFlowLayout: 0xa5b9e60> \{\{0, 0}, \{0, 0\}\}: 
@@ -164,13 +164,13 @@ without representedObject for item <UICollectionViewLayoutAttributes: 0xa3833e0>
 index path: (<NSIndexPath: 0xa382410> {length = 2, path = 0 - 0}); 
 frame = (10 10; 300 44);
 
-~~~
+{% endhighlight %}
 
 如果看到了这个错误，那么这基本表明你添加了两个behavior给同一个`UICollectionViewLayoutAttribute`，这使得系统不知道该怎么处理。
 
 无论如何，一旦我们已经检查好我们是否已经将behavior添加到dynamic animator之后，我们就需要遍历每个collection view layout attribute来创建和添加新的dynamic animator:
 
-~~~objc
+{% highlight objc %}
 
 if (self.dynamicAnimator.behaviors.count == 0) {
 	[items enumerateObjectsUsingBlock:^(id<UIDynamicItem> obj, NSUInteger idx, BOOL *stop) {
@@ -187,13 +187,13 @@ if (self.dynamicAnimator.behaviors.count == 0) {
 
 }
 
-~~~
+{% endhighlight %}
 
 这段代码非常简单。我们为每个item创建了一个以物体的中心为附着点的`UIAttachmentBehavior`对象。然后又设置了我们的attachment behavior的length为0以便约束这个cell能一直以behavior的附着点为中心。然后又给`damping`和`frequency`这两个参数设置一个比较合适的值。
 
 这就是`prepareLayout`。我们现在需要实现`layoutAttributesForElementsInRect:` 和 `layoutAttributesForItemAtIndexPath:`这两个方法，UIKit会调用它们来询问collection view每一个item的布局信息。我们写的代码会把这些查询交给专门做这些事的dynamic animator:
 
-~~~objc
+{% highlight objc %}
 
 -(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect 
 {
@@ -207,7 +207,7 @@ if (self.dynamicAnimator.behaviors.count == 0) {
 
 }
 
-~~~
+{% endhighlight %}
 
 #响应滚动事件
 
@@ -215,7 +215,7 @@ if (self.dynamicAnimator.behaviors.count == 0) {
 
 为了使它表现地动态点，我们需要layout和dynamic animator能够对collection view中滑动位置的变化做出反应。幸好这里有个非常适合这个要求的方法`shouldInvalidateLayoutForBoundsChange:`。这个方法会在collection view 的bound发生改变的时候被调用，根据最新的`content offset`调整我们的dynamic animator中的behaviors的参数。在重新调整这些behavior的item之后，我们在这个方法中返回NO；因为dynamic animator会关心layout的无效问题，所以在这种情况下，它不需要去主动使其无效:
 
-~~~objc
+{% highlight objc %}
 
 -(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds 
 {
@@ -249,7 +249,7 @@ if (self.dynamicAnimator.behaviors.count == 0) {
 
 }
 
-~~~
+{% endhighlight %}
 
 让我们仔细查看这个代码的细节。首先我们得到了这个scroll view(这是我们的collection view)，然后计算它的content offset中y的变化(在这个例子中，我们的collection view是垂直滑动的)。一旦我们得到这个增量，我们需要得到用户接触的位置。这是非常重要的，因为我们希望离接触位置比较近的那些物体能移动地更迅速些，而离接触位置比较远的那些物体则应该滞后些。
 
@@ -270,11 +270,11 @@ if (self.dynamicAnimator.behaviors.count == 0) {
 我们需要做的第一件事就是是跟踪dynamic animator中的所有behavior物体的index path。我在collection view 中添加一个property来做这件事:
 
 
-~~~objc
+{% highlight objc %}
 
 @property (nonatomic, strong) NSMutableSet *visibleIndexPathsSet;
 
-~~~
+{% endhighlight %}
 
 我们用set是因为它具有常数复杂度的查找效率，并且我们经常地查找`visibleIndexPathsSet`中是否已经包含了某个index path。
 
@@ -284,20 +284,20 @@ if (self.dynamicAnimator.behaviors.count == 0) {
 因为我们是在滚动中创建这些新的behavior，所以我们需要维持现在collection view 的一些状态。尤其我们需要跟踪最近一次我们`bound`变化的增量。我们会在滚动时用这个状态去创建我们的behavior:
 
 
-~~~objc
+{% highlight objc %}
 
 @property (nonatomic, assign) CGFloat latestDelta;
 
-~~~
+{% endhighlight %}
 
 添加完这个property后，我们将要在`shouldInvalidateLayoutForBoundsChange:`方法中添加下面这行代码:
 
 
-~~~objc
+{% highlight objc %}
 
 self.latestDelta = delta;
 
-~~~
+{% endhighlight %}
 
 这就是我们需要修改我们的方法来响应滚动事件。我们的这两个方法是为了将collection view中items的layout信息传给dynamic animator，这种方式没有变化。事实上，当你的collection view实现了dynamic animator的大部分情况下，都需要实现我们上面提到的两个方法`layoutAttributesForElementsInRect:`和`layoutAttributesForItemAtIndexPath:`。
 
@@ -311,31 +311,31 @@ self.latestDelta = delta;
 
 所以我们需要计算这个显示矩形。但是别着急！有件事要记住。我们的用户可能会非常快地滑动collection view，导致了dynamic animator不能跟上，所以我们需要稍微扩大显示范围，这样就能包含到那些将要显示的物体了。否则，在滑动很快的时候就会出现频闪现象了。让我们计算一下显示范围:
 
-~~~objc
+{% highlight objc %}
 
 CGRect originalRect = (CGRect){.origin = self.collectionView.bounds.origin, .size = self.collectionView.frame.size};
 CGRect visibleRect = CGRectInset(originalRect, -100, -100);
 
-~~~
+{% endhighlight %}
 
 我确信在实际显示矩形上的每个方向都扩大100个像素对我的demo来说是可行的。仔细查看这些值是否适合你们的collection view，尤其是当你们的cell很小的情况下。
 
 接下来我们就需要收集在显示范围内的collection view layout attributes。还有它们的index paths:
 
-~~~objc
+{% highlight objc %}
 
 NSArray *itemsInVisibleRectArray = [super layoutAttributesForElementsInRect:visibleRect];
 
 NSSet *itemsIndexPathsInVisibleRectSet = [NSSet setWithArray:[itemsInVisibleRectArray valueForKey:@"indexPath"]];
 
-~~~
+{% endhighlight %}
 
 注意我们是在用一个NSSet。这是因为它具有常数复杂度的查找效率，并且我们经常的查找visibleIndexPathsSet是否已经包含了某个index path:
 
 接下来我们要做的就是遍历dynamic animator 的behaviors，过滤掉那些已经在`itemsIndexPathsInVisibleRectSet`中的item。因为我们已经过滤掉我们的behavior，所以我们将要遍历的这些item都是不在显示范围里的，我们就可以将这些item从animator中删除掉(连同`visibleIndexPathsSet`属性中的index path):
 
 
-~~~objc
+{% highlight objc %}
 
 NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UIAttachmentBehavior *behaviour, NSDictionary *bindings) {
     BOOL currentlyVisible = [itemsIndexPathsInVisibleRectSet member:[[[behaviour items] firstObject] indexPath]] != nil;
@@ -350,11 +350,11 @@ NSArray *noLongerVisibleBehaviours = [self.dynamicAnimator.behaviors filteredArr
 
 }];
 
-~~~
+{% endhighlight %}
 
 下一步就是要得到新出现item的`UICollectionViewLayoutAttributes`数组--那些item的index path在`itemsIndexPathsInVisibleRectSet`而不在`visibleIndexPathsSet`:
 
-~~~objc
+{% highlight objc %}
 
 NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UICollectionViewLayoutAttributes *item, NSDictionary *bindings) {
     BOOL currentlyVisible = [self.visibleIndexPathsSet member:item.indexPath] != nil;
@@ -363,21 +363,21 @@ NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UICollectionViewL
 }];
 NSArray *newlyVisibleItems = [itemsInVisibleRectArray filteredArrayUsingPredicate:predicate];
 
-~~~
+{% endhighlight %}
 
 一旦我们有新的layout attribute出现，我就可以遍历他们来创建新的behavior，并且将他们的index path添加到`visibleIndexPathsSet`中。首先，无论如何，我都需要获取到用户手指触碰的位置。如果它是`CGPointZero`的话，那就表示这个用户没有在滑动collection view，我就不需要在滚动时创建新的behavior:
 
-~~~objc
+{% highlight objc %}
 
 CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
 
-~~~
+{% endhighlight %}
 
 这是一个潜在的威胁。如果用户很快地滑动了collection view 之后释放了他的手指呢？这个collection view 就会一直滚动，但是我们的方法就不会在滚动时创建新的behavior了。幸运的是，那也就意味这scroll view滚动太快很难被注意到！好哇！这可能会是个问题，但是，只是针对那些拥有大量cell的collection view。在这种情况下，增加你的显示范围的界限就可以加载更多物体了。
 
 现在我们需要枚举我们刚显示的item，为他们创建behavior，再将他们的index path 添加到`visibleIndexPathsSet`。我们还需要在滚动时做些运算来创建behavior:
 
-~~~objc
+{% highlight objc %}
 
 [newlyVisibleItems enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *item, NSUInteger idx, BOOL *stop) {
     CGPoint center = item.center;
@@ -409,7 +409,7 @@ CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView
 
 }];
 
-~~~
+{% endhighlight %}
 
 大部分代码看起来还是挺熟悉的。大概有一半是来自没有实现tiling的`prepareLayout`。另一半是来自`shouldInvalidateLayoutForBoundsChange`方法。我们用latestDelta这个property来表示`bound`变化的增量，适当地调整`UICollectionViewLayoutAttributes`使这些cell表现地就像被attachment behavior拉着一样。
 
@@ -423,7 +423,7 @@ CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView
 
 让我们继承`UICollectionViewLayout`。当继承`UICollectionViewLayout`的时候需要实现`collectionViewContentSize`方法，这点非常重要。否则这个collection view就不知道如果去显示自己，也不会有显示任何东西。因为我们想要我们的collection view不要再滑动，我们将会返回我们的collection view的frame的尺寸，减去它的`contentInset.top`:
 
-~~~objc
+{% highlight objc %}
 
 -(CGSize)collectionViewContentSize 
 {
@@ -432,13 +432,13 @@ CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView
 
 }
 
-~~~
+{% endhighlight %}
 
 在这个(有教育意义)的例子中，我们的collection view总是会以零个cell开始，物体通过`performBatchUpdates:`方法添加。这就意味着我们必须使用`-[UICollectionViewLayout prepareForCollectionViewUpdates:]`方法来添加我们的behavior(即这个collection view的数据源总是以零开始)。
 
 除了给各个物体添加附着behavior外，我们还将保留另外两个behavior:重力和碰撞。对于添加在这个collection view中的每个item来说，我们必须把这些item添加到我们的碰撞和附着behavior中。最后一步就是设置这些item的初始位置为屏幕外的某些地方，这样就有被附着behavior拉入到屏幕内的效果了:
 
-~~~objc
+{% highlight objc %}
 
 -(void)prepareForCollectionViewUpdates:(NSArray *)updateItems
 {
@@ -467,7 +467,7 @@ CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView
 
 }
 
-~~~
+{% endhighlight %}
 
 ![Example](http://www.objc.io/images/issue-5/newtonianCollectionView@2x.gif)
 
