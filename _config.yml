@@ -2,7 +2,7 @@ title:            Morisunshine's Blog
 description:      
 disqus_shortname: morisunshine
 #Your site's domain goes here. Leave localhost server or blank when working locally.
-url:              http://localhost:4000
+url:              http://morisunshine.com
 
 # Owner/author information
 owner:
