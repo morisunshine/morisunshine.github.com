@@ -37,7 +37,7 @@ As noted many times in this publication, Objective-C is built directly on top of
 You can see this for yourself—try defining a new static variable with the same name as an existing @interface, and the compiler will generate an error:
 
 
-```
+```objc
 @interface XXObject : NSObject
 @end
 
@@ -47,7 +47,7 @@ static char * XXObject;  // Redefinition of "XXObject" as different kind of symb
 
 That said, the Objective-C runtime creates a layer of abstraction on top of the C type system, allowing the following code to compile without even a snicker:
 
-```
+```objc
 @protocol Foo
 @end
 
@@ -159,7 +159,7 @@ It's not just classes that are prone to naming collisions: selectors suffer from
 
 Consider the category:
 
-```
+```objc
 
 @interface NSString (PigLatin)
 - (NSString *)pigLatinString;
@@ -171,7 +171,7 @@ If -pigLatinString were implemented by another category (or added to the NSStrin
 
 This can be guarded against by prefixing the method name, just like the class name (prefixing the category name isn't a bad idea, either):
 
-```
+```objc
 
 @interface NSString (XXXPigLatin)
 - (NSString *)xxx_pigLatinString;
@@ -195,7 +195,7 @@ Go ahead and add "category method" to your Tweetbot mute terms. Expiration: 1 We
 
 The one case where method prefixing (or suffixing) is absolutely necessary is when doing method replacement, as discussed in last week's article on [swizzling]().
 
-```
+```objc
 @implementation UIViewController (Swizzling)
 
 - (void)xxx_viewDidLoad {
@@ -215,7 +215,7 @@ Semantics? Start to look closely at any other language, and how they actually us
 
 Not to create a straw man, but an imagined implementation of Objective-C namespaces probably look a lot like this:
 
-```
+```objc
 @namespace XX
     @implementation Object
 

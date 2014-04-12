@@ -1,24 +1,70 @@
-markdown: redcarpet
-permalink: /:year/:month/:day/:title/
-url: http://morisunshine.com
-author: morisunshine
-pygments: true
-safe: true
-paginate: 16
-auto: true
-name: Morisunshine's Blog
-author: morisunshine
-email: sheldon.zen@gmail.com
-duoshuo: morisunshine
-weibo: 1626743220
-github: morisunshine
-paginate: 20 
-truncate: 300 
-about: "这里是我的博客。"
+title:            Morisunshine's Blog
+description:      
+disqus_shortname: morisunshine
+#Your site's domain goes here. Leave localhost server or blank when working locally.
+url:              http://localhost:4000
 
-analytics :
-  provider : google
-  google : 
-      tracking_id : 'UA-47868064-1'
-  getclicky :
-    site_id :
+# Owner/author information
+owner:
+  name:           Sheldon
+  avatar:         avatar.png
+  bio:            1991-12-10
+  email:          sheldon.zen@gmail.com
+  # Social networking links used in footer. Update and remove as you like.
+  twitter:        morisunshine
+  facebook:       
+  github:         morisunshine
+  stackexchange:  http://stackoverflow.com/users/2194236/morisunshine
+  linkedin:       morisunshine
+  instagram:      morisunshine
+  flickr:         
+  tumblr:         
+  # For Google Authorship https://plus.google.com/authorship
+  google_plus:   
+
+# Background image to be tiled on all pages
+background: 
+
+# Analytics and webmaster tools stuff goes here
+google_analytics: 47868064  
+google_verify:      
+# https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
+bing_verify:         
+
+# Links to include in top navigation
+# For external links add external: true
+links:
+  - title: 
+    url: 
+  - title: 
+    url: 
+    external: true
+
+# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone:    Asia/Shanghai
+future:      true
+pygments:    true
+markdown:    kramdown
+
+# https://github.com/mojombo/jekyll/wiki/Permalinks
+permalink:   /:categories/:title/
+
+# Amount of post to show on home page
+paginate: 5
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  use_coderay: true
+
+  coderay:
+    coderay_line_numbers: nil
+    coderay_line_numbers_start: 1
+    coderay_tab_width: 4
+    coderay_bold_every: 10
+    coderay_css: class
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]

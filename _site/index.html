@@ -1,187 +1,1238 @@
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
-  <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-    <meta name="author" content="morisunshine" />
-    <title>Morisunshine' Blog | morisunshine</title>
-    <link rel="shortcut icon" href="/favicon.ico">
-    <link href="/feed/" rel="alternate" title="morisunshine" type="application/atom+xml" />
-    <link rel="stylesheet" href="/media/css/style.css">
-    <link rel="stylesheet" href="/media/css/highlight.css">
-    <script type="text/javascript" src="/media/js/jquery-1.7.1.min.js"></script>
-  </head>
-  <script type="text/javascript">
-    function setTimeSpan(){
-    	var date = new Date();
-    	timeSpan.innerText=date.format('yyyy-MM-dd hh:mm:ss');
-    }
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Latest Posts &#8211; Morisunshine's Blog</title>
+<meta name="description" content="Describe this nonsense.">
+<meta name="keywords" content="Jekyll, theme, themes, responsive, blog, modern">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://localhost:4000/images/abstract-1.jpg">
+
+<meta name="twitter:title" content="Latest Posts">
+<meta name="twitter:description" content="Describe this nonsense.">
+<meta name="twitter:creator" content="@morisunshine">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Latest Posts">
+<meta property="og:description" content="Describe this nonsense.">
+<meta property="og:url" content="http://localhost:4000/index.html">
+<meta property="og:site_name" content="Morisunshine's Blog">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.min.css">
+<!-- Webfonts -->
+<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+</head>
+
+<body id="post-index" class="feature">
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="http://localhost:4000">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="http://localhost:4000/images/avatar.png" alt="Sheldon photo" class="author-photo">
+					<h4>Sheldon</h4>
+					<p>1991-12-10</p>
+				</li>
+				<li><a href="http://localhost:4000/about/">Learn More</a></li>
+				<li>
+					<a href="mailto:sheldon.zen@gmail.com"><i class="icon-envelope"></i> Email</a>
+				</li>
+				<li>
+					<a href="http://twitter.com/morisunshine"><i class="icon-twitter"></i> Twitter</a>
+				</li>
+				
+				
+				<li>
+					<a href="http://linkedin.com/in/morisunshine"><i class="icon-linkedin"></i> LinkedIn</a>
+				</li>
+				<li>
+					<a href="http://github.com/morisunshine"><i class="icon-github"></i> GitHub</a>
+				</li>
+				<li>
+					<a href="http://stackoverflow.com/users/2194236/morisunshine"><i class="icon-stackexchange"></i> Stackexchange</a>
+				</li>
+				<li>
+					<a href="http://instagram.com/morisunshine"><i class="icon-instagram"></i> Instagram</a>
+				</li>
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="http://localhost:4000/posts/">All Posts</a></li>
+				<li><a href="http://localhost:4000/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		<li><a href="http://localhost:4000"></a></li><li><a href=""></a></li>
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+<div class="entry-header">
+  <div class="image-credit">Image source: <a href="http://www.dargadgetz.com/ios-7-abstract-wallpaper-pack-for-iphone-5-and-ipod-touch-retina/">dargadgetz</a></div><!-- /.image-credit -->
+  
+    <div class="entry-image">
+      <img src="http://localhost:4000/images/abstract-1.jpg" alt="Latest Posts">
+    </div><!-- /.entry-image -->
+  
+  <div class="header-title">
+    <div class="header-title-wrap">
+      <h1>Morisunshine's Blog</h1>
+      <h2>Latest Posts</h2>
+    </div><!-- /.header-title-wrap -->
+  </div><!-- /.header-title -->
+</div><!-- /.entry-header -->
+
+<div id="main" role="main">
+  
+<article class="hentry">
+  <header>
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-04-05T00:00:00+08:00"><a href="http://localhost:4000/ios/Namespacing/">April 05, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://localhost:4000/about/" title="About Sheldon">Sheldon</a></span></span></div><!-- /.entry-meta -->
     
-    Date.prototype.format = function(format)
-		{
-    var o =
-    	{
-    	    "M+" : this.getMonth()+1, //month
-    	    "d+" : this.getDate(),    //day
-    	    "h+" : this.getHours(),   //hour
-    	    "m+" : this.getMinutes(), //minute
-    	    "s+" : this.getSeconds(), //second
-    	    "q+" : Math.floor((this.getMonth()+3)/3),  //quarter
-    	    "S" : this.getMilliseconds() //millisecond
-    	}
-    	if(/(y+)/.test(format))
-    	format=format.replace(RegExp.$1,(this.getFullYear()+"").substr(4 - RegExp.$1.length));
-    	for(var k in o)
-    	if(new RegExp("("+ k +")").test(format))
-    	format = format.replace(RegExp.$1,RegExp.$1.length==1 ? o[k] : ("00"+ o[k]).substr((""+ o[k]).length));
-    	return format;
-		}
-  </script>
-  <body onLoad="setInterval(setTimeSpan,1000);">
-    <div id="container">
-      <div id="main" role="main">
-        <header>
-        <h1>Morisunshine' Blog</h1>
-        </header>
-        <nav>
-        <span><a title="home page" class="" href="/">Home</a></span>
-        <span><a title="about" class="" href="/about/">About</a></span>
-        <span><a title="guestbook" class="" href="/guestbook/">Guestbook</a></span>
-        <span><a title="categories" class="" href="/categories/">Categories</a></span>
-        <span><a title="tags" class="" href="/tags/">Tags</a></span>
-        <span><a title="links" class="" href="/links/">Links</a></span>
-        <span><a title="subscribe by RSS" class="" href="/feed/">Subscribe</a></span>
-        </nav>
-        <article class="content">
-        <section class="post">
-<ul class="listing">
-
-  
-  
+      <h1 class="entry-title"><a href="http://localhost:4000/ios/Namespacing/" rel="bookmark" title="Object-C的命名空间" itemprop="url">Object-C的命名空间</a></h1>
     
-    <li class="listing-seperator">2014</li>
-  
-  <li class="listing-item">
-    <time datetime="2014-04-05">2014-04-05</time>
-    <a href="/2014/04/05/Namespacing/" title="Object-C的命名空间">Object-C的命名空间</a>
-  </li>
+  </header>
+  <div class="entry-content">
+    <h1 id="namespacing">Namespacing</h1>
 
-  
-  
-  <li class="listing-item">
-    <time datetime="2014-03-24">2014-03-24</time>
-    <a href="/2014/03/24/live_in_the_moment/" title="我的时间观---活在当下">我的时间观---活在当下</a>
-  </li>
+<p>Written by Mattt Thompson on Feb 24th, 2014</p>
 
-  
-  
-  <li class="listing-item">
-    <time datetime="2014-03-13">2014-03-13</time>
-    <a href="/2014/03/13/objc_is_not_what_you_think_it_is/" title="Objective-C 不是你想的那样">Objective-C 不是你想的那样</a>
-  </li>
+<p>Why the hell is everything NS-whatever?</p>
 
-  
-  
-  <li class="listing-item">
-    <time datetime="2014-03-06">2014-03-06</time>
-    <a href="/2014/03/06/experience_of_develop/" title="我的开发经验漫谈">我的开发经验漫谈</a>
-  </li>
+<p>You’ll hear that within the first minute of introducing someone to Objective-C. Guaranteed.</p>
 
-  
-  
-  <li class="listing-item">
-    <time datetime="2014-02-27">2014-02-27</time>
-    <a href="/2014/02/27/UICollectionView_UIKit_Dynamics/" title="UICollectionView+UIKit Dynamics">UICollectionView+UIKit Dynamics</a>
-  </li>
+<p>Like a parent faced with the task of explaining the concept of death or the non-existence of Santa, you do your best to be forthcoming with facts, so that they might arrive at a conclusion themselves.</p>
 
-  
-  
-  <li class="listing-item">
-    <time datetime="2014-02-19">2014-02-19</time>
-    <a href="/2014/02/19/make_your_own_gem/" title="制作自己的Gem">制作自己的Gem</a>
-  </li>
+<p>Why, Jimmy, NS stands for NeXTSTEP (well, actually, NeXTSTEP/Sun, but we’ll cover that with “the birds &amp; the bees” talk), and it’s used to…</p>
 
-  
-  
-  <li class="listing-item">
-    <time datetime="2014-02-15">2014-02-15</time>
-    <a href="/2014/02/15/my_first_blog/" title="第一篇博客">第一篇博客</a>
-  </li>
+<p>…but by the time the words have left your mouth, you can already sense the disappointment in their face. Their innocence has been lost, and with an audible sigh of resignation, they start to ask uncomfortable questions about @</p>
 
-  
-  
-    
-    <li class="listing-seperator">2013</li>
-  
-  <li class="listing-item">
-    <time datetime="2013-07-14">2013-07-14</time>
-    <a href="/2013/07/14/iOS_Decorator/" title="iOS设计模式学习---装饰模式">iOS设计模式学习---装饰模式</a>
-  </li>
+<p>Namespacing is the preeminent bugbear of Objective-C. A cosmetic quirk with global implications, the language’s lack of identifier containers remains a source of prodigious quantities of caremad for armchair language critics.</p>
 
-  
-  
-  <li class="listing-item">
-    <time datetime="2013-01-10">2013-01-10</time>
-    <a href="/2013/01/10/travel-to-qinghai/" title="站在原地, 心存远方">站在原地, 心存远方</a>
-  </li>
+<p>This is all to say: unlike many other languages that are popular today, Objective-C does not provide a module-like mechanism for avoiding class and method name collisions.</p>
 
+<p>Instead, Objective-C relies on prefixes to ensure that functionality in one part of the app doesn’t interfere with similarly named code somewhere else.</p>
+
+<p>We’ll jump into those right after a quick digression into type systems:</p>
+
+<h1 id="types-in-c--objective-c">Types in C &amp; Objective-C</h1>
+
+<p>As noted many times in this publication, Objective-C is built directly on top of the C language. One consequence of this is that Objective-C and C share a type system, requiring that identifiers are globally unique.</p>
+
+<p>You can see this for yourself—try defining a new static variable with the same name as an existing @interface, and the compiler will generate an error:</p>
+
+<p>```objc
+@interface XXObject : NSObject
+@end</p>
+
+<p>static char * XXObject;  // Redefinition of “XXObject” as different kind of symbol</p>
+
+<p>```</p>
+
+<p>That said, the Objective-C runtime creates a layer of abstraction on top of the C type system, allowing the following code to compile without even a snicker:</p>
+
+<p>```objc
+@protocol Foo
+@end</p>
+
+<p>@interface Foo : NSObject <foo> {
+    id Foo;</foo></p>
+
+<p>}</p>
+
+<p>@property id Foo;
++ (id)Foo;
+- (id)Foo;
+@end</p>
+
+<p>@interface Foo (Foo)
+@end</p>
+
+<p>@implementation Foo
+@synthesize Foo;</p>
+
+<ul>
+  <li>(id)Foo {
+  id Foo = @”Foo”;
+  return Foo;</li>
 </ul>
 
-<div id="post-pagination" class="paginator">
+<p>}
+@end</p>
 
-  
-    <span class="previous disabled"><前页</span>
-  
+<p>```</p>
 
-      
-      <span class="current-page">1</span>
-      
+<p>Within the context of the Objective-C runtime, a program is able to differentiate between a class, a protocol, a category, an instance variable, an instance method, and a class method all having the same name.</p>
 
+<p>That a variable can reappropriate the name of an existing method is a consequence of the C type system (which similarly allows for a variable to shadow the name of its containing function)</p>
+
+<h1 id="prefixes">Prefixes</h1>
+
+<p>All classes in an Objective-C application must be globally unique. Since many different frameworks are likely have some conceptual overlap—and therefore an overlap in names (users, views, requests / responses, etc.)—convention dictates that class names use 2 or 3 letter prefix.</p>
+
+<h1 id="class-prefixes">Class Prefixes</h1>
+
+<p>Apple recommends that 2-letter prefixes be reserved for first-party libraries and frameworks, while third-party developers (that’s us) opt for 3 letters or more.</p>
+
+<p>A veteran Mac or iOS developer will have likely memorized most if not all of the following abbreviated identifiers:</p>
+
+<h3 id="prefix-frameworks">Prefix	 Frameworks</h3>
+<p>===
+AB	 AddressBook / AddressBookUI <br />
+AC	 Accounts <br />
+AD	 iAd<br />
+AL	 AssetsLibrary <br />
+AU	 AudioUnit <br />
+AV	 AVFoundation <br />
+CA	 CoreAnimation <br />
+CB	 CoreBluetooth <br />
+CF	 CoreFoundation / CFNetwork <br />
+CG	 CoreGraphics / QuartzCore / ImageIO <br />
+CI	 CoreImage <br />
+CL	 CoreLocation <br />
+CM	 CoreMedia / CoreMotion <br />
+CV	 CoreVideo <br />
+EA	 ExternalAccessory <br />
+EK	 EventKit / EventKitUI <br />
+GC	 GameController <br />
+GLK*	 GLKit <br />
+JS	 JavaScriptCore <br />
+MA	 MediaAccessibility <br />
+MC	 MultipeerConnectivity <br />
+MF	 MessageUI* <br />
+MIDI*	 CoreMIDI  <br />
+MK	 MapKit <br />
+MP	 MediaPlayer <br />
+NK	 NewsstandKit <br />
+NS	 Foundation, AppKit, CoreData<br />
+PK	 PassKit <br />
+QL	 QuickLook <br />
+SC	 SystemConfiguration <br />
+Sec*	 Security* <br />
+SK	 StoreKit / SpriteKit <br />
+SL	 Social <br />
+SS	 Safari Services <br />
+TW	 Twitter <br />
+UI	 UIKit <br />
+UT	 MobileCoreServices <br />
+3rd-Party Class Prefixes   </p>
+
+<p>Until recently, with the advent of <a href="">CocoaPods</a> and a surge of new iOS developers, the distribution of open source, 3rd-party code had been largely a non-issue for Apple and the rest of the Objective-C community. Apple’s naming guidelines came about recently enough that the advice to adopt 3-letter prefixes is only just becoming accepted practice.</p>
+
+<p>Because of this, many established libraries still use 2-letter prefixes. Consider some of these <a href="">most-starred Objective-C repositories on GitHub</a>.</p>
+
+<h3 id="prefix-frameworks-1">Prefix	 Frameworks</h3>
+<p>===
+AF	AFNetworking (“Alamofire”) <br />
+RK	RestKit <br />
+GPU	GPUImage<br />
+SD	SDWebImage <br />
+MB	MBProgressHUD <br />
+FB	Facebook SDK <br />
+FM	FMDB (“Flying Meat”) <br />
+JK	JSONKit <br />
+FUI	FlatUI<br />
+NI	Nimbus <br />
+RAC	 Reactive Cocoa  </p>
+
+<p>Seeing as how <a href="">we’re already seeing prefix overlap among 3rd-party libraries</a>, make sure that you follow a 3+-letter convention in your own code.</p>
+
+<p>For especially future-focused library authors, consider using @compatibility_alias to provide a seamless migration path for existing users in your next major upgrade.</p>
+
+<h1 id="method-prefixes">Method Prefixes</h1>
+
+<p>It’s not just classes that are prone to naming collisions: selectors suffer from this too—in ways that are even more problematic than classes.</p>
+
+<p>Consider the category:</p>
+
+<p>```objc</p>
+
+<p>@interface NSString (PigLatin)
+- (NSString *)pigLatinString;
+@end</p>
+
+<p>```</p>
+
+<p>If -pigLatinString were implemented by another category (or added to the NSString class in a future version of iOS or Mac OS X), any calls to that method would result in undefined behavior, since no guarantee is made as to the order in which methods are defined by the runtime.</p>
+
+<p>This can be guarded against by prefixing the method name, just like the class name (prefixing the category name isn’t a bad idea, either):</p>
+
+<p>```objc</p>
+
+<p>@interface NSString (XXXPigLatin)
+- (NSString *)xxx_pigLatinString;
+@end</p>
+
+<p>```</p>
+
+<p>Apple’s recommendation that <a href="">all category methods use prefixes</a> is even less widely known or accepted than its policy on class prefixing.</p>
+
+<p>There are many outspoken developers who will passionately argue one side or another. However, weighing the risk of collision against its likelihood, the cost/benefit analysis is not entirely clear-cut:</p>
+
+<p>The main feature of categories is coating useful functionality with syntactic sugar. Any category method could alternatively be implemented as a function taking an explicit argument in place of the implicit self of a method.</p>
+
+<p>Collisions can be detected at compile time by setting the OBJC_PRINT_REPLACED_METHODS environment variable to YES. In practice, collisions are extremely rare, and when they do occur, they’re usually an indicator of functionality that is needlessly duplicated across dependencies. Although the worst-case scenario is a runtime exception, it’s entirely likely that two methods named the same thing will actually do the same thing, and result in no change in behavior. All of those Swiss Army Knife categories that defined NSArray -firstObject continued to march on once the method was officially added.</p>
+
+<p>Just as with constitutional scholarship, there will be strict and loose interpretations of Apple’s programming guidelines. Those that see it as a living document would point out that… actually, you know what? If you’ve read this far and are still undecided, just prefix your damn category methods. If you choose not to, just be mindful that it could bite you in the ass.</p>
+
+<p>Go ahead and add “category method” to your Tweetbot mute terms. Expiration: 1 Week.</p>
+
+<h1 id="swizzling">Swizzling</h1>
+
+<p>The one case where method prefixing (or suffixing) is absolutely necessary is when doing method replacement, as discussed in last week’s article on <a href="">swizzling</a>.</p>
+
+<p>```objc
+@implementation UIViewController (Swizzling)</p>
+
+<ul>
+  <li>(void)xxx_viewDidLoad {
+[self xxx_viewDidLoad];</li>
+</ul>
+
+<p>}</p>
+
+<p>```</p>
+
+<h1 id="do-we-really-need-namespaces">Do We Really Need Namespaces?</h1>
+
+<p>With all of the recent talk about replacing / reinventing / reimagining Objective-C, it’s almost taken as a given that namespacing would be an obvious feature. But what does that actually get us?</p>
+
+<p>Aesthetics? Aside from IETF members and military personnel, nobody likes the visual aesthetic of CLAs. But would ::, /, or an extra . really make matters better? Do we really want to start calling NSArray “Foundation Array”? (And what would I do with NSHipster.com ?!)</p>
+
+<p>Semantics? Start to look closely at any other language, and how they actually use namespaces, and you’ll realize that namespaces don’t magically solve all matters of ambiguity. If anything, the additional context makes things worse.</p>
+
+<p>Not to create a straw man, but an imagined implementation of Objective-C namespaces probably look a lot like this:</p>
+
+<p>```objc
+@namespace XX
+    @implementation Object</p>
+
+<pre><code>@using F: Foundation;
+
+- (void)foo {
+    F:Array *array = @[@1,@2, @3];
+
+    // ...
+}
+
+@end @end
+</code></pre>
+
+<p>```</p>
+
+<p>What we have currently—warts and all—has the notable advantage of non-ambiguity. There is no mistaking NSString for anything other than what it is, either by the compiler or when we talk about it as developers. There are no special contextual considerations to consider when reading through code to understand what actors are at play. And best of all: class names are exceedingly easy to search for.</p>
+
+<p>Either way, if you’re interested in this subject, I’d encourage you to take a look at this namespace feature proposal by Kyle Sluder. It’s a fascinating read.</p>
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-03-24T00:00:00+08:00"><a href="http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/">March 24, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://localhost:4000/about/" title="About Sheldon">Sheldon</a></span></span></div><!-- /.entry-meta -->
     
+      <h1 class="entry-title"><a href="http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/" rel="bookmark" title="我的时间观---活在当下" itemprop="url">我的时间观---活在当下</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    <p><img src="/images/p2014_3_24.jpg" alt="图片" /></p>
 
+<p>经常有这样的困惑，觉得每天的时间都不够用，对未来做了很多计划，但最终总是证明“计划赶不上变化”，所以那些计划就这样被积压，或者被遗弃，感觉时间真是吝啬。但当自己拥有足够的时间时，却拖延症作祟，什么都不想动，只想坐在那里，什么都不想，让自己放空，但这时内心却是无比挣扎，很想打败拖延症，可是内心总有个懒散的声音在说“好不容易放个假，应该好好休息一下，看什么书啊，多累啊”，好吧，大多数时候总是信了他的话。</p>
+
+<p>后来开始上班，在公司里面接触到了<a href="http://zh.wikipedia.org/wiki/GTD">GTD</a>，也就是一种时间管理方法，它通过将任务记录下来，然后进行整理，再进行检查的方式，来实现集中精力完成正在做的事情。怎么样？听起来很美好吧，这简直就是我的梦想，如果能达到这样的效果，人生该多么美好啊，把每件事情在短时间里做好，你就可以有很多时间去做自己想做的事了。但人生哪有那么容易呢，这里还是回到那个问题—我是拖延症。该怎么让一个拖延症去有效率的做事情呢，还要每天去计划，每天去整理，每天去打勾啊，真是想的太美了。</p>
+
+<p>忘记告诉你了，我喜欢禅学，所以会经常看一些佛学书，在很多书中都提到一句话—“活在当下”，当我第一次看到这句话时，只是轻轻翻过去了，因为实在是太普通的一句话了，但是当这么多本书都在提到时，我觉得我应该好好思考了。“活在当下”是什么呢？其实和GTD的主要目的是一致的，就是专心做好当下这一刻的事。可是禅中的涵义就更深刻多了，我不仅是要做好现在要做的事，还要注重当下的感觉，就像我们总是会去纠结那些自己现在不想做的，却又应该做的事情，这些都是我们对未来未知的不确定。“活在当下”就告诉我们“不要急，先做好现在的事”。为什么这么强调现在？因为现在是过去的未来，是未来的过去，而我们又无法改变过去，而只能通过现在才能改变未来，所以现在才是最重要的。就像佛说“当下是我们唯一拥有的一刻，在当下这一刻快乐地生活，是可以办到的事”。</p>
+
+<p>对于我来说GTD是一个方法，它开始时会给你一些条条框框，你要这样，你要那样，有点让我手足无措，内心无法自由，但当很多人在用了很长时间之后，都可以游刃有余。</p>
+
+<p>所以给自己一点自由，别让自己活在自己营造的压力下，偶尔的拖延症都是可以理解的，我们都不是完美的人，所以当我们没有达到我们想要的程度时，不用着急，给自己一点时间，慢慢积累，努力练习。我一直相信人生是一场慢热积累的过程。所以现在没有成为你想要的样子，也许是你的积分不够吧。</p>
+
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-03-13T00:00:00+08:00"><a href="http://localhost:4000/ios/objc_is_not_what_you_think_it_is/">March 13, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://localhost:4000/about/" title="About Sheldon">Sheldon</a></span></span></div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="http://localhost:4000/ios/objc_is_not_what_you_think_it_is/" rel="bookmark" title="Objective-C 不是你想的那样" itemprop="url">Objective-C 不是你想的那样</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    <p>本文由<a href="http://morisunshine.com/">morisunshine</a>译自<a href="http://news.rapgenius.com/Soroush-khanlou-objective-c-isnt-what-you-think-it-is-if-you-think-like-a-rubyist-annotated">“Objective-C isn’t what you think it is”</a>。转载请注明出处！</p>
+
+<hr />
+
+<p> <a href="#message_in_a_bottle"><strong>消息的传递</strong></a>     <br />
+ <a href="#getting_metaer_and_metaer"><strong>变得越来越动态</strong></a><br />
+ <a href="#introspection"><strong>内省</strong></a><br />
+ <a href="#cashing_in"><strong>现学现用</strong></a><br />
+ <a href="#what_is_comepielur"><strong>什么是编译器？</strong></a>  </p>
+
+<p>Ruby 和 Objective-C 这两种语言看上去好像天南地北：一种是动态语言，另一种则是静态语言；一种是解释型语言，另一种是编译型语言；一种有简洁的语法，另一种则是有点冗长的语法。从优雅的角度来看，Ruby似乎更能给我们一种自由的编程体验，所以很多人都放弃了Objective-C。</p>
+
+<p>但这是一个不幸的笑话。Objective-C其实并不像别人认为的那样是件紧身衣，它和Ruby一样都受Smalltalk影响，它拥有很多Ruby开发者都喜爱的语言功能–动态方法查找、鸭子类型、开放的类和通常情况下高度可变的runtime等这些功能在Objective-C中同样存在，即使那些不出名的技术也是一样。Objective-C的这些功能都要归功于它的IDE和编译器，但也是因为它们才使你不能自由地编写代码</p>
+
+<p>但是等一下，怎么能说Objective-C是动态语言呢？难道它不是建立在C语言的基础上？</p>
+
+<p>你可以在Objective-C代码中包含任何C或C++的代码，但这不意味着Objective-C仅限于C或C++代码。Objective-C中所有有意思的类操作和对象内省都是来自于一个叫Objective-C Runtime的东西。这个Objective-C Runtime可以和Ruby解释器相媲美。它包含了强大的元编程里所需要的所有重要特性。</p>
+
+<p>其实C语言和Ruby一样是支持这些特性的，用<code>property_getAttributes</code>或<code>method_getImplementation</code>方法就能将selector对应到具体实现(一个selector处理一个方法)，并判断这个对象能否对这个selector做出反应，再遍历子类树。在Objective-C的众多方法中，最重要的就是<code>objc_msgSend</code>方法，是它推动了应用中的每次消息发送。</p>
+
+<hr />
+
+<p><a id="message_in_a_bottle" name="message_in_a_bottle"> </a>
+##消息的传递</p>
+
+<p>Smalltalk才是实至名归的第一种面向对象语言，它用“从一个对象发送信息给另一个对象”的新概念取代了“调用函数”的旧概念，对后面的语言发展产生了深远的影响。</p>
+
+<p>你可以在Ruby中通过这样写来实现消息的发送：</p>
+
+<p>```ruby</p>
+
+<p>receiver.the_message argument</p>
+
+<p>```</p>
+
+<p>Objective-C的实现方式和Ruby的差不多：</p>
+
+<p>```objc</p>
+
+<p>[receiver theMessage:argument];</p>
+
+<p>```</p>
+
+<p>这些消息实现了鸭子类型的方式，也就是说关注的不是这个对象的类型或类本身，而是这个对象能否对一个消息做出反应。</p>
+
+<p>发送消息真的是非常棒的事，但是只有当消息在传送数据时，它的价值才会被发挥地更大：</p>
+
+<p>```ruby</p>
+
+<p>receiver.send(:the_message, argument)</p>
+
+<p>```
+和</p>
+
+<p>```objc</p>
+
+<p>[receiver performSelector:@selector(theMessage:) 
+withObject:argument];</p>
+
+<p>```</p>
+
+<p>正如Ruby中方法需要symbol支持一样，Objective-C中selector也需要string来支持。（在Objective-C中没有symbol。）这样就可以让你通过动态的方式使用一个方法。你甚至可以通过<code>NSSelectorFromString</code>方法来使用string创建一个selector，并在一个对象里执行它。同样的，我们可以在Ruby中也可以创建一个string或symbol，并把传给<code>Object#send</code>方法。</p>
+
+<p>当然，无论是哪种语言，一旦你将一个消息发送给不能处理该消息的对象，那么默认情况下就会抛出一个异常，还会导致应用的崩溃。</p>
+
+<p>当你想在调用一个方法前判断一下这个对象是否能够执行这个方法，你可以用Ruby中的<code>respond_to？</code>方法来检查：</p>
+
+<p>```ruby</p>
+
+<p>if receiver.respond_to? :the_message
+  receiver.the_message argument
+end</p>
+
+<p>```</p>
+
+<p>Objective-C中也有差不多的方法：</p>
+
+<p>```objc</p>
+
+<p>if ([receiver respondsToSelector:@selector(theMessage:)]) {
+    [receiver theMessage:someThing];
+}</p>
+
+<p>```</p>
+
+<hr />
+
+<p><a id="getting_metaer_and_metaer" name="getting_metaer_and_metaer"> </a>
+##变得越来越动态</p>
+
+<p>如果你想在一个不能修改的类（像系统类）中添加你想要的方法，那么Objective-C里的category一定不会让你失望 – 很像Ruby中的“开放类”。</p>
+
+<p>举个例子，如果你想将Rails中的<code>to_sentence</code>方法添加到<code>NSArray</code>类中，我们只需要对<code>NSArray</code>这个类进行扩展就好了：</p>
+
+<p>```objc</p>
+
+<p>@interface NSArray (ToSentence)</p>
+
+<ul>
+  <li>(NSString *)toSentence;</li>
+</ul>
+
+<p>@end</p>
+
+<p>@implementation NSArray (ToSentence)</p>
+
+<ul>
+  <li>(NSString *)toSentence {
+  if (self.count == 0) return @"";
+  if (self.count == 1) return [self lastObject];
+  NSArray *allButLastObject = [self subarrayWithRange:NSMakeRange(0, self.count-1)];
+  NSString *result = [allButLastObject componentsJoinedByString:@", "];
+  BOOL showComma = self.count &gt; 2;
+  result = [result stringByAppendingFormat:@"%@ and ", showComma ? @"," : @""];
+  result = [result stringByAppendingString:[self lastObject]];
+  return result;
+}</li>
+</ul>
+
+<p>@end</p>
+
+<p>```</p>
+
+<p>Category是在编译的时候将方法添加到程序中 – 让我们在runtime中动态捕捉它们怎么样？</p>
+
+<p>有些消息可以嵌套数据，就像Rails的dynamic finders。Ruby通过对<code>method_missing</code> 和 <code>respond_to</code>这两个方法的重写，先匹配模式，再将新方法的定义添加到这个对象中。</p>
+
+<p>Objective-C中的流程是差不多，但我们不是重写<code>doesNotRecognizeSelector:</code>方法（相当于Ruby中的<code>method_missing</code>方法），而是在<code>resolveClassMethod:</code>方法中捕捉Category添加的方法。假设我们有一个叫<code>+findWhere:equals:</code>的类方法，它可以得到property的名称和值，那么通过正则表达式就可以很容易实现找到property的名字，并通过block来注册这个selector。</p>
+
+<p>```objc</p>
+
+<ul>
+  <li>
+    <p>(BOOL)resolveClassMethod:(SEL)sel {
+  NSString *selectorName = NSStringFromSelector(sel);</p>
+
+    <p>NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@"^findWhere(\w+)Equals:$" options:0 error:nil];
+  NSTextCheckingResult *result = [regex firstMatchInString:selectorName options:0 range:NSMakeRange(0, selectorName.length)];
+  if (result) {
+      NSRange propertyNameRange = [result rangeAtIndex:1];
+      NSString *propertyName = [selectorName substringWithRange:propertyNameRange];</p>
+
+    <pre><code>  IMP implementation  = imp_implementationWithBlock((id) ^(id self, id arg1) {
+      return [self findWhere:propertyName equals:arg1];
+  });
+
+  Class metaClass = object_getClass(self);
+
+  class_addMethod(metaClass, sel, implementation, &amp;quot;@@:@@&amp;quot;);
+  return YES;   }
+</code></pre>
+
+    <p>return [super resolveClassMethod:sel];
+}</p>
+  </li>
+</ul>
+
+<p>```</p>
+
+<p>这个方法的优点就是我们不需要去重写<code>respondsToSelector:</code>，因为每个在类中注册过的selector都会去调用这个方法。现在让我们调用<code>[RGSong findWhereTitleEquals:@“Mercy”]</code>。当<code>findWhereTitleEquals:</code>第一次被调用的时候，runtime并不知道这个方法，所以它会调用<code>resolveClassMethod:</code>，这时我们就将<code>findWhereTitleEquals:</code>这个方法动态添加进去，当第二次调用<code>findWhereTitleEquals:</code>的时候，因为它已经被添加过了，所以就不会再调用<code>resolveClassMethod:</code>了。</p>
+
+<p>这里还有一些别的方法来实现捕捉动态方法。你可以通过重写<code>resolveClassMethod:</code> 和 <code>resolveInstanceMethod:</code>方法（就像上面的一样），可以将消息传递给不同的对象或全权接管这个“调用”，并在消息传递之前，做你想这个消息要完成的任何事。这些方法都会导致运行成本的增加，特别在<code>-forwardInvocation:</code>中会达到顶峰，在这种情况下我们必须要实例化一个对象才能去执行它们。<code>-forwardInvocation:</code>方法中默认调用<code>doesNotRecognizeSelector</code>方法，这导致了应用的频繁异常或崩溃。</p>
+
+<hr />
+
+<p><a id="introspection" name="introspection"> </a>
+##内省  </p>
+
+<p>动态方法决议并不只是像Ruby和Objective-C这样的语言的技术支持。你也可以通过在runtime中用一种有意思的方式去操作这些对象。</p>
+
+<p>就像在Ruby中调用<code>MyClass#instance_methods</code>一样，你可以在Objective-C中调用<code>class_copyMethodList([MyClass class], &amp;amp;numberOfMethods)</code>来得到一个对象中方法的列表。你还可以通过<code>class_copyPropertyList</code>方法得到一个类中property的列表，它能在你的模型中实现不可思议的内省。比如在这个<code>Rap Genius</code>应用中，我们用这个功能来将JSON中的字典映射到本地对象上。</p>
+
+<p>（如果你非常喜欢Ruby中的mixin，那么Objective-C强大的动态支持也能能实现同样的效果。 Vladimir Mitrovic有一个叫<code>Objective-Mixin</code>的库，它能在runtime时将一个类中的实现复制到另一个类中。）</p>
+
+<hr />
+
+<p><a id="cashing_in" name="cashing_in"> </a>
+##现学现用</p>
+
+<p>所有的动态工具都可以用来创建像Core Data这样的东西，Core Data是一个有点像ActiveRecord的持久化对象图。在Core Data中，relationship是“有缺陷的”，也就是说他们只有在被别的对象访问时，才会被加载。每个property的accessor和mutator在runtime中都被重写（使用的就是我们上面提到的动态方法决议）。如果我们访问了一个还没有被加载的对象时，框架就会从持久性储存中动态加载这个对象并将它返回。它保持了内存的低利用率，避免了在任何一个物体被获取时，实体对象图表都要被加载到内存中这样情况的发生。</p>
+
+<p>当Core Data实体中的mutator被调用时，系统会将那个对象标记为需要清理，不需要去重写每个property的getter和setter。</p>
+
+<p>这就是元程序，羡慕吧！</p>
+
+<hr />
+
+<p><a id="what_is_comepielur" name="what_is_comepielur"> </a>
+##什么是编译器？ </p>
+
+<p>很明显，Objective-C和Ruby并不是同一种语言，目前为止最大的不同就是Objective-C是一种编译型语言。</p>
+
+<p>这就是这些技术中最需要注意的地方。在编译时，编译器会先确定你应用使用的每个selector是不是都在应用中。如果你处理的这个对象有类型信息，那么编译器也会检查确保这个selector在头文件有声明过，这样做就是为了防止在对象中调用未声明的selector。有些方法可以绕过这些讨厌的限制，包括关闭相关的编译警告。这里就是实践元程序化的Objective-C最好的练习。</p>
+
+<p>你可以通过将selector的类型储存为不知道的类型或<code>id</code>来从对象中删除这些类型信息。因为编译器不认识这个类型，所以它只能假设你的程序可以接受发给它的任何消息（假设这些消息在应用中的其他地方被声明了，并且相关的编译标识已经打开）。</p>
+
+<p>善意的忠告：如果我们关掉编译器标识和把对象保存成<code>id</code>类型，那么将会非常危险的事！其实Objective-C中最好的东西之一就是编译器（是的，比元程序还要好）。类型检查保证了我们更快的写和重构代码，也是我们在编程时少犯错误。因为没有人会关掉那些警告，所以你很难去分享你那些<code>id</code>类型的代码。大部分Objective-C开发者还是更愿意使用更强的类型而不是元程序。</p>
+
+<p>事实证明Objective-C更受束缚–但因为编译器能提高更多的安全性和速度，所以我们只能选择这样并承担后果。</p>
+
+<p>事实再次告诉我们，这些语言都是差不多的，Ruby开发者应该享受Objective-C，即使那些中括号让我们望而却步。</p>
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-03-06T00:00:00+08:00"><a href="http://localhost:4000/%E5%BC%80%E5%8F%91/experience_of_develop/">March 06, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://localhost:4000/about/" title="About Sheldon">Sheldon</a></span></span></div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="http://localhost:4000/%E5%BC%80%E5%8F%91/experience_of_develop/" rel="bookmark" title="我的开发经验漫谈" itemprop="url">我的开发经验漫谈</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    <p>    <a href="#begin"><strong>项目开始之前</strong></a>     <br />
+    <a href="#specification"><strong>规范</strong></a><br />
+     <a href="#code_specification"><strong>代码规范</strong></a><br />
+     <a href="#version_specification"><strong>版本控制规范</strong></a><br />
+     <a href="#document_specification"><strong>文档规范</strong></a><br />
+     <a href="#test_specification"><strong>测试规范</strong></a><br />
+    <a href="#tidy"><strong>整理</strong></a><br />
+    <a href="#summary"><strong>总结</strong></a>  </p>
+
+<p>工作快一年了，参与了一些项目，在项目有崩溃的时候，也有欣喜的时候，我觉得很有必要记录下来，其中，可能是一些理想的化的设想，因为在之前的开发过程并没有实践过，但我觉得是可以一试，并且是有帮助的。</p>
+
+<p><a id="begin" name="begin"> </a>
+##项目开始之前</p>
+
+<p>很多次，我都迫不及待地想马上编写代码，我太喜欢那种写代码的感觉了。可是，越写越觉得不对劲，或者写到一半发现这个功能与需求不一样，然后改了又改，或直接重新开始写。<br />
+所以，不要急，慢慢来，我们可以先用Mind Map，或者你喜欢的方式将需求分析一下，并对一些功能进行细化。    <br />
+有大概的了解之后，我就该去考虑每个功能的具体实现，这个功能的难点在哪里，用什么方法比较好，如果没有找到好的方法，可以用现有的方法去代替。
+在上面都考虑好了，我们就该往大的方面想，用什么样的方式比较好，或许用到什么框架，设计模式比较好。 <br />
+也许刚开始的时候，我的经验有限，想到的方法或方式非常有限，但是一旦我开始去考虑这些问题，并且去实践的时候，我对这些方法的考虑开始往全面的方向发展，这就是在积累中成长吧。</p>
+
+<hr />
+
+<p><a id="specification" name="specification"> </a>
+##规范</p>
+
+<p>当我看过去写的代码，真的有种不想认自己的娃的冲动啊，根本不知道在写什么，命名非常幼稚，当然，现在可能也还是这样，但现在应该有一部分已经成年了吧。很多人会觉得规范是件很麻烦的事，因为规范会给限制程序员的自由，但个人觉得规范与自由并没有冲突。规范应该是团队之间的一种的约定的事情，它的目的是为了能够减少因代码问题而导致的沟通成本。</p>
+
+<p>规范体现在那些地方呢？</p>
+
+<p><a id="code_specification" name="code_specification"> </a>
+###代码规范</p>
+
+<p>我觉得每个团队之间的代码规范应该是不一样，代码规范应该是由团队中的每个成员讨论出来的结果，而不是一个人拍案决定，代码规范的目的应该是让你和每个成员都能很好的阅读，把时间专注到更需要时间的地方。 <br />
+哪些需要规范呢?<br />
+比如在iOS项目开发中，就可以有文件名的规范，图片名的规范，类名的规范等。这些命名都需要考虑仔细，因为它不是为一个人而起的。你还要确保别人也能看懂它的作用，也许你会觉得注释就好，当然，这会是个好办法，但如果只要能看到名字就能知道它的功能，那不是更好么？</p>
+
+<p><a id="version_specification" name="version_specification"> </a>
+###版本控制规范</p>
+
+<p>版本控制在开发过程中非常重要，所以版本控制的规范也是非常重要的，以git为例:</p>
+
+<ul>
+  <li>创建的分支名，就应该清楚让人知道我们在这个分支里做了哪些事情。</li>
+  <li>commit，每一条commit都应该清楚的描述，不能马虎，这不只帮助你未来的查看，也是让开发人员了解代码演化的重要途径之一，另一方面，也不知不觉中养成细化功能的习惯，这样在以后地开发中，你就会对要开发的功能进行细分，当一个子功能开发完成，就写一个commit。(这里可以参考<a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit">google开源项目的commit规范</a>)</li>
+</ul>
+
+<p><a id="document_specification" name="document_specification"> </a>
+###文档规范</p>
+
+<p>当开始一个项目时，应该需要一个文档，来跟踪你的项目，其中的内容应该包括，这个项目的文件结构，功能，还有一些类的功能。这些也是对代码可读性的扩展。</p>
+
+<p>这么多规范很烦吧，程序员的自由在哪儿，但我觉得我们不只是为现在写程序，很多时候，写程序的时间只占开发整个项目的10%，而很多时间都是在测试，调试，解决bug，或者在寻找以前的代码。所以我们要为未来而写，这对于我来说也是一种自我修养吧。</p>
+
+<p><a id="test_specification" name="test_specification"> </a>
+###测试规范</p>
+
+<p>测试，听上去很美好，当在我的以往项目中，这总是被遗忘的事情，或者是根本不会提起的事情，只有当问题产生，才会悔不当初，有它该多好。每次下定决心，一定要写一个测试的时候，总是懒于去行动，但励志要成为优秀工程师的我们一定不会忽略它的，所以测试的规范，也是非常重要的，它也让你知道一这段测试的功能与该有的结果，这也是对功能性的一个很好的补充，也为以后的改动带来了很多方便。</p>
+
+<hr />
+<p><a id="tidy" name="tidy"> </a>
+##整理</p>
+
+<p>你的项目不会是一尘不变的，他会因为时间的推移而增加更多东西，这时也许你之前的那些管理方式就变得很没有效率，想重新捣腾它，发现牵一发而动全身，真抓狂，早干嘛去了。为了避免这样的悲剧再次重演整理就变得很重要了，整理包括目录结构、资源和代码的整理，文件结构可以参考这篇<a href="http://blog.jobbole.com/61083/">博文</a>,资源和代码整理则是根据上面提到的各种规范，整理的目的应该是让项目清晰和简洁。</p>
+
+<hr />
+<p><a id="summary" name="summary"> </a>
+##总结</p>
+
+<p>写了这么多，其实也是对自己过去的经验的整理，也是对自己的勉励，博客的意义在于分享，而分享又是为了更好的交流，希望能提出一些宝贵的意见，让我们一起成长。</p>
+
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-02-27T00:00:00+08:00"><a href="http://localhost:4000/ios/UICollectionView_UIKit_Dynamics/">February 27, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://localhost:4000/about/" title="About Sheldon">Sheldon</a></span></span></div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="http://localhost:4000/ios/UICollectionView_UIKit_Dynamics/" rel="bookmark" title="UICollectionView+UIKit Dynamics" itemprop="url">UICollectionView+UIKit Dynamics</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    <p><a href="http://www.objc.io/issue-5/collection-views-and-uidynamics.html">原文</a>作者<a href="https://twitter.com/ashfurrow">Ash Furrow</a>。转载请注明出处！</p>
+
+<p>感谢<a href="http://blog.codingcoder.com/">破土</a>参与翻译。</p>
+
+<p>UIKit Dynamics 是iOS7中基于物理动画引擎的一个新功能–它被特别设计使其能很好地与collection Views配合工作，collection view是在iOS6中才被引入的新特性。接下来，我们要好好看看如何将这两个特性结合在一起。 </p>
+
+<p>这篇文章将讨论两个实现UIkit Dynamics的collection view的例子。第一个例子展示了如何去实现像iOS7里Messages应用中的弹簧效果，如果你还不大了解iOS7中Messages的弹簧效果是什么样子的，下面这张gif图可以帮你大概了解下：</p>
+
+<p><img src="http://img.onevcat.com/2013/ios7-message-app-spring.gif" alt="Example" /></p>
+
+<p>然后再进一步结合了有可伸缩效果的平铺机制。</p>
+
+<p>第二个例子展现了如何用UIKit Dynamics来模拟牛顿摆，物体可以在某一时刻被加入到collection view，并和其他物体相互作用。</p>
+
+<p>在我们开始之前，我假定你们对<code>UICollectionView</code>是如何工作是有基本的了解–查看<a href="http://www.objc.io/issue-3/collection-view-layouts.html">这篇objc.io博客</a>博客会有你想要的所有细节。我也假定你已经理解了<code>UIKit Dynamics</code>的工作原理–阅读这篇<a href="http://www.teehanlax.com/blog/introduction-to-uikit-dynamics/">博客</a>，可以了解更多UIKit Dynamics的知识。</p>
+
+<p>文章中的两个例子项目都已经在GitHub中:</p>
+
+<ul>
+  <li><a href="https://github.com/objcio/issue-5-springy-collection-view">ASHSpringyCollectionView</a>(基于<a href="https://github.com/TeehanLax/UICollectionView-Spring-Demo">UICollectionView Spring Demo</a>)</li>
+  <li><a href="https://github.com/objcio/issue-5-newtonian-collection-view">Newtownian UICollectionView</a></li>
+</ul>
+
+<h1 id="dynamic-animator">Dynamic Animator</h1>
+
+<p>支持UICollectionView实现UIkit Dynamic的最关键部分就是UIDynamicAnimator。要实现这样的UIKit Dynamics的效果，我们需要自己自定义一个继承于UICollectionViewFlowLayout的子类，并且在这个子类里面持有一个UIDynamicAnimator的对象。</p>
+
+<p>当我们创建我们自己的dynamic animator时，我们不会使用常用的初始化方法<code>-(instancetype)initWithReferenceView:(UIView*)view;</code>
+因为，我们不需要把这个dynamic animator关联一个view，而是给它关联一个collection view layout。所以我们使用<code>- (instancetype)initWithCollectionViewLayout:(UICollectionViewLayout*)layout;</code>
+这个初始化方法，并把collection view layout作为参数传入。
+这很关键，当他的behavior物体的属性应该被更新的时候，dynamic animator必须能够使collection view layout无效。换句话说，dynamic animator将会使旧的layout失效，并根据最新的behavior的items中的attribute重新建立新的layout。</p>
+
+<p>我们很快就能看到这些事情是怎么连接起来的，但是在概念上理解collection view 如何与 dynamic animator相互作用是很重要的。我们将要在自定义的collection view layout的子类中，根据每一个collection view中的<code>UICollectionViewLayoutAttributes</code>对象的属性，创建一个对应的<code>UIAttachmentBehavior</code>对象，并把这个UIAttachmentBehavior对象添加到我们持有的<code>UIDynamicAnimator</code>对象上(过会儿我们将讨论tiling这些)。当我们需要<code>UICollectionViewLayoutAttribute</code>时，我们不再是从头开始计算collection view 每一个item的layout attribute，而是使用<code>UIDynamicAnimator</code>中的layout attribute，因为我们在创建UIDynamicAnimator时就已经计算过每一个item的layout attribute了，所以这里不需要再重复计算一次。一旦模拟状态发生改变，dynamic animator就会使这个layout无效。这会导致UIKit重新查询layout，直到这个模拟静止。</p>
+
+<p>所以重申一下，layout创建了dynamic animator，并且在dynamic animator上添加每个item的layout attribute对应的<code>UIAttachmentBehavior</code>。当collection view需要layout信息时，dynamic animator提供想要的信息。</p>
+
+<h1 id="uicollectionviewflowlayout">继承UICollectionViewFlowLayout</h1>
+
+<p>我们将要创建一个简单的例子来展示如何使用一个带UIkit Dynamic的collection view layout。当然，我们需要做的第一件事就是，创建一个数据源去驱动我们的collection view。我知道以你的能力完全可以独立实现一个数据源，但是为了完整性，我还是提供了一个给你:</p>
+
+<p>```objc</p>
+
+<p>@implementation ASHCollectionViewController</p>
+
+<p>static NSString * CellIdentifier = @”CellIdentifier”;</p>
+
+<p>-(void)viewDidLoad 
+{
+    [super viewDidLoad];
+    [self.collectionView registerClass:[UICollectionViewCell class] 
+            forCellWithReuseIdentifier:CellIdentifier];</p>
+
+<p>}</p>
+
+<p>-(UIStatusBarStyle)preferredStatusBarStyle 
+{
+    return UIStatusBarStyleLightContent;</p>
+
+<p>}</p>
+
+<p>-(void)viewDidAppear:(BOOL)animated 
+{
+    [super viewDidAppear:animated];
+    [self.collectionViewLayout invalidateLayout];</p>
+
+<p>}</p>
+
+<h1 id="pragma-mark---uicollectionview-methods">pragma mark - UICollectionView Methods</h1>
+
+<p>-(NSInteger)collectionView:(UICollectionView *)collectionView 
+    numberOfItemsInSection:(NSInteger)section 
+{
+    return 120;</p>
+
+<p>}</p>
+
+<p>-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView 
+                 cellForItemAtIndexPath:(NSIndexPath *)indexPath 
+{
+    UICollectionViewCell *cell = [collectionView 
+        dequeueReusableCellWithReuseIdentifier:CellIdentifier 
+                                  forIndexPath:indexPath];</p>
+
+<pre><code>cell.backgroundColor = [UIColor orangeColor];
+return cell;
+</code></pre>
+
+<p>}</p>
+
+<p>@end</p>
+
+<p>```</p>
+
+<p>我们注意到当视图第一次出现的时候，这个layout是被无效的。这是因为没有用Storybards的结果(当使用Storyboards时，调用prepareLayout方法的时机是不同的–或是相同的–在WWDC的视频中他们没有告诉我们这些)。所以，当这些试图一出现我们就需要手动使这个collection view layout无效。当我们用tiling的时候，就不需要这样。</p>
+
+<p>让我们创建我们自己的collection view layout。我们需要强引用一个dynamic animator, 并且使用它来驱动我们的collcetion view layout的attribute。我们在实现文件里定义了一个私有的property:</p>
+
+<p>```objc</p>
+
+<p>@interface ASHSpringyCollectionViewFlowLayout ()</p>
+
+<p>@property (nonatomic, strong) UIDynamicAnimator *dynamicAnimator;</p>
+
+<p>@end</p>
+
+<p>```</p>
+
+<p>我们将在layout的初始化方法中初始化我们的dynamic animator。还要设置一些属于父类UICollectionViewFlowLayout中的property:</p>
+
+<p>```objc</p>
+
+<ul>
+  <li>
+    <p>(id)init 
+{
+  if (!(self = [super init])) return nil;</p>
+
+    <p>self.minimumInteritemSpacing = 10;
+  self.minimumLineSpacing = 10;
+  self.itemSize = CGSizeMake(44, 44);
+  self.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);</p>
+
+    <p>self.dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];</p>
+
+    <p>return self;</p>
+  </li>
+</ul>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>我们将实现的下一个方法是prepareLayout。我们首先需要调用父类的方法。因为我们是继承<code>UICollectionViewFlowLayout</code>类，所以在调用父类的prepareLayout的时，可以使collection view layout attribute都放置在合适的位置。我们可以依靠基类<code>UICollectionViewFlowLayout</code>的<code>prepareLayout</code>方法来提供一个默认的排布，并且能够使用<code>[super layoutAttributesForElementsInRect:visibleRect];</code>方法得到指定rect内的所有item的layout attributes。</p>
+
+<p>```objc</p>
+
+<p>[super prepareLayout];</p>
+
+<p>CGSize contentSize = self.collectionView.contentSize;
+NSArray *items = [super layoutAttributesForElementsInRect:
+    CGRectMake(0.0f, 0.0f, contentSize.width, contentSize.height)];</p>
+
+<p>```</p>
+
+<p>这真的是效率低下的代码。因为我们的collection view中可能会有成千上万个cell，一次性加载所有的cell是一个可能会产生难以置信的内存紧张的操作。我们要在一段时间内遍历所有的元素，这也成为耗时的操作。这真的是效率的双重打击！别担心–我们是负责任的开发者，所以我们会很快解决这个问题的。我们先暂时继续使用简单、粗暴的实现方式。</p>
+
+<p>当加载完我们所有的collection view layout attribute之后，我们需要检查他们是否都已经被加载到我们的animator里了。如果一个behavior已经在animator中存在，那么我们就不能重新添加，否则就会得到一个非常难懂的运行异常提示:</p>
+
+<p>```objc</p>
+
+<p>&lt;UIDynamicAnimator: 0xa5ba280&gt; (0.004987s) in 
+&lt;ASHSpringyCollectionViewFlowLayout: 0xa5b9e60&gt; {{0, 0}, {0, 0}}: 
+body <pkphysicsbody> type:<rectangle> representedObject:
+[&lt;UICollectionViewLayoutAttributes: 0xa281880&gt; 
+index path: (&lt;NSIndexPath: 0xa281850&gt; {length = 2, path = 0 - 0}); 
+frame = (10 10; 300 44); ] 0xa2877c0  
+PO:(159.999985,32.000000) AN:(0.000000) VE:(0.000000,0.000000) AV:(0.000000) 
+dy:(1) cc:(0) ar:(1) rs:(0) fr:(0.200000) re:(0.200000) de:(1.054650) gr:(0) 
+without representedObject for item &lt;UICollectionViewLayoutAttributes: 0xa3833e0&gt; 
+index path: (&lt;NSIndexPath: 0xa382410&gt; {length = 2, path = 0 - 0}); 
+frame = (10 10; 300 44);</rectangle></pkphysicsbody></p>
+
+<p>```</p>
+
+<p>如果看到了这个错误，那么这基本表明你添加了两个behavior给同一个<code>UICollectionViewLayoutAttribute</code>，这使得系统不知道该怎么处理。</p>
+
+<p>无论如何，一旦我们已经检查好我们是否已经将behavior添加到dynamic animator之后，我们就需要遍历每个collection view layout attribute来创建和添加新的dynamic animator:</p>
+
+<p>```objc</p>
+
+<p>if (self.dynamicAnimator.behaviors.count == 0) {
+	[items enumerateObjectsUsingBlock:^(id<uidynamicitem> obj, NSUInteger idx, BOOL *stop) {
+        UIAttachmentBehavior *behaviour = [[UIAttachmentBehavior alloc] initWithItem:obj 
+                                                                    attachedToAnchor:[obj center]];</uidynamicitem></p>
+
+<pre><code>    behaviour.length = 0.0f;
+    behaviour.damping = 0.8f;
+    behaviour.frequency = 1.0f;
+    
+    [self.dynamicAnimator addBehavior:behaviour];
+
+}];
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>这段代码非常简单。我们为每个item创建了一个以物体的中心为附着点的<code>UIAttachmentBehavior</code>对象。然后又设置了我们的attachment behavior的length为0以便约束这个cell能一直以behavior的附着点为中心。然后又给<code>damping</code>和<code>frequency</code>这两个参数设置一个比较合适的值。</p>
+
+<p>这就是<code>prepareLayout</code>。我们现在需要实现<code>layoutAttributesForElementsInRect:</code> 和 <code>layoutAttributesForItemAtIndexPath:</code>这两个方法，UIKit会调用它们来询问collection view每一个item的布局信息。我们写的代码会把这些查询交给专门做这些事的dynamic animator:</p>
+
+<p>```objc</p>
+
+<p>-(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect 
+{
+    return [self.dynamicAnimator itemsInRect:rect];</p>
+
+<p>}</p>
+
+<p>-(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath 
+{
+    return [self.dynamicAnimator layoutAttributesForCellAtIndexPath:indexPath];</p>
+
+<p>}</p>
+
+<p>```</p>
+
+<h1 id="section">响应滚动事件</h1>
+
+<p>我们目前实现的代码给我们展示的只是一个在正常滑动下只有静态感觉的<code>UICollectionView</code>运行起来没什么特别的。看上去很好，但不是真的动态，不是么？</p>
+
+<p>为了使它表现地动态点，我们需要layout和dynamic animator能够对collection view中滑动位置的变化做出反应。幸好这里有个非常适合这个要求的方法<code>shouldInvalidateLayoutForBoundsChange:</code>。这个方法会在collection view 的bound发生改变的时候被调用，根据最新的<code>content offset</code>调整我们的dynamic animator中的behaviors的参数。在重新调整这些behavior的item之后，我们在这个方法中返回NO；因为dynamic animator会关心layout的无效问题，所以在这种情况下，它不需要去主动使其无效:</p>
+
+<p>```objc</p>
+
+<p>-(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds 
+{
+    UIScrollView *scrollView = self.collectionView;
+    CGFloat delta = newBounds.origin.y - scrollView.bounds.origin.y;</p>
+
+<pre><code>CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
+
+[self.dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
+    CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
+    CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
+    CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1500.0f;
+    
+    UICollectionViewLayoutAttributes *item = springBehaviour.items.firstObject;
+    CGPoint center = item.center;
+if (delta &lt; 0) {
+        center.y += MAX(delta, delta*scrollResistance);
+    
+}
+else {
+        center.y += MIN(delta, delta*scrollResistance);
+    
+}
+    item.center = center;
+    
+    [self.dynamicAnimator updateItemUsingCurrentState:item];
+
+}];
+
+return NO;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>让我们仔细查看这个代码的细节。首先我们得到了这个scroll view(这是我们的collection view)，然后计算它的content offset中y的变化(在这个例子中，我们的collection view是垂直滑动的)。一旦我们得到这个增量，我们需要得到用户接触的位置。这是非常重要的，因为我们希望离接触位置比较近的那些物体能移动地更迅速些，而离接触位置比较远的那些物体则应该滞后些。</p>
+
+<p>对于dynamic animator中的每个behavior，我们将接触点到该behavior物体的x和y的距离之和除以1500，1500是我根据经验设的。分母越小，这个collection view的的交互就越有弹簧的感觉。因为我们有了这种“滑动阻力”，我们根据它的增量乘上<code>scrollResistance</code>这个变量来指定这个behavior物体的中心的y。最后，我们在滑动阻力大于增量的情况下对增量和滑动阻力的结果进行了选择。 (这意味着物体开始往错误的方向移动了)。如果我们用了这么大的分母，那么这种情况是不可能的，但是在一些更具弹性的collection view layout中还是需要注意的。</p>
+
+<p>就是这么一回事。以我的经验，这个方法对多达几百个物体的collection view来说也是是适用的。超过这个数量的话，一次性加载所有物体到内存中就会变成很大的负担，并且在滑动的时候就会开始卡顿了。</p>
+
+<p><img src="http://f.cl.ly/items/411o450x2E3A3c3m2b3k/springyCollectionView.gif" alt="Example" /></p>
+
+<h1 id="tiling-your-dynamic-behaviors-for-performance">Tiling your Dynamic Behaviors for Performance</h1>
+
+<p>当你的collection view中只有几百个cell的时候，他运行的很好，但当数据源超过这个范围的时候会发生什么呢？或者在运行的时你不能预测你的数据源有多大呢？我们的简单粗暴的方法就不管用了。</p>
+
+<p>除了在<code>prepareLayout</code>中加载所有的物体，如果我们能更聪明地知道哪些物体会加载那该多好啊。是的，就是这些显示的或即将显示的物体。这就是我们要采取的办法。</p>
+
+<p>我们需要做的第一件事就是是跟踪dynamic animator中的所有behavior物体的index path。我在collection view 中添加一个property来做这件事:</p>
+
+<p>```objc</p>
+
+<p>@property (nonatomic, strong) NSMutableSet *visibleIndexPathsSet;</p>
+
+<p>```</p>
+
+<p>我们用set是因为它具有常数复杂度的查找效率，并且我们经常地查找<code>visibleIndexPathsSet</code>中是否已经包含了某个index path。</p>
+
+<p>在我们实现全新的<code>prepareLayout</code>方法之前–有一个问题就是什么是tiles behavior–理解tiling的意思是非常重要的。当我们title behavior的时候，我们会在这些item离开collection view 的可视范围的时候删除对应的behavior，在这些item进入可视范围的时候又添加对应的behavior。这是一个大麻烦:我们需要在滚动中创建新的behavior。这就意味着让人觉得创建它们就好像它们本来就已经在dynamic animator里了一样，并且它们是在<code>shouldInvalidateLayoutForBoundsChange:</code>方法被修改的。</p>
+
+<p>因为我们是在滚动中创建这些新的behavior，所以我们需要维持现在collection view 的一些状态。尤其我们需要跟踪最近一次我们<code>bound</code>变化的增量。我们会在滚动时用这个状态去创建我们的behavior:</p>
+
+<p>```objc</p>
+
+<p>@property (nonatomic, assign) CGFloat latestDelta;</p>
+
+<p>```</p>
+
+<p>添加完这个property后，我们将要在<code>shouldInvalidateLayoutForBoundsChange:</code>方法中添加下面这行代码:</p>
+
+<p>```objc</p>
+
+<p>self.latestDelta = delta;</p>
+
+<p>```</p>
+
+<p>这就是我们需要修改我们的方法来响应滚动事件。我们的这两个方法是为了将collection view中items的layout信息传给dynamic animator，这种方式没有变化。事实上，当你的collection view实现了dynamic animator的大部分情况下，都需要实现我们上面提到的两个方法<code>layoutAttributesForElementsInRect:</code>和<code>layoutAttributesForItemAtIndexPath:</code>。</p>
+
+<p>这里最难懂的部分就是tiling mechanism。我们将要完全重写我们的prepareLayout。</p>
+
+<p>这个方法的第一步是将那些物体的index path已经不再屏幕上的behavior从dynamic animator上删除。第二步是添加那些即将显示的物体的behavior。</p>
+
+<p>让我们先看一下第一步。</p>
+
+<p>像以前一样，我们要调用<code>super prepareLayout</code>，这样我们就能依赖父类<code>UICollectionViewFlowLayout</code>提供的默认排布。还像以前一样，我们通过父类获取一个矩形内的所有元素的layout attribute。不同的是我们不是获取整个collection view 中的元素属性，而只是获取显示范围内的。</p>
+
+<p>所以我们需要计算这个显示矩形。但是别着急！有件事要记住。我们的用户可能会非常快地滑动collection view，导致了dynamic animator不能跟上，所以我们需要稍微扩大显示范围，这样就能包含到那些将要显示的物体了。否则，在滑动很快的时候就会出现频闪现象了。让我们计算一下显示范围:</p>
+
+<p>```objc</p>
+
+<p>CGRect originalRect = (CGRect){.origin = self.collectionView.bounds.origin, .size = self.collectionView.frame.size};
+CGRect visibleRect = CGRectInset(originalRect, -100, -100);</p>
+
+<p>```</p>
+
+<p>我确信在实际显示矩形上的每个方向都扩大100个像素对我的demo来说是可行的。仔细查看这些值是否适合你们的collection view，尤其是当你们的cell很小的情况下。</p>
+
+<p>接下来我们就需要收集在显示范围内的collection view layout attributes。还有它们的index paths:</p>
+
+<p>```objc</p>
+
+<p>NSArray *itemsInVisibleRectArray = [super layoutAttributesForElementsInRect:visibleRect];</p>
+
+<p>NSSet *itemsIndexPathsInVisibleRectSet = [NSSet setWithArray:[itemsInVisibleRectArray valueForKey:@”indexPath”]];</p>
+
+<p>```</p>
+
+<p>注意我们是在用一个NSSet。这是因为它具有常数复杂度的查找效率，并且我们经常的查找visibleIndexPathsSet是否已经包含了某个index path:</p>
+
+<p>接下来我们要做的就是遍历dynamic animator 的behaviors，过滤掉那些已经在<code>itemsIndexPathsInVisibleRectSet</code>中的item。因为我们已经过滤掉我们的behavior，所以我们将要遍历的这些item都是不在显示范围里的，我们就可以将这些item从animator中删除掉(连同<code>visibleIndexPathsSet</code>属性中的index path):</p>
+
+<p>```objc</p>
+
+<p>NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UIAttachmentBehavior *behaviour, NSDictionary *bindings) {
+    BOOL currentlyVisible = [itemsIndexPathsInVisibleRectSet member:[[[behaviour items] firstObject] indexPath]] != nil;
+    return !currentlyVisible;
+}]</p>
+
+<p>NSArray *noLongerVisibleBehaviours = [self.dynamicAnimator.behaviors filteredArrayUsingPredicate:predicate];</p>
+
+<p>[noLongerVisibleBehaviours enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop) {
+    [self.dynamicAnimator removeBehavior:obj];
+    [self.visibleIndexPathsSet removeObject:[[[obj items] firstObject] indexPath]];</p>
+
+<p>}];</p>
+
+<p>```</p>
+
+<p>下一步就是要得到新出现item的<code>UICollectionViewLayoutAttributes</code>数组–那些item的index path在<code>itemsIndexPathsInVisibleRectSet</code>而不在<code>visibleIndexPathsSet</code>:</p>
+
+<p>```objc</p>
+
+<p>NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UICollectionViewLayoutAttributes *item, NSDictionary *bindings) {
+    BOOL currentlyVisible = [self.visibleIndexPathsSet member:item.indexPath] != nil;
+    return !currentlyVisible;</p>
+
+<p>}];
+NSArray *newlyVisibleItems = [itemsInVisibleRectArray filteredArrayUsingPredicate:predicate];</p>
+
+<p>```</p>
+
+<p>一旦我们有新的layout attribute出现，我就可以遍历他们来创建新的behavior，并且将他们的index path添加到<code>visibleIndexPathsSet</code>中。首先，无论如何，我都需要获取到用户手指触碰的位置。如果它是<code>CGPointZero</code>的话，那就表示这个用户没有在滑动collection view，我就不需要在滚动时创建新的behavior:</p>
+
+<p>```objc</p>
+
+<p>CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];</p>
+
+<p>```</p>
+
+<p>这是一个潜在的威胁。如果用户很快地滑动了collection view 之后释放了他的手指呢？这个collection view 就会一直滚动，但是我们的方法就不会在滚动时创建新的behavior了。幸运的是，那也就意味这scroll view滚动太快很难被注意到！好哇！这可能会是个问题，但是，只是针对那些拥有大量cell的collection view。在这种情况下，增加你的显示范围的界限就可以加载更多物体了。</p>
+
+<p>现在我们需要枚举我们刚显示的item，为他们创建behavior，再将他们的index path 添加到<code>visibleIndexPathsSet</code>。我们还需要在滚动时做些运算来创建behavior:</p>
+
+<p>```objc</p>
+
+<p>[newlyVisibleItems enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *item, NSUInteger idx, BOOL *stop) {
+    CGPoint center = item.center;
+    UIAttachmentBehavior *springBehaviour = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:center];</p>
+
+<pre><code>springBehaviour.length = 0.0f;
+springBehaviour.damping = 0.8f;
+springBehaviour.frequency = 1.0f;
+
+if (!CGPointEqualToPoint(CGPointZero, touchLocation)) {
+    CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
+    CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
+    CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1500.0f;
+    
+if (self.latestDelta &lt; 0) {
+        center.y += MAX(self.latestDelta, self.latestDelta*scrollResistance);
+    
+}
+else {
+        center.y += MIN(self.latestDelta, self.latestDelta*scrollResistance);
+    
+}
+    item.center = center;
+
+}
+
+[self.dynamicAnimator addBehavior:springBehaviour];
+[self.visibleIndexPathsSet addObject:item.indexPath];
+</code></pre>
+
+<p>}];</p>
+
+<p>```</p>
+
+<p>大部分代码看起来还是挺熟悉的。大概有一半是来自没有实现tiling的<code>prepareLayout</code>。另一半是来自<code>shouldInvalidateLayoutForBoundsChange</code>方法。我们用latestDelta这个property来表示<code>bound</code>变化的增量，适当地调整<code>UICollectionViewLayoutAttributes</code>使这些cell表现地就像被attachment behavior拉着一样。</p>
+
+<p>就是这样，真的！我已经在真机上测试过显示上千个cell的情况了，它运行地非常完美。<a href="https://github.com/objcio/issue-5-springy-collection-view">去试试吧</a>。</p>
+
+<h1 id="section-1">超越瀑布流布局</h1>
+
+<p>一般来说，当我们使用<code>UICollectionView</code>的时候，继承<code>UICollectionViewFlowLayout</code>会比继承<code>UICollectionViewLayout</code>更容易。这是因为flow layout 会为我们做很多事。然而，瀑布流布局是严格基于它们的尺寸一个接一个的展现出来。如果你有一个layout不能适应这个标准怎么办？好的，如果你已经尝试用<code>UICollectionViewFlowLayout</code>来适应，而且你很确定它不能很好运行，那么就应该抛弃<code>UICollectionViewFlowLayout</code>这个定制性比较弱的子类，而应该直接在<code>UICollectionViewLayout</code>这个基类上进行定制。</p>
+
+<p>当处理UIKit Dynamic的时候也是适用的。</p>
+
+<p>让我们继承<code>UICollectionViewLayout</code>。当继承<code>UICollectionViewLayout</code>的时候需要实现<code>collectionViewContentSize</code>方法，这点非常重要。否则这个collection view就不知道如果去显示自己，也不会有显示任何东西。因为我们想要我们的collection view不要再滑动，我们将会返回我们的collection view的frame的尺寸，减去它的<code>contentInset.top</code>:</p>
+
+<p>```objc</p>
+
+<p>-(CGSize)collectionViewContentSize 
+{
+    return CGSizeMake(self.collectionView.frame.size.width, 
+        self.collectionView.frame.size.height - self.collectionView.contentInset.top);</p>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>在这个(有教育意义)的例子中，我们的collection view总是会以零个cell开始，物体通过<code>performBatchUpdates:</code>方法添加。这就意味着我们必须使用<code>-[UICollectionViewLayout prepareForCollectionViewUpdates:]</code>方法来添加我们的behavior(即这个collection view的数据源总是以零开始)。</p>
+
+<p>除了给各个物体添加附着behavior外，我们还将保留另外两个behavior:重力和碰撞。对于添加在这个collection view中的每个item来说，我们必须把这些item添加到我们的碰撞和附着behavior中。最后一步就是设置这些item的初始位置为屏幕外的某些地方，这样就有被附着behavior拉入到屏幕内的效果了:</p>
+
+<p>```objc</p>
+
+<p>-(void)prepareForCollectionViewUpdates:(NSArray *)updateItems
+{
+    [super prepareForCollectionViewUpdates:updateItems];</p>
+
+<pre><code>[updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger idx, BOOL *stop) {
+    if (updateItem.updateAction == UICollectionUpdateActionInsert) {
+        UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes 
+            layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+    
+        attributes.frame = CGRectMake(CGRectGetMaxX(self.collectionView.frame) + kItemSize, 300, kItemSize, kItemSize);
+
+        UIAttachmentBehavior *attachmentBehaviour = [[UIAttachmentBehavior alloc] initWithItem:attributes 
+                                                                              attachedToAnchor:attachmentPoint];
+        attachmentBehaviour.length = 300.0f;
+        attachmentBehaviour.damping = 0.4f;
+        attachmentBehaviour.frequency = 1.0f;
+        [self.dynamicAnimator addBehavior:attachmentBehaviour];
+    
+        [self.gravityBehaviour addItem:attributes];
+        [self.collisionBehaviour addItem:attributes];
+    
+    }
+
+}];
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p><img src="http://www.objc.io/images/issue-5/newtonianCollectionView@2x.gif" alt="Example" /></p>
+
+<p>删除就有点复杂了。我们希望这些物体有”掉落”的效果而不是简单的消失。这就不仅仅是从collection view 中删除这个cell这么简单了，因为我们希望在它离开了屏幕之前还是保留它。我已经在代码中实现了这样的效果，但是有点坑爹。</p>
+
+<p>基本上我们要做的是在layout中提供一个方法，在它删除attachment behavior两秒之后，将这个cell从collection view中删除。我们希望在这段时间里，这个cell能掉出屏幕，但是这不一定会发生。如果没有发生，也没关系。只要淡出就行了。然而，我们必须避免在这两秒内没有新的cell被添加，也没有旧的cell被删除。(我说过有点坑。)</p>
+
+<p>欢迎在github上提出pull requests</p>
+
+<p>这个方法是有些限制的。我将cell数量的上限设为10，但是即使这样，在像iPad2这样比较久的设备中，动画就会运行地很慢。然而，这个例子充分地展示你可以自己实现有意思的动力学模拟的方法–这并不意味着这是一个可以解决任何问题的万金油。你的模拟中包括性能的各个方面，都是取决于你自己。</p>
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+
+<div class="pagination">
   
-    <span class="next disabled" >后页></span>
+    Previous
   
-  (共9篇)
-</div>
+  <ul class="inline-list">
+    <li>
+      
+        <span class="current-page">1</span>
+      
+    </li>
+    
+      <li>
+        
+          <a href="http://localhost:4000/page2">2</a>
+        
+      </li>
+    
+  </ul>
+  
+    <a href="http://localhost:4000/page2" class="btn">Next</a>
+  
+</div><!-- /.pagination -->
+</div><!-- /#main -->
 
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2014 Sheldon. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>.</span>
+  </footer>
+</div><!-- /.footer-wrapper -->
 
-</section>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
 
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', '47868064']);
+  _gaq.push(['_trackPageview']);
 
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
 
-        </article>
-      </div>
+          
 
-    <footer>
-        <p><small>Powered by <a href="https://github.com/mojombo/jekyll">Jekyll</a> & <a href="http://pages.github.com">GitHub</a> | Copyright 2012 - 2014 by <a href="/about/">morisunshine</a> | <span class="label label-info" id="timeSpan"></span></small></p>
-    </footer>
-
-    </div>
-
-    <script type="text/javascript">
-      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;
-        i[r]=i[r]||function(){
-      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();
-      a=s.createElement(o),
-      m=s.getElementsByTagName(o)[0];
-      a.async=1;
-      a.src=g;
-      m.parentNode.insertBefore(a,m)}
-      )
-      (window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-      ga('create', 'UA-47868064-1', 'morisunshine.com');
-      ga('send', 'pageview');
-
-    </script>
-
-    <!-- Baidu Button BEGIN -->
-		<script type="text/javascript" id="bdshare_js" data="type=slide&amp;img=4&amp;pos=right&amp;uid=541841" ></script>
-		<script type="text/javascript" id="bdshell_js"></script>
-		<script type="text/javascript">
-		var bds_config={"bdTop":170};
-		document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000);
-		</script>
-		<!-- Baidu Button END -->
-  </body>
+</body>
 </html>

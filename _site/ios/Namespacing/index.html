@@ -1,0 +1,431 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Object-C的命名空间 &#8211; Morisunshine's Blog</title>
+<meta name="description" content="">
+<meta name="keywords" content="iOS">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/">
+<meta name="twitter:title" content="Object-C的命名空间">
+<meta name="twitter:description" content="">
+<meta name="twitter:creator" content="@morisunshine">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Object-C的命名空间">
+<meta property="og:description" content="">
+<meta property="og:url" content="http://localhost:4000/ios/Namespacing/">
+<meta property="og:site_name" content="Morisunshine's Blog">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/ios/Namespacing/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.min.css">
+<!-- Webfonts -->
+<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="http://localhost:4000">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="http://localhost:4000/images/avatar.png" alt="Sheldon photo" class="author-photo">
+					<h4>Sheldon</h4>
+					<p>1991-12-10</p>
+				</li>
+				<li><a href="http://localhost:4000/about/">Learn More</a></li>
+				<li>
+					<a href="mailto:sheldon.zen@gmail.com"><i class="icon-envelope"></i> Email</a>
+				</li>
+				<li>
+					<a href="http://twitter.com/morisunshine"><i class="icon-twitter"></i> Twitter</a>
+				</li>
+				
+				
+				<li>
+					<a href="http://linkedin.com/in/morisunshine"><i class="icon-linkedin"></i> LinkedIn</a>
+				</li>
+				<li>
+					<a href="http://github.com/morisunshine"><i class="icon-github"></i> GitHub</a>
+				</li>
+				<li>
+					<a href="http://stackoverflow.com/users/2194236/morisunshine"><i class="icon-stackexchange"></i> Stackexchange</a>
+				</li>
+				<li>
+					<a href="http://instagram.com/morisunshine"><i class="icon-instagram"></i> Instagram</a>
+				</li>
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="http://localhost:4000/posts/">All Posts</a></li>
+				<li><a href="http://localhost:4000/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		<li><a href="http://localhost:4000"></a></li><li><a href=""></a></li>
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="http://localhost:4000/ios/Namespacing/" rel="bookmark" title="Object-C的命名空间">Object-C的命名空间</a></h1>
+        
+        <h2>April 05, 2014</h2>
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <h1 id="namespacing">Namespacing</h1>
+
+<p>Written by Mattt Thompson on Feb 24th, 2014</p>
+
+<p>Why the hell is everything NS-whatever?</p>
+
+<p>You’ll hear that within the first minute of introducing someone to Objective-C. Guaranteed.</p>
+
+<p>Like a parent faced with the task of explaining the concept of death or the non-existence of Santa, you do your best to be forthcoming with facts, so that they might arrive at a conclusion themselves.</p>
+
+<p>Why, Jimmy, NS stands for NeXTSTEP (well, actually, NeXTSTEP/Sun, but we’ll cover that with “the birds &amp; the bees” talk), and it’s used to…</p>
+
+<p>…but by the time the words have left your mouth, you can already sense the disappointment in their face. Their innocence has been lost, and with an audible sigh of resignation, they start to ask uncomfortable questions about @</p>
+
+<p>Namespacing is the preeminent bugbear of Objective-C. A cosmetic quirk with global implications, the language’s lack of identifier containers remains a source of prodigious quantities of caremad for armchair language critics.</p>
+
+<p>This is all to say: unlike many other languages that are popular today, Objective-C does not provide a module-like mechanism for avoiding class and method name collisions.</p>
+
+<p>Instead, Objective-C relies on prefixes to ensure that functionality in one part of the app doesn’t interfere with similarly named code somewhere else.</p>
+
+<p>We’ll jump into those right after a quick digression into type systems:</p>
+
+<h1 id="types-in-c--objective-c">Types in C &amp; Objective-C</h1>
+
+<p>As noted many times in this publication, Objective-C is built directly on top of the C language. One consequence of this is that Objective-C and C share a type system, requiring that identifiers are globally unique.</p>
+
+<p>You can see this for yourself—try defining a new static variable with the same name as an existing @interface, and the compiler will generate an error:</p>
+
+<p>```objc
+@interface XXObject : NSObject
+@end</p>
+
+<p>static char * XXObject;  // Redefinition of “XXObject” as different kind of symbol</p>
+
+<p>```</p>
+
+<p>That said, the Objective-C runtime creates a layer of abstraction on top of the C type system, allowing the following code to compile without even a snicker:</p>
+
+<p>```objc
+@protocol Foo
+@end</p>
+
+<p>@interface Foo : NSObject <foo> {
+    id Foo;</foo></p>
+
+<p>}</p>
+
+<p>@property id Foo;
++ (id)Foo;
+- (id)Foo;
+@end</p>
+
+<p>@interface Foo (Foo)
+@end</p>
+
+<p>@implementation Foo
+@synthesize Foo;</p>
+
+<ul>
+  <li>(id)Foo {
+  id Foo = @”Foo”;
+  return Foo;</li>
+</ul>
+
+<p>}
+@end</p>
+
+<p>```</p>
+
+<p>Within the context of the Objective-C runtime, a program is able to differentiate between a class, a protocol, a category, an instance variable, an instance method, and a class method all having the same name.</p>
+
+<p>That a variable can reappropriate the name of an existing method is a consequence of the C type system (which similarly allows for a variable to shadow the name of its containing function)</p>
+
+<h1 id="prefixes">Prefixes</h1>
+
+<p>All classes in an Objective-C application must be globally unique. Since many different frameworks are likely have some conceptual overlap—and therefore an overlap in names (users, views, requests / responses, etc.)—convention dictates that class names use 2 or 3 letter prefix.</p>
+
+<h1 id="class-prefixes">Class Prefixes</h1>
+
+<p>Apple recommends that 2-letter prefixes be reserved for first-party libraries and frameworks, while third-party developers (that’s us) opt for 3 letters or more.</p>
+
+<p>A veteran Mac or iOS developer will have likely memorized most if not all of the following abbreviated identifiers:</p>
+
+<h3 id="prefix-frameworks">Prefix	 Frameworks</h3>
+<p>===
+AB	 AddressBook / AddressBookUI <br />
+AC	 Accounts <br />
+AD	 iAd<br />
+AL	 AssetsLibrary <br />
+AU	 AudioUnit <br />
+AV	 AVFoundation <br />
+CA	 CoreAnimation <br />
+CB	 CoreBluetooth <br />
+CF	 CoreFoundation / CFNetwork <br />
+CG	 CoreGraphics / QuartzCore / ImageIO <br />
+CI	 CoreImage <br />
+CL	 CoreLocation <br />
+CM	 CoreMedia / CoreMotion <br />
+CV	 CoreVideo <br />
+EA	 ExternalAccessory <br />
+EK	 EventKit / EventKitUI <br />
+GC	 GameController <br />
+GLK*	 GLKit <br />
+JS	 JavaScriptCore <br />
+MA	 MediaAccessibility <br />
+MC	 MultipeerConnectivity <br />
+MF	 MessageUI* <br />
+MIDI*	 CoreMIDI  <br />
+MK	 MapKit <br />
+MP	 MediaPlayer <br />
+NK	 NewsstandKit <br />
+NS	 Foundation, AppKit, CoreData<br />
+PK	 PassKit <br />
+QL	 QuickLook <br />
+SC	 SystemConfiguration <br />
+Sec*	 Security* <br />
+SK	 StoreKit / SpriteKit <br />
+SL	 Social <br />
+SS	 Safari Services <br />
+TW	 Twitter <br />
+UI	 UIKit <br />
+UT	 MobileCoreServices <br />
+3rd-Party Class Prefixes   </p>
+
+<p>Until recently, with the advent of <a href="">CocoaPods</a> and a surge of new iOS developers, the distribution of open source, 3rd-party code had been largely a non-issue for Apple and the rest of the Objective-C community. Apple’s naming guidelines came about recently enough that the advice to adopt 3-letter prefixes is only just becoming accepted practice.</p>
+
+<p>Because of this, many established libraries still use 2-letter prefixes. Consider some of these <a href="">most-starred Objective-C repositories on GitHub</a>.</p>
+
+<h3 id="prefix-frameworks-1">Prefix	 Frameworks</h3>
+<p>===
+AF	AFNetworking (“Alamofire”) <br />
+RK	RestKit <br />
+GPU	GPUImage<br />
+SD	SDWebImage <br />
+MB	MBProgressHUD <br />
+FB	Facebook SDK <br />
+FM	FMDB (“Flying Meat”) <br />
+JK	JSONKit <br />
+FUI	FlatUI<br />
+NI	Nimbus <br />
+RAC	 Reactive Cocoa  </p>
+
+<p>Seeing as how <a href="">we’re already seeing prefix overlap among 3rd-party libraries</a>, make sure that you follow a 3+-letter convention in your own code.</p>
+
+<p>For especially future-focused library authors, consider using @compatibility_alias to provide a seamless migration path for existing users in your next major upgrade.</p>
+
+<h1 id="method-prefixes">Method Prefixes</h1>
+
+<p>It’s not just classes that are prone to naming collisions: selectors suffer from this too—in ways that are even more problematic than classes.</p>
+
+<p>Consider the category:</p>
+
+<p>```objc</p>
+
+<p>@interface NSString (PigLatin)
+- (NSString *)pigLatinString;
+@end</p>
+
+<p>```</p>
+
+<p>If -pigLatinString were implemented by another category (or added to the NSString class in a future version of iOS or Mac OS X), any calls to that method would result in undefined behavior, since no guarantee is made as to the order in which methods are defined by the runtime.</p>
+
+<p>This can be guarded against by prefixing the method name, just like the class name (prefixing the category name isn’t a bad idea, either):</p>
+
+<p>```objc</p>
+
+<p>@interface NSString (XXXPigLatin)
+- (NSString *)xxx_pigLatinString;
+@end</p>
+
+<p>```</p>
+
+<p>Apple’s recommendation that <a href="">all category methods use prefixes</a> is even less widely known or accepted than its policy on class prefixing.</p>
+
+<p>There are many outspoken developers who will passionately argue one side or another. However, weighing the risk of collision against its likelihood, the cost/benefit analysis is not entirely clear-cut:</p>
+
+<p>The main feature of categories is coating useful functionality with syntactic sugar. Any category method could alternatively be implemented as a function taking an explicit argument in place of the implicit self of a method.</p>
+
+<p>Collisions can be detected at compile time by setting the OBJC_PRINT_REPLACED_METHODS environment variable to YES. In practice, collisions are extremely rare, and when they do occur, they’re usually an indicator of functionality that is needlessly duplicated across dependencies. Although the worst-case scenario is a runtime exception, it’s entirely likely that two methods named the same thing will actually do the same thing, and result in no change in behavior. All of those Swiss Army Knife categories that defined NSArray -firstObject continued to march on once the method was officially added.</p>
+
+<p>Just as with constitutional scholarship, there will be strict and loose interpretations of Apple’s programming guidelines. Those that see it as a living document would point out that… actually, you know what? If you’ve read this far and are still undecided, just prefix your damn category methods. If you choose not to, just be mindful that it could bite you in the ass.</p>
+
+<p>Go ahead and add “category method” to your Tweetbot mute terms. Expiration: 1 Week.</p>
+
+<h1 id="swizzling">Swizzling</h1>
+
+<p>The one case where method prefixing (or suffixing) is absolutely necessary is when doing method replacement, as discussed in last week’s article on <a href="">swizzling</a>.</p>
+
+<p>```objc
+@implementation UIViewController (Swizzling)</p>
+
+<ul>
+  <li>(void)xxx_viewDidLoad {
+[self xxx_viewDidLoad];</li>
+</ul>
+
+<p>}</p>
+
+<p>```</p>
+
+<h1 id="do-we-really-need-namespaces">Do We Really Need Namespaces?</h1>
+
+<p>With all of the recent talk about replacing / reinventing / reimagining Objective-C, it’s almost taken as a given that namespacing would be an obvious feature. But what does that actually get us?</p>
+
+<p>Aesthetics? Aside from IETF members and military personnel, nobody likes the visual aesthetic of CLAs. But would ::, /, or an extra . really make matters better? Do we really want to start calling NSArray “Foundation Array”? (And what would I do with NSHipster.com ?!)</p>
+
+<p>Semantics? Start to look closely at any other language, and how they actually use namespaces, and you’ll realize that namespaces don’t magically solve all matters of ambiguity. If anything, the additional context makes things worse.</p>
+
+<p>Not to create a straw man, but an imagined implementation of Objective-C namespaces probably look a lot like this:</p>
+
+<p>```objc
+@namespace XX
+    @implementation Object</p>
+
+<pre><code>@using F: Foundation;
+
+- (void)foo {
+    F:Array *array = @[@1,@2, @3];
+
+    // ...
+}
+
+@end @end
+</code></pre>
+
+<p>```</p>
+
+<p>What we have currently—warts and all—has the notable advantage of non-ambiguity. There is no mistaking NSString for anything other than what it is, either by the compiler or when we talk about it as developers. There are no special contextual considerations to consider when reading through code to understand what actors are at play. And best of all: class names are exceedingly easy to search for.</p>
+
+<p>Either way, if you’re interested in this subject, I’d encourage you to take a look at this namespace feature proposal by Kyle Sluder. It’s a fascinating read.</p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="http://localhost:4000/tags/#iOS" title="Pages tagged iOS" class="tag">iOS</a></span>
+        <span><a href="http://localhost:4000/ios/Namespacing/" rel="bookmark" title="Object-C的命名空间">Object-C的命名空间</a> was published on <span class="entry-date date published updated"><time datetime="2014-04-05T00:00:00+08:00">April 05, 2014</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="http://localhost:4000/about/" title="About Sheldon">Sheldon</a></span></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    
+    
+    <div class="read-more">
+      
+        <div class="read-more-header">
+          <a href="http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/" class="read-more-btn">Read More</a>
+        </div><!-- /.read-more-header -->
+        <div class="read-more-content">
+          <h3><a href="http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/" title="我的时间观---活在当下">我的时间观---活在当下</a></h3>
+          <p>经常有这样的困惑，觉得每天的时间都不够用，对未来做了很多计划，但最终总是证明“计划赶不上变化”，所以那些计划就这样被积压，或者被遗弃，感觉时间真是吝啬。但当自己拥有足够的时间时，却拖延症作祟，什么都不想动，只想坐在那里，什么都不想，让自己放空，但这时内心却是无比挣扎，很想打...&hellip; <a href="http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/">Continue reading</a></p>
+        </div><!-- /.read-more-content -->
+      
+      <div class="read-more-list">
+        
+          <div class="list-item">
+            <h4><a href="http://localhost:4000/ios/objc_is_not_what_you_think_it_is/" title="Objective-C 不是你想的那样">Objective-C 不是你想的那样</a></h4>
+            <span>Published on March 13, 2014</span>
+          </div><!-- /.list-item -->
+        
+          <div class="list-item">
+            <h4><a href="http://localhost:4000/%E5%BC%80%E5%8F%91/experience_of_develop/" title="我的开发经验漫谈">我的开发经验漫谈</a></h4>
+            <span>Published on March 06, 2014</span>
+          </div><!-- /.list-item -->
+        
+      </div><!-- /.read-more-list -->
+      
+    </div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2014 Sheldon. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>.</span>
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', '47868064']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+	        
+
+</body>
+</html>

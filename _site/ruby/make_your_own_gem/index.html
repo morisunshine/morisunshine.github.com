@@ -1,0 +1,546 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>制作自己的Gem &#8211; Morisunshine's Blog</title>
+<meta name="description" content="">
+<meta name="keywords" content="ruby, 技术">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://localhost:4000/images/">
+<meta name="twitter:title" content="制作自己的Gem">
+<meta name="twitter:description" content="">
+<meta name="twitter:creator" content="@morisunshine">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="制作自己的Gem">
+<meta property="og:description" content="">
+<meta property="og:url" content="http://localhost:4000/ruby/make_your_own_gem/">
+<meta property="og:site_name" content="Morisunshine's Blog">
+
+
+
+
+
+<link rel="canonical" href="http://localhost:4000/ruby/make_your_own_gem/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.min.css">
+<!-- Webfonts -->
+<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="http://localhost:4000">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="http://localhost:4000/images/avatar.png" alt="Sheldon photo" class="author-photo">
+					<h4>Sheldon</h4>
+					<p>1991-12-10</p>
+				</li>
+				<li><a href="http://localhost:4000/about/">Learn More</a></li>
+				<li>
+					<a href="mailto:sheldon.zen@gmail.com"><i class="icon-envelope"></i> Email</a>
+				</li>
+				<li>
+					<a href="http://twitter.com/morisunshine"><i class="icon-twitter"></i> Twitter</a>
+				</li>
+				
+				
+				<li>
+					<a href="http://linkedin.com/in/morisunshine"><i class="icon-linkedin"></i> LinkedIn</a>
+				</li>
+				<li>
+					<a href="http://github.com/morisunshine"><i class="icon-github"></i> GitHub</a>
+				</li>
+				<li>
+					<a href="http://stackoverflow.com/users/2194236/morisunshine"><i class="icon-stackexchange"></i> Stackexchange</a>
+				</li>
+				<li>
+					<a href="http://instagram.com/morisunshine"><i class="icon-instagram"></i> Instagram</a>
+				</li>
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="http://localhost:4000/posts/">All Posts</a></li>
+				<li><a href="http://localhost:4000/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		<li><a href="http://localhost:4000"></a></li><li><a href=""></a></li>
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="http://localhost:4000/ruby/make_your_own_gem/" rel="bookmark" title="制作自己的Gem">制作自己的Gem</a></h1>
+        
+        <h2>February 19, 2014</h2>
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <p> <a href="#introduce"><strong>什么是Gem？</strong></a>     <br />
+ <a href="#first_gem"><strong>第一个Gem</strong></a><br />
+ <a href="#include_more_files"><strong>包含更多文件</strong></a><br />
+ <a href="#adding_an_executable"><strong>添加可执行文件</strong></a><br />
+ <a href="#writing_tests"><strong>测试</strong></a><br />
+ <a href="#documenting_your_code"><strong>文档</strong></a>  </p>
+
+<p><a id="introduce" name="introduce"> </a>
+##什么是Gem?</p>
+
+<p>RubyGems是一个方便而强大的Ruby程序包管理器，Ruby的第三方插件是用gem方式来管理，非常容易发布和共享，一个简单的命令就可以安装上第三方的扩展库。特点：能远程安装包，包之间依赖关系的管理，简单可靠的卸载，查询机制，能查询本地和远程服务器的包信息，能保持一个包的不同版本，基于Web的查看接口，能查看你安装的gem的信息。</p>
+
+<hr />
+
+<p><a id="first_gem" name="first_gem"> </a>
+##第一个Gem</p>
+
+<p>我们要创建一个名叫<code>moondemo</code>的gem，首先，就要创建一个名字为<code>moondemo_yourname</code>的目录，这个是为了后面的发布，如果你想发布的话，就要检查一下你的gem名字是否已经被人使用了，如果已经被人使用，那就要换个名字了。  <br />
+然后这个目录里的基本文件结构应该是这样的。 </p>
+
+<p>```ruby
+➜  tree<br />
+.<br />
+├── moondemo.gemspec  <br />
+├── lib<br />
+│   └── moondemo.rb  </p>
+
+<p>```</p>
+
+<p>gem中的代码被放在<code>lib</code>目录中，这里有个约定就是<code>lib</code>中必须有个和gem同名的ruby文件，这样当<code>require 'moondemo'</code>运行的时候，这个gem就会被加载，这个文件就是负责配置你的gem的代码和API。</p>
+
+<p>```ruby
+➜  cat lib/moondemo.rb
+class moondemo
+  def self.hi
+    puts “Hello world!”
+  end
+end</p>
+
+<p>```</p>
+
+<p>而<code>.gemspec</code>文件是定义了这个gem的信息，比如是这个gem的功能，作者等，并且当这个gem发布的时候，会将这些信息显示到这个gem的主页上(就像<a href="http://rubygems.org/gems/jekyll">jekyll</a>)。</p>
+
+<p>```ruby
+➜  cat moondemo.gemspec
+Gem::Specification.new do |s|
+  s.name        = ‘moondemo’
+  s.version     = ‘0.0.0’
+  s.date        = ‘2014-02-19’
+  s.summary     = “moondemo!”
+  s.description = “A simple hello world gem”
+  s.authors     = [“sheldon huang”]
+  s.email       = ‘allenwenzhou@gmail.com’
+  s.files       = [“lib/moondemo.rb”]
+  s.homepage    =
+    ‘http://rubygems.org/gems/moondemo’
+  s.license       = ‘MIT’
+end</p>
+
+<p>```</p>
+
+<p>这里有很多选项，一看名字就知道他们是要代表什么内容的，如果你还想知道更多就看一些这个<a href="http://guides.rubygems.org/specification-reference/">文档</a></p>
+
+<p>当我们创建完成了一个.gemspec，就可以编译出一个gem了，是不是有点小激动啊。但如果想要测试它就必须要在本地安装编译好的gem。</p>
+
+<p>```ruby
+➜ gem build moondemo.gemspec
+  Successfully built RubyGem
+  Name: moondemo
+  Version: 0.0.1
+  File: moondemo-0.0.1.gem</p>
+
+<p>➜ gem install ./moondemo-0.0.1.gem
+Successfully installed moondemo-0.0.1
+Parsing documentation for moondemo-0.0.1
+Installing ri documentation for moondemo-0.0.1
+1 gem installed</p>
+
+<p>```</p>
+
+<p>上面这些步骤，只能是在本地已经装好了我们自己的gem，但还没有使用它，
+我们需要<code>require</code>这个gem然后根据自己定义的方法来使用它。</p>
+
+<p>```ruby</p>
+
+<p>➜ irb
+2.0.0-p353 :001 &gt; require ‘moondemo’
+ =&gt; true
+2.0.0-p353 :002 &gt; MoonDemo.hi
+Hello world!
+ =&gt; nil
+```
+现在就可以将你的gem发布到Ruby社区上了，当在发布之前需要将你的帐号安装在电脑上，如果你在RubyGems.org上注册了帐号，那就只需要输入一个命令,再输入自己的密码就可以了</p>
+
+<p>```ruby
+➜ curl -u 你的帐号名 https://rubygems.org/api/v1/api_key.yaml &gt; ~/.gem/credentials; chmod 0600 ~/.gem/credentials</p>
+
+<p>Enter host password for user ‘你的帐号名’:</p>
+
+<p>```</p>
+
+<p>一旦你的用户名已经被安装了，就可以直接发布你的gem了。</p>
+
+<p>```ruby
+➜ gem push moondemo-0.0.1.gem
+Pushing gem to https://rubygems.org…
+Successfully registered gem: moondemo (0.0.1)</p>
+
+<p>```
+很快的，你的gem就可以被任何人使用了</p>
+
+<p>```ruby
+➜ gem install moondemo
+Successfully installed moondemo-0.0.1
+Parsing documentation for moondemo-0.0.1
+1 gem installed</p>
+
+<p>```
+用Ruby和RubyGems来分享代码是不是很简单。</p>
+
+<hr />
+
+<p><a id="include_more_files" name="include_more_files"> </a>
+##包含更多文件</p>
+
+<p>我们以后代码当然不会这么简单，如果代码变得非常多了之后，该怎么办呢，当然是要是要将代码分到不同的文件中了。<br />
+比如我们想在刚才的gem中添加根据不同语言来输出不同语言的”Hello world”。<br />
+我们就可以添加一个<code>Translator</code>文件，刚才提到过，gem的根文件是负责加载代码的，所以其他的功能的文件就需要放在<code>lib</code>中和gem同名的目录中，我们可以这样分:</p>
+
+<p>```bash
+➜ tree
+.
+├── lib
+│   ├── moondemo
+│   │   └── translator.rb
+│   └── moondemo.rb
+├── moondemo-0.0.1.gem</p>
+
+<p>```</p>
+
+<p><code>Translator</code>中的内容是:</p>
+
+<p>```ruby
+class Translator
+  def initialize(language)
+    @language = language
+  end</p>
+
+<p>def hi
+    case @language
+      when “chinese”
+        “你好，世界!”
+      else
+        “Hello world!”
+      end
+  end
+end</p>
+
+<p>```</p>
+
+<p>所以接下来，<code>moondemo.rb</code>中需要加载<code>Translator</code>:</p>
+
+<p>```ruby
+class MoonDemo
+  def self.hi(language = “english”)
+    translator = Translator.new(language)
+    translator.hi
+  end
+end</p>
+
+<p>```</p>
+
+<p><em>注意:每次新建了一个目录或者文件，都不要忘记加到.gemspec文件中，就像这样</em></p>
+
+<p>```ruby
+ s.authors     = [“Sheldon”]
+ s.email       = ‘allenwenzhou@gmial.com’
+ s.files       = [“lib/moondemo.rb”,”lib/moondemo/translator.rb”]</p>
+
+<p>```
+<em>如果没有上面的修改的话，这个新建的目录是不会被加载到已安装的gem里的</em></p>
+
+<p>让我们再运行一篇</p>
+
+<p>```ruby
+➜ irb -Ilib -rmoondemo
+2.0.0-p353 :001 &gt; MoonDemo.hi(“english”)
+ =&gt; “Hello world!”
+2.0.0-p353 :002 &gt; MoonDemo.hi(“chinese”)
+ =&gt; “你好，世界!”</p>
+
+<p>```</p>
+
+<p>这里我们使用了一个新的命令行<code>-Ilib</code>,通常RubyGems会为你包含了<code>lib</code>路径，所以很多时候，我们不需要去考虑配置它们的加载路径，但是，如果你把代码运行在RubyGems的项目之外，你就要自己去配置这些了。</p>
+
+<p>如果你添加了一些新的文件到你的gem中，那么你一定要记住在发布之前将这些文件添加到你的<code>.gemspec</code>的<code>files</code>数组中。这样很麻烦是么，所以很多人就选择用<a href="http://docs.seattlerb.org/hoe/">Hoe</a>,<a href="https://github.com/technicalpickles/jeweler">Jeweler</a>,<a href="http://rake.rubyforge.org/classes/Rake/GemPackageTask.html">Rake</a>,<a href="http://railscasts.com/episodes/245-new-gem-with-bundler">Bundler</a>或者用<a href="https://github.com/wycats/newgem-template/blob/master/newgem.gemspec">动态的gemspec</a>来实现自动化。</p>
+
+<p>添加更多的目录也都是按照上面一样的步骤，我们要将我们的文件结构分布合理，这样对于我们以后的维护和未来开发人员来说就不会是一件头疼的事儿了。</p>
+
+<p><a id="adding_an_executable" name="adding_an_executable"> </a>
+##添加可执行文件</p>
+
+<p>gem除了可以提供Ruby代码库外，还可以在你的可执行文件路径里提供很多可执行可执行文件文件。可能最有名的就是<code>rake</code>，
+添加一个可执行可执行可执行文件文件其实很简单，你只需要将你的可执行文件放在你的gem的<code>bin</code>目录下，然后在将这个文件添加到<code>.gemspec</code>文件中<code>executables</code>的列表里就可以了，让我们试一下:</p>
+
+<p>```bash
+➜  mkdir bin
+➜  touch bin/moondemo
+➜  chmod a+x bin/moondemo</p>
+
+<p>```
+这个可执行文件只需要在开头用<a href="http://www.catb.org/jargon/html/S/shebang.html">shebang</a>来表明这是用程序来运行的，下面就是这个可执行文件的内容:</p>
+
+<p>```ruby
+#!/usr/bin/env ruby</p>
+
+<p>require ‘moondemo’
+puts MoonDemo.hi(ARGV[0])</p>
+
+<p>```
+这个可执行文件的内容很简单，它只是加载了moondemo这个gem，然后在命令行中通过输入一个参数来判断是用哪个国家的语言来说”hello, world”。下面就是运行的例子:</p>
+
+<p>```bash
+➜  ruby -Ilib ./bin/moondemo
+Hello world!
+➜  ruby -Ilib ./bin/moondemo chinese
+你好，世界!</p>
+
+<p>```</p>
+
+<p>最后，我们要将这个可执行文件添加到<code>.gemspec</code></p>
+
+<p>```ruby
+s.executables « ‘moondemo’</p>
+
+<p>```</p>
+
+<p>更新你的gem，上传到官网上，这样你就可以在命令行中有自己的命令了，是不是很帅啊。这里要提醒一下，上传新的gem时，要记得修改<code>.gemspec</code>中的版本号。详情看<a href="http://guides.rubygems.org/patterns/#semantic-versioning">这儿</a></p>
+
+<p>在看一下用我们自己定义的命令行吧:</p>
+
+<p>```bash</p>
+
+<p>➜  ~  moondemo
+Hello world!
+➜  ~  moondemo chinese
+你好，世界!</p>
+
+<p>```</p>
+
+<p>世界在向我们招手呢。哈哈哈~~~</p>
+
+<p><a id="writing_tests" name="writing_tests"> </a>
+#测试</p>
+
+<p>测试我们的gem是非常重要的，它不仅保证了这个gem是正常的，也保证了别人能知道你的gem是正常的。当我们评价一个gem的时候，很多Ruby开发者会倾向于通过查看测试用例来做为主要依据。</p>
+
+<p>Gems是支持将测试文件添加到程序包中的，所以当gem被下载了之后，我们可以直接运行测试用例。这里有个帮助我们如何在不同框架和解释器下写测试用例的社区叫<a href="http://test.rubygems.org/">GemTesters</a>
+总而言之:去测试我们的Gem吧！啥都别想了！</p>
+
+<p><code>Test::Unit</code>是Ruby的自带测试框架。这里有很多<a href="https://github.com/seattlerb/minitest/blob/master/README.txt">教程</a>，当然还是有很多其他的测试框架，<a href="http://rspec.info/">RSpec</a>就是比较有名的一个，是不是迫不及待，让我们测试吧！</p>
+
+<p>我们需要在原来的基础上再添加一些文件，一个名为<code>Rakefile</code>的文件和一个名为<code>test</code>的目录:</p>
+
+<p>```bash</p>
+
+<p>.
+├── Rakefile
+├── bin
+│   └── moondemo
+├── lib
+│   ├── moondemo
+│   │   └── translator.rb
+│   └── moondemo.rb
+├── moondemo-0.0.1.gem
+├── moondemo.gemspec
+├── npm-debug.log
+└── test
+    └── test_moondemo.rb</p>
+
+<p>```</p>
+
+<p><code>Rakefile</code>文件是为了实现自动化的测试:</p>
+
+<p>```ruby</p>
+
+<p>require ‘rake/testtask’</p>
+
+<p>Rake::TestTask.new do |t|
+        t.libs « ‘test’
+end</p>
+
+<p>desc “Run tests”
+task :default =&gt; :test
+~</p>
+
+<p>```</p>
+
+<p>下面就是一个简单的测试用例了:</p>
+
+<p>```ruby
+require ‘test/unit’
+require ‘moondemo’</p>
+
+<p>class MoonDemoTest &lt; Test::Unit::TestCase
+  def test_english_hello
+    assert_equal “Hello world!”,
+      MoonDemo.hi(“english”)
+  end</p>
+
+<p>def test_any_hello
+    assert_equal “Hello world!”,
+      MoonDemo.hi(“ruby”)
+  end</p>
+
+<p>def test_spanish_hello
+    assert_equal “你好，世界!”,
+      MoonDemo.hi(“chinese”)
+  end
+end</p>
+
+<p>```</p>
+
+<p>最后，让我们运行这个测试:</p>
+
+<p>```bash
+➜  rake test
+Run options:</p>
+
+<h1 id="running-tests">Running tests:</h1>
+
+<p>Finished tests in 0.006151s, 487.7256 tests/s, 487.7256 assertions/s.
+3 tests, 3 assertions, 0 failures, 0 errors, 0 skips</p>
+
+<p>```</p>
+
+<p>很好，全部都通过了！</p>
+
+<p><a id="documenting_your_code" name="documenting_your_code"> </a>
+#文档</p>
+
+<p>文档和测试是一样重要的，大部分gem都是用RDoc来生成文档的，这里有很多<a href="http://docs.seattlerb.org/rdoc/RDoc/Markup.html">教程</a>.
+很简单，先切换到gem的根目录下，再命令行中输入<code>rdoc</code>，你就会发现多出了一个名为<code>doc</code>的目录，里面就是我们的文档了，当然你可以自己再进行一些调整。
+除了RDoc呢，我们还有另外的选择<a href="http://yardoc.org/">YARD</a>，当我们发布了gem的时候呢，<a href="http://rubydoc.info/">RubyDoc.info</a>会根据你的gem自动生成YARDocs，并且它是可以向下兼容RDoc。</p>
+
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="http://localhost:4000/tags/#ruby" title="Pages tagged ruby" class="tag">ruby</a><a href="http://localhost:4000/tags/#技术" title="Pages tagged 技术" class="tag">技术</a></span>
+        <span><a href="http://localhost:4000/ruby/make_your_own_gem/" rel="bookmark" title="制作自己的Gem">制作自己的Gem</a> was published on <span class="entry-date date published updated"><time datetime="2014-02-19T00:00:00+08:00">February 19, 2014</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="http://localhost:4000/about/" title="About Sheldon">Sheldon</a></span></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    
+    
+    <div class="read-more">
+      
+        <div class="read-more-header">
+          <a href="http://localhost:4000/%E6%8A%98%E8%85%BE/my_first_blog/" class="read-more-btn">Read More</a>
+        </div><!-- /.read-more-header -->
+        <div class="read-more-content">
+          <h3><a href="http://localhost:4000/ios/Namespacing/" title="Object-C的命名空间">Object-C的命名空间</a></h3>
+          <p>Namespacing===Written by Mattt Thompson on Feb 24th, 2014Why the hell is everything NS-whatever?You'll hear that within the first minute ...&hellip; <a href="http://localhost:4000/ios/Namespacing/">Continue reading</a></p>
+        </div><!-- /.read-more-content -->
+      
+      <div class="read-more-list">
+        
+          <div class="list-item">
+            <h4><a href="http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/" title="我的时间观---活在当下">我的时间观---活在当下</a></h4>
+            <span>Published on March 24, 2014</span>
+          </div><!-- /.list-item -->
+        
+          <div class="list-item">
+            <h4><a href="http://localhost:4000/ios/objc_is_not_what_you_think_it_is/" title="Objective-C 不是你想的那样">Objective-C 不是你想的那样</a></h4>
+            <span>Published on March 13, 2014</span>
+          </div><!-- /.list-item -->
+        
+      </div><!-- /.read-more-list -->
+      
+    </div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2014 Sheldon. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>.</span>
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', '47868064']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+	        
+
+</body>
+</html>

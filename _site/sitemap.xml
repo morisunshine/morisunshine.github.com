@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+        <loc>http://localhost:4000</loc>
+    </url>
+    
+    
+    <url>
+        <loc>http://localhost:4000/404.html</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/about/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/feed.xml</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/index.html</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/posts/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/sitemap.xml</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/tags/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/page2/index.html</loc>
+    </url>
+    
+
+    
+    <url>
+        <loc>http://localhost:4000/ios/Namespacing/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/ios/objc_is_not_what_you_think_it_is/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/%E5%BC%80%E5%8F%91/experience_of_develop/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/ios/UICollectionView_UIKit_Dynamics/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/ruby/make_your_own_gem/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/%E6%8A%98%E8%85%BE/my_first_blog/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/ios/iOS_Decorator/</loc>
+    </url>
+    
+    <url>
+        <loc>http://localhost:4000/%E7%94%9F%E6%B4%BB/travel-to-qinghai/</loc>
+    </url>
+    
+</urlset>
