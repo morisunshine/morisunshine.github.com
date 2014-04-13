@@ -3,6 +3,7 @@ layout: post
 title: "UICollectionView+UIKit Dynamics"  
 category: iOS  
 tags: [iOS, 技术]  
+comments: true 
 
 ---
 

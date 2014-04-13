@@ -4,6 +4,7 @@ title: "第一篇博客"
 description: ""  
 category: 折腾  
 tags: [博客]
+comments: true 
 
 ---
 

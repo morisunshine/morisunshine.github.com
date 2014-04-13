@@ -3,7 +3,8 @@ layout: post
 title: "我的开发经验漫谈"  
 description: ""  
 category: 开发  
-tags: [经验]  
+tags: [经验]
+comments: true   
 
 ---
 

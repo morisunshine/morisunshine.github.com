@@ -4,6 +4,7 @@ title: "iOS设计模式学习---装饰模式"
 description: ""  
 category: iOS  
 tags: [iOS]  
+comments: true 
 
 ---
 

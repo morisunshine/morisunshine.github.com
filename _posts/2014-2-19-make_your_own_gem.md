@@ -3,6 +3,7 @@ layout: post
 title: "制作自己的Gem"  
 category: Ruby  
 tags: [ruby,技术]
+comments: true 
 
 ---
 

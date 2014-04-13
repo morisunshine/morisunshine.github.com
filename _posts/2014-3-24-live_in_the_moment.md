@@ -3,6 +3,7 @@ layout: post
 title: "我的时间观---活在当下"  
 category: 生活  
 tags: [感悟]  
+comments: true 
 
 ---
 

@@ -4,6 +4,7 @@ title: "站在原地, 心存远方"
 description: "青海兰州之旅"  
 category: 生活  
 tags: [旅行]
+comments: true 
 
 ---
 
