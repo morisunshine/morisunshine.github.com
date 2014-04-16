@@ -141,6 +141,38 @@
   
 <article class="hentry">
   <header>
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-04-16T00:00:00+08:00"><a href="http://morisunshine.com/ios/Property_of_Objective_C/">April 16, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/ios/Property_of_Objective_C/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="http://morisunshine.com/ios/Property_of_Objective_C/" rel="bookmark" title="@property中attribute的整理" itemprop="url">@property中attribute的整理</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    <p><code>assign</code>:指定setter方法用简单的赋值，这是默认操作。你可以对标量类型（如int）使用这个属性。你可以想象一个float，它不是一个对象，所以它不能retain、copy。可以简单赋值，不更改索引计数(Reference Counting)。使用assign: 对基础数据类型 （NSInteger）和C数据类型（int, float, double, char,等）</p>
+
+<p><code>retain</code>:指定retain应该在后面的对象上调用，前一个值发送一条release消息。你可以想象一个NSString实例，它是一个对象，而且你可能想要retain它。
+ 释放旧的对象，将旧对象的值赋予输入对象，再提高输入对象的索引计数为1 ，使用retain： 对其他NSObject和其子类 ，retain，是说明该属性在赋值的时候，先release之前的值，然后再赋新值给属性，引用再加1。</p>
+
+<p><code>copy</code>:指定应该使用对象的副本（深度复制），前一个值发送一条release消息。基本上像retain，但是没有增加引用计数，是分配一块新的内存来放置它。copy是创建一个新对象，retain是创建一个指针，引用对象计数加1。copy：建立一个索引计数为1的对象，然后释放旧对象，copy是创建一个新对象，retain是创建一个指针，引用对象计数加1。</p>
+
+<p><code>readonly</code>:将只生成getter方法而不生成setter方法（getter方法没有get前缀)。</p>
+
+<p><code>readwrite</code>：默认属性，将生成不带额外参数的getter和setter方法（setter方法只有一个参数）。</p>
+
+<p><code>atomic</code>：对于对象的默认属性，就是setter/getter生成的方法是一个原子操作。如果有多个线程同时调用setter的话，不会出现某一个线程执行setter全部语句之前，另一个线程开始执行setter的情况，相关于方法头尾加了锁一样。</p>
+
+<p><code>nonatomic</code>：不保证setter/getter的原子性，多线程情况下数据可能会有问题。nonatomic，非原子性访问，不加同步，多线程并发访问会提高性能。先释放原先变量，再将新变量retain然后赋值；</p>
+
+<p><code>strong</code>:ARC中默认的方式是Strong，所以一般情况下，你是不需要写Strong的，strong关键字与retain关似，用了它，引用计数自动＋1。</p>
+
+<p><code>weak</code>:weak所指向的指针顾名思义，只有很多的引用关系，当指向的内存地址被释放掉，weak指针也就会被释放掉了，这些指针都将被赋值为nil，这样的好处能有效的防止野指针</p>
+
+<p><code>unsafe_unretained</code>:unsafe_unretained与weak有点类似，但是当所指向的指针被释放后，这些指针不会被赋值为nil，而成为野指针。</p>
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
     <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-03-24T00:00:00+08:00"><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/">March 24, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
     
       <h1 class="entry-title"><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/" rel="bookmark" title="我的时间观---活在当下" itemprop="url">我的时间观---活在当下</a></h1>
@@ -856,330 +888,6 @@
 <p>欢迎在github上提出pull requests</p>
 
 <p>这个方法是有些限制的。我将cell数量的上限设为10，但是即使这样，在像iPad2这样比较久的设备中，动画就会运行地很慢。然而，这个例子充分地展示你可以自己实现有意思的动力学模拟的方法–这并不意味着这是一个可以解决任何问题的万金油。你的模拟中包括性能的各个方面，都是取决于你自己。</p>
-
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  <header>
-    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-02-19T00:00:00+08:00"><a href="http://morisunshine.com/ruby/make_your_own_gem/">February 19, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/ruby/make_your_own_gem/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
-    
-      <h1 class="entry-title"><a href="http://morisunshine.com/ruby/make_your_own_gem/" rel="bookmark" title="制作自己的Gem" itemprop="url">制作自己的Gem</a></h1>
-    
-  </header>
-  <div class="entry-content">
-    <p> <a href="#introduce"><strong>什么是Gem？</strong></a>     <br />
- <a href="#first_gem"><strong>第一个Gem</strong></a><br />
- <a href="#include_more_files"><strong>包含更多文件</strong></a><br />
- <a href="#adding_an_executable"><strong>添加可执行文件</strong></a><br />
- <a href="#writing_tests"><strong>测试</strong></a><br />
- <a href="#documenting_your_code"><strong>文档</strong></a>  </p>
-
-<p><a id="introduce" name="introduce"> </a></p>
-
-<h2 id="gem">什么是Gem?</h2>
-
-<p>RubyGems是一个方便而强大的Ruby程序包管理器，Ruby的第三方插件是用gem方式来管理，非常容易发布和共享，一个简单的命令就可以安装上第三方的扩展库。特点：能远程安装包，包之间依赖关系的管理，简单可靠的卸载，查询机制，能查询本地和远程服务器的包信息，能保持一个包的不同版本，基于Web的查看接口，能查看你安装的gem的信息。</p>
-
-<hr />
-
-<p><a id="first_gem" name="first_gem"> </a></p>
-
-<h2 id="gem-1">第一个Gem</h2>
-
-<p>我们要创建一个名叫<code>moondemo</code>的gem，首先，就要创建一个名字为<code>moondemo_yourname</code>的目录，这个是为了后面的发布，如果你想发布的话，就要检查一下你的gem名字是否已经被人使用了，如果已经被人使用，那就要换个名字了。  <br />
-然后这个目录里的基本文件结构应该是这样的。 </p>
-
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span>  <span class="n">tree</span>  
-<span class="o">.</span>  
-<span class="err">├──</span> <span class="n">moondemo</span><span class="o">.</span><span class="n">gemspec</span>    
-<span class="err">├──</span> <span class="n">lib</span>  
-<span class="err">│  </span> <span class="err">└──</span> <span class="n">moondemo</span><span class="o">.</span><span class="n">rb</span>  
-</code></pre></div>
-
-<p>gem中的代码被放在<code>lib</code>目录中，这里有个约定就是<code>lib</code>中必须有个和gem同名的ruby文件，这样当<code>require 'moondemo'</code>运行的时候，这个gem就会被加载，这个文件就是负责配置你的gem的代码和API。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span>  <span class="n">cat</span> <span class="n">lib</span><span class="o">/</span><span class="n">moondemo</span><span class="o">.</span><span class="n">rb</span>
-<span class="k">class</span> <span class="n">moondemo</span>
-  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">hi</span>
-    <span class="nb">puts</span> <span class="s2">&quot;Hello world!&quot;</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<p>而<code>.gemspec</code>文件是定义了这个gem的信息，比如是这个gem的功能，作者等，并且当这个gem发布的时候，会将这些信息显示到这个gem的主页上(就像<a href="http://rubygems.org/gems/jekyll">jekyll</a>)。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span>  <span class="n">cat</span> <span class="n">moondemo</span><span class="o">.</span><span class="n">gemspec</span>
-<span class="no">Gem</span><span class="o">::</span><span class="no">Specification</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">name</span>        <span class="o">=</span> <span class="s1">&#39;moondemo&#39;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">version</span>     <span class="o">=</span> <span class="s1">&#39;0.0.0&#39;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">date</span>        <span class="o">=</span> <span class="s1">&#39;2014-02-19&#39;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">summary</span>     <span class="o">=</span> <span class="s2">&quot;moondemo!&quot;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;A simple hello world gem&quot;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">authors</span>     <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;sheldon huang&quot;</span><span class="o">]</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">email</span>       <span class="o">=</span> <span class="s1">&#39;allenwenzhou@gmail.com&#39;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">files</span>       <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;lib/moondemo.rb&quot;</span><span class="o">]</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">homepage</span>    <span class="o">=</span>
-    <span class="s1">&#39;http://rubygems.org/gems/moondemo&#39;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">license</span>       <span class="o">=</span> <span class="s1">&#39;MIT&#39;</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<p>这里有很多选项，一看名字就知道他们是要代表什么内容的，如果你还想知道更多就看一些这个<a href="http://guides.rubygems.org/specification-reference/">文档</a></p>
-
-<p>当我们创建完成了一个.gemspec，就可以编译出一个gem了，是不是有点小激动啊。但如果想要测试它就必须要在本地安装编译好的gem。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">gem</span> <span class="n">build</span> <span class="n">moondemo</span><span class="o">.</span><span class="n">gemspec</span>
-  <span class="no">Successfully</span> <span class="n">built</span> <span class="no">RubyGem</span>
-  <span class="ss">Name</span><span class="p">:</span> <span class="n">moondemo</span>
-  <span class="ss">Version</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-  <span class="ss">File</span><span class="p">:</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="n">gem</span>
-  
-<span class="err">➜</span> <span class="n">gem</span> <span class="n">install</span> <span class="o">.</span><span class="n">/moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="n">gem</span>
-<span class="no">Successfully</span> <span class="n">installed</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-<span class="no">Parsing</span> <span class="n">documentation</span> <span class="k">for</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-<span class="no">Installing</span> <span class="n">ri</span> <span class="n">documentation</span> <span class="k">for</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-<span class="mi">1</span> <span class="n">gem</span> <span class="n">installed</span>
-</code></pre></div>
-
-<p>上面这些步骤，只能是在本地已经装好了我们自己的gem，但还没有使用它，
-我们需要<code>require</code>这个gem然后根据自己定义的方法来使用它。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">irb</span>
-<span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="nb">require</span> <span class="s1">&#39;moondemo&#39;</span>
- <span class="o">=&gt;</span> <span class="kp">true</span>
-<span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span>
-<span class="no">Hello</span> <span class="n">world!</span>
- <span class="o">=&gt;</span> <span class="kp">nil</span>
-</code></pre></div>
-
-<p>现在就可以将你的gem发布到Ruby社区上了，当在发布之前需要将你的帐号安装在电脑上，如果你在RubyGems.org上注册了帐号，那就只需要输入一个命令,再输入自己的密码就可以了</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">curl</span> <span class="o">-</span><span class="n">u</span> <span class="err">你的帐号名</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">api_key</span><span class="o">.</span><span class="n">yaml</span> <span class="o">&gt;</span> <span class="o">~</span><span class="sr">/.gem/</span><span class="n">credentials</span><span class="p">;</span> <span class="n">chmod</span> <span class="mo">0600</span> <span class="o">~</span><span class="sr">/.gem/</span><span class="n">credentials</span>
-
-<span class="no">Enter</span> <span class="n">host</span> <span class="n">password</span> <span class="k">for</span> <span class="n">user</span> <span class="s1">&#39;你的帐号名&#39;</span><span class="p">:</span>
-</code></pre></div>
-
-<p>一旦你的用户名已经被安装了，就可以直接发布你的gem了。</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">gem</span> <span class="n">push</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="n">gem</span>
-<span class="no">Pushing</span> <span class="n">gem</span> <span class="n">to</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
-<span class="no">Successfully</span> <span class="n">registered</span> <span class="ss">gem</span><span class="p">:</span> <span class="n">moondemo</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span>
-</code></pre></div>
-
-<p>很快的，你的gem就可以被任何人使用了</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">moondemo</span>
-<span class="no">Successfully</span> <span class="n">installed</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-<span class="no">Parsing</span> <span class="n">documentation</span> <span class="k">for</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-<span class="mi">1</span> <span class="n">gem</span> <span class="n">installed</span>
-</code></pre></div>
-
-<p>用Ruby和RubyGems来分享代码是不是很简单。</p>
-
-<hr />
-
-<p><a id="include_more_files" name="include_more_files"> </a></p>
-
-<h2 id="section">包含更多文件</h2>
-
-<p>我们以后代码当然不会这么简单，如果代码变得非常多了之后，该怎么办呢，当然是要是要将代码分到不同的文件中了。<br />
-比如我们想在刚才的gem中添加根据不同语言来输出不同语言的”Hello world”。<br />
-我们就可以添加一个<code>Translator</code>文件，刚才提到过，gem的根文件是负责加载代码的，所以其他的功能的文件就需要放在<code>lib</code>中和gem同名的目录中，我们可以这样分:</p>
-
-<div class="highlight"><pre><code class="bash">➜ tree
-.
-├── lib
-│   ├── moondemo
-│   │   └── translator.rb
-│   └── moondemo.rb
-├── moondemo-0.0.1.gem
-</code></pre></div>
-
-<p><code>Translator</code>中的内容是:</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Translator</span>
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
-    <span class="vi">@language</span> <span class="o">=</span> <span class="n">language</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">hi</span>
-    <span class="k">case</span> <span class="vi">@language</span>
-      <span class="k">when</span> <span class="s2">&quot;chinese&quot;</span>
-        <span class="s2">&quot;你好，世界!&quot;</span>
-      <span class="k">else</span>
-        <span class="s2">&quot;Hello world!&quot;</span>
-      <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<p>所以接下来，<code>moondemo.rb</code>中需要加载<code>Translator</code>:</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">MoonDemo</span>
-  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">hi</span><span class="p">(</span><span class="n">language</span> <span class="o">=</span> <span class="s2">&quot;english&quot;</span><span class="p">)</span>
-    <span class="n">translator</span> <span class="o">=</span> <span class="no">Translator</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
-    <span class="n">translator</span><span class="o">.</span><span class="n">hi</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<p><em>注意:每次新建了一个目录或者文件，都不要忘记加到.gemspec文件中，就像这样</em></p>
-
-<div class="highlight"><pre><code class="ruby"> <span class="n">s</span><span class="o">.</span><span class="n">authors</span>     <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;Sheldon&quot;</span><span class="o">]</span>
- <span class="n">s</span><span class="o">.</span><span class="n">email</span>       <span class="o">=</span> <span class="s1">&#39;allenwenzhou@gmial.com&#39;</span>
- <span class="n">s</span><span class="o">.</span><span class="n">files</span>       <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;lib/moondemo.rb&quot;</span><span class="p">,</span><span class="s2">&quot;lib/moondemo/translator.rb&quot;</span><span class="o">]</span>
-  
-</code></pre></div>
-
-<p><em>如果没有上面的修改的话，这个新建的目录是不会被加载到已安装的gem里的</em></p>
-
-<p>让我们再运行一篇</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">irb</span> <span class="o">-</span><span class="no">Ilib</span> <span class="o">-</span><span class="n">rmoondemo</span>
-<span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">)</span>
- <span class="o">=&gt;</span> <span class="s2">&quot;Hello world!&quot;</span>
-<span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="s2">&quot;chinese&quot;</span><span class="p">)</span>
- <span class="o">=&gt;</span> <span class="s2">&quot;你好，世界!&quot;</span>
- 
-</code></pre></div>
-
-<p>这里我们使用了一个新的命令行<code>-Ilib</code>,通常RubyGems会为你包含了<code>lib</code>路径，所以很多时候，我们不需要去考虑配置它们的加载路径，但是，如果你把代码运行在RubyGems的项目之外，你就要自己去配置这些了。</p>
-
-<p>如果你添加了一些新的文件到你的gem中，那么你一定要记住在发布之前将这些文件添加到你的<code>.gemspec</code>的<code>files</code>数组中。这样很麻烦是么，所以很多人就选择用<a href="http://docs.seattlerb.org/hoe/">Hoe</a>,<a href="https://github.com/technicalpickles/jeweler">Jeweler</a>,<a href="http://rake.rubyforge.org/classes/Rake/GemPackageTask.html">Rake</a>,<a href="http://railscasts.com/episodes/245-new-gem-with-bundler">Bundler</a>或者用<a href="https://github.com/wycats/newgem-template/blob/master/newgem.gemspec">动态的gemspec</a>来实现自动化。</p>
-
-<p>添加更多的目录也都是按照上面一样的步骤，我们要将我们的文件结构分布合理，这样对于我们以后的维护和未来开发人员来说就不会是一件头疼的事儿了。</p>
-
-<p><a id="adding_an_executable" name="adding_an_executable"> </a></p>
-
-<h2 id="section-1">添加可执行文件</h2>
-
-<p>gem除了可以提供Ruby代码库外，还可以在你的可执行文件路径里提供很多可执行可执行文件文件。可能最有名的就是<code>rake</code>，
-添加一个可执行可执行可执行文件文件其实很简单，你只需要将你的可执行文件放在你的gem的<code>bin</code>目录下，然后在将这个文件添加到<code>.gemspec</code>文件中<code>executables</code>的列表里就可以了，让我们试一下:</p>
-
-<div class="highlight"><pre><code class="bash">➜  mkdir bin
-➜  touch bin/moondemo
-➜  chmod a+x bin/moondemo
-</code></pre></div>
-
-<p>这个可执行文件只需要在开头用<a href="http://www.catb.org/jargon/html/S/shebang.html">shebang</a>来表明这是用程序来运行的，下面就是这个可执行文件的内容:</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
-
-<span class="nb">require</span> <span class="s1">&#39;moondemo&#39;</span>
-<span class="nb">puts</span> <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">)</span>
-</code></pre></div>
-
-<p>这个可执行文件的内容很简单，它只是加载了moondemo这个gem，然后在命令行中通过输入一个参数来判断是用哪个国家的语言来说”hello, world”。下面就是运行的例子:</p>
-
-<div class="highlight"><pre><code class="bash">➜  ruby -Ilib ./bin/moondemo
-Hello world!
-➜  ruby -Ilib ./bin/moondemo chinese
-你好，世界!
-</code></pre></div>
-
-<p>最后，我们要将这个可执行文件添加到<code>.gemspec</code></p>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">s</span><span class="o">.</span><span class="n">executables</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;moondemo&#39;</span>
-</code></pre></div>
-
-<p>更新你的gem，上传到官网上，这样你就可以在命令行中有自己的命令了，是不是很帅啊。这里要提醒一下，上传新的gem时，要记得修改<code>.gemspec</code>中的版本号。详情看<a href="http://guides.rubygems.org/patterns/#semantic-versioning">这儿</a></p>
-
-<p>在看一下用我们自己定义的命令行吧:</p>
-
-<div class="highlight"><pre><code class="bash">➜  ~  moondemo
-Hello world!
-➜  ~  moondemo chinese
-你好，世界!
-</code></pre></div>
-
-<p>世界在向我们招手呢。哈哈哈~~~</p>
-
-<p><a id="writing_tests" name="writing_tests"> </a></p>
-
-<h1 id="section-2">测试</h1>
-
-<p>测试我们的gem是非常重要的，它不仅保证了这个gem是正常的，也保证了别人能知道你的gem是正常的。当我们评价一个gem的时候，很多Ruby开发者会倾向于通过查看测试用例来做为主要依据。</p>
-
-<p>Gems是支持将测试文件添加到程序包中的，所以当gem被下载了之后，我们可以直接运行测试用例。这里有个帮助我们如何在不同框架和解释器下写测试用例的社区叫<a href="http://test.rubygems.org/">GemTesters</a>
-总而言之:去测试我们的Gem吧！啥都别想了！</p>
-
-<p><code>Test::Unit</code>是Ruby的自带测试框架。这里有很多<a href="https://github.com/seattlerb/minitest/blob/master/README.txt">教程</a>，当然还是有很多其他的测试框架，<a href="http://rspec.info/">RSpec</a>就是比较有名的一个，是不是迫不及待，让我们测试吧！</p>
-
-<p>我们需要在原来的基础上再添加一些文件，一个名为<code>Rakefile</code>的文件和一个名为<code>test</code>的目录:</p>
-
-<div class="highlight"><pre><code class="bash">.
-├── Rakefile
-├── bin
-│   └── moondemo
-├── lib
-│   ├── moondemo
-│   │   └── translator.rb
-│   └── moondemo.rb
-├── moondemo-0.0.1.gem
-├── moondemo.gemspec
-├── npm-debug.log
-└── <span class="nb">test</span>
-    └── test_moondemo.rb
-</code></pre></div>
-
-<p><code>Rakefile</code>文件是为了实现自动化的测试:</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;rake/testtask&#39;</span>
-
-<span class="no">Rake</span><span class="o">::</span><span class="no">TestTask</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">libs</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;test&#39;</span>
-<span class="k">end</span>
-
-<span class="n">desc</span> <span class="s2">&quot;Run tests&quot;</span>
-<span class="n">task</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="ss">:test</span>
-<span class="o">~</span>
-</code></pre></div>
-
-<p>下面就是一个简单的测试用例了:</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;test/unit&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;moondemo&#39;</span>
-
-<span class="k">class</span> <span class="nc">MoonDemoTest</span> <span class="o">&lt;</span> <span class="no">Test</span><span class="o">::</span><span class="no">Unit</span><span class="o">::</span><span class="no">TestCase</span>
-  <span class="k">def</span> <span class="nf">test_english_hello</span>
-    <span class="n">assert_equal</span> <span class="s2">&quot;Hello world!&quot;</span><span class="p">,</span>
-      <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">test_any_hello</span>
-    <span class="n">assert_equal</span> <span class="s2">&quot;Hello world!&quot;</span><span class="p">,</span>
-      <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="s2">&quot;ruby&quot;</span><span class="p">)</span>
-  <span class="k">end</span>
-
-  <span class="k">def</span> <span class="nf">test_spanish_hello</span>
-    <span class="n">assert_equal</span> <span class="s2">&quot;你好，世界!&quot;</span><span class="p">,</span>
-      <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="s2">&quot;chinese&quot;</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
-
-<p>最后，让我们运行这个测试:</p>
-
-<div class="highlight"><pre><code class="bash">➜  rake <span class="nb">test</span>
-Run options:
-
-<span class="c"># Running tests:</span>
-
-Finished tests in 0.006151s, 487.7256 tests/s, 487.7256 assertions/s.
-3 tests, 3 assertions, 0 failures, 0 errors, 0 skips
-</code></pre></div>
-
-<p>很好，全部都通过了！</p>
-
-<p><a id="documenting_your_code" name="documenting_your_code"> </a></p>
-
-<h1 id="section-3">文档</h1>
-
-<p>文档和测试是一样重要的，大部分gem都是用RDoc来生成文档的，这里有很多<a href="http://docs.seattlerb.org/rdoc/RDoc/Markup.html">教程</a>.
-很简单，先切换到gem的根目录下，再命令行中输入<code>rdoc</code>，你就会发现多出了一个名为<code>doc</code>的目录，里面就是我们的文档了，当然你可以自己再进行一些调整。
-除了RDoc呢，我们还有另外的选择<a href="http://yardoc.org/">YARD</a>，当我们发布了gem的时候呢，<a href="http://rubydoc.info/">RubyDoc.info</a>会根据你的gem自动生成YARDocs，并且它是可以向下兼容RDoc。</p>
-
 
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
