@@ -4,13 +4,610 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://morisunshine.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://morisunshine.com" />
-<updated>2014-04-18T22:31:22+08:00</updated>
+<updated>2014-04-22T18:36:14+08:00</updated>
 <id>http://morisunshine.com/</id>
 <author>
   <name>Sheldon</name>
   <uri>http://morisunshine.com/</uri>
   <email>sheldon.zen@gmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[iOS编码规范参考]]></title>
+ <link rel="alternate" type="text/html" href="http://morisunshine.com/ios/ios_code_standards/" />
+  <id>http://morisunshine.com/ios/ios_code_standards</id>
+  <published>2014-04-22T00:00:00+08:00</published>
+  <updated>2014-04-22T00:00:00+08:00</updated>
+  <author>
+    <name>Sheldon</name>
+    <uri>http://morisunshine.com</uri>
+    <email>sheldon.zen@gmail.com</email>
+  </author>
+  <content type="html">&lt;h1 id=&quot;section&quot;&gt;注释&lt;/h1&gt;
+
+&lt;p&gt;建议使用&lt;a href=&quot;https://github.com/onevcat/VVDocumenter-Xcode&quot;&gt;VVDocumenter&lt;/a&gt;插件&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;注释&lt;/strong&gt;分为&lt;em&gt;多行注释&lt;/em&gt;和&lt;em&gt;单行注释&lt;/em&gt;，为了方便后期文档输出，规定：&lt;/p&gt;
+
+&lt;p&gt;多行注释的格式为&lt;/p&gt;
+
+&lt;p&gt;```
+/**&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;          注释内容 */ ```
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;单行注释的格式为&lt;/p&gt;
+
+&lt;p&gt;```
+///在对文件、类、函数进行注释时推荐使用多行注释，在函数体内对代码块进行注释时，使用单行注释。&lt;/p&gt;
+
+&lt;p&gt;```
+类的注释
+函数的注释
+函数注释的格式为&lt;/p&gt;
+
+&lt;p&gt;```
+/**
+ *  @brief&lt;br /&gt;
+ *  @param
+ *  @return
+ &lt;strong&gt;/
+ 在brief中需要写明函数的主要功能、注意事项
+ 在param中需要写明函数的变量类型、变量的作用
+ 在return中需要写明函数的返回类型、返回值的作用
+ 如有其他需要说明的地方，可以在@return后面添加新项。如
+ /&lt;/strong&gt;
+ *  @brief&lt;br /&gt;
+ *  @param
+ *  @return
+ *  @warning
+ &lt;strong&gt;/
+ 例子
+/&lt;/strong&gt;
+ *  @brief      上传图片。上传成功后会自动将图片放入缓存，缓存的key为图片的url
+ *  @param      UIImage，需要上传的图片
+ *  @return     void
+ *  @blocks
+ *              success:返回的NSDictionary中包含服务器的response信息，包括图片id（id）,url(url),宽度(width),高度(height)。使用括号中的名称从NSDictionary中获取。
+ *              failed:返回error
+ **/&lt;/p&gt;
+
+&lt;p&gt;```
+#命名&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;常量的命名&lt;/strong&gt;:(如宏、枚举、静态局部变量等)应该以小写字母k开头，使用混合大小写的格式来分隔单词。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;函数的命名&lt;/strong&gt;:函数名应该已小写字母开头，并混合大小写，其中的每个参数都应该是小写字母开头，读起来应该像句子一样，访问器方法应该与他们getting的成员变量的名字一样，但不应该以get作为前缀，如：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+   	- (id)getDelegate;	//avoid
+	- (id)delegate;   	//good
+&lt;/code&gt;
+&lt;strong&gt;变量的命名&lt;/strong&gt;:成员变量应该已小写字母开头，并以下划线作为后缀，如usernameTextField_,使用KVO/KVC绑定成员变量时，可以以一个下划线为前缀。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;公共变量命名:&lt;/em&gt;
+小写字母开头。如:imageView;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;实例变量命名:&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;私有变量:&lt;/em&gt;
+应该以下划线开头。如:_addButton&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;常量命名:&lt;/em&gt;
+以小写k开头，混合大小写。如:kInvalidHandle, kWritePerm&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;图片的命名&lt;/strong&gt;:应该已“模块+功能+作用+样式”的形式
+&lt;code&gt;
+如:message_private_at_button_bg_normal.png
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;类的命名&lt;/strong&gt;:类名、分类名、协议名应该以大写字母开始，并混合小写字母来分隔单词，应该已“模块+功能+子功能”的方式：
+&lt;code&gt;
+如:MessagePrivateAtsomebody
+&lt;/code&gt;
+应用级的类，应避免不用前缀，跨应用级的类，应使用前缀，
+&lt;code&gt;
+如:GTMSendMessage
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;分类名&lt;/strong&gt;:类别名应该有两三个字母作为前缀已表示为某项目的一部分，并且包含所扩展的类的名字，如我们要创建一个NSString的类别以解析，我们将类别放在一个名为GTMNSString+Parsing.h的文件中。类别名本身为GTMStringParsingAdditions(类别名与文件名不同是为了让文件可以包含更多相同功能的扩展)类名与包含类别名之间应一个空格分隔。&lt;/p&gt;
+
+&lt;p&gt;```
+如:
+//NSString 为要扩展的类名, GTMStringParsingAdditions为类别名
+@interface NSString (GTMStringParsingAdditions)
+ 	    - (NSString *)gtm_foobarString;
+ 	    @end&lt;/p&gt;
+
+ 	    @interface FoobarViewController ()
+ 	    @property(nonatomic, retain) NSView *dongleView;
+ 	    - (void)performLayout;
+ 	    @end
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;em&gt;一些常用命名规范的建议&lt;/em&gt;&lt;/strong&gt;:   &lt;/p&gt;
+
+&lt;p&gt;按钮事件用- (IBAction)开头 &lt;br /&gt;
+ViewController = VC &lt;br /&gt;
+Button = btn&lt;br /&gt;
+image = img &lt;br /&gt;
+Dictionary = Dic&lt;br /&gt;
+私有函数前加上:#Pragma mark - Private&lt;br /&gt;
+relolad开头的函数表示刷新数据 &lt;br /&gt;
+update开头的函数表示更新界面&lt;/p&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;注意事项&lt;/h1&gt;
+&lt;p&gt;&lt;strong&gt;条件语句&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;为避免错误，条件语句体必须使用大括号，即便语句体中的语句可以不必使用大括号（比如只有一行语句）。常见的错误包括在不使用大括号的情况下添加第二行语句，以为它属于if语句的一部分。此外，更可怕的事情是，如果条件语句中的代码行被注释，则本不术语条件语句的下一行代码将变成条件语句的一部分。此外，这种编码风格和所有其它条件语句均保持一致。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+如:
+if (!error) {
+    return success;
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;变量&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;变量的命名应尽可能具有自解释性。除了在for()循环语句中，应避免使用单个字母变量名称。
+除非是常量，星号应紧贴变量名称表示指向变量的指针，
+&lt;code&gt;
+如:
+NSString *text;
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;应尽可能使用属性定义替代单一的实例变量。避免在初始化方法,dealloc方法和自定义的setter和getter方法中直接读取实例变量参数（init,initWithCoder:，等等）&lt;/p&gt;
+
+&lt;p&gt;```
+如:
+@interface NYTSection: NSObject&lt;/p&gt;
+
+&lt;p&gt;@property (nonatomic) NSString *headline;&lt;/p&gt;
+
+&lt;p&gt;@end&lt;/p&gt;
+
+&lt;p&gt;应尽量避免下面的方式:&lt;/p&gt;
+
+&lt;p&gt;@interface NYTSection : NSObject {
+    NSString *headline;
+}
+```
+&lt;strong&gt;下划线&lt;/strong&gt;
+当使用属性变量时，应通过self.来获取和更改实例变量。这就意味着所有的属性将是独特的，因为它们的名称前会加上self。本地变量名称中不应包含下划线&lt;/p&gt;
+
+&lt;p&gt;```
+如:
+self.imgView.backgroundColor = [UIColor black];&lt;/p&gt;
+
+&lt;p&gt;而尽量避免:&lt;/p&gt;
+
+&lt;p&gt;_imgView.backgroundColor = [UIColor black];
+```
+&lt;strong&gt;Immutable实例初始化&lt;/strong&gt;
+在创建NSString,NSDictionary,NSArray和NSNumber等对象的immutable实例时，应使用字面量。需要注意的是，不应将&lt;strong&gt;&lt;em&gt;nil&lt;/em&gt;&lt;/strong&gt;传递给NSArray和NSDictionary字面量，否则会引起程序崩溃。所以在存入数据到NSArray和NSDictionary时也要判断一下数据是否是nil。&lt;/p&gt;
+
+&lt;p&gt;```
+NSArray *names = @[@”Brian”, @”Matt”, @”Chris”, @”Alex”, @”Steve”, @”Paul”];
+NSDictionary *productManagers = @{@”iPhone” : @”Kate”, @”iPad” : @”Kamal”, @”Mobile Web” : @”Bill”};
+NSNumber *shouldUseLiterals = @YES;
+NSNumber *buildingZIPCode = @10018;&lt;/p&gt;
+
+&lt;p&gt;不恰当:
+NSArray *names = [NSArray arrayWithObjects:@”Brian”, @”Matt”, @”Chris”, @”Alex”, @”Steve”, @”Paul”, nil];
+NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @”Kate”, @”iPhone”, @”Kamal”, @”iPad”, @”Bill”, @”Mobile Web”, nil];
+NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
+NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];
+```
+&lt;strong&gt;类型&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;最好用NSInteger和NSUInteger而不是用int，long。其他的float同理。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;CGRect函数&lt;/strong&gt;
+当需要获取一个CGRect矩形的x,y,width,height属性时，应使用CGGeometry函数，而非直接访问结构体成员。&lt;/p&gt;
+
+&lt;p&gt;```
+如：
+CGRect frame = self.view.frame;&lt;/p&gt;
+
+&lt;p&gt;CGFloat x = CGRectGetMinX(frame);
+CGFloat y = CGRectGetMinY(frame);
+CGFloat width = CGRectGetWidth(frame);
+CGFloat height = CGRectGetHeight(frame);&lt;/p&gt;
+
+&lt;p&gt;不恰当：
+CGRect frame = self.view.frame;&lt;/p&gt;
+
+&lt;p&gt;CGFloat x = frame.origin.x;
+CGFloat y = frame.origin.y;
+CGFloat width = frame.size.width;
+CGFloat height = frame.size.height;
+```&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;常量&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;相对字符串字面量或数字，我们更推荐适用常量。应使用static方式声明常量，而非使用#define的方式来定义宏。&lt;/p&gt;
+
+&lt;p&gt;``` 
+例如：
+static NSString * const NYTAboutViewControllerCompanyName = @”The New York Times Company”;&lt;br /&gt;
+static const CGFloat NYTImageThumbnailHeight = 50.0;&lt;/p&gt;
+
+&lt;p&gt;不恰当:
+#define CompanyName @”The New York Times Company”
+#define thumbnailHeight 2&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;枚举类型&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在使用enum的时候，推荐适用最新的fixed underlying type(WWDC 2012 session 405- Modern Objective-C)规范，因为它具备更强的类型检查和代码完成功能。&lt;/p&gt;
+
+&lt;p&gt;```
+如：
+typedef NS_ENUM(NSInteger, NYTAdRequestState) {
+    NYTAdRequestStateInactive,
+    NYTAdRequestStateLoading
+};&lt;/p&gt;
+
+&lt;p&gt;```
+&lt;strong&gt;布尔变量&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;因为nil将被解析为NO，因此没有必要在条件语句中进行比较。永远不要将任何东西和YES进行直接比较，因为YES被定义为1，而一个BOOL变量可以有8个字节。&lt;/p&gt;
+
+&lt;p&gt;```
+如：
+if (!someObject) {
+}&lt;/p&gt;
+
+&lt;p&gt;if (isAwesome)&lt;/p&gt;
+
+&lt;p&gt;if (![someObject boolValue])&lt;/p&gt;
+
+&lt;p&gt;不恰当：
+if (someObject == nil) {
+}&lt;/p&gt;
+
+&lt;p&gt;if ([someObject boolValue] == NO)&lt;/p&gt;
+
+&lt;p&gt;if (isAwesome == YES) // Never do this.
+&lt;code&gt;
+如果一个BOOL属性使用形容词来表达，属性将忽略’is’前缀，但会强调惯用名称。
+例如：
+&lt;/code&gt;
+@property (assign, getter=isEditable) BOOL editable;
+```&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;单例&lt;/strong&gt;
+在创建单例对象的共享实例时，应使用线程安全模式。&lt;/p&gt;
+
+&lt;p&gt;```
+如：
+(instancetype)sharedInstance {
+   static id sharedInstance = nil;&lt;/p&gt;
+
+&lt;p&gt;static dispatch_once_t onceToken;
+   dispatch_once(&amp;amp;onceToken, ^{
+      sharedInstance = [[self alloc] init];
+   });&lt;/p&gt;
+
+&lt;p&gt;return sharedInstance;
+}
+```&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;数字&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;尽量避免数字固定为某个类型```如:写5而不写5.0，5.3而不写5.3f)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;代码组织&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;用 &lt;code&gt;#pragma mark&lt;/code&gt;来将方法分类，这个非常有效，当你用快捷键&lt;code&gt;Control+6&lt;/code&gt;可以高效的寻找到自己想要跳转到的方法&lt;/p&gt;
+
+&lt;p&gt;```
+#pragma mark Properties&lt;/p&gt;
+
+&lt;p&gt;@dynamic someProperty;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;(void)setCustomProperty:(id)value {}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;pragma-mark-lifecycle&quot;&gt;pragma mark Lifecycle&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;(id)objectWithThing:(id)thing {}&lt;/li&gt;
+  &lt;li&gt;(id)init {}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;pragma-mark-drawing&quot;&gt;pragma mark Drawing&lt;/h1&gt;
+
+&lt;h1 id=&quot;pragma-mark-uitableview-delegate&quot;&gt;pragma mark UItableView delegate&lt;/h1&gt;
+
+&lt;h1 id=&quot;pragma-mark-uitableview-datasource&quot;&gt;pragma mark UITableView datasource&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;(void)drawRect:(CGRect) {}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;pragma-mark-another-functional-grouping&quot;&gt;pragma mark Another functional grouping&lt;/h1&gt;
+
+&lt;h1 id=&quot;pragma-mark-ghsuperclass&quot;&gt;pragma mark GHSuperclass&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;(void)someOverriddenMethod {}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;pragma-mark-nscopying&quot;&gt;pragma mark NSCopying&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;(id)copyWithZone:(NSZone *)zone {}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1 id=&quot;pragma-mark-nsobject&quot;&gt;pragma mark NSObject&lt;/h1&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;(NSString *)description {}&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;判断语句&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;if和else应该和左大括号在同一行&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+如:
+if (button.enabled) {
+    // Stuff
+} else if (otherButton.enabled) {
+    // Other stuff
+} else {
+    // More stuf
+}
+&lt;/code&gt;
+Switch 也是一样&lt;/p&gt;
+
+&lt;p&gt;```
+如:
+switch (something.state) {
+    case 0: {
+        // Something
+        break;
+    }&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;case 1: {
+    // Something
+    break;
+}
+
+case 2:
+case 3: {
+    // Something
+    break;
+}
+
+default: {
+    // Something
+    break;
+} } ```
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Import&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;在类的头文件中需要引用其他的类的时候，需要用&lt;code&gt;@class&lt;/code&gt;这个关键字，这样能减少类与类之间的依赖。&lt;/p&gt;
+
+&lt;p&gt;```
+如:
+store.h:&lt;/p&gt;
+
+&lt;h1 id=&quot;import-foundationfoundationh&quot;&gt;import &amp;lt;Foundation/Foundation.h&amp;gt;&lt;/h1&gt;
+&lt;p&gt;#import &amp;lt;CoreData/CoreData.h&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;@class User;&lt;/p&gt;
+
+&lt;p&gt;@interface Store : NSManagedObject&lt;/p&gt;
+
+&lt;p&gt;@property (nonatomic, retain) User *user;&lt;/p&gt;
+
+&lt;p&gt;@end&lt;/p&gt;
+
+&lt;p&gt;Store.m:&lt;/p&gt;
+
+&lt;h1 id=&quot;import-storeh&quot;&gt;import “Store.h”&lt;/h1&gt;
+
+&lt;h1 id=&quot;import-userh&quot;&gt;import “User.h”&lt;/h1&gt;
+
+&lt;p&gt;@implementation Store&lt;/p&gt;
+
+&lt;p&gt;//doSomething&lt;/p&gt;
+
+&lt;p&gt;@end&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;私有方法&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;关于私有方法，苹果官方建议呢是是使用统一的前缀来分组和辨识。但是千万不用用下划线来作为前缀来命名，或者你可以在前缀前添加一些特殊的标识。&lt;/p&gt;
+
+&lt;h2 id=&quot;git-commit-&quot;&gt;git commit 格式&lt;/h2&gt;
+
+&lt;p&gt;可以参考&lt;a href=&quot;https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#&quot;&gt;google开源项目的Commit 规范&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;参考规范:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;添加了新功能&lt;/strong&gt; &lt;code&gt;feat(大模块+子模块):#例如实现了某个具体功能&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;修改了某些功能&lt;/strong&gt;  &lt;code&gt;change(大模块+子模块):#例如修改了某个具体的功能&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;修复了某个Bug&lt;/strong&gt;  &lt;code&gt;fix_bug(大模块+子模块):#修复了什么的bug，最好写上*原因*和*解决方法*。&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;比较大的改动&lt;/strong&gt;  &lt;/p&gt;
+
+    &lt;p&gt;```
+broken_change():
+before: &lt;/p&gt;
+
+    &lt;p&gt;after:&lt;/p&gt;
+
+    &lt;p&gt;```&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;修改了文档&lt;/strong&gt; &lt;code&gt;docs():&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;修改了格式&lt;/strong&gt; &lt;code&gt;style():&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;添加了一些测试&lt;/strong&gt; &lt;code&gt;test(大模块+子模块):&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;一些杂项，比如像解决工程编译错误等问题之后的修改&lt;/strong&gt; &lt;code&gt;chore():&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;对又有代码的重构&lt;/strong&gt; &lt;code&gt;refactor(大模块+子模块):&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;格式&lt;/h2&gt;
+&lt;p&gt;一行代码的长度不能超过80个字母&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;函数声明和定义:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;“-”或“+”和返回类型之间应该有一个空格&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+如:
+- (void)doSomethingWithString:(NSString *)theString {
+  ...
+}
+&lt;/code&gt;
+方法大括号和其它大括号（比如if/else/switch/while等等）应在语句的同一行开始，而在新的一行关闭。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+if (user.isHappy) {
+//Do something
+}
+else {
+//Do something else
+}
+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;当有多个参数的时，如果参数太多超过一行，则应该将每个参数分行，并且冒号对齐&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+如:
+- (void)doSomethingWith:(GTMFoo *)theFoo
+                   rect:(NSRect)theRect
+               interval:(float)theInterval {
+  ...
+}
+&lt;/code&gt;
+当第一个参数短于其他参数的时候，分行时每行至少要缩进4个空格&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+如：- (void)short:(GTMFoo *)theFoo
+             longKeyword:(NSRect)theRect
+       evenLongerKeyword:(float)theInterval
+                   error:(NSError **)theError {
+          ...
+}
+&lt;/code&gt;
+&lt;strong&gt;方法调用:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;方法调用应该和方法声明的时候一个格式,要么所有参数放在一行里:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+如:
+[myObject doFooWith:arg1 name:arg2 error:arg3];
+&lt;/code&gt;
+要么每一行一个参数:&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+如:
+[myObject doFooWith:arg1
+               name:arg2
+              error:arg3];
+&lt;/code&gt;
+当第一个参数短语其他参数的时候，分行是每行至少要缩进4个空格:&lt;/p&gt;
+
+&lt;p&gt;```
+如:
+[myObj short:arg1
+          longKeyword:arg2
+    evenLongerKeyword:arg3
+                error:arg4];&lt;/p&gt;
+
+&lt;p&gt;```&lt;/p&gt;
+
+&lt;p&gt;@public 和 @private前面为一个空格&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+如:
+@interface MyClass : NSObject{
+ @public
+ …
+ @private
+}
+@end
+&lt;/code&gt;
+&lt;strong&gt;协议:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;类型与协议名之间不要空格&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;
+如:
+@interface MyProtocoledClass : NsObject&amp;lt;NSWindowDelegate&amp;gt; {
+ @private
+  id&amp;lt;MyFancyDelegate&amp;gt; _delegate;
+}
+-  (void)setDelegate:(id&amp;lt;MyFancyDelegate&amp;gt;)aDelegate;
+@end
+&lt;/code&gt;
+&lt;strong&gt;Blocks:&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;```
+在一行的情况
+如:
+[operation setCompletionBlock:^{ [self onOperationDone]; }];&lt;/p&gt;
+
+&lt;p&gt;//block 在新的行里，需要缩进四个空格
+[operation setCompletionBlock:^{
+      [self.delegate newDataAvailable];
+}];&lt;/p&gt;
+
+&lt;p&gt;dispatch_async(_fileIOQueue, ^{
+      NSString* path = [self sessionFilePath];
+      if (path) {
+        // …
+      }
+});
+```&lt;/p&gt;
+
+&lt;p&gt;```
+//有参数的block,|(SessionWindow *window)|与|{|之间有一个空格
+如:
+[[SessionService sharedService]
+    loadWindowWithCompletionBlock:^(SessionWindow *window) {
+        if (window) {
+          [self windowDidLoad:window];
+        } else {
+          [self errorLoadingWindow];
+        }
+    }];&lt;/p&gt;
+
+&lt;p&gt;//block 中有参数且不能在一行中显示
+//要行与行之间要相对有四个空格
+[[SessionService sharedService]
+      loadWindowWithCompletionBlock:
+            ^(SessionWindow *window) {
+                   if (window) {
+                     [self windowDidLoad:window];
+                   } else {
+                     [self errorLoadingWindow];
+                   }
+            }];&lt;/p&gt;
+
+&lt;p&gt;//很长的block可以被定义不在一行里
+void (^largeBlock)(void) = ^{
+    // …
+};
+[_operationQueue addOperationWithBlock:largeBlock];
+```&lt;/p&gt;
+
+
+  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/ios_code_standards/&quot;&gt;iOS编码规范参考&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 22, 2014.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
