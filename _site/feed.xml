@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://morisunshine.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://morisunshine.com" />
-<updated>2014-04-22T18:36:14+08:00</updated>
+<updated>2014-04-22T21:36:20+08:00</updated>
 <id>http://morisunshine.com/</id>
 <author>
   <name>Sheldon</name>
@@ -24,71 +24,79 @@
     <uri>http://morisunshine.com</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
-  <content type="html">&lt;h1 id=&quot;section&quot;&gt;注释&lt;/h1&gt;
+  <content type="html">&lt;h2 id=&quot;section&quot;&gt;注释&lt;/h2&gt;
 
 &lt;p&gt;建议使用&lt;a href=&quot;https://github.com/onevcat/VVDocumenter-Xcode&quot;&gt;VVDocumenter&lt;/a&gt;插件&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;注释&lt;/strong&gt;分为&lt;em&gt;多行注释&lt;/em&gt;和&lt;em&gt;单行注释&lt;/em&gt;，为了方便后期文档输出，规定：&lt;/p&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;多行注释&lt;/h3&gt;
 
-&lt;p&gt;多行注释的格式为&lt;/p&gt;
+&lt;p&gt;格式:&lt;/p&gt;
 
-&lt;p&gt;```
-/**&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/**&lt;/span&gt;
 
-&lt;pre&gt;&lt;code&gt;          注释内容 */ ```
-&lt;/code&gt;&lt;/pre&gt;
+&lt;span class=&quot;cm&quot;&gt;              注释内容&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt;*/&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;单行注释的格式为&lt;/p&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;单行注释&lt;/h3&gt;
 
-&lt;p&gt;```
-///在对文件、类、函数进行注释时推荐使用多行注释，在函数体内对代码块进行注释时，使用单行注释。&lt;/p&gt;
+&lt;p&gt;格式:&lt;/p&gt;
 
-&lt;p&gt;```
-类的注释
-函数的注释
-函数注释的格式为&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;c1&quot;&gt;///在对文件、类、函数进行注释时推荐使用多行注释，在函数体内对代码块进行注释时，使用单行注释&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;```
-/**
- *  @brief&lt;br /&gt;
- *  @param
- *  @return
- &lt;strong&gt;/
- 在brief中需要写明函数的主要功能、注意事项
- 在param中需要写明函数的变量类型、变量的作用
- 在return中需要写明函数的返回类型、返回值的作用
- 如有其他需要说明的地方，可以在@return后面添加新项。如
- /&lt;/strong&gt;
- *  @brief&lt;br /&gt;
- *  @param
- *  @return
- *  @warning
- &lt;strong&gt;/
- 例子
-/&lt;/strong&gt;
- *  @brief      上传图片。上传成功后会自动将图片放入缓存，缓存的key为图片的url
- *  @param      UIImage，需要上传的图片
- *  @return     void
- *  @blocks
- *              success:返回的NSDictionary中包含服务器的response信息，包括图片id（id）,url(url),宽度(width),高度(height)。使用括号中的名称从NSDictionary中获取。
- *              failed:返回error
- **/&lt;/p&gt;
+&lt;h3 id=&quot;section-3&quot;&gt;函数的注释&lt;/h3&gt;
 
-&lt;p&gt;```
-#命名&lt;/p&gt;
+&lt;p&gt;函数注释的格式为&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;常量的命名&lt;/strong&gt;:(如宏、枚举、静态局部变量等)应该以小写字母k开头，使用混合大小写的格式来分隔单词。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;cm&quot;&gt;/**&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *  @brief  &lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *  @param&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *  @return&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; **/&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;在&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;brief&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;中需要写明函数的主要功能、注意事项&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;在&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;param&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;中需要写明函数的变量类型、变量的作用&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;在&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;中需要写明函数的返回类型、返回值的作用&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;如有其他需要说明的地方，可以在&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt;&lt;span class=&quot;err&quot;&gt;后面添加新项。如&lt;/span&gt;
+ &lt;span class=&quot;cm&quot;&gt;/**&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *  @brief  &lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *  @param&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *  @return&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *  @warning&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; **/&lt;/span&gt;
 
-&lt;p&gt;&lt;strong&gt;函数的命名&lt;/strong&gt;:函数名应该已小写字母开头，并混合大小写，其中的每个参数都应该是小写字母开头，读起来应该像句子一样，访问器方法应该与他们getting的成员变量的名字一样，但不应该以get作为前缀，如：&lt;/p&gt;
+&lt;span class=&quot;cm&quot;&gt;/**&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *  @brief      上传图片。上传成功后会自动将图片放入缓存，缓存的key为图片的url&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *  @param      UIImage，需要上传的图片&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *  @return     void&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *  @blocks&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *              success:返回的NSDictionary中包含服务器的response信息，包括图片id（id）,url(url),宽度(width),高度(height)。使用括号中的名称从NSDictionary中获取。&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; *              failed:返回error&lt;/span&gt;
+&lt;span class=&quot;cm&quot;&gt; **/&lt;/span&gt;
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-   	- (id)getDelegate;	//avoid
-	- (id)delegate;   	//good
-&lt;/code&gt;
-&lt;strong&gt;变量的命名&lt;/strong&gt;:成员变量应该已小写字母开头，并以下划线作为后缀，如usernameTextField_,使用KVO/KVC绑定成员变量时，可以以一个下划线为前缀。&lt;/p&gt;
+&lt;h2 id=&quot;section-4&quot;&gt;命名&lt;/h2&gt;
 
-&lt;p&gt;&lt;em&gt;公共变量命名:&lt;/em&gt;
-小写字母开头。如:imageView;&lt;/p&gt;
+&lt;h3 id=&quot;section-5&quot;&gt;常量的命名&lt;/h3&gt;
+
+&lt;p&gt;(如宏、枚举、静态局部变量等)应该以小写字母k开头，使用混合大小写的格式来分隔单词。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;函数的命名&lt;/h3&gt;
+
+&lt;p&gt;函数名应该已小写字母开头，并混合大小写，其中的每个参数都应该是小写字母开头，读起来应该像句子一样，访问器方法应该与他们getting的成员变量的名字一样，但不应该以get作为前缀，如：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;  &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;getDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;	&lt;span class=&quot;c1&quot;&gt;//avoid&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;   	&lt;span class=&quot;c1&quot;&gt;//good&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;变量的命名&lt;/h3&gt;
+
+&lt;p&gt;成员变量应该已小写字母开头，并以下划线作为后缀，如usernameTextField_,使用KVO/KVC绑定成员变量时，可以以一个下划线为前缀。&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;公共变量命名:&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;小写字母开头。如:imageView;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;实例变量命名:&lt;/em&gt;&lt;/p&gt;
 
@@ -98,336 +106,310 @@
 &lt;p&gt;&lt;em&gt;常量命名:&lt;/em&gt;
 以小写k开头，混合大小写。如:kInvalidHandle, kWritePerm&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;图片的命名&lt;/strong&gt;:应该已“模块+功能+作用+样式”的形式
-&lt;code&gt;
-如:message_private_at_button_bg_normal.png
-&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;section-8&quot;&gt;图片的命名&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;类的命名&lt;/strong&gt;:类名、分类名、协议名应该以大写字母开始，并混合小写字母来分隔单词，应该已“模块+功能+子功能”的方式：
-&lt;code&gt;
-如:MessagePrivateAtsomebody
-&lt;/code&gt;
-应用级的类，应避免不用前缀，跨应用级的类，应使用前缀，
-&lt;code&gt;
-如:GTMSendMessage
-&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;应该已“模块+功能+作用+样式”的形式&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;分类名&lt;/strong&gt;:类别名应该有两三个字母作为前缀已表示为某项目的一部分，并且包含所扩展的类的名字，如我们要创建一个NSString的类别以解析，我们将类别放在一个名为GTMNSString+Parsing.h的文件中。类别名本身为GTMStringParsingAdditions(类别名与文件名不同是为了让文件可以包含更多相同功能的扩展)类名与包含类别名之间应一个空格分隔。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;message_private_at_button_bg_normal&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;png&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;```
-如:
-//NSString 为要扩展的类名, GTMStringParsingAdditions为类别名
-@interface NSString (GTMStringParsingAdditions)
- 	    - (NSString *)gtm_foobarString;
- 	    @end&lt;/p&gt;
+&lt;h3 id=&quot;section-9&quot;&gt;类的命名&lt;/h3&gt;
 
- 	    @interface FoobarViewController ()
- 	    @property(nonatomic, retain) NSView *dongleView;
- 	    - (void)performLayout;
- 	    @end
-&lt;p&gt;```&lt;/p&gt;
+&lt;p&gt;类名、分类名、协议名应该以大写字母开始，并混合小写字母来分隔单词，应该已“模块+功能+子功能”的方式：&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;&lt;em&gt;一些常用命名规范的建议&lt;/em&gt;&lt;/strong&gt;:   &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MessagePrivateAtsomebody&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;按钮事件用- (IBAction)开头 &lt;br /&gt;
-ViewController = VC &lt;br /&gt;
-Button = btn&lt;br /&gt;
-image = img &lt;br /&gt;
-Dictionary = Dic&lt;br /&gt;
-私有函数前加上:#Pragma mark - Private&lt;br /&gt;
-relolad开头的函数表示刷新数据 &lt;br /&gt;
-update开头的函数表示更新界面&lt;/p&gt;
+&lt;p&gt;应用级的类，应避免不用前缀，跨应用级的类，应使用前缀，&lt;/p&gt;
 
-&lt;h1 id=&quot;section-1&quot;&gt;注意事项&lt;/h1&gt;
-&lt;p&gt;&lt;strong&gt;条件语句&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GTMSendMessage&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;section-10&quot;&gt;分类名&lt;/h2&gt;
+
+&lt;p&gt;类别名应该有两三个字母作为前缀已表示为某项目的一部分，并且包含所扩展的类的名字，如我们要创建一个NSString的类别以解析，我们将类别放在一个名为GTMNSString+Parsing.h的文件中。类别名本身为GTMStringParsingAdditions(类别名与文件名不同是为了让文件可以包含更多相同功能的扩展)类名与包含类别名之间应一个空格分隔。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//NSString 为要扩展的类名, GTMStringParsingAdditions为类别名&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;(GTMStringParsingAdditions)&lt;/span&gt;
+ 	    &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;gtm_foobarString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 	    &lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+
+ 	    &lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;FoobarViewController&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;
+ 	    &lt;span class=&quot;k&quot;&gt;@property&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nonatomic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;retain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NSView&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;dongleView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 	    &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;performLayout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 	    &lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;section-11&quot;&gt;注意事项&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;条件语句&lt;/h3&gt;
 
 &lt;p&gt;为避免错误，条件语句体必须使用大括号，即便语句体中的语句可以不必使用大括号（比如只有一行语句）。常见的错误包括在不使用大括号的情况下添加第二行语句，以为它属于if语句的一部分。此外，更可怕的事情是，如果条件语句中的代码行被注释，则本不术语条件语句的下一行代码将变成条件语句的一部分。此外，这种编码风格和所有其它条件语句均保持一致。&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-如:
-if (!error) {
-    return success;
-}
-&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;success&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;strong&gt;变量&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;section-13&quot;&gt;变量&lt;/h3&gt;
 
 &lt;p&gt;变量的命名应尽可能具有自解释性。除了在for()循环语句中，应避免使用单个字母变量名称。
-除非是常量，星号应紧贴变量名称表示指向变量的指针，
-&lt;code&gt;
-如:
-NSString *text;
-&lt;/code&gt;&lt;/p&gt;
+除非是常量，星号应紧贴变量名称表示指向变量的指针，&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;应尽可能使用属性定义替代单一的实例变量。避免在初始化方法,dealloc方法和自定义的setter和getter方法中直接读取实例变量参数（init,initWithCoder:，等等）&lt;/p&gt;
 
-&lt;p&gt;```
-如:
-@interface NYTSection: NSObject&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NYTSection&lt;/span&gt;: &lt;span class=&quot;nc&quot;&gt;NSObject&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;@property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nonatomic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
 
-&lt;p&gt;@property (nonatomic) NSString *headline;&lt;/p&gt;
+&lt;span class=&quot;err&quot;&gt;应尽量避免下面的方式&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
 
-&lt;p&gt;@end&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NYTSection&lt;/span&gt; : &lt;span class=&quot;nc&quot;&gt;NSObject&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;headline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;应尽量避免下面的方式:&lt;/p&gt;
+&lt;h3 id=&quot;section-14&quot;&gt;下划线&lt;/h3&gt;
+&lt;p&gt;当使用属性变量时，应通过self.来获取和更改实例变量。这就意味着所有的属性将是独特的，因为它们的名称前会加上self。本地变量名称中不应包含下划线&lt;/p&gt;
 
-&lt;p&gt;@interface NYTSection : NSObject {
-    NSString *headline;
-}
-```
-&lt;strong&gt;下划线&lt;/strong&gt;
-当使用属性变量时，应通过self.来获取和更改实例变量。这就意味着所有的属性将是独特的，因为它们的名称前会加上self。本地变量名称中不应包含下划线&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;imgView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backgroundColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIColor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
 
-&lt;p&gt;```
-如:
-self.imgView.backgroundColor = [UIColor black];&lt;/p&gt;
+&lt;span class=&quot;err&quot;&gt;而尽量避免&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
 
-&lt;p&gt;而尽量避免:&lt;/p&gt;
+&lt;span class=&quot;n&quot;&gt;_imgView&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;backgroundColor&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;UIColor&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;_imgView.backgroundColor = [UIColor black];
-```
-&lt;strong&gt;Immutable实例初始化&lt;/strong&gt;
-在创建NSString,NSDictionary,NSArray和NSNumber等对象的immutable实例时，应使用字面量。需要注意的是，不应将&lt;strong&gt;&lt;em&gt;nil&lt;/em&gt;&lt;/strong&gt;传递给NSArray和NSDictionary字面量，否则会引起程序崩溃。所以在存入数据到NSArray和NSDictionary时也要判断一下数据是否是nil。&lt;/p&gt;
+&lt;h3 id=&quot;immutable&quot;&gt;Immutable实例初始化&lt;/h3&gt;
+&lt;p&gt;在创建NSString,NSDictionary,NSArray和NSNumber等对象的immutable实例时，应使用字面量。需要注意的是，不应将&lt;strong&gt;&lt;em&gt;nil&lt;/em&gt;&lt;/strong&gt;传递给NSArray和NSDictionary字面量，否则会引起程序崩溃。所以在存入数据到NSArray和NSDictionary时也要判断一下数据是否是nil。&lt;/p&gt;
 
-&lt;p&gt;```
-NSArray *names = @[@”Brian”, @”Matt”, @”Chris”, @”Alex”, @”Steve”, @”Paul”];
-NSDictionary *productManagers = @{@”iPhone” : @”Kate”, @”iPad” : @”Kamal”, @”Mobile Web” : @”Bill”};
-NSNumber *shouldUseLiterals = @YES;
-NSNumber *buildingZIPCode = @10018;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;n&quot;&gt;NSArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;@[&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;Brian&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Matt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Chris&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Alex&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Steve&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Paul&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSDictionary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;productManagers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;@{&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;iPhone&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Kate&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;iPad&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Kamal&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Mobile Web&amp;quot;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Bill&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shouldUseLiterals&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;YES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;buildingZIPCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;@10018&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-&lt;p&gt;不恰当:
-NSArray *names = [NSArray arrayWithObjects:@”Brian”, @”Matt”, @”Chris”, @”Alex”, @”Steve”, @”Paul”, nil];
-NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @”Kate”, @”iPhone”, @”Kamal”, @”iPad”, @”Bill”, @”Mobile Web”, nil];
-NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
-NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];
-```
-&lt;strong&gt;类型&lt;/strong&gt;&lt;/p&gt;
+&lt;span class=&quot;err&quot;&gt;不恰当&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSArray&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;names&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSArray&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arrayWithObjects&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;@&amp;quot;Brian&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Matt&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Chris&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Alex&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Steve&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Paul&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSDictionary&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;productManagers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSDictionary&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;dictionaryWithObjectsAndKeys&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Kate&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;iPhone&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Kamal&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;iPad&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Bill&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Mobile Web&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;shouldUseLiterals&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSNumber&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numberWithBool&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;YES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;NSNumber&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;ZIPCode&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSNumber&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;numberWithInteger&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10018&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;section-15&quot;&gt;类型&lt;/h3&gt;
 
 &lt;p&gt;最好用NSInteger和NSUInteger而不是用int，long。其他的float同理。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;CGRect函数&lt;/strong&gt;
-当需要获取一个CGRect矩形的x,y,width,height属性时，应使用CGGeometry函数，而非直接访问结构体成员。&lt;/p&gt;
+&lt;h3 id=&quot;cgrect&quot;&gt;CGRect函数&lt;/h3&gt;
+&lt;p&gt;当需要获取一个CGRect矩形的x,y,width,height属性时，应使用CGGeometry函数，而非直接访问结构体成员。&lt;/p&gt;
 
-&lt;p&gt;```
-如：
-CGRect frame = self.view.frame;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如：&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CGRect&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;CGFloat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CGRectGetMinX&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CGFloat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CGRectGetMinY&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CGFloat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CGRectGetWidth&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CGFloat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CGRectGetHeight&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+ 
+&lt;span class=&quot;err&quot;&gt;不恰当：&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CGRect&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;view&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 
+&lt;span class=&quot;n&quot;&gt;CGFloat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;origin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CGFloat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;origin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CGFloat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;width&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;CGFloat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;height&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;frame&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;CGFloat x = CGRectGetMinX(frame);
-CGFloat y = CGRectGetMinY(frame);
-CGFloat width = CGRectGetWidth(frame);
-CGFloat height = CGRectGetHeight(frame);&lt;/p&gt;
-
-&lt;p&gt;不恰当：
-CGRect frame = self.view.frame;&lt;/p&gt;
-
-&lt;p&gt;CGFloat x = frame.origin.x;
-CGFloat y = frame.origin.y;
-CGFloat width = frame.size.width;
-CGFloat height = frame.size.height;
-```&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;常量&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;section-16&quot;&gt;常量&lt;/h3&gt;
 
 &lt;p&gt;相对字符串字面量或数字，我们更推荐适用常量。应使用static方式声明常量，而非使用#define的方式来定义宏。&lt;/p&gt;
 
-&lt;p&gt;``` 
-例如：
-static NSString * const NYTAboutViewControllerCompanyName = @”The New York Times Company”;&lt;br /&gt;
-static const CGFloat NYTImageThumbnailHeight = 50.0;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;例如：&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NYTAboutViewControllerCompanyName&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;The New York Times Company&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;  
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;const&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;CGFloat&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NYTImageThumbnailHeight&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mf&quot;&gt;50.0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 
+&lt;span class=&quot;err&quot;&gt;不恰当&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//#define CompanyName @&amp;quot;The New York Times Company&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//#define thumbnailHeight 2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;不恰当:
-#define CompanyName @”The New York Times Company”
-#define thumbnailHeight 2&lt;/p&gt;
-
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;枚举类型&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;section-17&quot;&gt;枚举类型&lt;/h3&gt;
 
 &lt;p&gt;在使用enum的时候，推荐适用最新的fixed underlying type(WWDC 2012 session 405- Modern Objective-C)规范，因为它具备更强的类型检查和代码完成功能。&lt;/p&gt;
 
-&lt;p&gt;```
-如：
-typedef NS_ENUM(NSInteger, NYTAdRequestState) {
-    NYTAdRequestStateInactive,
-    NYTAdRequestStateLoading
-};&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如：&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;typedef&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NS_ENUM&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSInteger&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;NYTAdRequestState&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;NYTAdRequestStateInactive&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;NYTAdRequestStateLoading&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;```
-&lt;strong&gt;布尔变量&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;section-18&quot;&gt;布尔变量&lt;/h3&gt;
 
 &lt;p&gt;因为nil将被解析为NO，因此没有必要在条件语句中进行比较。永远不要将任何东西和YES进行直接比较，因为YES被定义为1，而一个BOOL变量可以有8个字节。&lt;/p&gt;
 
-&lt;p&gt;```
-如：
-if (!someObject) {
-}&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如：&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;p&gt;if (isAwesome)&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isAwesome&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;p&gt;if (![someObject boolValue])&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someObject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boolValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;])&lt;/span&gt;
+ 
+&lt;span class=&quot;err&quot;&gt;不恰当：&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;p&gt;不恰当：
-if (someObject == nil) {
-}&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;([&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someObject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;boolValue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;NO&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 
-&lt;p&gt;if ([someObject boolValue] == NO)&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isAwesome&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;YES&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;// Never do this.&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;if (isAwesome == YES) // Never do this.
-&lt;code&gt;
-如果一个BOOL属性使用形容词来表达，属性将忽略’is’前缀，但会强调惯用名称。
-例如：
-&lt;/code&gt;
-@property (assign, getter=isEditable) BOOL editable;
-```&lt;/p&gt;
+&lt;p&gt;如果一个BOOL属性使用形容词来表达，属性将忽略’is’前缀，但会强调惯用名称。
+例如：&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;单例&lt;/strong&gt;
-在创建单例对象的共享实例时，应使用线程安全模式。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;k&quot;&gt;@property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;assign&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;getter&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEditable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;BOOL&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;editable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;```
-如：
-(instancetype)sharedInstance {
-   static id sharedInstance = nil;&lt;/p&gt;
+&lt;h3 id=&quot;section-19&quot;&gt;单例&lt;/h3&gt;
+&lt;p&gt;在创建单例对象的共享实例时，应使用线程安全模式。&lt;/p&gt;
 
-&lt;p&gt;static dispatch_once_t onceToken;
-   dispatch_once(&amp;amp;onceToken, ^{
-      sharedInstance = [[self alloc] init];
-   });&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如：&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;instancetype&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sharedInstance&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+   &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sharedInstance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;nil&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+ 
+   &lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;dispatch_once_t&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onceToken&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;dispatch_once&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;onceToken&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;sharedInstance&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;alloc&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;init&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+   &lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+ 
+   &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sharedInstance&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;return sharedInstance;
-}
-```&lt;/p&gt;
+&lt;h3 id=&quot;section-20&quot;&gt;数字&lt;/h3&gt;
 
-&lt;p&gt;&lt;strong&gt;数字&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;尽量避免数字固定为某个类型如:写5而不写5.0，5.3而不写5.3f)&lt;/p&gt;
 
-&lt;p&gt;尽量避免数字固定为某个类型```如:写5而不写5.0，5.3而不写5.3f)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;代码组织&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;section-21&quot;&gt;代码组织&lt;/h3&gt;
 
 &lt;p&gt;用 &lt;code&gt;#pragma mark&lt;/code&gt;来将方法分类，这个非常有效，当你用快捷键&lt;code&gt;Control+6&lt;/code&gt;可以高效的寻找到自己想要跳转到的方法&lt;/p&gt;
 
-&lt;p&gt;```
-#pragma mark Properties&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//#pragma mark Properties&lt;/span&gt;
 
-&lt;p&gt;@dynamic someProperty;&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@dynamic&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;someProperty&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;(void)setCustomProperty:(id)value {}&lt;/li&gt;
-&lt;/ul&gt;
+&lt;span class=&quot;k&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;setCustomProperty:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;value&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
 
-&lt;h1 id=&quot;pragma-mark-lifecycle&quot;&gt;pragma mark Lifecycle&lt;/h1&gt;
+&lt;span class=&quot;c1&quot;&gt;//#pragma mark Lifecycle&lt;/span&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;(id)objectWithThing:(id)thing {}&lt;/li&gt;
-  &lt;li&gt;(id)init {}&lt;/li&gt;
-&lt;/ul&gt;
+&lt;span class=&quot;k&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;objectWithThing:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;thing&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;init&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
 
-&lt;h1 id=&quot;pragma-mark-drawing&quot;&gt;pragma mark Drawing&lt;/h1&gt;
+&lt;span class=&quot;c1&quot;&gt;//#pragma mark Drawing&lt;/span&gt;
 
-&lt;h1 id=&quot;pragma-mark-uitableview-delegate&quot;&gt;pragma mark UItableView delegate&lt;/h1&gt;
+&lt;span class=&quot;c1&quot;&gt;//#pragma mark UItableView delegate&lt;/span&gt;
 
-&lt;h1 id=&quot;pragma-mark-uitableview-datasource&quot;&gt;pragma mark UITableView datasource&lt;/h1&gt;
+&lt;span class=&quot;c1&quot;&gt;//#pragma mark UITableView datasource&lt;/span&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;(void)drawRect:(CGRect) {}&lt;/li&gt;
-&lt;/ul&gt;
+&lt;span class=&quot;k&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;drawRect:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;CGRect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
 
-&lt;h1 id=&quot;pragma-mark-another-functional-grouping&quot;&gt;pragma mark Another functional grouping&lt;/h1&gt;
+&lt;span class=&quot;c1&quot;&gt;//#pragma mark Another functional grouping&lt;/span&gt;
 
-&lt;h1 id=&quot;pragma-mark-ghsuperclass&quot;&gt;pragma mark GHSuperclass&lt;/h1&gt;
+&lt;span class=&quot;c1&quot;&gt;//#pragma mark GHSuperclass&lt;/span&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;(void)someOverriddenMethod {}&lt;/li&gt;
-&lt;/ul&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;someOverriddenMethod&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
 
-&lt;h1 id=&quot;pragma-mark-nscopying&quot;&gt;pragma mark NSCopying&lt;/h1&gt;
+&lt;span class=&quot;c1&quot;&gt;//#pragma mark NSCopying&lt;/span&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;(id)copyWithZone:(NSZone *)zone {}&lt;/li&gt;
-&lt;/ul&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;copyWithZone&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSZone&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;zone&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
 
-&lt;h1 id=&quot;pragma-mark-nsobject&quot;&gt;pragma mark NSObject&lt;/h1&gt;
+&lt;span class=&quot;c1&quot;&gt;//#pragma mark NSObject&lt;/span&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;(NSString *)description {}&lt;/li&gt;
-&lt;/ul&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;description&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;判断语句&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;section-22&quot;&gt;判断语句&lt;/h3&gt;
 
 &lt;p&gt;if和else应该和左大括号在同一行&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-如:
-if (button.enabled) {
-    // Stuff
-} else if (otherButton.enabled) {
-    // Other stuff
-} else {
-    // More stuf
-}
-&lt;/code&gt;
-Switch 也是一样&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Stuff&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;otherButton&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;enabled&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// Other stuff&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// More stuf&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;```
-如:
-switch (something.state) {
-    case 0: {
-        // Something
-        break;
-    }&lt;/p&gt;
+&lt;p&gt;Switch 也是一样&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;case 1: {
-    // Something
-    break;
-}
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;switch&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;something&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;state&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;: &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Something&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-case 2:
-case 3: {
-    // Something
-    break;
-}
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;: &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Something&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-default: {
-    // Something
-    break;
-} } ```
-&lt;/code&gt;&lt;/pre&gt;
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;:
+    &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;: &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Something&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
-&lt;p&gt;&lt;strong&gt;Import&lt;/strong&gt;&lt;/p&gt;
+    &lt;span class=&quot;nl&quot;&gt;default:&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// Something&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;import&quot;&gt;Import&lt;/h3&gt;
 
 &lt;p&gt;在类的头文件中需要引用其他的类的时候，需要用&lt;code&gt;@class&lt;/code&gt;这个关键字，这样能减少类与类之间的依赖。&lt;/p&gt;
 
-&lt;p&gt;```
-如:
-store.h:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;h&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
 
-&lt;h1 id=&quot;import-foundationfoundationh&quot;&gt;import &amp;lt;Foundation/Foundation.h&amp;gt;&lt;/h1&gt;
-&lt;p&gt;#import &amp;lt;CoreData/CoreData.h&amp;gt;&lt;/p&gt;
+&lt;span class=&quot;c1&quot;&gt;//#import &amp;lt;Foundation/Foundation.h&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//#import &amp;lt;CoreData/CoreData.h&amp;gt;&lt;/span&gt;
 
-&lt;p&gt;@class User;&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt;;
 
-&lt;p&gt;@interface Store : NSManagedObject&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Store&lt;/span&gt; : &lt;span class=&quot;nc&quot;&gt;NSManagedObject&lt;/span&gt;
 
-&lt;p&gt;@property (nonatomic, retain) User *user;&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@property&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nonatomic&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;retain&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-&lt;p&gt;@end&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
 
-&lt;p&gt;Store.m:&lt;/p&gt;
+&lt;span class=&quot;n&quot;&gt;Store&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
 
-&lt;h1 id=&quot;import-storeh&quot;&gt;import “Store.h”&lt;/h1&gt;
+&lt;span class=&quot;c1&quot;&gt;//#import &amp;quot;Store.h&amp;quot;&lt;/span&gt;
 
-&lt;h1 id=&quot;import-userh&quot;&gt;import “User.h”&lt;/h1&gt;
+&lt;span class=&quot;c1&quot;&gt;//#import &amp;quot;User.h&amp;quot;&lt;/span&gt;
 
-&lt;p&gt;@implementation Store&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Store&lt;/span&gt;
 
-&lt;p&gt;//doSomething&lt;/p&gt;
+&lt;span class=&quot;c1&quot;&gt;//doSomething&lt;/span&gt;
 
-&lt;p&gt;@end&lt;/p&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;```&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;私有方法&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&quot;section-23&quot;&gt;私有方法&lt;/h3&gt;
 
 &lt;p&gt;关于私有方法，苹果官方建议呢是是使用统一的前缀来分组和辨识。但是千万不用用下划线来作为前缀来命名，或者你可以在前缀前添加一些特殊的标识。&lt;/p&gt;
 
@@ -441,17 +423,17 @@ store.h:&lt;/p&gt;
   &lt;li&gt;&lt;strong&gt;添加了新功能&lt;/strong&gt; &lt;code&gt;feat(大模块+子模块):#例如实现了某个具体功能&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;修改了某些功能&lt;/strong&gt;  &lt;code&gt;change(大模块+子模块):#例如修改了某个具体的功能&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;修复了某个Bug&lt;/strong&gt;  &lt;code&gt;fix_bug(大模块+子模块):#修复了什么的bug，最好写上*原因*和*解决方法*。&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;比较大的改动&lt;/strong&gt;  &lt;/p&gt;
+  &lt;li&gt;&lt;strong&gt;比较大的改动&lt;/strong&gt;  &lt;/li&gt;
+&lt;/ol&gt;
 
-    &lt;p&gt;```
-broken_change():
-before: &lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;   &lt;span class=&quot;n&quot;&gt;broken_change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+   &lt;span class=&quot;nl&quot;&gt;before:&lt;/span&gt; 
+   
+   &lt;span class=&quot;n&quot;&gt;after&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-    &lt;p&gt;after:&lt;/p&gt;
-
-    &lt;p&gt;```&lt;/p&gt;
-  &lt;/li&gt;
+&lt;ol&gt;
   &lt;li&gt;&lt;strong&gt;修改了文档&lt;/strong&gt; &lt;code&gt;docs():&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;修改了格式&lt;/strong&gt; &lt;code&gt;style():&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;&lt;strong&gt;添加了一些测试&lt;/strong&gt; &lt;code&gt;test(大模块+子模块):&lt;/code&gt;&lt;/li&gt;
@@ -459,151 +441,144 @@ before: &lt;/p&gt;
   &lt;li&gt;&lt;strong&gt;对又有代码的重构&lt;/strong&gt; &lt;code&gt;refactor(大模块+子模块):&lt;/code&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;格式&lt;/h2&gt;
+&lt;h2 id=&quot;section-24&quot;&gt;格式&lt;/h2&gt;
 &lt;p&gt;一行代码的长度不能超过80个字母&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;函数声明和定义:&lt;/strong&gt;&lt;/p&gt;
 
 &lt;p&gt;“-”或“+”和返回类型之间应该有一个空格&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-如:
-- (void)doSomethingWithString:(NSString *)theString {
-  ...
-}
-&lt;/code&gt;
-方法大括号和其它大括号（比如if/else/switch/while等等）应在语句的同一行开始，而在新的一行关闭。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;doSomethingWithString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theString&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-if (user.isHappy) {
-//Do something
-}
-else {
-//Do something else
-}
-&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;方法大括号和其它大括号（比如if/else/switch/while等等）应在语句的同一行开始，而在新的一行关闭。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isHappy&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//Do something&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//Do something else&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;当有多个参数的时，如果参数太多超过一行，则应该将每个参数分行，并且冒号对齐&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-如:
-- (void)doSomethingWith:(GTMFoo *)theFoo
-                   rect:(NSRect)theRect
-               interval:(float)theInterval {
-  ...
-}
-&lt;/code&gt;
-当第一个参数短于其他参数的时候，分行时每行至少要缩进4个空格&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;doSomethingWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;GTMFoo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theFoo&lt;/span&gt;
+                   &lt;span class=&quot;nl&quot;&gt;rect:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSRect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theRect&lt;/span&gt;
+               &lt;span class=&quot;nl&quot;&gt;interval:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theInterval&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-如：- (void)short:(GTMFoo *)theFoo
-             longKeyword:(NSRect)theRect
-       evenLongerKeyword:(float)theInterval
-                   error:(NSError **)theError {
-          ...
-}
-&lt;/code&gt;
-&lt;strong&gt;方法调用:&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;当第一个参数短于其他参数的时候，分行时每行至少要缩进4个空格&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;             &lt;span class=&quot;nl&quot;&gt;longKeyword:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSRect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theRect&lt;/span&gt;
+       &lt;span class=&quot;nl&quot;&gt;evenLongerKeyword:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theInterval&lt;/span&gt;
+                   &lt;span class=&quot;nl&quot;&gt;error:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSError&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;theError&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;section-25&quot;&gt;方法调用&lt;/h3&gt;
 
 &lt;p&gt;方法调用应该和方法声明的时候一个格式,要么所有参数放在一行里:&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-如:
-[myObject doFooWith:arg1 name:arg2 error:arg3];
-&lt;/code&gt;
-要么每一行一个参数:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myObject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;doFooWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg1&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg2&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;error&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;code&gt;
-如:
-[myObject doFooWith:arg1
-               name:arg2
-              error:arg3];
-&lt;/code&gt;
-当第一个参数短语其他参数的时候，分行是每行至少要缩进4个空格:&lt;/p&gt;
+&lt;p&gt;要么每一行一个参数:&lt;/p&gt;
 
-&lt;p&gt;```
-如:
-[myObj short:arg1
-          longKeyword:arg2
-    evenLongerKeyword:arg3
-                error:arg4];&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myObject&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;doFooWith&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg1&lt;/span&gt;
+               &lt;span class=&quot;nl&quot;&gt;name:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg2&lt;/span&gt;
+              &lt;span class=&quot;nl&quot;&gt;error:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;```&lt;/p&gt;
+&lt;p&gt;当第一个参数短语其他参数的时候，分行是每行至少要缩进4个空格:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;myObj&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;short&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg1&lt;/span&gt;
+          &lt;span class=&quot;nl&quot;&gt;longKeyword:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg2&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;evenLongerKeyword:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg3&lt;/span&gt;
+                &lt;span class=&quot;nl&quot;&gt;error:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arg4&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;@public 和 @private前面为一个空格&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-如:
-@interface MyClass : NSObject{
- @public
- …
- @private
-}
-@end
-&lt;/code&gt;
-&lt;strong&gt;协议:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyClass&lt;/span&gt; : &lt;span class=&quot;nc&quot;&gt;NSObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;@public&lt;/span&gt;
+ &lt;span class=&quot;err&quot;&gt;…&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;@private&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;section-26&quot;&gt;协议&lt;/h3&gt;
 
 &lt;p&gt;类型与协议名之间不要空格&lt;/p&gt;
 
-&lt;p&gt;&lt;code&gt;
-如:
-@interface MyProtocoledClass : NsObject&amp;lt;NSWindowDelegate&amp;gt; {
- @private
-  id&amp;lt;MyFancyDelegate&amp;gt; _delegate;
-}
--  (void)setDelegate:(id&amp;lt;MyFancyDelegate&amp;gt;)aDelegate;
-@end
-&lt;/code&gt;
-&lt;strong&gt;Blocks:&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;MyProtocoledClass&lt;/span&gt; : &lt;span class=&quot;nc&quot;&gt;NsObject&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSWindowDelegate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+ &lt;span class=&quot;k&quot;&gt;@private&lt;/span&gt;
+  &lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyFancyDelegate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;_delegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;  &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;setDelegate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;MyFancyDelegate&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;aDelegate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;```
-在一行的情况
-如:
-[operation setCompletionBlock:^{ [self onOperationDone]; }];&lt;/p&gt;
+&lt;h3 id=&quot;blocks&quot;&gt;Blocks&lt;/h3&gt;
 
-&lt;p&gt;//block 在新的行里，需要缩进四个空格
-[operation setCompletionBlock:^{
-      [self.delegate newDataAvailable];
-}];&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;err&quot;&gt;在一行的情况&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;operation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setCompletionBlock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;onOperationDone&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
 
-&lt;p&gt;dispatch_async(_fileIOQueue, ^{
-      NSString* path = [self sessionFilePath];
-      if (path) {
-        // …
-      }
-});
-```&lt;/p&gt;
+&lt;span class=&quot;c1&quot;&gt;//block 在新的行里，需要缩进四个空格&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;operation&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;setCompletionBlock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;delegate&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;newDataAvailable&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
 
-&lt;p&gt;```
-//有参数的block,|(SessionWindow *window)|与|{|之间有一个空格
-如:
-[[SessionService sharedService]
-    loadWindowWithCompletionBlock:^(SessionWindow *window) {
-        if (window) {
-          [self windowDidLoad:window];
-        } else {
-          [self errorLoadingWindow];
-        }
-    }];&lt;/p&gt;
+&lt;span class=&quot;n&quot;&gt;dispatch_async&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_fileIOQueue&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;path&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sessionFilePath&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;path&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;});&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;//block 中有参数且不能在一行中显示
-//要行与行之间要相对有四个空格
-[[SessionService sharedService]
-      loadWindowWithCompletionBlock:
-            ^(SessionWindow *window) {
-                   if (window) {
-                     [self windowDidLoad:window];
-                   } else {
-                     [self errorLoadingWindow];
-                   }
-            }];&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;c1&quot;&gt;//有参数的block,|(SessionWindow *window)|与|{|之间有一个空格&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;如&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SessionService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sharedService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;nl&quot;&gt;loadWindowWithCompletionBlock:&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SessionWindow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;windowDidLoad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+          &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;errorLoadingWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
 
-&lt;p&gt;//很长的block可以被定义不在一行里
-void (^largeBlock)(void) = ^{
-    // …
-};
-[_operationQueue addOperationWithBlock:largeBlock];
-```&lt;/p&gt;
+&lt;span class=&quot;c1&quot;&gt;//block 中有参数且不能在一行中显示&lt;/span&gt;
+&lt;span class=&quot;c1&quot;&gt;//要行与行之间要相对有四个空格&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SessionService&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sharedService&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;loadWindowWithCompletionBlock:&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;SessionWindow&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                   &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                     &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;windowDidLoad&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;window&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+                   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+                     &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;errorLoadingWindow&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+                   &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;p&quot;&gt;}];&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;//很长的block可以被定义不在一行里&lt;/span&gt;
+&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;largeBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;^&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;};&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;_operationQueue&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;addOperationWithBlock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;largeBlock&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 
   &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/ios_code_standards/&quot;&gt;iOS编码规范参考&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 22, 2014.&lt;/p&gt;</content>
