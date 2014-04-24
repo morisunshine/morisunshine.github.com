@@ -1,0 +1,588 @@
+<!doctype html>
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if (IE 7)&!(IEMobile)]><html class="no-js lt-ie9 lt-ie8" lang="en"><![endif]-->
+<!--[if (IE 8)&!(IEMobile)]><html class="no-js lt-ie9" lang="en"><![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"><!--<![endif]-->
+<head>
+<meta charset="utf-8">
+<title>Objective-C的命名空间 &#8211; Morisunshine's Blog</title>
+<meta name="description" content="">
+<meta name="keywords" content="iOS">
+
+<!-- Twitter Cards -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://morisunshine.com/images/">
+<meta name="twitter:title" content="Objective-C的命名空间">
+<meta name="twitter:description" content="">
+<meta name="twitter:creator" content="@morisunshine">
+
+<!-- Open Graph -->
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Objective-C的命名空间">
+<meta property="og:description" content="">
+<meta property="og:url" content="http://morisunshine.com/ios/namespacing/">
+<meta property="og:site_name" content="Morisunshine's Blog">
+
+
+
+
+
+<link rel="canonical" href="http://morisunshine.com/ios/namespacing/">
+<link href="http://morisunshine.com/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
+
+
+<!-- http://t.co/dKP3o1e -->
+<meta name="HandheldFriendly" content="True">
+<meta name="MobileOptimized" content="320">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- For all browsers -->
+<link rel="stylesheet" href="http://morisunshine.com/assets/css/main.min.css">
+<!-- Webfonts -->
+<link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
+
+<meta http-equiv="cleartype" content="on">
+
+<!-- Load Modernizr -->
+<script src="http://morisunshine.com/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+
+<!-- Icons -->
+<!-- 16x16 -->
+<link rel="shortcut icon" href="http://morisunshine.com/favicon.ico">
+<!-- 32x32 -->
+<link rel="shortcut icon" href="http://morisunshine.com/favicon.png">
+<!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
+<link rel="apple-touch-icon-precomposed" href="http://morisunshine.com/images/apple-touch-icon-precomposed.png">
+<!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://morisunshine.com/images/apple-touch-icon-72x72-precomposed.png">
+<!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://morisunshine.com/images/apple-touch-icon-114x114-precomposed.png">
+<!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://morisunshine.com/images/apple-touch-icon-144x144-precomposed.png">
+
+
+
+</head>
+
+<body id="post" >
+
+<!--[if lt IE 9]><div class="upgrade"><strong><a href="http://whatbrowser.org/">Your browser is quite old!</strong> Why not upgrade to a different browser to better enjoy this site?</a></div><![endif]-->
+<nav id="dl-menu" class="dl-menuwrapper" role="navigation">
+	<button class="dl-trigger">Open Menu</button>
+	<ul class="dl-menu">
+		<li><a href="http://morisunshine.com">Home</a></li>
+		<li>
+			<a href="#">About</a>
+			<ul class="dl-submenu">
+				<li>
+					<img src="http://morisunshine.com/images/avatar.png" alt="Sheldon photo" class="author-photo">
+					<h4>Sheldon</h4>
+					<p>1991-12-10</p>
+				</li>
+				<li><a href="http://morisunshine.com/about/">Know More</a></li>
+				<li>
+					<a href="mailto:sheldon.zen@gmail.com"><i class="icon-envelope"></i> Email</a>
+				</li>
+				<li>
+					<a href="http://twitter.com/morisunshine"><i class="icon-twitter"></i> Twitter</a>
+				</li>
+				<li>
+					<a href="http://weibo.com/u/1626743220"><i class="icon-weibo"></i> weibo</a>
+				</li>
+				
+				
+				<li>
+					<a href="http://linkedin.com/in/morisunshine"><i class="icon-linkedin"></i> LinkedIn</a>
+				</li>
+				<li>
+					<a href="http://github.com/morisunshine"><i class="icon-github"></i> GitHub</a>
+				</li>
+				<li>
+					<a href="http://stackoverflow.com/users/2194236/morisunshine"><i class="icon-stackexchange"></i> Stackexchange</a>
+				</li>
+				<li>
+					<a href="http://instagram.com/morisunshine"><i class="icon-instagram"></i> Instagram</a>
+				</li>
+				
+				
+			</ul><!-- /.dl-submenu -->
+		</li>
+		<li>
+			<a href="#">Posts</a>
+			<ul class="dl-submenu">
+				<li><a href="http://morisunshine.com/posts/">All Posts</a></li>
+				<li><a href="http://morisunshine.com/tags/">All Tags</a></li>
+			</ul>
+		</li>
+		<li><a href="http://morisunshine.com/feed">Feed</a></li>
+		
+	</ul><!-- /.dl-menu -->
+</nav><!-- /.dl-menuwrapper -->
+
+
+
+
+<div id="main" role="main">
+  <article class="hentry">
+    <header class="header-title">
+      <div class="header-title-wrap">
+        
+          <h1 class="entry-title"><a href="http://morisunshine.com/ios/namespacing/" rel="bookmark" title="Objective-C的命名空间">Objective-C的命名空间</a></h1>
+        
+        <h2>April 24, 2014</h2>
+      </div><!-- /.header-title-wrap -->
+    </header>
+    <div class="entry-content">
+      <p><strong>为什么很多命名都是NS开头的呢？</strong></p>
+
+<p>我保证在第一次给别人介绍Objective-C的时候你肯定会听到这句话。</p>
+
+<p>就像父母要向孩子解释什么是死亡或者圣诞老人是不存在的问题一样，父母总是寄希望于未来，希望将来孩子能够自己找到答案。</p>
+
+<p><strong>你既然这么问了，实际上NS代表了NeXTSTEP （好吧，其实是代表NeXTSTEP/Sun，我们只是做个简单的介绍），它被用于…</strong></p>
+
+<p>随着你解释的更多，你可能会从对方的脸上看到失望两个字，接下来，他们不在只是随便问问了，他们开始问一些你更难解释的问题–在Objective-C中<a href="http://nshipster.com/at-compiler-directives/">@</a>是什么？</p>
+
+<hr />
+
+<p>命名一直是Objective-C的硬伤，和那些优雅的语言相比，Objective-C缺乏标识符容器这点引来了很多不切实际的批评家。</p>
+
+<p>他们总是说：Objective-C不像其他流行语言一样提供模块化机制来避免类名和方法名的冲突。</p>
+
+<p>相反地，Objective-C 依靠前缀来确保APP中的一些地方的方法名不会影响其他的地方有相同名字的代码。</p>
+
+<p>插入一个关于类型系统的题外话之后我们会继续进入关于命名的讨论。</p>
+
+<h2 id="cobjective-c">C和Objective-C中的类型</h2>
+
+<p>我曾在这本书上多次提过，Objective-C是直接建立在C语言之上的，一个重要的原因是Objective-C和C语言共用一个类型系统，他们都要求标识符是全局唯一的。</p>
+
+<p>你可以自己定义一个和@interface同名的静态变量，编译之后你会得到一个错误：</p>
+
+<div class="highlight"><pre><code class="objc"><span class="k">@interface</span> <span class="nc">XXObject</span> : <span class="nc">NSObject</span>
+<span class="k">@end</span>
+
+<span class="k">static</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">XXObject</span><span class="p">;</span><span class="c1">//将“XXObject”重新定义为不同的符号</span>
+</code></pre></div>
+
+<p>也就是说，Objective-C的runtime在C语言的类型系统上又创建了一个抽象层，它甚至可以允许下面这段代码被编译:</p>
+
+<div class="highlight"><pre><code class="objc"><span class="k">@protocol</span> <span class="nc">Foo</span>
+<span class="k">@end</span>
+
+<span class="k">@interface</span> <span class="nc">Foo</span> : <span class="nc">NSObject</span> <span class="o">&lt;</span><span class="n">Foo</span> 
+    <span class="kt">id</span> <span class="n">Foo</span>
+<span class="p">}</span>
+
+<span class="k">@property</span> <span class="kt">id</span> <span class="n">Foo</span><span class="p">;</span>
+<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">Foo</span><span class="p">;</span>
+<span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">Foo</span><span class="p">;</span>
+<span class="k">@end</span>
+
+<span class="k">@interface</span> <span class="nc">Foo</span> <span class="nl">(Foo)</span>
+<span class="k">@end</span>
+
+<span class="k">@implementation</span> <span class="nc">Foo</span>
+<span class="k">@synthesize</span> <span class="n">Foo</span><span class="p">;</span>
+
+<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">Fo</span> 
+    <span class="kt">id</span> <span class="n">Foo</span> <span class="o">=</span> <span class="s">@&quot;Fo</span>
+    <span class="k">return</span> <span class="n">Foo</span>
+<span class="p">}</span>
+<span class="k">@end</span>
+</code></pre></div>
+
+<ol>
+  <li>通过Objective-C的环境，程序能区别所有相同名字的类，协议，类别，实例变量，实例方法和类方法。</li>
+</ol>
+
+<p><strong>一个变量能重新调整一个已经存在的方法也是得益与C语言的类型系统（这个有点像一个变量能够隐藏它的隐藏功能）</strong></p>
+
+<h2 id="section">前缀</h2>
+
+<p>在Objective-C应用中的所有类名都必须是全局唯一的。由于很多不同的框架中会有一些相似的功能，所以在名字上也可能会有重复（users， views， requests / responses 等等），所以<a href="https://developer.apple.com/library/ios/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html">苹果官方文档</a>规定类名需要有2-3个字母作为前缀。</p>
+
+<h3 id="section-1">类前缀</h3>
+
+<p>苹果官方<a href="https://developer.apple.com/library/ios/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html">建议</a>两个字母作为前缀的类名是为官方的库和框架准备的，而对于作为第三方的开发者的我们，他们建议使用3个或者更多的字母作为前缀去命名我们的类。</p>
+
+<p>一个资深的Mac或iOS开发者可能会记得下面大部分的缩写标识符：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prefix</th>
+      <th style="text-align: left">Frameworks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AB</td>
+      <td style="text-align: left">AddressBook / AddressBookUI</td>
+    </tr>
+    <tr>
+      <td>AC</td>
+      <td style="text-align: left">Accounts</td>
+    </tr>
+    <tr>
+      <td>AD</td>
+      <td style="text-align: left">iAd</td>
+    </tr>
+    <tr>
+      <td>AL</td>
+      <td style="text-align: left">AssetsLibrary</td>
+    </tr>
+    <tr>
+      <td>AU</td>
+      <td style="text-align: left">AudioUnit</td>
+    </tr>
+    <tr>
+      <td>AV</td>
+      <td style="text-align: left">AVFoundation</td>
+    </tr>
+    <tr>
+      <td>CA</td>
+      <td style="text-align: left">CoreAnimation</td>
+    </tr>
+    <tr>
+      <td>CB</td>
+      <td style="text-align: left">CoreBluetooth</td>
+    </tr>
+    <tr>
+      <td>CF</td>
+      <td style="text-align: left">CoreFoundation / CFNetwork</td>
+    </tr>
+    <tr>
+      <td>CG</td>
+      <td style="text-align: left">CoreGraphics / QuartzCore / ImageIO</td>
+    </tr>
+    <tr>
+      <td>CI</td>
+      <td style="text-align: left">CoreImage</td>
+    </tr>
+    <tr>
+      <td>CL</td>
+      <td style="text-align: left">CoreLocation</td>
+    </tr>
+    <tr>
+      <td>CM</td>
+      <td style="text-align: left">CoreMedia / CoreMotion</td>
+    </tr>
+    <tr>
+      <td>CV</td>
+      <td style="text-align: left">CoreVideo</td>
+    </tr>
+    <tr>
+      <td>EA</td>
+      <td style="text-align: left">ExternalAccessory</td>
+    </tr>
+    <tr>
+      <td>EK</td>
+      <td style="text-align: left">EventKit / EventKitUI</td>
+    </tr>
+    <tr>
+      <td>GC</td>
+      <td style="text-align: left">GameController</td>
+    </tr>
+    <tr>
+      <td>GLK</td>
+      <td style="text-align: left">GLKit</td>
+    </tr>
+    <tr>
+      <td>JS</td>
+      <td style="text-align: left">JavaScriptCore</td>
+    </tr>
+    <tr>
+      <td>MA</td>
+      <td style="text-align: left">MediaAccessibility</td>
+    </tr>
+    <tr>
+      <td>MC</td>
+      <td style="text-align: left">MultipeerConnectivity</td>
+    </tr>
+    <tr>
+      <td>MF</td>
+      <td style="text-align: left">MessageUI</td>
+    </tr>
+    <tr>
+      <td>MIDI</td>
+      <td style="text-align: left">CoreMIDI</td>
+    </tr>
+    <tr>
+      <td>MK</td>
+      <td style="text-align: left">MapKit</td>
+    </tr>
+    <tr>
+      <td>MP</td>
+      <td style="text-align: left">MediaPlayer</td>
+    </tr>
+    <tr>
+      <td>NK</td>
+      <td style="text-align: left">NewsstandKit</td>
+    </tr>
+    <tr>
+      <td>NS</td>
+      <td style="text-align: left">Foundation, AppKit, CoreData</td>
+    </tr>
+    <tr>
+      <td>PK</td>
+      <td style="text-align: left">PassKit</td>
+    </tr>
+    <tr>
+      <td>QL</td>
+      <td style="text-align: left">QuickLook</td>
+    </tr>
+    <tr>
+      <td>SC</td>
+      <td style="text-align: left">SystemConfiguration</td>
+    </tr>
+    <tr>
+      <td>Se</td>
+      <td style="text-align: left">Security</td>
+    </tr>
+    <tr>
+      <td>SK</td>
+      <td style="text-align: left">StoreKit / SpriteKit</td>
+    </tr>
+    <tr>
+      <td>SL</td>
+      <td style="text-align: left">Social</td>
+    </tr>
+    <tr>
+      <td>SS</td>
+      <td style="text-align: left">Safari Services</td>
+    </tr>
+    <tr>
+      <td>TW</td>
+      <td style="text-align: left">Twitter</td>
+    </tr>
+    <tr>
+      <td>UI</td>
+      <td style="text-align: left">UIKit</td>
+    </tr>
+    <tr>
+      <td>UT</td>
+      <td style="text-align: left">MobileCoreServices</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="section-2">第三方类前缀</h4>
+<hr />
+
+<p>直到最近，由于<a href="http://cocoapods.org/">CocoaPods</a>的出现和大量新的iOS开发者的涌现，开源代码的遍布，第三方代码在很大程度上对苹果和其余的Objective-C开发社区来说已经不是问题了。最近苹果官方的命名指南也发生了变化，它将三个字母作为前缀的建议只是做为一个习惯做法。</p>
+
+<p>正因为这样，那些已经存在的第三方库依然使用2个字母作为前缀，你可以参考一些那些在GitHub上得到很多<a href="https://github.com/search?l=Objective-C&amp;q=stars%3A%3E1&amp;s=stars&amp;type=Repositories">start的Objective-C的仓库</a>。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Prefix</th>
+      <th style="text-align: left">Frameworks</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>AF</td>
+      <td style="text-align: left">AFNetworking (“Alamofire”)</td>
+    </tr>
+    <tr>
+      <td>RK</td>
+      <td style="text-align: left">RestKit</td>
+    </tr>
+    <tr>
+      <td>PU</td>
+      <td style="text-align: left">GPUImage</td>
+    </tr>
+    <tr>
+      <td>SD</td>
+      <td style="text-align: left">SDWebImage</td>
+    </tr>
+    <tr>
+      <td>MB</td>
+      <td style="text-align: left">MBProgressHUD</td>
+    </tr>
+    <tr>
+      <td>FB</td>
+      <td style="text-align: left">Facebook SDK</td>
+    </tr>
+    <tr>
+      <td>FM</td>
+      <td style="text-align: left">FMDB (“Flying Meat”)</td>
+    </tr>
+    <tr>
+      <td>JK</td>
+      <td style="text-align: left">JSONKit</td>
+    </tr>
+    <tr>
+      <td>UI</td>
+      <td style="text-align: left">FlatUI</td>
+    </tr>
+    <tr>
+      <td>NI</td>
+      <td style="text-align: left">Nimbus</td>
+    </tr>
+    <tr>
+      <td>AC</td>
+      <td style="text-align: left">Reactive Cocoa</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>我们已经看到在在这个<a href="https://github.com/AshFurrow/AFTabledCollectionView">第三方库中</a>的前缀已经和我的<a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a>一样了，所以最好还是要在你的代码中遵守要三个字母以上的作为类前缀的规定(https://github.com/AshFurrow/AFTabledCollectionView)。</p>
+
+<p><strong>对于那些针对特殊功能而写的第三方库的作者，可以考虑在下一次主要升级时使用<a href="http://nshipster.com/at-compiler-directives/">@compatibility_alias</a>来为那些使用者们提供一个天衣无缝的转移路径。</strong></p>
+
+<h2 id="section-3">方法前缀</h2>
+
+<p>不仅是类容易造成命名冲突，selectors也很容易造成命名冲突，甚至方法比类会有更多的问题。
+考虑一下这个category：</p>
+
+<div class="highlight"><pre><code class="objc"><span class="k">@interface</span> <span class="nc">NSString</span> <span class="nl">(PigLatin)</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">pigLatinString</span><span class="p">;</span>
+<span class="k">@end</span>
+</code></pre></div>
+
+<p>如果 <code>-pigLatinString</code>方法被另一个category实现了（或者以后版本的iOS或者Mac OS X 在NSString类中也添加了同样名字的方法），那么调用这个方法就会得到未定义的行为错误，因为我们不能保证在runtime中哪个方法会先被定义。</p>
+
+<p>我们可以通过在方法名前加前缀来避免这个问题，就像加这个类名一样（在类别名前加前缀也是个好办法）：</p>
+
+<div class="highlight"><pre><code class="objc"><span class="k">@interface</span> <span class="nc">NSString</span> <span class="nl">(XXXPigLatin)</span>
+<span class="k">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">xxx_pigLatinString</span><span class="p">;</span>
+<span class="k">@end</span>
+</code></pre></div>
+
+<p>苹果官方建议<a href="https://developer.apple.com/library/ios/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html#//apple_ref/doc/uid/TP40011210-CH6-SW4">所有category方法使使用前缀</a>，这个建议比类名需要加前缀的规定更加广为人知和接受。</p>
+
+<p>很多开发者都在热情地讨论着这个规定的某一方面。然而，无论是通过成本角度还是效益角度来衡量命名冲突风险的可能性都是是不全面的:</p>
+
+<p>category的主要功能是通过语法糖将一些有用的功能包裹进原来的类中。任何一个category方法都可以被选择性实现，你也可以把他当做是self的一个隐型的功能方法。</p>
+
+<p>当我在编译器的环境参数中将<code>OBJC_PRINT_REPLACED_METHODS</code>这个参数设置为YES，那我们就能在编译的时候检测方法名是否有冲突。实际上，方法名的冲突是很少发生的，而且在发生的时候，他们通常会得到一个<code>needlessly duplicated across dependencies</code>的提示。即使发生最坏的情况，程序在运行是出现异常，那么很可能是两个方法名一样，那么他们做的事情也是一样的，所以结果也不会有什么变化。就像Swiss Army Knife写了一个category，他定义了<code>NSArray</code>中的<code> -firstObject</code>这个方法，那么只要苹果官方没有在<code>NSArray</code>中加这个方法的话，那么这个类别方法一直有效的。</p>
+
+<p>在苹果官方的编程指南有很多严肃又松散的解释。这里没有固定的文档，他们可能一直变化。看到这里，如果你还是悬而未决，那么你只需要把的category方法名加上前缀，如果你还是选择不去做任何改变，那么你就等着自食其果吧。</p>
+
+<h3 id="section-4">方法混合</h3>
+<hr />
+
+<p>在方法混合时，方法名加前缀或者后缀也是非常有必要的，这个我在上周关于<a href="http://nshipster.com/method-swizzling/">swizzling</a>的文章中提到过。</p>
+
+<div class="highlight"><pre><code class="objc"><span class="k">@implementation</span> <span class="nc">UIViewController</span> <span class="nl">(Swizzling)</span>
+
+<span class="k">@implementation</span> <span class="nc">UIViewController</span> <span class="nl">(Swizzling)</span>
+
+<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">xxx_viewDidLoad</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">self</span> <span class="n">xxx_viewDidLoad</span><span class="p">];</span>
+
+    <span class="c1">// Swizzled implementation</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<h2 id="section-5">我们真的需要命名空间么？</h2>
+
+<p>在最近关于Objective-C替换、改造和重塑的讨论中，我可以明显地发现命名空间是未来的一个趋势。但是它到底给我们带来了什么呢？</p>
+
+<p>美学？除了IETE成员和军事人员，我想没有人会喜欢CLAs的视觉审美，但是用::，/或者另外的.这些符号真的能让我们觉得更好么？你真的想要以后把<code>NSArray</code>叫做<code>Foundation Array</code>？（那我这个NSHipster.com这个博客不是也得改名字了?!）</p>
+
+<p>语义学？我比较一下其他的语言，看看他们是怎么用命名空间的，那么你就会意识到命名空间不能解决所有不明确的问题。可能在某些额外环境的情况下，那些命名空间会出现更多问题。</p>
+
+<p>你还是不赞同，那么你想象一下Objective-C的命名空间的实现可能会像这个样子，你会觉得怎么样:</p>
+
+<div class="highlight"><pre><code class="objc"><span class="p">@</span><span class="n">namespaceX</span>
+    <span class="k">@implementation</span> <span class="nc">Obje</span>
+    <span class="p">@</span><span class="n">using</span> <span class="n">F</span><span class="o">:</span> <span class="n">Foundatio</span>
+    <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">fo</span>
+      <span class="nl">F:</span><span class="n">Array</span> <span class="o">*</span><span class="n">array</span> <span class="o">=</span> <span class="p">@[</span><span class="mi">@1</span><span class="p">,</span><span class="mi">@2</span><span class="p">,</span> <span class="mi">@3</span>
+      <span class="c1">// </span>
+   
+    <span class="p">@</span><span class="n">en</span>
+<span class="k">@end</span>
+</code></pre></div>
+
+<p>虽然Objective-C有繁琐的代码但也有容易理解的明显优点。我们作为开发者去讨论NSString的时候，我们不会把它理解成别的意思，编译器也是一样。当我们在阅读代码时，我们不需要过多地去考虑这些代码是什么作用的。并且最重要的是，这个类名在google这些搜索引擎中<a href="http://lmgtfy.com/?q=NSString">很容易就可以找到</a>。</p>
+
+<p>不管怎样，如果你对这个讨论感兴趣的话，我强烈建议你看一下<a href="http://optshiftk.com/">Kyle Sluder</a>的<a href="http://optshiftk.com/2012/04/draft-proposal-for-namespaces-in-objective-c/">《 this namespace feature proposal 》</a>。非常值得一看。</p>
+
+      <footer class="entry-meta">
+        <span class="entry-tags"><a href="http://morisunshine.com/tags/#iOS" title="Pages tagged iOS" class="tag">iOS</a></span>
+        <span><a href="http://morisunshine.com/ios/namespacing/" rel="bookmark" title="Objective-C的命名空间">Objective-C的命名空间</a> was published on <span class="entry-date date published updated"><time datetime="2014-04-24T00:00:00+08:00">April 24, 2014</time></span></span>
+        
+        <span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>
+        
+      </footer>
+    </div><!-- /.entry-content -->
+    <section id="disqus_thread">
+      <!-- Duoshuo Comment BEGIN -->
+<div class="ds-thread"></div>
+<script type="text/javascript">
+var duoshuoQuery = {short_name:"morisunshne"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = 'http://static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		|| document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+<!-- Duoshuo Comment END -->
+    </section>
+    
+    <div class="read-more">
+      
+        <div class="read-more-header">
+          <a href="http://morisunshine.com/ios/ios_code_standards/" class="read-more-btn">Read More</a>
+        </div><!-- /.read-more-header -->
+        <div class="read-more-content">
+          <h3><a href="http://morisunshine.com/ios/ios_code_standards/" title="iOS编码规范参考">iOS编码规范参考</a></h3>
+          <p>注释建议使用VVDocumenter插件多行注释格式:/**              注释内容*/单行注释格式:///在对文件、类、函数进行注释时推荐使用多行注释，在函数体内对代码块进行注释时，使用单行注释函数的注释函数注释的格式为/** *  @brief   *  @...&hellip; <a href="http://morisunshine.com/ios/ios_code_standards/">Continue reading</a></p>
+        </div><!-- /.read-more-content -->
+      
+      <div class="read-more-list">
+        
+          <div class="list-item">
+            <h4><a href="http://morisunshine.com/ios/Property_of_Objective_C/" title="@property中attribute的整理">@property中attribute的整理</a></h4>
+            <span>Published on April 16, 2014</span>
+          </div><!-- /.list-item -->
+        
+          <div class="list-item">
+            <h4><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/" title="我的时间观---活在当下">我的时间观---活在当下</a></h4>
+            <span>Published on March 24, 2014</span>
+          </div><!-- /.list-item -->
+        
+      </div><!-- /.read-more-list -->
+      
+    </div><!-- /.read-more -->
+  </article>
+</div><!-- /#main -->
+
+<div class="footer-wrapper">
+  <footer role="contentinfo">
+    <span>&copy; 2014 Sheldon. Powered by <a href="http://jekyllrb.com">Jekyll</a> using the <a href="http://mademistakes.com/hpstr/">HPSTR Theme</a>.</span>
+  </footer>
+</div><!-- /.footer-wrapper -->
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://morisunshine.com/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://morisunshine.com/assets/js/scripts.min.js"></script>
+
+<!-- Asynchronous Google Analytics snippet -->
+<script>
+  var _gaq = _gaq || [];
+  var pluginUrl = 
+ '//www.google-analytics.com/plugins/ga/inpage_linkid.js';
+  _gaq.push(['_require', 'inpage_linkid', pluginUrl]);
+  _gaq.push(['_setAccount', 'UA-47868064-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+	        
+
+</body>
+</html>

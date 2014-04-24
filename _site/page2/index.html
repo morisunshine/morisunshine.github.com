@@ -141,6 +141,96 @@
   
 <article class="hentry">
   <header>
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-03-06T00:00:00+08:00"><a href="http://morisunshine.com/%E5%BC%80%E5%8F%91/experience_of_develop/">March 06, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/%E5%BC%80%E5%8F%91/experience_of_develop/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="http://morisunshine.com/%E5%BC%80%E5%8F%91/experience_of_develop/" rel="bookmark" title="我的开发经验漫谈" itemprop="url">我的开发经验漫谈</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    <p>    <a href="#begin"><strong>项目开始之前</strong></a>     <br />
+    <a href="#specification"><strong>规范</strong></a><br />
+     <a href="#code_specification"><strong>代码规范</strong></a><br />
+     <a href="#version_specification"><strong>版本控制规范</strong></a><br />
+     <a href="#document_specification"><strong>文档规范</strong></a><br />
+     <a href="#test_specification"><strong>测试规范</strong></a><br />
+    <a href="#tidy"><strong>整理</strong></a><br />
+    <a href="#summary"><strong>总结</strong></a>  </p>
+
+<p>工作快一年了，参与了一些项目，在项目有崩溃的时候，也有欣喜的时候，我觉得很有必要记录下来，其中，可能是一些理想的化的设想，因为在之前的开发过程并没有实践过，但我觉得是可以一试，并且是有帮助的。</p>
+
+<p><a id="begin" name="begin"> </a></p>
+
+<h2 id="section">项目开始之前</h2>
+
+<p>很多次，我都迫不及待地想马上编写代码，我太喜欢那种写代码的感觉了。可是，越写越觉得不对劲，或者写到一半发现这个功能与需求不一样，然后改了又改，或直接重新开始写。<br />
+所以，不要急，慢慢来，我们可以先用Mind Map，或者你喜欢的方式将需求分析一下，并对一些功能进行细化。    <br />
+有大概的了解之后，我就该去考虑每个功能的具体实现，这个功能的难点在哪里，用什么方法比较好，如果没有找到好的方法，可以用现有的方法去代替。
+在上面都考虑好了，我们就该往大的方面想，用什么样的方式比较好，或许用到什么框架，设计模式比较好。 <br />
+也许刚开始的时候，我的经验有限，想到的方法或方式非常有限，但是一旦我开始去考虑这些问题，并且去实践的时候，我对这些方法的考虑开始往全面的方向发展，这就是在积累中成长吧。</p>
+
+<hr />
+
+<p><a id="specification" name="specification"> </a></p>
+
+<h2 id="section-1">规范</h2>
+
+<p>当我看过去写的代码，真的有种不想认自己的娃的冲动啊，根本不知道在写什么，命名非常幼稚，当然，现在可能也还是这样，但现在应该有一部分已经成年了吧。很多人会觉得规范是件很麻烦的事，因为规范会给限制程序员的自由，但个人觉得规范与自由并没有冲突。规范应该是团队之间的一种的约定的事情，它的目的是为了能够减少因代码问题而导致的沟通成本。</p>
+
+<p>规范体现在那些地方呢？</p>
+
+<p><a id="code_specification" name="code_specification"> </a></p>
+
+<h3 id="section-2">代码规范</h3>
+
+<p>我觉得每个团队之间的代码规范应该是不一样，代码规范应该是由团队中的每个成员讨论出来的结果，而不是一个人拍案决定，代码规范的目的应该是让你和每个成员都能很好的阅读，把时间专注到更需要时间的地方。 <br />
+哪些需要规范呢?<br />
+比如在iOS项目开发中，就可以有文件名的规范，图片名的规范，类名的规范等。这些命名都需要考虑仔细，因为它不是为一个人而起的。你还要确保别人也能看懂它的作用，也许你会觉得注释就好，当然，这会是个好办法，但如果只要能看到名字就能知道它的功能，那不是更好么？</p>
+
+<p><a id="version_specification" name="version_specification"> </a></p>
+
+<h3 id="section-3">版本控制规范</h3>
+
+<p>版本控制在开发过程中非常重要，所以版本控制的规范也是非常重要的，以git为例:</p>
+
+<ul>
+  <li>创建的分支名，就应该清楚让人知道我们在这个分支里做了哪些事情。</li>
+  <li>commit，每一条commit都应该清楚的描述，不能马虎，这不只帮助你未来的查看，也是让开发人员了解代码演化的重要途径之一，另一方面，也不知不觉中养成细化功能的习惯，这样在以后地开发中，你就会对要开发的功能进行细分，当一个子功能开发完成，就写一个commit。(这里可以参考<a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit">google开源项目的commit规范</a>)</li>
+</ul>
+
+<p><a id="document_specification" name="document_specification"> </a></p>
+
+<h3 id="section-4">文档规范</h3>
+
+<p>当开始一个项目时，应该需要一个文档，来跟踪你的项目，其中的内容应该包括，这个项目的文件结构，功能，还有一些类的功能。这些也是对代码可读性的扩展。</p>
+
+<p>这么多规范很烦吧，程序员的自由在哪儿，但我觉得我们不只是为现在写程序，很多时候，写程序的时间只占开发整个项目的10%，而很多时间都是在测试，调试，解决bug，或者在寻找以前的代码。所以我们要为未来而写，这对于我来说也是一种自我修养吧。</p>
+
+<p><a id="test_specification" name="test_specification"> </a></p>
+
+<h3 id="section-5">测试规范</h3>
+
+<p>测试，听上去很美好，当在我的以往项目中，这总是被遗忘的事情，或者是根本不会提起的事情，只有当问题产生，才会悔不当初，有它该多好。每次下定决心，一定要写一个测试的时候，总是懒于去行动，但励志要成为优秀工程师的我们一定不会忽略它的，所以测试的规范，也是非常重要的，它也让你知道一这段测试的功能与该有的结果，这也是对功能性的一个很好的补充，也为以后的改动带来了很多方便。</p>
+
+<hr />
+<p><a id="tidy" name="tidy"> </a></p>
+
+<h2 id="section-6">整理</h2>
+
+<p>你的项目不会是一尘不变的，他会因为时间的推移而增加更多东西，这时也许你之前的那些管理方式就变得很没有效率，想重新捣腾它，发现牵一发而动全身，真抓狂，早干嘛去了。为了避免这样的悲剧再次重演整理就变得很重要了，整理包括目录结构、资源和代码的整理，文件结构可以参考这篇<a href="http://blog.jobbole.com/61083/">博文</a>,资源和代码整理则是根据上面提到的各种规范，整理的目的应该是让项目清晰和简洁。</p>
+
+<hr />
+<p><a id="summary" name="summary"> </a></p>
+
+<h2 id="section-7">总结</h2>
+
+<p>写了这么多，其实也是对自己过去的经验的整理，也是对自己的勉励，博客的意义在于分享，而分享又是为了更好的交流，希望能提出一些宝贵的意见，让我们一起成长。</p>
+
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
     <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-02-27T00:00:00+08:00"><a href="http://morisunshine.com/ios/UICollectionView_UIKit_Dynamics/">February 27, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/ios/UICollectionView_UIKit_Dynamics/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
     
       <h1 class="entry-title"><a href="http://morisunshine.com/ios/UICollectionView_UIKit_Dynamics/" rel="bookmark" title="UICollectionView+UIKit Dynamics" itemprop="url">UICollectionView+UIKit Dynamics</a></h1>
@@ -1054,59 +1144,6 @@ Finished tests in 0.006151s, 487.7256 tests/s, 487.7256 assertions/s.
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 
-<article class="hentry">
-  <header>
-    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2013-01-10T00:00:00+08:00"><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/travel-to-qinghai/">January 10, 2013</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/travel-to-qinghai/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
-    
-      <h1 class="entry-title"><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/travel-to-qinghai/" rel="bookmark" title="站在原地, 心存远方" itemprop="url">站在原地, 心存远方</a></h1>
-    
-  </header>
-  <div class="entry-content">
-    <p><img src="/images/p7796217.jpg" alt="图片" /></p>
-
-<p style="text-indent: 2em;">
-旅行不是我一定要做的事，却是我一直想做的事。与旅行的结识，源于一部电影《第36个故事》，电影里的咖啡馆，浮想式的画面，以物易物，沙发客，环球旅行，都给那个漫长而又无聊的夏天带来了一阵清新的风。于是慢慢地开始去找寻许多关于旅行的故事，知道得愈多，对旅行的向往就愈强烈，然而看过了那么多关于旅行的书与电影，却发现自己依然站在原地。就像那些旅行的人常说的“只要踏出第一步，你就已经在路上了”，于是我一直在等待那第一步的到来。
-</p>
-<p style="text-indent: 2em;">
-    2012年7月19号，我匆匆忙忙地结束了实习的最后工作，回到寝室整理背包，脸上是难以抑制的兴奋，因为再过十几个小时，我就可以开始我的远行。
-</p>
-<p style="text-indent: 2em;">
-    每段旅行都是从交通工具开始，我坐上去兰州的火车，很幸运地买到了靠窗的位置，望着窗外，脑海中翻过很多旅行故事，想象着即将发生的一切。过不多久，火车开始运行，一直觉得绿皮火车是旅行的美好开始，车厢里的人充满人情味的对白，会让你忘了车途的颠簸。可是慢慢地开始困倦，望着窗外，渐渐倦意起来，眯了一会儿又醒来，急忙看着手机，才过了一个小时，于是从背包中抽出舒国治的《流浪集》来读，车厢内，摇摇晃晃，灯光，忽明忽暗，难以定神阅读，就这样迷迷糊糊，又昏昏欲睡，可是每睡一会并醒，醒的时候又看着窗外，风景依旧，知道自己只不过睡了一会儿，想象中那个有故事的人没来，对面坐着的大叔若无其事地磕着瓜子，没有发现我的期盼，我只能戴着耳机听着音乐，旅行还未开始，就已经感觉厌倦，只期望快点结束这漫长的颠簸。
-</p>
-<p style="text-indent: 2em;">
-    接下来的十天，与同学们一起逛兰州的夜市，吃着各种没有吃过的美食，与一群同龄人包车环青海湖，途中有说有笑。远行之美，在于那在远方，距离让两个地方之间有许多不同，天空，白云，蓝天，草地，湖水，一切在南方可以看到的东西，在西部这个空旷的世界里，却见到更多，每一样风景都可以让我们心旷神怡，对于这些风景，言语总是匮乏，最好的表达就是坐在那里，静静远望，让感动留在心里。
- 
-</p>
-
-<p><img src="/images/p7796228.jpg" alt="图片" /></p>
-
-<p style="text-indent: 2em;">
-印象中，独自旅行是最浪漫的方式，就像一个侠客，可以在天地之间任我飘逸。在兰州与同学们分开之后，我并开始了自己盼望已久的独自旅行，身边虽然没有可以了熟悉的朋友，却可以在路上遇到许多朋友，孤独也有孤独的自由。在通过同学的推荐下,我知道甘南这个地方,后来又在青旅里做过一些攻略，但是看来看去，最后还是只记住几个地名就上路了，太详细的攻略固定了旅行的不确定性，虽然保证了安全，却失去了很多乐趣。在来甘南之前，我在兰州的青旅里认识了在云南开酒吧的纪姐,还有一个在四川上大学的妹子,后来又在去夏河的大巴上认识了一个退伍军人，我们都叫他鞋子，还有两个女孩，我们就一起结伴。在夏河的最深印象就是出租车，无论到哪里都是一块钱，就像坐公交车一样方便。我们三天一直住在宝马宾馆，住宿费很便宜，只要15块钱一个晚上，白天我们一起去看了拉卜楞寺，桑科草原，八角古城，到了晚上就逛夏河，淘一些饰品带回去。我们到八角城的时候，就碰到一位夏河文化馆的馆长，原来他老家就在八角城，他那天是回家探亲，他很热情地为我们介绍这座有三千多年历史的八角古城，由于风化，原来的古城墙早已面目全非，只有站在高处，才能看到八角城的轮廓。馆长又把我们带到了一个小庙，那个小庙只有教室大小，然而里面却是整洁干净，在墙的周围种着娇艳的花朵，而地板上就像所有藏族区的寺庙一样被那些虔诚的藏民们跪得光滑，这时纪姐叫我们给这寺庙捐些钱，我就从兜里掏出五块钱想给守庙人，可是守庙人看到之后，拼命摇头，用藏语和馆长说了几句话，馆长对我们说“他说你们是远方来的客人，旅费本来就不多，你们还是自己用吧。”我当时听了之后，不知道该用什么语言去表达，相信这就是信仰下的善良，他们虽然物质匮乏内心却无比充实，而在那些物质丰富的大城市里，大部分人却活的并不快乐。后来我们又在街上闲逛，几个老人看见我们都很大方地向我们招手，我们对他们说“扎西得嘞”，他们也微笑地回应我们，在八角城的街头，总是能看到一个老人，手上拿着转经筒，端坐在地上，看着远处，我们静静走过，不忍心打扰。当我们准备离开的时候，一群孩子跑到村头向我们挥手，那一个个纯真的脸里上都是那个年龄该有的快乐。在回去的路上，我一直在想，是不是物质的匮乏反而让灵魂有地方栖息。
-</p>
-
-<p><img src="/images/p7796213.jpg" alt="图片" /></p>
-
-<p style="text-indent: 2em;">
-在夏河的第四天，我们的路线开始不同，我要回兰州坐火车回家了，他们还要继续旅行，于是和他们挥手再见。和他们分手之后，我还有一天的时间，打算去最近的合作市去看看，那天不是很急，就先去拉卜楞寺又转了一圈转经长廊，在转经筒的时候，心里不知道该默念什么，当时有了搭车去合作的想法，于是心里就开始默念成功搭到车，可是后来又想还是保佑自己快乐吧，后来又想是不是该保佑爸妈快乐，身体健康呢，又想还有朋友呢，于是贪心越来越大，就想佛祖不会保佑这么贪心的人的，还是保佑自己快乐吧，我快乐，关心我的人也会快乐，别人快乐所以我也会快乐，有因必有果。
-</p>
-
-<p><img src="/images/p7796219.jpg" alt="图片" /></p>
-
-<p style="text-indent: 2em;">
-搭车是我很意外的想法，本来这次旅行并没有搭车的准备，但是在青旅里遇到很多人都有过搭车的经历，听他们说起来自己的搭车经历觉得很简单，又很好玩，就想尝试一下，但是后来我跟同学说了这个想法之后，她说搭车不是那么容易的，会被拒绝很多次的。当时心里在犹豫，可是后来一想，拒绝就拒绝吧，又不会把我怎么样，旅行就是要尝试一下才有意思。就这样在旅行的最后一站，我举起了大拇指。我一边走一边问路人去合作的方向，一看到有车子经过就举起大拇指，可是大部分都是出租车停了下来，有些司机并没有理我，有些司机还是很和善地向我摇了摇手，我就一直向前方走，终于在一个路口，停下了一辆小面包车，坐在副驾驶座的大叔摇下窗户问我“你要去哪里？”我说：“我要去合作。”然后那个大叔就和驾驶座上的司机说了一下，就对我说“上来吧”。我很兴奋地坐上了后座，终于搭到第一辆车啦，可是没开多少里路，那个大叔转过头来对我说，一会儿给司机15块钱，我听了之后就懵了，后来就想给了钱就不叫搭车了，于是就叫司机在前面把我放下。又问了了路边的一个大叔这是不是去合作的方向，大叔点点头，我就又举起大拇指，刚举起大拇指，就又有一辆面包车停下来，打开车门叫我上来，由于刚才的经历，我对司机说的第一句话却是“要钱么？”司机大叔摇了摇头，我就上车了，心中羞愧自己的冒失，司机大叔好像在用藏语和家人聊天，我一句都听不懂，我想说谢谢，却不好意思打扰，当他一放下电话的时候，他就开口问我，“你是哪里人？”我说“我是浙江的”，于是就这样没有准备却很自然的聊了起来，慢慢地我的紧张感也慢慢放松下来，跟他说了自己最近的经历啊，司机大叔又跟我说了自己最近担忧的事，比如对这一代藏族孩子对信仰越来越不重视，还有到处修建的公路破坏了环境，他说开车有三十多年了，回忆起以前开车的日子，以前开车的时候虽然路况不好，窗外的风景却很美，即使开车的时候很颠簸，却依然很快乐。他后来又给我说了很多藏传佛教的知识，推荐了一些甘南比较美的地方，还教了我几句藏语，最后把我送到了合作的一个景点，九层佛阁，还告诉我在哪里可以坐到回兰州的大巴，我用他教我的藏语和他说“再见”。他和开心地和我挥手再见，开玩笑地说“回兰州可不能搭车咯”，我微笑地点点头。
-</p>
-
-<p><img src="/images/p7796225.jpg" alt="图片" /></p>
-
-<p style="text-indent: 2em;">
-旅行的意义是什么，在这次旅行之前，我好像很清楚，因为很多书中都可以找到，逃离原来的安全圈，发现自我，做自己想做的事情等等。可是，旅行之后，我却说不清楚，也许只是一次行走，从一个地方走到另一个地方，看看风景，与路上的人交朋友，互相交换故事，仅此而已。此刻我终于明白了《迟到的间隔年》中的一段话“旅行是寻找不到答案的，它只会让你多了选择，甚至更加迷茫，但完全值得”，当你在旅行中过于强调意义，注定得不到什么。所以冷暖自知，总有言语无法表达的心情，想要知道，就去旅行吧。
-</p>
-
-<p><img src="/images/p7796220.jpg" alt="图片" /></p>
-
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
-
 
 <div class="pagination">
   
@@ -1127,9 +1164,15 @@ Finished tests in 0.006151s, 487.7256 tests/s, 487.7256 assertions/s.
         
       </li>
     
+      <li>
+        
+          <a href="http://morisunshine.com/page3">3</a>
+        
+      </li>
+    
   </ul>
   
-    Next
+    <a href="http://morisunshine.com/page3" class="btn">Next</a>
   
 </div><!-- /.pagination -->
 </div><!-- /#main -->

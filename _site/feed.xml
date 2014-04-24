@@ -4,13 +4,398 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://morisunshine.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://morisunshine.com" />
-<updated>2014-04-22T21:36:20+08:00</updated>
+<updated>2014-04-24T23:05:07+08:00</updated>
 <id>http://morisunshine.com/</id>
 <author>
   <name>Sheldon</name>
   <uri>http://morisunshine.com/</uri>
   <email>sheldon.zen@gmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[Objective-C的命名空间]]></title>
+ <link rel="alternate" type="text/html" href="http://morisunshine.com/ios/namespacing/" />
+  <id>http://morisunshine.com/ios/namespacing</id>
+  <published>2014-04-24T00:00:00+08:00</published>
+  <updated>2014-04-24T00:00:00+08:00</updated>
+  <author>
+    <name>Sheldon</name>
+    <uri>http://morisunshine.com</uri>
+    <email>sheldon.zen@gmail.com</email>
+  </author>
+  <content type="html">&lt;p&gt;&lt;strong&gt;为什么很多命名都是NS开头的呢？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;我保证在第一次给别人介绍Objective-C的时候你肯定会听到这句话。&lt;/p&gt;
+
+&lt;p&gt;就像父母要向孩子解释什么是死亡或者圣诞老人是不存在的问题一样，父母总是寄希望于未来，希望将来孩子能够自己找到答案。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;你既然这么问了，实际上NS代表了NeXTSTEP （好吧，其实是代表NeXTSTEP/Sun，我们只是做个简单的介绍），它被用于…&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;随着你解释的更多，你可能会从对方的脸上看到失望两个字，接下来，他们不在只是随便问问了，他们开始问一些你更难解释的问题–在Objective-C中&lt;a href=&quot;http://nshipster.com/at-compiler-directives/&quot;&gt;@&lt;/a&gt;是什么？&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;命名一直是Objective-C的硬伤，和那些优雅的语言相比，Objective-C缺乏标识符容器这点引来了很多不切实际的批评家。&lt;/p&gt;
+
+&lt;p&gt;他们总是说：Objective-C不像其他流行语言一样提供模块化机制来避免类名和方法名的冲突。&lt;/p&gt;
+
+&lt;p&gt;相反地，Objective-C 依靠前缀来确保APP中的一些地方的方法名不会影响其他的地方有相同名字的代码。&lt;/p&gt;
+
+&lt;p&gt;插入一个关于类型系统的题外话之后我们会继续进入关于命名的讨论。&lt;/p&gt;
+
+&lt;h2 id=&quot;cobjective-c&quot;&gt;C和Objective-C中的类型&lt;/h2&gt;
+
+&lt;p&gt;我曾在这本书上多次提过，Objective-C是直接建立在C语言之上的，一个重要的原因是Objective-C和C语言共用一个类型系统，他们都要求标识符是全局唯一的。&lt;/p&gt;
+
+&lt;p&gt;你可以自己定义一个和@interface同名的静态变量，编译之后你会得到一个错误：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;XXObject&lt;/span&gt; : &lt;span class=&quot;nc&quot;&gt;NSObject&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;XXObject&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;c1&quot;&gt;//将“XXObject”重新定义为不同的符号&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;也就是说，Objective-C的runtime在C语言的类型系统上又创建了一个抽象层，它甚至可以允许下面这段代码被编译:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;k&quot;&gt;@protocol&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt; : &lt;span class=&quot;nc&quot;&gt;NSObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt; 
+    &lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@property&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;(Foo)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@synthesize&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Fo&lt;/span&gt; 
+    &lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Fo&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;通过Objective-C的环境，程序能区别所有相同名字的类，协议，类别，实例变量，实例方法和类方法。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;一个变量能重新调整一个已经存在的方法也是得益与C语言的类型系统（这个有点像一个变量能够隐藏它的隐藏功能）&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;前缀&lt;/h2&gt;
+
+&lt;p&gt;在Objective-C应用中的所有类名都必须是全局唯一的。由于很多不同的框架中会有一些相似的功能，所以在名字上也可能会有重复（users， views， requests / responses 等等），所以&lt;a href=&quot;https://developer.apple.com/library/ios/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html&quot;&gt;苹果官方文档&lt;/a&gt;规定类名需要有2-3个字母作为前缀。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;类前缀&lt;/h3&gt;
+
+&lt;p&gt;苹果官方&lt;a href=&quot;https://developer.apple.com/library/ios/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html&quot;&gt;建议&lt;/a&gt;两个字母作为前缀的类名是为官方的库和框架准备的，而对于作为第三方的开发者的我们，他们建议使用3个或者更多的字母作为前缀去命名我们的类。&lt;/p&gt;
+
+&lt;p&gt;一个资深的Mac或iOS开发者可能会记得下面大部分的缩写标识符：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Prefix&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Frameworks&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AB&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;AddressBook / AddressBookUI&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AC&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Accounts&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AD&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;iAd&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AL&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;AssetsLibrary&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;AudioUnit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AV&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;AVFoundation&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CA&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;CoreAnimation&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CB&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;CoreBluetooth&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CF&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;CoreFoundation / CFNetwork&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CG&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;CoreGraphics / QuartzCore / ImageIO&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CI&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;CoreImage&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CL&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;CoreLocation&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CM&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;CoreMedia / CoreMotion&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;CV&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;CoreVideo&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;EA&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ExternalAccessory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;EK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;EventKit / EventKitUI&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GC&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;GameController&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;GLK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;GLKit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;JS&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;JavaScriptCore&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MA&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;MediaAccessibility&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MC&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;MultipeerConnectivity&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MF&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;MessageUI&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MIDI&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;CoreMIDI&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;MapKit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MP&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;MediaPlayer&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;NewsstandKit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NS&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Foundation, AppKit, CoreData&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;PK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;PassKit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;QL&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;QuickLook&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SC&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;SystemConfiguration&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Se&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Security&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;StoreKit / SpriteKit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SL&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Social&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SS&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Safari Services&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;TW&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Twitter&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;UI&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;UIKit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;UT&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;MobileCoreServices&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h4 id=&quot;section-2&quot;&gt;第三方类前缀&lt;/h4&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;直到最近，由于&lt;a href=&quot;http://cocoapods.org/&quot;&gt;CocoaPods&lt;/a&gt;的出现和大量新的iOS开发者的涌现，开源代码的遍布，第三方代码在很大程度上对苹果和其余的Objective-C开发社区来说已经不是问题了。最近苹果官方的命名指南也发生了变化，它将三个字母作为前缀的建议只是做为一个习惯做法。&lt;/p&gt;
+
+&lt;p&gt;正因为这样，那些已经存在的第三方库依然使用2个字母作为前缀，你可以参考一些那些在GitHub上得到很多&lt;a href=&quot;https://github.com/search?l=Objective-C&amp;amp;q=stars%3A%3E1&amp;amp;s=stars&amp;amp;type=Repositories&quot;&gt;start的Objective-C的仓库&lt;/a&gt;。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Prefix&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;Frameworks&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AF&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;AFNetworking (“Alamofire”)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;RK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;RestKit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;PU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;GPUImage&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SD&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;SDWebImage&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MB&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;MBProgressHUD&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;FB&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Facebook SDK&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;FM&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;FMDB (“Flying Meat”)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;JK&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;JSONKit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;UI&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;FlatUI&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;NI&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Nimbus&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;AC&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Reactive Cocoa&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;我们已经看到在在这个&lt;a href=&quot;https://github.com/AshFurrow/AFTabledCollectionView&quot;&gt;第三方库中&lt;/a&gt;的前缀已经和我的&lt;a href=&quot;https://github.com/AFNetworking/AFNetworking&quot;&gt;AFNetworking&lt;/a&gt;一样了，所以最好还是要在你的代码中遵守要三个字母以上的作为类前缀的规定(https://github.com/AshFurrow/AFTabledCollectionView)。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;对于那些针对特殊功能而写的第三方库的作者，可以考虑在下一次主要升级时使用&lt;a href=&quot;http://nshipster.com/at-compiler-directives/&quot;&gt;@compatibility_alias&lt;/a&gt;来为那些使用者们提供一个天衣无缝的转移路径。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;方法前缀&lt;/h2&gt;
+
+&lt;p&gt;不仅是类容易造成命名冲突，selectors也很容易造成命名冲突，甚至方法比类会有更多的问题。
+考虑一下这个category：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;(PigLatin)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;pigLatinString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;如果 &lt;code&gt;-pigLatinString&lt;/code&gt;方法被另一个category实现了（或者以后版本的iOS或者Mac OS X 在NSString类中也添加了同样名字的方法），那么调用这个方法就会得到未定义的行为错误，因为我们不能保证在runtime中哪个方法会先被定义。&lt;/p&gt;
+
+&lt;p&gt;我们可以通过在方法名前加前缀来避免这个问题，就像加这个类名一样（在类别名前加前缀也是个好办法）：&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;(XXXPigLatin)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;NSString&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;xxx_pigLatinString&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;苹果官方建议&lt;a href=&quot;https://developer.apple.com/library/ios/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html#//apple_ref/doc/uid/TP40011210-CH6-SW4&quot;&gt;所有category方法使使用前缀&lt;/a&gt;，这个建议比类名需要加前缀的规定更加广为人知和接受。&lt;/p&gt;
+
+&lt;p&gt;很多开发者都在热情地讨论着这个规定的某一方面。然而，无论是通过成本角度还是效益角度来衡量命名冲突风险的可能性都是是不全面的:&lt;/p&gt;
+
+&lt;p&gt;category的主要功能是通过语法糖将一些有用的功能包裹进原来的类中。任何一个category方法都可以被选择性实现，你也可以把他当做是self的一个隐型的功能方法。&lt;/p&gt;
+
+&lt;p&gt;当我在编译器的环境参数中将&lt;code&gt;OBJC_PRINT_REPLACED_METHODS&lt;/code&gt;这个参数设置为YES，那我们就能在编译的时候检测方法名是否有冲突。实际上，方法名的冲突是很少发生的，而且在发生的时候，他们通常会得到一个&lt;code&gt;needlessly duplicated across dependencies&lt;/code&gt;的提示。即使发生最坏的情况，程序在运行是出现异常，那么很可能是两个方法名一样，那么他们做的事情也是一样的，所以结果也不会有什么变化。就像Swiss Army Knife写了一个category，他定义了&lt;code&gt;NSArray&lt;/code&gt;中的&lt;code&gt; -firstObject&lt;/code&gt;这个方法，那么只要苹果官方没有在&lt;code&gt;NSArray&lt;/code&gt;中加这个方法的话，那么这个类别方法一直有效的。&lt;/p&gt;
+
+&lt;p&gt;在苹果官方的编程指南有很多严肃又松散的解释。这里没有固定的文档，他们可能一直变化。看到这里，如果你还是悬而未决，那么你只需要把的category方法名加上前缀，如果你还是选择不去做任何改变，那么你就等着自食其果吧。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;方法混合&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;在方法混合时，方法名加前缀或者后缀也是非常有必要的，这个我在上周关于&lt;a href=&quot;http://nshipster.com/method-swizzling/&quot;&gt;swizzling&lt;/a&gt;的文章中提到过。&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UIViewController&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;(Swizzling)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;UIViewController&lt;/span&gt; &lt;span class=&quot;nl&quot;&gt;(Swizzling)&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;xxx_viewDidLoad&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;self&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;xxx_viewDidLoad&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+    &lt;span class=&quot;c1&quot;&gt;// Swizzled implementation&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;我们真的需要命名空间么？&lt;/h2&gt;
+
+&lt;p&gt;在最近关于Objective-C替换、改造和重塑的讨论中，我可以明显地发现命名空间是未来的一个趋势。但是它到底给我们带来了什么呢？&lt;/p&gt;
+
+&lt;p&gt;美学？除了IETE成员和军事人员，我想没有人会喜欢CLAs的视觉审美，但是用::，/或者另外的.这些符号真的能让我们觉得更好么？你真的想要以后把&lt;code&gt;NSArray&lt;/code&gt;叫做&lt;code&gt;Foundation Array&lt;/code&gt;？（那我这个NSHipster.com这个博客不是也得改名字了?!）&lt;/p&gt;
+
+&lt;p&gt;语义学？我比较一下其他的语言，看看他们是怎么用命名空间的，那么你就会意识到命名空间不能解决所有不明确的问题。可能在某些额外环境的情况下，那些命名空间会出现更多问题。&lt;/p&gt;
+
+&lt;p&gt;你还是不赞同，那么你想象一下Objective-C的命名空间的实现可能会像这个样子，你会觉得怎么样:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;namespaceX&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Obje&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foundatio&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fo&lt;/span&gt;
+      &lt;span class=&quot;nl&quot;&gt;F:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;@[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;@1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;@2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;@3&lt;/span&gt;
+      &lt;span class=&quot;c1&quot;&gt;// &lt;/span&gt;
+   
+    &lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;en&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;虽然Objective-C有繁琐的代码但也有容易理解的明显优点。我们作为开发者去讨论NSString的时候，我们不会把它理解成别的意思，编译器也是一样。当我们在阅读代码时，我们不需要过多地去考虑这些代码是什么作用的。并且最重要的是，这个类名在google这些搜索引擎中&lt;a href=&quot;http://lmgtfy.com/?q=NSString&quot;&gt;很容易就可以找到&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;不管怎样，如果你对这个讨论感兴趣的话，我强烈建议你看一下&lt;a href=&quot;http://optshiftk.com/&quot;&gt;Kyle Sluder&lt;/a&gt;的&lt;a href=&quot;http://optshiftk.com/2012/04/draft-proposal-for-namespaces-in-objective-c/&quot;&gt;《 this namespace feature proposal 》&lt;/a&gt;。非常值得一看。&lt;/p&gt;
+
+  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/namespacing/&quot;&gt;Objective-C的命名空间&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 24, 2014.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>

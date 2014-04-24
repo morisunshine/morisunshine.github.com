@@ -37,7 +37,15 @@
         <loc>http://morisunshine.com/page2/index.html</loc>
     </url>
     
+    <url>
+        <loc>http://morisunshine.com/page3/index.html</loc>
+    </url>
+    
 
+    
+    <url>
+        <loc>http://morisunshine.com/ios/namespacing/</loc>
+    </url>
     
     <url>
         <loc>http://morisunshine.com/ios/ios_code_standards/</loc>
