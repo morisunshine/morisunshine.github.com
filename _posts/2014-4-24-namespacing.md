@@ -7,6 +7,9 @@ tags: [iOS]
 
 ---
 
+本文由[morisunshine](http://morisunshine.com/)译自["Namespacing"](http://nshipster.com/namespacing/)。转载请注明出处！
+
+---
 **为什么很多命名都是NS开头的呢？**
 
 我保证在第一次给别人介绍Objective-C的时候你肯定会听到这句话。
