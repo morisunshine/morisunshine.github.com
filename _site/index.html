@@ -150,7 +150,7 @@
     <p>本文由<a href="http://morisunshine.com/">morisunshine</a>译自<a href="http://nshipster.com/namespacing/">“Namespacing”</a>。转载请注明出处！</p>
 
 <blockquote>
-  <p>为什么Objecive-C中的很多类名都是NS开头的呢？</p>
+  <p>为什么Objecive-C中的很多类名都是<code>NS</code>开头的呢？</p>
 </blockquote>
 
 <p>我保证在你第一次给别人介绍Objective-C的时候肯定会听到这句话。</p>
@@ -158,10 +158,10 @@
 <p>就像父母要向孩子解释什么是死亡或者圣诞老人是不存在的问题一样，父母总是寄希望时间会让孩子自己找到答案。</p>
 
 <blockquote>
-  <p>你既然这么问了，实际上NS代表了NeXTSTEP （好吧，其实是代表NeXTSTEP/Sun，我们只是做个简单的介绍），它被用于…</p>
+  <p>你既然这么问了，实际上<code>NS</code>代表了<code>NeXTSTEP</code>（好吧，其实是代表<code>NeXTSTEP/Sun</code>，我们只是做个简单的介绍），它被用于…</p>
 </blockquote>
 
-<p>你越解释，你会发现对方越失望，接下来，他们不在只是随便问问了，他们开始问一些你更难解释的问题–在Objective-C中<a href="http://nshipster.com/at-compiler-directives/">@</a>是什么？</p>
+<p>你越解释，你会发现对方越失望*，接下来，他们不在只是随便问问了，他们开始问一些你更难解释的问题–在Objective-C中<a href="http://nshipster.com/at-compiler-directives/">@</a>是什么？</p>
 
 <hr />
 
@@ -177,7 +177,7 @@
 
 <p>我曾在这个博客上多次提过Objective-C是直接建立在C语言之上的，一个重要的原因是Objective-C和C语言共用一个类型系统，他们都要求标识符是全局唯一的。</p>
 
-<p>你可以自己定义一个和@interface同名的静态变量，编译之后你会得到一个错误：</p>
+<p>你可以自己定义一个和<code>@interface</code>同名的静态变量，编译之后你会得到一个错误：</p>
 
 <div class="highlight"><pre><code class="objc"><span class="k">@interface</span> <span class="nc">XXObject</span> : <span class="nc">NSObject</span>
 <span class="k">@end</span>
@@ -190,8 +190,8 @@
 <div class="highlight"><pre><code class="objc"><span class="k">@protocol</span> <span class="nc">Foo</span>
 <span class="k">@end</span>
 
-<span class="k">@interface</span> <span class="nc">Foo</span> : <span class="nc">NSObject</span> <span class="o">&lt;</span><span class="n">Foo</span> 
-    <span class="kt">id</span> <span class="n">Foo</span>
+<span class="k">@interface</span> <span class="nc">Foo</span> : <span class="nc">NSObject</span> <span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kt">id</span> <span class="n">Foo</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">@property</span> <span class="kt">id</span> <span class="n">Foo</span><span class="p">;</span>
@@ -205,9 +205,9 @@
 <span class="k">@implementation</span> <span class="nc">Foo</span>
 <span class="k">@synthesize</span> <span class="n">Foo</span><span class="p">;</span>
 
-<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">Fo</span> 
-    <span class="kt">id</span> <span class="n">Foo</span> <span class="o">=</span> <span class="s">@&quot;Fo</span>
-    <span class="k">return</span> <span class="n">Foo</span>
+<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">Foo</span> <span class="p">{</span>
+    <span class="kt">id</span> <span class="n">Foo</span> <span class="o">=</span> <span class="s">@&quot;Foo&quot;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">Foo</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="k">@end</span>
 </code></pre></div>
@@ -231,224 +231,79 @@
 <p>一个资深的Mac或iOS开发者可能会记得下面大部分的缩写标识符：</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Prefix</th>
-      <th style="text-align: left">Frameworks</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>AB</td>
-      <td style="text-align: left">AddressBook / AddressBookUI</td>
-    </tr>
-    <tr>
-      <td>AC</td>
-      <td style="text-align: left">Accounts</td>
-    </tr>
-    <tr>
-      <td>AD</td>
-      <td style="text-align: left">iAd</td>
-    </tr>
-    <tr>
-      <td>AL</td>
-      <td style="text-align: left">AssetsLibrary</td>
-    </tr>
-    <tr>
-      <td>AU</td>
-      <td style="text-align: left">AudioUnit</td>
-    </tr>
-    <tr>
-      <td>AV</td>
-      <td style="text-align: left">AVFoundation</td>
-    </tr>
-    <tr>
-      <td>CA</td>
-      <td style="text-align: left">CoreAnimation</td>
-    </tr>
-    <tr>
-      <td>CB</td>
-      <td style="text-align: left">CoreBluetooth</td>
-    </tr>
-    <tr>
-      <td>CF</td>
-      <td style="text-align: left">CoreFoundation / CFNetwork</td>
-    </tr>
-    <tr>
-      <td>CG</td>
-      <td style="text-align: left">CoreGraphics / QuartzCore / ImageIO</td>
-    </tr>
-    <tr>
-      <td>CI</td>
-      <td style="text-align: left">CoreImage</td>
-    </tr>
-    <tr>
-      <td>CL</td>
-      <td style="text-align: left">CoreLocation</td>
-    </tr>
-    <tr>
-      <td>CM</td>
-      <td style="text-align: left">CoreMedia / CoreMotion</td>
-    </tr>
-    <tr>
-      <td>CV</td>
-      <td style="text-align: left">CoreVideo</td>
-    </tr>
-    <tr>
-      <td>EA</td>
-      <td style="text-align: left">ExternalAccessory</td>
-    </tr>
-    <tr>
-      <td>EK</td>
-      <td style="text-align: left">EventKit / EventKitUI</td>
-    </tr>
-    <tr>
-      <td>GC</td>
-      <td style="text-align: left">GameController</td>
-    </tr>
-    <tr>
-      <td>GLK</td>
-      <td style="text-align: left">GLKit</td>
-    </tr>
-    <tr>
-      <td>JS</td>
-      <td style="text-align: left">JavaScriptCore</td>
-    </tr>
-    <tr>
-      <td>MA</td>
-      <td style="text-align: left">MediaAccessibility</td>
-    </tr>
-    <tr>
-      <td>MC</td>
-      <td style="text-align: left">MultipeerConnectivity</td>
-    </tr>
-    <tr>
-      <td>MF</td>
-      <td style="text-align: left">MessageUI</td>
-    </tr>
-    <tr>
-      <td>MIDI</td>
-      <td style="text-align: left">CoreMIDI</td>
-    </tr>
-    <tr>
-      <td>MK</td>
-      <td style="text-align: left">MapKit</td>
-    </tr>
-    <tr>
-      <td>MP</td>
-      <td style="text-align: left">MediaPlayer</td>
-    </tr>
-    <tr>
-      <td>NK</td>
-      <td style="text-align: left">NewsstandKit</td>
-    </tr>
-    <tr>
-      <td>NS</td>
-      <td style="text-align: left">Foundation, AppKit, CoreData</td>
-    </tr>
-    <tr>
-      <td>PK</td>
-      <td style="text-align: left">PassKit</td>
-    </tr>
-    <tr>
-      <td>QL</td>
-      <td style="text-align: left">QuickLook</td>
-    </tr>
-    <tr>
-      <td>SC</td>
-      <td style="text-align: left">SystemConfiguration</td>
-    </tr>
-    <tr>
-      <td>Se</td>
-      <td style="text-align: left">Security</td>
-    </tr>
-    <tr>
-      <td>SK</td>
-      <td style="text-align: left">StoreKit / SpriteKit</td>
-    </tr>
-    <tr>
-      <td>SL</td>
-      <td style="text-align: left">Social</td>
-    </tr>
-    <tr>
-      <td>SS</td>
-      <td style="text-align: left">Safari Services</td>
-    </tr>
-    <tr>
-      <td>TW</td>
-      <td style="text-align: left">Twitter</td>
-    </tr>
-    <tr>
-      <td>UI</td>
-      <td style="text-align: left">UIKit</td>
-    </tr>
-    <tr>
-      <td>UT</td>
-      <td style="text-align: left">MobileCoreServices</td>
-    </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th>Prefix</th>
+            <th>Frameworks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><tt>AB</tt></td><td>AddressBook / AddressBookUI</td></tr>
+        <tr><td><tt>AC</tt></td><td>Accounts</td></tr>
+        <tr><td><tt>AD</tt></td><td>iAd</td></tr>
+        <tr><td><tt>AL</tt></td><td>AssetsLibrary</td></tr>
+        <tr><td><tt>AU</tt></td><td>AudioUnit</td></tr>
+        <tr><td><tt>AV</tt></td><td>AVFoundation</td></tr>
+        <tr><td><tt>CA</tt></td><td>CoreAnimation</td></tr>
+        <tr><td><tt>CB</tt></td><td>CoreBluetooth</td></tr>
+        <tr><td><tt>CF</tt></td><td>CoreFoundation / CFNetwork</td></tr>
+        <tr><td><tt>CG</tt></td><td>CoreGraphics / QuartzCore / ImageIO</td></tr>
+        <tr><td><tt>CI</tt></td><td>CoreImage</td></tr>
+        <tr><td><tt>CL</tt></td><td>CoreLocation</td></tr>
+        <tr><td><tt>CM</tt></td><td>CoreMedia / CoreMotion</td></tr>
+        <tr><td><tt>CV</tt></td><td>CoreVideo</td></tr>
+        <tr><td><tt>EA</tt></td><td>ExternalAccessory</td></tr>
+        <tr><td><tt>EK</tt></td><td>EventKit / EventKitUI</td></tr>
+        <tr><td><tt>GC</tt></td><td>GameController</td></tr>
+        <tr><td><tt>GLK</tt><sup>*</sup></td><td>GLKit</td></tr>
+        <tr><td><tt>JS</tt></td><td>JavaScriptCore</td></tr>
+        <tr><td><tt>MA</tt></td><td>MediaAccessibility</td></tr>
+        <tr><td><tt>MC</tt></td><td>MultipeerConnectivity</td></tr>
+        <tr><td><tt>MF</tt></td><td>MessageUI*</td></tr>
+        <tr><td><tt>MIDI</tt><sup>*</sup></td><td>CoreMIDI</td></tr>
+        <tr><td><tt>MK</tt></td><td>MapKit</td></tr>
+        <tr><td><tt>MP</tt></td><td>MediaPlayer</td></tr>
+        <tr><td><tt>NK</tt></td><td>NewsstandKit</td></tr>
+        <tr><td><tt>NS</tt></td><td>Foundation, AppKit, CoreData</td></tr>
+        <tr><td><tt>PK</tt></td><td>PassKit</td></tr>
+        <tr><td><tt>QL</tt></td><td>QuickLook</td></tr>
+        <tr><td><tt>SC</tt></td><td>SystemConfiguration</td></tr>
+        <tr><td><tt>Sec</tt><sup>*</sup></td><td>Security*</td></tr>
+        <tr><td><tt>SK</tt></td><td>StoreKit / SpriteKit</td></tr>
+        <tr><td><tt>SL</tt></td><td>Social</td></tr>
+        <tr><td><tt>SS</tt></td><td>Safari Services</td></tr>
+        <tr><td><tt>TW</tt></td><td>Twitter</td></tr>
+        <tr><td><tt>UI</tt></td><td>UIKit</td></tr>
+        <tr><td><tt>UT</tt></td><td>MobileCoreServices</td></tr>
+    </tbody>
 </table>
 
 <h4 id="section-2">第三方类前缀</h4>
-<hr />
 
 <p>直到最近，由于<a href="http://cocoapods.org/">CocoaPods</a>的出现和大量新的iOS开发者的涌现，开源代码的遍布，第三方代码在很大程度上对苹果和其余的Objective-C开发社区来说已经不是问题了。最近苹果官方的命名指南也发生了变化，它将三个字母作为前缀的建议只是做为一个习惯做法。</p>
 
 <p>正因为这样，那些已经存在的第三方库依然使用2个字母作为前缀，你可以参考一些那些<a href="https://github.com/search?l=Objective-C&amp;q=stars%3A%3E1&amp;s=stars&amp;type=Repositories">在GitHub上得到很多start的Objective-C的仓库</a>。</p>
 
 <table>
-  <thead>
-    <tr>
-      <th>Prefix</th>
-      <th style="text-align: left">Frameworks</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>AF</td>
-      <td style="text-align: left">AFNetworking (“Alamofire”)</td>
-    </tr>
-    <tr>
-      <td>RK</td>
-      <td style="text-align: left">RestKit</td>
-    </tr>
-    <tr>
-      <td>PU</td>
-      <td style="text-align: left">GPUImage</td>
-    </tr>
-    <tr>
-      <td>SD</td>
-      <td style="text-align: left">SDWebImage</td>
-    </tr>
-    <tr>
-      <td>MB</td>
-      <td style="text-align: left">MBProgressHUD</td>
-    </tr>
-    <tr>
-      <td>FB</td>
-      <td style="text-align: left">Facebook SDK</td>
-    </tr>
-    <tr>
-      <td>FM</td>
-      <td style="text-align: left">FMDB (“Flying Meat”)</td>
-    </tr>
-    <tr>
-      <td>JK</td>
-      <td style="text-align: left">JSONKit</td>
-    </tr>
-    <tr>
-      <td>UI</td>
-      <td style="text-align: left">FlatUI</td>
-    </tr>
-    <tr>
-      <td>NI</td>
-      <td style="text-align: left">Nimbus</td>
-    </tr>
-    <tr>
-      <td>AC</td>
-      <td style="text-align: left">Reactive Cocoa</td>
-    </tr>
-  </tbody>
+    <thead>
+        <tr>
+            <th>Prefix</th>
+            <th>Frameworks</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr><td><tt>AF</tt></td><td><a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a> ("<a href="http://en.wikipedia.org/wiki/Gowalla">Alamofire</a>")</td></tr>
+        <tr><td><tt>RK</tt></td><td><a href="https://github.com/RestKit/RestKit">RestKit</a></td></tr>
+        <tr><td><tt>GPU</tt></td><td><a href="https://github.com/BradLarson/GPUImage">GPUImage</a></td></tr>
+        <tr><td><tt>SD</tt></td><td><a href="https://github.com/rs/SDWebImage">SDWebImage</a></td></tr>
+        <tr><td><tt>MB</tt></td><td><a href="https://github.com/jdg/MBProgressHUD">MBProgressHUD</a></td></tr>
+        <tr><td><tt>FB</tt></td><td><a href="https://github.com/facebook/facebook-ios-sdk">Facebook SDK</a></td></tr>
+        <tr><td><tt>FM</tt></td><td><a href="https://github.com/ccgus/fmdb">FMDB</a> ("<a href="http://flyingmeat.com">Flying Meat</a>")</td></tr>
+        <tr><td><tt>JK</tt></td><td><a href="https://github.com/johnezang/JSONKit">JSONKit</a></td></tr>
+        <tr><td><tt>FUI</tt></td><td><a href="https://github.com/Grouper/FlatUIKit">FlatUI</a></td></tr>
+        <tr><td><tt>NI</tt></td><td><a href="https://github.com/jverkoey/nimbus">Nimbus</a></td></tr>
+        <tr><td><tt>RAC</tt></td><td><a href="https://github.com/ReactiveCocoa/ReactiveCocoa">Reactive Cocoa</a></td></tr>
+    </tbody>
 </table>
 
 <p>我们已经看到在在这个<a href="https://github.com/AshFurrow/AFTabledCollectionView">第三方库</a>的前缀已经和我的<a href="https://github.com/AFNetworking/AFNetworking">AFNetworking</a>一样了，所以最好还是要在你的代码中遵守要三个字母以上的作为类前缀的规定(https://github.com/AshFurrow/AFTabledCollectionView)。</p>
@@ -482,12 +337,15 @@
 
 <p>category的主要功能是通过语法糖将一些有用的功能包裹进原来的类中。任何一个category方法都可以被选择性实现，你也可以把他当做是self的一个隐型功能方法。</p>
 
-<p>当我在编译器的环境参数中将<code>OBJC_PRINT_REPLACED_METHODS</code>这个参数设置为YES，那我们就能在编译的时候检测方法名是否有冲突。实际上，方法名的冲突是很少发生的，而且在发生的时候，他们通常会得到一个<code>needlessly duplicated across dependencies</code>的提示。即使发生最坏的情况，程序在运行是出现异常，那么很可能是两个方法名一样，那么他们做的事情也是一样的，所以结果也不会有什么变化。就像Swiss Army Knife写了一个category，他定义了<code>NSArray</code>中的<code> -firstObject</code>这个方法，那么只要苹果官方没有在<code>NSArray</code>中加这个方法的话，那么这个类别方法一直有效的。</p>
+<p>当我在编译器的环境参数中将<code>OBJC_PRINT_REPLACED_METHODS</code>这个参数设置为YES，那我们就能在编译的时候检测方法名是否有冲突。实际上，方法名的冲突是很少发生的，而且在发生的时候，他们通常会得到一个<code>needlessly duplicated across dependencies</code>的提示。即使发生最坏的情况，程序在运行是出现异常，那么很可能是两个方法名一样，那么他们_做_的事情也是一样的，所以结果也不会有什么变化。就像Swiss Army Knife写了一个category，他定义了<code>NSArray</code>中的<code> -firstObject</code>这个方法，那么只要苹果官方没有在<code>NSArray</code>中加这个方法的话，那么这个类别方法一直有效的。</p>
 
 <p>在苹果官方的编程指南中有很多严肃又松散的解释。这里没有固定的文档，他们可能一直变化。看到这里，如果你还是悬而未决，那么你只需要把的category方法名加上前缀，如果你还是选择不去做任何改变，那么你就等着自食其果吧。</p>
 
+<blockquote>
+  <p>继续添加“category 方法”到你的Tweetbot条款。有效期:一个星期</p>
+</blockquote>
+
 <h3 id="swizzling">Swizzling</h3>
-<hr />
 
 <p>在Swizzling时，方法名加前缀或者后缀也是非常有必要的，这个我在上周关于<a href="http://nshipster.com/method-swizzling/">swizzling</a>的文章中提到过。</p>
 
@@ -500,30 +358,34 @@
 <span class="p">}</span>
 </code></pre></div>
 
-<h2 id="section-4">我们真的需要命名空间么？</h2>
+<h2 id="section-4">我们_真的_需要命名空间么？</h2>
 
 <p>在最近关于Objective-C替换、改造和重塑的讨论中，我可以明显地发现命名空间是未来的一个趋势。但是它到底给我们带来了什么呢？</p>
 
-<p>美学？除了IETE成员和军事人员，我想没有人会喜欢CLAs的视觉审美，但是用::，/或者另外的.这些符号真的能让我们觉得更好么？你真的想要以后把<code>NSArray</code>叫做<code>Foundation Array</code>？（那我这个NSHipster.com这个博客不是也得改名字了?!）</p>
+<p><strong>美学</strong>？除了IETE成员和军事人员，我想没有人会喜欢<acronym title="CAPITAL LETTER ACRONYMS">CLA</acronym>s的视觉审美，但是用<code>::</code>，<code>/</code>或者另外的<code>.</code>这些符号真的能让我们觉得更好么？你_真的_想要以后把<code>NSArray</code>叫做”Foundation Array”？（那我这个NSHipster.com这个博客不是也得改名字了?!）</p>
 
-<p>语义学？让我们比较一下其他的语言，看看他们是怎么用命名空间的，那么你就会意识到命名空间不能解决所有不明确的问题。可能在某些额外环境的情况下，那些命名空间会出现更多问题。</p>
+<p><strong>语义学</strong>？让我们比较一下其他的语言，看看他们是怎么用命名空间的，那么你就会意识到命名空间不能解决所有不明确的问题。可能在某些额外环境的情况下，那些命名空间会出现更多问题。</p>
 
 <p>你还是不赞同，那么你想象一下Objective-C的命名空间的实现可能会像这个样子，你会觉得怎么样:</p>
 
-<div class="highlight"><pre><code class="objc"><span class="p">@</span><span class="n">namespaceX</span>
-    <span class="k">@implementation</span> <span class="nc">Obje</span>
-    <span class="p">@</span><span class="n">using</span> <span class="n">F</span><span class="o">:</span> <span class="n">Foundatio</span>
-    <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">fo</span>
-      <span class="nl">F:</span><span class="n">Array</span> <span class="o">*</span><span class="n">array</span> <span class="o">=</span> <span class="p">@[</span><span class="mi">@1</span><span class="p">,</span><span class="mi">@2</span><span class="p">,</span> <span class="mi">@3</span>
-      <span class="c1">// </span>
-   
-    <span class="p">@</span><span class="n">en</span>
+<div class="highlight"><pre><code class="objc"><span class="p">@</span><span class="n">namespace</span> <span class="n">XX</span>
+    <span class="k">@implementation</span> <span class="nc">Object</span>
+
+    <span class="p">@</span><span class="n">using</span> <span class="n">F</span><span class="o">:</span> <span class="n">Foundation</span><span class="p">;</span>
+
+    <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">foo</span> <span class="p">{</span>
+        <span class="nl">F:</span><span class="n">Array</span> <span class="o">*</span><span class="n">array</span> <span class="o">=</span> <span class="p">@[</span><span class="mi">@1</span><span class="p">,</span><span class="mi">@2</span><span class="p">,</span> <span class="mi">@3</span><span class="p">];</span>
+
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
+
+    <span class="k">@end</span>
 <span class="k">@end</span>
 </code></pre></div>
 
-<p>虽然Objective-C有繁琐的代码但也有容易理解的明显优点。我们作为开发者去讨论NSString的时候，我们不会把它理解成别的意思，编译器也是一样。当我们在阅读代码时，我们不需要过多地去考虑这些代码是什么作用的。并且最重要的是，NSString这个类名在google这些搜索引擎中<a href="http://lmgtfy.com/?q=NSString">很容易就可以找到， 你不会得到其他结果</a>。</p>
+<p>虽然Objective-C有繁琐的代码但也有容易理解的明显优点。我们作为开发者去讨论<code>NSString</code>的时候，我们不会把它理解成别的意思，编译器也是一样。当我们在阅读代码时，我们不需要过多地去考虑这些代码是什么作用的。并且最重要的是，NSString这个类名在google这些搜索引擎中<a href="http://lmgtfy.com/?q=NSString">很容易就可以找到， 你不会得到其他结果</a>。</p>
 
-<p>不管怎样，如果你对这个讨论感兴趣的话，我强烈建议你看一下<a href="http://optshiftk.com/">Kyle Sluder</a>的<a href="http://optshiftk.com/2012/04/draft-proposal-for-namespaces-in-objective-c/">《 this namespace feature proposal 》</a>。非常值得一看。</p>
+<p>不管怎样，如果你对这个讨论感兴趣的话，我强烈建议你看一下<a href="http://optshiftk.com/">Kyle Sluder</a>的<a href="http://optshiftk.com/2012/04/draft-proposal-for-namespaces-in-objective-c/">this namespace feature proposal</a>。非常值得一看。</p>
 
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->

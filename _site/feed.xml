@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://morisunshine.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://morisunshine.com" />
-<updated>2014-04-26T21:32:37+08:00</updated>
+<updated>2014-04-27T10:10:38+08:00</updated>
 <id>http://morisunshine.com/</id>
 <author>
   <name>Sheldon</name>
@@ -27,7 +27,7 @@
   <content type="html">&lt;p&gt;本文由&lt;a href=&quot;http://morisunshine.com/&quot;&gt;morisunshine&lt;/a&gt;译自&lt;a href=&quot;http://nshipster.com/namespacing/&quot;&gt;“Namespacing”&lt;/a&gt;。转载请注明出处！&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;为什么Objecive-C中的很多类名都是NS开头的呢？&lt;/p&gt;
+  &lt;p&gt;为什么Objecive-C中的很多类名都是&lt;code&gt;NS&lt;/code&gt;开头的呢？&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;我保证在你第一次给别人介绍Objective-C的时候肯定会听到这句话。&lt;/p&gt;
@@ -35,10 +35,10 @@
 &lt;p&gt;就像父母要向孩子解释什么是死亡或者圣诞老人是不存在的问题一样，父母总是寄希望时间会让孩子自己找到答案。&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;你既然这么问了，实际上NS代表了NeXTSTEP （好吧，其实是代表NeXTSTEP/Sun，我们只是做个简单的介绍），它被用于…&lt;/p&gt;
+  &lt;p&gt;你既然这么问了，实际上&lt;code&gt;NS&lt;/code&gt;代表了&lt;code&gt;NeXTSTEP&lt;/code&gt;（好吧，其实是代表&lt;code&gt;NeXTSTEP/Sun&lt;/code&gt;，我们只是做个简单的介绍），它被用于…&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;你越解释，你会发现对方越失望，接下来，他们不在只是随便问问了，他们开始问一些你更难解释的问题–在Objective-C中&lt;a href=&quot;http://nshipster.com/at-compiler-directives/&quot;&gt;@&lt;/a&gt;是什么？&lt;/p&gt;
+&lt;p&gt;你越解释，你会发现对方越失望*，接下来，他们不在只是随便问问了，他们开始问一些你更难解释的问题–在Objective-C中&lt;a href=&quot;http://nshipster.com/at-compiler-directives/&quot;&gt;@&lt;/a&gt;是什么？&lt;/p&gt;
 
 &lt;hr /&gt;
 
@@ -54,7 +54,7 @@
 
 &lt;p&gt;我曾在这个博客上多次提过Objective-C是直接建立在C语言之上的，一个重要的原因是Objective-C和C语言共用一个类型系统，他们都要求标识符是全局唯一的。&lt;/p&gt;
 
-&lt;p&gt;你可以自己定义一个和@interface同名的静态变量，编译之后你会得到一个错误：&lt;/p&gt;
+&lt;p&gt;你可以自己定义一个和&lt;code&gt;@interface&lt;/code&gt;同名的静态变量，编译之后你会得到一个错误：&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;XXObject&lt;/span&gt; : &lt;span class=&quot;nc&quot;&gt;NSObject&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
@@ -67,8 +67,8 @@
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;k&quot;&gt;@protocol&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
 
-&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt; : &lt;span class=&quot;nc&quot;&gt;NSObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt; 
-    &lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;@interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt; : &lt;span class=&quot;nc&quot;&gt;NSObject&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;@property&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
@@ -82,9 +82,9 @@
 &lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Foo&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;@synthesize&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 
-&lt;span class=&quot;k&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Fo&lt;/span&gt; 
-    &lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Fo&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kt&quot;&gt;id&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;@&amp;quot;Foo&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foo&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -108,224 +108,79 @@
 &lt;p&gt;一个资深的Mac或iOS开发者可能会记得下面大部分的缩写标识符：&lt;/p&gt;
 
 &lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Prefix&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Frameworks&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;AB&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;AddressBook / AddressBookUI&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;AC&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Accounts&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;AD&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;iAd&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;AL&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;AssetsLibrary&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;AU&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;AudioUnit&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;AV&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;AVFoundation&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CA&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;CoreAnimation&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CB&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;CoreBluetooth&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CF&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;CoreFoundation / CFNetwork&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CG&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;CoreGraphics / QuartzCore / ImageIO&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CI&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;CoreImage&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CL&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;CoreLocation&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CM&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;CoreMedia / CoreMotion&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;CV&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;CoreVideo&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;EA&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;ExternalAccessory&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;EK&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;EventKit / EventKitUI&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GC&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;GameController&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;GLK&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;GLKit&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;JS&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;JavaScriptCore&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;MA&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;MediaAccessibility&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;MC&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;MultipeerConnectivity&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;MF&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;MessageUI&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;MIDI&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;CoreMIDI&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;MK&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;MapKit&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;MP&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;MediaPlayer&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;NK&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;NewsstandKit&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;NS&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Foundation, AppKit, CoreData&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;PK&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;PassKit&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;QL&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;QuickLook&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;SC&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;SystemConfiguration&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Se&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Security&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;SK&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;StoreKit / SpriteKit&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;SL&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Social&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;SS&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Safari Services&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;TW&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Twitter&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;UI&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;UIKit&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;UT&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;MobileCoreServices&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Prefix&lt;/th&gt;
+            &lt;th&gt;Frameworks&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;AB&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;AddressBook / AddressBookUI&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;AC&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;Accounts&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;AD&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;iAd&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;AL&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;AssetsLibrary&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;AU&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;AudioUnit&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;AV&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;AVFoundation&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;CA&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;CoreAnimation&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;CB&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;CoreBluetooth&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;CF&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;CoreFoundation / CFNetwork&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;CG&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;CoreGraphics / QuartzCore / ImageIO&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;CI&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;CoreImage&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;CL&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;CoreLocation&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;CM&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;CoreMedia / CoreMotion&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;CV&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;CoreVideo&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;EA&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;ExternalAccessory&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;EK&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;EventKit / EventKitUI&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;GC&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;GameController&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;GLK&lt;/tt&gt;&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;GLKit&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;JS&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;JavaScriptCore&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;MA&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;MediaAccessibility&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;MC&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;MultipeerConnectivity&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;MF&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;MessageUI*&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;MIDI&lt;/tt&gt;&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;CoreMIDI&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;MK&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;MapKit&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;MP&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;MediaPlayer&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;NK&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;NewsstandKit&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;NS&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;Foundation, AppKit, CoreData&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;PK&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;PassKit&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;QL&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;QuickLook&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;SC&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;SystemConfiguration&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;Sec&lt;/tt&gt;&lt;sup&gt;*&lt;/sup&gt;&lt;/td&gt;&lt;td&gt;Security*&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;SK&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;StoreKit / SpriteKit&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;SL&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;Social&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;SS&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;Safari Services&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;TW&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;Twitter&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;UI&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;UIKit&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;UT&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;MobileCoreServices&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
 &lt;/table&gt;
 
 &lt;h4 id=&quot;section-2&quot;&gt;第三方类前缀&lt;/h4&gt;
-&lt;hr /&gt;
 
 &lt;p&gt;直到最近，由于&lt;a href=&quot;http://cocoapods.org/&quot;&gt;CocoaPods&lt;/a&gt;的出现和大量新的iOS开发者的涌现，开源代码的遍布，第三方代码在很大程度上对苹果和其余的Objective-C开发社区来说已经不是问题了。最近苹果官方的命名指南也发生了变化，它将三个字母作为前缀的建议只是做为一个习惯做法。&lt;/p&gt;
 
 &lt;p&gt;正因为这样，那些已经存在的第三方库依然使用2个字母作为前缀，你可以参考一些那些&lt;a href=&quot;https://github.com/search?l=Objective-C&amp;amp;q=stars%3A%3E1&amp;amp;s=stars&amp;amp;type=Repositories&quot;&gt;在GitHub上得到很多start的Objective-C的仓库&lt;/a&gt;。&lt;/p&gt;
 
 &lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Prefix&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;Frameworks&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;AF&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;AFNetworking (“Alamofire”)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;RK&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;RestKit&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;PU&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;GPUImage&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;SD&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;SDWebImage&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;MB&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;MBProgressHUD&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;FB&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Facebook SDK&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;FM&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;FMDB (“Flying Meat”)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;JK&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;JSONKit&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;UI&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;FlatUI&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;NI&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Nimbus&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;AC&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Reactive Cocoa&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
+    &lt;thead&gt;
+        &lt;tr&gt;
+            &lt;th&gt;Prefix&lt;/th&gt;
+            &lt;th&gt;Frameworks&lt;/th&gt;
+        &lt;/tr&gt;
+    &lt;/thead&gt;
+    &lt;tbody&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;AF&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;https://github.com/AFNetworking/AFNetworking&quot;&gt;AFNetworking&lt;/a&gt; (&quot;&lt;a href=&quot;http://en.wikipedia.org/wiki/Gowalla&quot;&gt;Alamofire&lt;/a&gt;&quot;)&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;RK&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;https://github.com/RestKit/RestKit&quot;&gt;RestKit&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;GPU&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;https://github.com/BradLarson/GPUImage&quot;&gt;GPUImage&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;SD&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;https://github.com/rs/SDWebImage&quot;&gt;SDWebImage&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;MB&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;https://github.com/jdg/MBProgressHUD&quot;&gt;MBProgressHUD&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;FB&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;https://github.com/facebook/facebook-ios-sdk&quot;&gt;Facebook SDK&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;FM&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;https://github.com/ccgus/fmdb&quot;&gt;FMDB&lt;/a&gt; (&quot;&lt;a href=&quot;http://flyingmeat.com&quot;&gt;Flying Meat&lt;/a&gt;&quot;)&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;JK&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;https://github.com/johnezang/JSONKit&quot;&gt;JSONKit&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;FUI&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;https://github.com/Grouper/FlatUIKit&quot;&gt;FlatUI&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;NI&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;https://github.com/jverkoey/nimbus&quot;&gt;Nimbus&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+        &lt;tr&gt;&lt;td&gt;&lt;tt&gt;RAC&lt;/tt&gt;&lt;/td&gt;&lt;td&gt;&lt;a href=&quot;https://github.com/ReactiveCocoa/ReactiveCocoa&quot;&gt;Reactive Cocoa&lt;/a&gt;&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
 &lt;/table&gt;
 
 &lt;p&gt;我们已经看到在在这个&lt;a href=&quot;https://github.com/AshFurrow/AFTabledCollectionView&quot;&gt;第三方库&lt;/a&gt;的前缀已经和我的&lt;a href=&quot;https://github.com/AFNetworking/AFNetworking&quot;&gt;AFNetworking&lt;/a&gt;一样了，所以最好还是要在你的代码中遵守要三个字母以上的作为类前缀的规定(https://github.com/AshFurrow/AFTabledCollectionView)。&lt;/p&gt;
@@ -359,12 +214,15 @@
 
 &lt;p&gt;category的主要功能是通过语法糖将一些有用的功能包裹进原来的类中。任何一个category方法都可以被选择性实现，你也可以把他当做是self的一个隐型功能方法。&lt;/p&gt;
 
-&lt;p&gt;当我在编译器的环境参数中将&lt;code&gt;OBJC_PRINT_REPLACED_METHODS&lt;/code&gt;这个参数设置为YES，那我们就能在编译的时候检测方法名是否有冲突。实际上，方法名的冲突是很少发生的，而且在发生的时候，他们通常会得到一个&lt;code&gt;needlessly duplicated across dependencies&lt;/code&gt;的提示。即使发生最坏的情况，程序在运行是出现异常，那么很可能是两个方法名一样，那么他们做的事情也是一样的，所以结果也不会有什么变化。就像Swiss Army Knife写了一个category，他定义了&lt;code&gt;NSArray&lt;/code&gt;中的&lt;code&gt; -firstObject&lt;/code&gt;这个方法，那么只要苹果官方没有在&lt;code&gt;NSArray&lt;/code&gt;中加这个方法的话，那么这个类别方法一直有效的。&lt;/p&gt;
+&lt;p&gt;当我在编译器的环境参数中将&lt;code&gt;OBJC_PRINT_REPLACED_METHODS&lt;/code&gt;这个参数设置为YES，那我们就能在编译的时候检测方法名是否有冲突。实际上，方法名的冲突是很少发生的，而且在发生的时候，他们通常会得到一个&lt;code&gt;needlessly duplicated across dependencies&lt;/code&gt;的提示。即使发生最坏的情况，程序在运行是出现异常，那么很可能是两个方法名一样，那么他们_做_的事情也是一样的，所以结果也不会有什么变化。就像Swiss Army Knife写了一个category，他定义了&lt;code&gt;NSArray&lt;/code&gt;中的&lt;code&gt; -firstObject&lt;/code&gt;这个方法，那么只要苹果官方没有在&lt;code&gt;NSArray&lt;/code&gt;中加这个方法的话，那么这个类别方法一直有效的。&lt;/p&gt;
 
 &lt;p&gt;在苹果官方的编程指南中有很多严肃又松散的解释。这里没有固定的文档，他们可能一直变化。看到这里，如果你还是悬而未决，那么你只需要把的category方法名加上前缀，如果你还是选择不去做任何改变，那么你就等着自食其果吧。&lt;/p&gt;
 
+&lt;blockquote&gt;
+  &lt;p&gt;继续添加“category 方法”到你的Tweetbot条款。有效期:一个星期&lt;/p&gt;
+&lt;/blockquote&gt;
+
 &lt;h3 id=&quot;swizzling&quot;&gt;Swizzling&lt;/h3&gt;
-&lt;hr /&gt;
 
 &lt;p&gt;在Swizzling时，方法名加前缀或者后缀也是非常有必要的，这个我在上周关于&lt;a href=&quot;http://nshipster.com/method-swizzling/&quot;&gt;swizzling&lt;/a&gt;的文章中提到过。&lt;/p&gt;
 
@@ -377,30 +235,34 @@
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;section-4&quot;&gt;我们真的需要命名空间么？&lt;/h2&gt;
+&lt;h2 id=&quot;section-4&quot;&gt;我们_真的_需要命名空间么？&lt;/h2&gt;
 
 &lt;p&gt;在最近关于Objective-C替换、改造和重塑的讨论中，我可以明显地发现命名空间是未来的一个趋势。但是它到底给我们带来了什么呢？&lt;/p&gt;
 
-&lt;p&gt;美学？除了IETE成员和军事人员，我想没有人会喜欢CLAs的视觉审美，但是用::，/或者另外的.这些符号真的能让我们觉得更好么？你真的想要以后把&lt;code&gt;NSArray&lt;/code&gt;叫做&lt;code&gt;Foundation Array&lt;/code&gt;？（那我这个NSHipster.com这个博客不是也得改名字了?!）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;美学&lt;/strong&gt;？除了IETE成员和军事人员，我想没有人会喜欢&lt;acronym title=&quot;CAPITAL LETTER ACRONYMS&quot;&gt;CLA&lt;/acronym&gt;s的视觉审美，但是用&lt;code&gt;::&lt;/code&gt;，&lt;code&gt;/&lt;/code&gt;或者另外的&lt;code&gt;.&lt;/code&gt;这些符号真的能让我们觉得更好么？你_真的_想要以后把&lt;code&gt;NSArray&lt;/code&gt;叫做”Foundation Array”？（那我这个NSHipster.com这个博客不是也得改名字了?!）&lt;/p&gt;
 
-&lt;p&gt;语义学？让我们比较一下其他的语言，看看他们是怎么用命名空间的，那么你就会意识到命名空间不能解决所有不明确的问题。可能在某些额外环境的情况下，那些命名空间会出现更多问题。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;语义学&lt;/strong&gt;？让我们比较一下其他的语言，看看他们是怎么用命名空间的，那么你就会意识到命名空间不能解决所有不明确的问题。可能在某些额外环境的情况下，那些命名空间会出现更多问题。&lt;/p&gt;
 
 &lt;p&gt;你还是不赞同，那么你想象一下Objective-C的命名空间的实现可能会像这个样子，你会觉得怎么样:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;namespaceX&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Obje&lt;/span&gt;
-    &lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foundatio&lt;/span&gt;
-    &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fo&lt;/span&gt;
-      &lt;span class=&quot;nl&quot;&gt;F:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;@[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;@1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;@2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;@3&lt;/span&gt;
-      &lt;span class=&quot;c1&quot;&gt;// &lt;/span&gt;
-   
-    &lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;en&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc&quot;&gt;&lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;namespace&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;XX&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;@implementation&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Object&lt;/span&gt;
+
+    &lt;span class=&quot;p&quot;&gt;@&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;using&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;F&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Foundation&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+    &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;foo&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;nl&quot;&gt;F:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;array&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;@[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;@1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;@2&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;@3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;];&lt;/span&gt;
+
+        &lt;span class=&quot;c1&quot;&gt;// ...&lt;/span&gt;
+    &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+    &lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;@end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;虽然Objective-C有繁琐的代码但也有容易理解的明显优点。我们作为开发者去讨论NSString的时候，我们不会把它理解成别的意思，编译器也是一样。当我们在阅读代码时，我们不需要过多地去考虑这些代码是什么作用的。并且最重要的是，NSString这个类名在google这些搜索引擎中&lt;a href=&quot;http://lmgtfy.com/?q=NSString&quot;&gt;很容易就可以找到， 你不会得到其他结果&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;虽然Objective-C有繁琐的代码但也有容易理解的明显优点。我们作为开发者去讨论&lt;code&gt;NSString&lt;/code&gt;的时候，我们不会把它理解成别的意思，编译器也是一样。当我们在阅读代码时，我们不需要过多地去考虑这些代码是什么作用的。并且最重要的是，NSString这个类名在google这些搜索引擎中&lt;a href=&quot;http://lmgtfy.com/?q=NSString&quot;&gt;很容易就可以找到， 你不会得到其他结果&lt;/a&gt;。&lt;/p&gt;
 
-&lt;p&gt;不管怎样，如果你对这个讨论感兴趣的话，我强烈建议你看一下&lt;a href=&quot;http://optshiftk.com/&quot;&gt;Kyle Sluder&lt;/a&gt;的&lt;a href=&quot;http://optshiftk.com/2012/04/draft-proposal-for-namespaces-in-objective-c/&quot;&gt;《 this namespace feature proposal 》&lt;/a&gt;。非常值得一看。&lt;/p&gt;
+&lt;p&gt;不管怎样，如果你对这个讨论感兴趣的话，我强烈建议你看一下&lt;a href=&quot;http://optshiftk.com/&quot;&gt;Kyle Sluder&lt;/a&gt;的&lt;a href=&quot;http://optshiftk.com/2012/04/draft-proposal-for-namespaces-in-objective-c/&quot;&gt;this namespace feature proposal&lt;/a&gt;。非常值得一看。&lt;/p&gt;
 
   &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/namespacing/&quot;&gt;Objective-C的命名空间&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 24, 2014.&lt;/p&gt;</content>
 </entry>
