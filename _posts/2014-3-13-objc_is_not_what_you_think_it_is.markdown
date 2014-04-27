@@ -41,37 +41,37 @@ Smalltalk才是实至名归的第一种面向对象语言，它用“从一个�
 
 你可以在Ruby中通过这样写来实现消息的发送：
 
-{% highlight ruby %}
+```ruby
 
 receiver.the_message argument
 
-{% endhighlight %}
+```
 
 Objective-C的实现方式和Ruby的差不多：
 
-{% highlight objc %}
+```objc
 
 [receiver theMessage:argument];
 
-{% endhighlight %}
+```
 
 这些消息实现了鸭子类型的方式，也就是说关注的不是这个对象的类型或类本身，而是这个对象能否对一个消息做出反应。
 
 发送消息真的是非常棒的事，但是只有当消息在传送数据时，它的价值才会被发挥地更大：
 
-{% highlight ruby %}
+```ruby
 
 receiver.send(:the_message, argument)
 
-{% endhighlight %}
+```
 和
 
-{% highlight objc %}
+```objc
 
 [receiver performSelector:@selector(theMessage:) 
 withObject:argument];
 
-{% endhighlight %}
+```
 
 正如Ruby中方法需要symbol支持一样，Objective-C中selector也需要string来支持。（在Objective-C中没有symbol。）这样就可以让你通过动态的方式使用一个方法。你甚至可以通过`NSSelectorFromString`方法来使用string创建一个selector，并在一个对象里执行它。同样的，我们可以在Ruby中也可以创建一个string或symbol，并把传给`Object#send`方法。
 
@@ -79,23 +79,23 @@ withObject:argument];
 
 当你想在调用一个方法前判断一下这个对象是否能够执行这个方法，你可以用Ruby中的`respond_to？`方法来检查：
 
-{% highlight ruby %}
+```ruby
 
 if receiver.respond_to? :the_message
   receiver.the_message argument
 end
 
-{% endhighlight %}
+```
 
 Objective-C中也有差不多的方法：
 
-{% highlight objc %}
+```objc
 
 if ([receiver respondsToSelector:@selector(theMessage:)]) {
     [receiver theMessage:someThing];
 }
 
-{% endhighlight %}
+```
 
 ---
 
@@ -107,7 +107,7 @@ if ([receiver respondsToSelector:@selector(theMessage:)]) {
 
 举个例子，如果你想将Rails中的`to_sentence`方法添加到`NSArray`类中，我们只需要对`NSArray`这个类进行扩展就好了：
 
-{% highlight objc %}
+```objc
 
 @interface NSArray (ToSentence)
 
@@ -131,7 +131,7 @@ if ([receiver respondsToSelector:@selector(theMessage:)]) {
 
 @end
 
-{% endhighlight %}
+```
 
 Category是在编译的时候将方法添加到程序中 -- 让我们在runtime中动态捕捉它们怎么样？
 
@@ -140,7 +140,7 @@ Category是在编译的时候将方法添加到程序中 -- 让我们在runtime�
 
 Objective-C中的流程是差不多，但我们不是重写`doesNotRecognizeSelector:`方法（相当于Ruby中的`method_missing`方法），而是在`resolveClassMethod:`方法中捕捉Category添加的方法。假设我们有一个叫`+findWhere:equals:`的类方法，它可以得到property的名称和值，那么通过正则表达式就可以很容易实现找到property的名字，并通过block来注册这个selector。
 
-{% highlight objc %}
+```objc
 
 + (BOOL)resolveClassMethod:(SEL)sel {
     NSString *selectorName = NSStringFromSelector(sel);
@@ -164,7 +164,7 @@ Objective-C中的流程是差不多，但我们不是重写`doesNotRecognizeSele
     return [super resolveClassMethod:sel];
 }
 
-{% endhighlight %}
+```
 
 这个方法的优点就是我们不需要去重写`respondsToSelector:`，因为每个在类中注册过的selector都会去调用这个方法。现在让我们调用`[RGSong findWhereTitleEquals:@“Mercy”]`。当`findWhereTitleEquals:`第一次被调用的时候，runtime并不知道这个方法，所以它会调用`resolveClassMethod:`，这时我们就将`findWhereTitleEquals:`这个方法动态添加进去，当第二次调用`findWhereTitleEquals:`的时候，因为它已经被添加过了，所以就不会再调用`resolveClassMethod:`了。
 

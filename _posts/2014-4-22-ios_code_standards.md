@@ -14,25 +14,25 @@ tags: [iOS]
 
 格式:
 
-{% highlight objc %}
+```objc
 /**
 
               注释内容
 */
-{% endhighlight %}
+```
 
 ###单行注释
 
 格式:
 
-{% highlight objc %}
+```objc
 ///在对文件、类、函数进行注释时推荐使用多行注释，在函数体内对代码块进行注释时，使用单行注释
-{% endhighlight %}
+```
 ###函数的注释
 
 函数注释的格式为
 
-{% highlight objc %}
+```objc
 /**
  *  @brief  
  *  @param
@@ -58,7 +58,7 @@ tags: [iOS]
  *              failed:返回error
  **/
  
-{% endhighlight %}
+```
 
 ##命名
 
@@ -70,10 +70,10 @@ tags: [iOS]
 
 函数名应该已小写字母开头，并混合大小写，其中的每个参数都应该是小写字母开头，读起来应该像句子一样，访问器方法应该与他们getting的成员变量的名字一样，但不应该以get作为前缀，如：
 
-{% highlight objc %}
+```objc
   - (id)getDelegate;	//avoid
 	- (id)delegate;   	//good
-{% endhighlight %}
+```
 
 ###变量的命名
 
@@ -96,33 +96,33 @@ tags: [iOS]
 
 应该已“模块+功能+作用+样式”的形式
 
-{% highlight objc %}
+```objc
 
 如:message_private_at_button_bg_normal.png
 
-{% endhighlight %}
+```
 
 ###类的命名
 
 类名、分类名、协议名应该以大写字母开始，并混合小写字母来分隔单词，应该已“模块+功能+子功能”的方式：
 
-{% highlight objc %}
+```objc
 
 如:MessagePrivateAtsomebody
 
-{% endhighlight %}
+```
 应用级的类，应避免不用前缀，跨应用级的类，应使用前缀，
-{% highlight objc %}
+```objc
 
 如:GTMSendMessage
 
-{% endhighlight %}
+```
 
 ##分类名
 
 类别名应该有两三个字母作为前缀已表示为某项目的一部分，并且包含所扩展的类的名字，如我们要创建一个NSString的类别以解析，我们将类别放在一个名为GTMNSString+Parsing.h的文件中。类别名本身为GTMStringParsingAdditions(类别名与文件名不同是为了让文件可以包含更多相同功能的扩展)类名与包含类别名之间应一个空格分隔。
 
-{% highlight objc %}
+```objc
 如:
 //NSString 为要扩展的类名, GTMStringParsingAdditions为类别名
 @interface NSString (GTMStringParsingAdditions)
@@ -133,7 +133,7 @@ tags: [iOS]
  	    @property(nonatomic, retain) NSView *dongleView;
  	    - (void)performLayout;
  	    @end
-{% endhighlight %}
+```
 
 ##注意事项
 
@@ -141,25 +141,25 @@ tags: [iOS]
 
 为避免错误，条件语句体必须使用大括号，即便语句体中的语句可以不必使用大括号（比如只有一行语句）。常见的错误包括在不使用大括号的情况下添加第二行语句，以为它属于if语句的一部分。此外，更可怕的事情是，如果条件语句中的代码行被注释，则本不术语条件语句的下一行代码将变成条件语句的一部分。此外，这种编码风格和所有其它条件语句均保持一致。
 
-{% highlight objc %}
+```objc
 如:
 if (!error) {
     return success;
 }
-{% endhighlight %}
+```
 
 ###变量
 
 变量的命名应尽可能具有自解释性。除了在for()循环语句中，应避免使用单个字母变量名称。
 除非是常量，星号应紧贴变量名称表示指向变量的指针，
-{% highlight objc %}
+```objc
 如:
 NSString *text;
-{% endhighlight %}
+```
 
 应尽可能使用属性定义替代单一的实例变量。避免在初始化方法,dealloc方法和自定义的setter和getter方法中直接读取实例变量参数（init,initWithCoder:，等等）
 
-{% highlight objc %}
+```objc
 如:
 @interface NYTSection: NSObject
  
@@ -172,12 +172,12 @@ NSString *text;
 @interface NYTSection : NSObject {
     NSString *headline;
 }
-{% endhighlight %}
+```
 
 ###下划线
 当使用属性变量时，应通过self.来获取和更改实例变量。这就意味着所有的属性将是独特的，因为它们的名称前会加上self。本地变量名称中不应包含下划线
 
-{% highlight objc %}
+```objc
 如:
 self.imgView.backgroundColor = [UIColor black];
 
@@ -185,12 +185,12 @@ self.imgView.backgroundColor = [UIColor black];
 
 _imgView.backgroundColor = [UIColor black];
 
-{% endhighlight %}
+```
 
 ###Immutable实例初始化
 在创建NSString,NSDictionary,NSArray和NSNumber等对象的immutable实例时，应使用字面量。需要注意的是，不应将***nil***传递给NSArray和NSDictionary字面量，否则会引起程序崩溃。所以在存入数据到NSArray和NSDictionary时也要判断一下数据是否是nil。
 
-{% highlight objc %}
+```objc
 NSArray *names = @[@"Brian", @"Matt", @"Chris", @"Alex", @"Steve", @"Paul"];
 NSDictionary *productManagers = @{@"iPhone" : @"Kate", @"iPad" : @"Kamal", @"Mobile Web" : @"Bill"};
 NSNumber *shouldUseLiterals = @YES;
@@ -202,7 +202,7 @@ NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @"Ka
 NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
 NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];
 
-{% endhighlight %}
+```
 ###类型
 
 最好用NSInteger和NSUInteger而不是用int，long。其他的float同理。
@@ -211,7 +211,7 @@ NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];
 ###CGRect函数
 当需要获取一个CGRect矩形的x,y,width,height属性时，应使用CGGeometry函数，而非直接访问结构体成员。
 
-{% highlight objc %}
+```objc
 如：
 CGRect frame = self.view.frame;
  
@@ -227,13 +227,13 @@ CGFloat x = frame.origin.x;
 CGFloat y = frame.origin.y;
 CGFloat width = frame.size.width;
 CGFloat height = frame.size.height;
-{% endhighlight %}
+```
 
 ###常量
 
 相对字符串字面量或数字，我们更推荐适用常量。应使用static方式声明常量，而非使用#define的方式来定义宏。
 
-{% highlight objc %}
+```objc
 例如：
 static NSString * const NYTAboutViewControllerCompanyName = @"The New York Times Company";  
 static const CGFloat NYTImageThumbnailHeight = 50.0;
@@ -242,26 +242,26 @@ static const CGFloat NYTImageThumbnailHeight = 50.0;
 //#define CompanyName @"The New York Times Company"
 //#define thumbnailHeight 2
 
-{% endhighlight %}
+```
 
 ###枚举类型
 
 在使用enum的时候，推荐适用最新的fixed underlying type(WWDC 2012 session 405- Modern Objective-C)规范，因为它具备更强的类型检查和代码完成功能。
 
-{% highlight objc %}
+```objc
 如：
 typedef NS_ENUM(NSInteger, NYTAdRequestState) {
     NYTAdRequestStateInactive,
     NYTAdRequestStateLoading
 };
 
-{% endhighlight %}
+```
 
 ###布尔变量
 
 因为nil将被解析为NO，因此没有必要在条件语句中进行比较。永远不要将任何东西和YES进行直接比较，因为YES被定义为1，而一个BOOL变量可以有8个字节。
 
-{% highlight objc %}
+```objc
 如：
 if (!someObject) {
 }
@@ -278,19 +278,19 @@ if ([someObject boolValue] == NO)
 
 if (isAwesome == YES) // Never do this.
 
-{% endhighlight %}
+```
 
 如果一个BOOL属性使用形容词来表达，属性将忽略’is’前缀，但会强调惯用名称。
 例如：
 
-{% highlight objc %}
+```objc
 @property (assign, getter=isEditable) BOOL editable;
-{% endhighlight %}
+```
 
 ###单例
 在创建单例对象的共享实例时，应使用线程安全模式。
 
-{% highlight objc %}
+```objc
 如：
 (instancetype)sharedInstance {
    static id sharedInstance = nil;
@@ -303,7 +303,7 @@ if (isAwesome == YES) // Never do this.
    return sharedInstance;
 }
 
-{% endhighlight %}
+```
 
 ###数字
 
@@ -313,47 +313,47 @@ if (isAwesome == YES) // Never do this.
 
 用 `#pragma mark`来将方法分类，这个非常有效，当你用快捷键`Control+6`可以高效的寻找到自己想要跳转到的方法
 
-{% highlight objc %}
+```objc
 //#pragma mark Properties
 
 @dynamic someProperty;
 
 - (void)setCustomProperty:(id)value {}
 
-//#pragma mark Lifecycle
+#pragma mark Lifecycle
 
 + (id)objectWithThing:(id)thing {}
 - (id)init {}
 
-//#pragma mark Drawing
+#pragma mark Drawing
 
-//#pragma mark UItableView delegate
+#pragma mark UItableView delegate
 
-//#pragma mark UITableView datasource
+#pragma mark UITableView datasource
 
 - (void)drawRect:(CGRect) {}
 
-//#pragma mark Another functional grouping
+#pragma mark Another functional grouping
 
-//#pragma mark GHSuperclass
+#pragma mark GHSuperclass
 
 - (void)someOverriddenMethod {}
 
-//#pragma mark NSCopying
+#pragma mark NSCopying
 
 - (id)copyWithZone:(NSZone *)zone {}
 
-//#pragma mark NSObject
+#pragma mark NSObject
 
 - (NSString *)description {}
 
-{% endhighlight %}
+```
 
 ###判断语句
 
 if和else应该和左大括号在同一行
 
-{% highlight objc %}
+```objc
 如:
 if (button.enabled) {
     // Stuff
@@ -363,11 +363,11 @@ if (button.enabled) {
     // More stuf
 }
 
-{% endhighlight %}
+```
 
 Switch 也是一样
 
-{% highlight objc %}
+```objc
 如:
 switch (something.state) {
     case 0: {
@@ -392,18 +392,18 @@ switch (something.state) {
     }
 }
 
-{% endhighlight %}
+```
 
 ###Import
 
 在类的头文件中需要引用其他的类的时候，需要用```@class```这个关键字，这样能减少类与类之间的依赖。
 
-{% highlight objc %}
+```objc
 如:
 store.h:
 
-//#import <Foundation/Foundation.h>
-//#import <CoreData/CoreData.h>
+#import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
 @class User;
 
@@ -415,9 +415,9 @@ store.h:
 
 Store.m:
 
-//#import "Store.h"
+#import "Store.h"
 
-//#import "User.h"
+#import "User.h"
 
 @implementation Store
 
@@ -425,7 +425,7 @@ Store.m:
 
 @end
 
-{% endhighlight %}
+```
 
 ###私有方法
 
@@ -444,14 +444,14 @@ git commit 格式
 3. **修复了某个Bug**  ``` fix_bug(大模块+子模块):#修复了什么的bug，最好写上*原因*和*解决方法*。```
 4. **比较大的改动**  
 
-{% highlight objc %}
+```objc
 
    broken_change():
    before: 
    
    after:
    
-{% endhighlight %}
+```
    
 5. **修改了文档** ```docs():```
 6. **修改了格式** ```style():```
@@ -467,16 +467,16 @@ git commit 格式
 
 “-”或“+”和返回类型之间应该有一个空格
 
-{% highlight objc %}
+```objc
 如:
 - (void)doSomethingWithString:(NSString *)theString {
   ...
 }
 
-{% endhighlight %}
+```
 方法大括号和其它大括号（比如if/else/switch/while等等）应在语句的同一行开始，而在新的一行关闭。
 
-{% highlight objc %}
+```objc
 
 if (user.isHappy) {
 //Do something
@@ -485,11 +485,11 @@ else {
 //Do something else
 }
 
-{% endhighlight %}
+```
 
 当有多个参数的时，如果参数太多超过一行，则应该将每个参数分行，并且冒号对齐
 
-{% highlight objc %}
+```objc
 如:
 - (void)doSomethingWith:(GTMFoo *)theFoo
                    rect:(NSRect)theRect
@@ -497,51 +497,51 @@ else {
   ...
 }
 
-{% endhighlight %}
+```
 
 当第一个参数短于其他参数的时候，分行时每行至少要缩进4个空格
 
-{% highlight objc %}
+```objc
 
              longKeyword:(NSRect)theRect
        evenLongerKeyword:(float)theInterval
                    error:(NSError **)theError {
           ...
 }
-{% endhighlight %}
+```
 ###方法调用
 
 方法调用应该和方法声明的时候一个格式,要么所有参数放在一行里:
 
-{% highlight objc %}
+```objc
 
 [myObject doFooWith:arg1 name:arg2 error:arg3];
 
-{% endhighlight %}
+```
 要么每一行一个参数:
 
-{% highlight objc %}
+```objc
 
 如:
 [myObject doFooWith:arg1
                name:arg2
               error:arg3];
-{% endhighlight %}
+```
 
 当第一个参数短语其他参数的时候，分行是每行至少要缩进4个空格:
 
-{% highlight objc %}
+```objc
 如:
 [myObj short:arg1
           longKeyword:arg2
     evenLongerKeyword:arg3
                 error:arg4];
 
-{% endhighlight %}
+```
    
 @public 和 @private前面为一个空格
 
-{% highlight objc %}
+```objc
 如:
 @interface MyClass : NSObject{
  @public
@@ -550,13 +550,13 @@ else {
 }
 @end
 
-{% endhighlight %}
+```
 
 ###协议
 
 类型与协议名之间不要空格
 
-{% highlight objc %}
+```objc
 如:
 @interface MyProtocoledClass : NsObject<NSWindowDelegate> {
  @private
@@ -565,11 +565,11 @@ else {
 -  (void)setDelegate:(id<MyFancyDelegate>)aDelegate;
 @end
 
-{% endhighlight %}
+```
 
 ###Blocks
 
-{% highlight objc %}
+```objc
 在一行的情况
 如:
 [operation setCompletionBlock:^{ [self onOperationDone]; }];
@@ -585,9 +585,9 @@ dispatch_async(_fileIOQueue, ^{
         // ...
       }
 });
-{% endhighlight %}
+```
 
-{% highlight objc %}
+```objc
 //有参数的block,|(SessionWindow *window)|与|{|之间有一个空格
 如:
 [[SessionService sharedService]
@@ -617,7 +617,7 @@ void (^largeBlock)(void) = ^{
 };
 [_operationQueue addOperationWithBlock:largeBlock];
 
-{% endhighlight %}
+```
 
 
 	        

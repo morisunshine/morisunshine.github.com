@@ -175,191 +175,187 @@
 <h1>继承UICollectionViewFlowLayout</h1>
 
 <p>我们将要创建一个简单的例子来展示如何使用一个带UIkit Dynamic的collection view layout。当然，我们需要做的第一件事就是，创建一个数据源去驱动我们的collection view。我知道以你的能力完全可以独立实现一个数据源，但是为了完整性，我还是提供了一个给你:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+@implementation ASHCollectionViewController
 
-<p><div>
-    <pre><code class='objc'>@implementation ASHCollectionViewController</p>
+static NSString * CellIdentifier = @&quot;CellIdentifier&quot;;
 
-<p>static NSString * CellIdentifier = @&quot;CellIdentifier&quot;;</p>
-
-<p>-(void)viewDidLoad 
+-(void)viewDidLoad 
 {
     [super viewDidLoad];
     [self.collectionView registerClass:[UICollectionViewCell class] 
-            forCellWithReuseIdentifier:CellIdentifier];</p>
+            forCellWithReuseIdentifier:CellIdentifier];
 
-<p>}</p>
+}
 
-<p>-(UIStatusBarStyle)preferredStatusBarStyle 
+-(UIStatusBarStyle)preferredStatusBarStyle 
 {
-    return UIStatusBarStyleLightContent;</p>
+    return UIStatusBarStyleLightContent;
 
-<p>}</p>
+}
 
-<p>-(void)viewDidAppear:(BOOL)animated 
+-(void)viewDidAppear:(BOOL)animated 
 {
     [super viewDidAppear:animated];
-    [self.collectionViewLayout invalidateLayout];</p>
+    [self.collectionViewLayout invalidateLayout];
 
-<p>}</p>
+}
 
-<h1>pragma mark - UICollectionView Methods</h1>
+#pragma mark - UICollectionView Methods
 
-<p>-(NSInteger)collectionView:(UICollectionView *)collectionView 
+-(NSInteger)collectionView:(UICollectionView *)collectionView 
     numberOfItemsInSection:(NSInteger)section 
 {
-    return 120;</p>
+    return 120;
 
-<p>}</p>
+}
 
-<p>-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView 
+-(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView 
                  cellForItemAtIndexPath:(NSIndexPath *)indexPath 
 {
     UICollectionViewCell *cell = [collectionView 
         dequeueReusableCellWithReuseIdentifier:CellIdentifier 
-                                  forIndexPath:indexPath];</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">cell.backgroundColor = [UIColor orangeColor];
-return cell;
+                                  forIndexPath:indexPath];
+
+    cell.backgroundColor = [UIColor orangeColor];
+    return cell;
+
+}
+
+@end
+
 </code></pre></div>
-<p>}</p>
-
-<p>@end</code></pre>
-  </div></p>
-
 <p>我们注意到当视图第一次出现的时候，这个layout是被无效的。这是因为没有用Storybards的结果(当使用Storyboards时，调用prepareLayout方法的时机是不同的--或是相同的--在WWDC的视频中他们没有告诉我们这些)。所以，当这些试图一出现我们就需要手动使这个collection view layout无效。当我们用tiling的时候，就不需要这样。</p>
 
 <p>让我们创建我们自己的collection view layout。我们需要强引用一个dynamic animator, 并且使用它来驱动我们的collcetion view layout的attribute。我们在实现文件里定义了一个私有的property:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+@interface ASHSpringyCollectionViewFlowLayout ()
 
-<p><div>
-    <pre><code class='objc'>@interface ASHSpringyCollectionViewFlowLayout ()</p>
+@property (nonatomic, strong) UIDynamicAnimator *dynamicAnimator;
 
-<p>@property (nonatomic, strong) UIDynamicAnimator *dynamicAnimator;</p>
+@end
 
-<p>@end</code></pre>
-  </div></p>
-
-<p>我们将在layout的初始化方法中初始化我们的dynamic animator。还要设置一些属于父类UICollectionViewFlowLayout中的property:</p>
-
-<p><div>
-    <pre><code class='objc'>- (id)init 
-{
-    if (!(self = [super init])) return nil;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">self.minimumInteritemSpacing = 10;
-self.minimumLineSpacing = 10;
-self.itemSize = CGSizeMake(44, 44);
-self.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
-
-self.dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
-
-return self;
 </code></pre></div>
-<p>}</code></pre>
-  </div></p>
+<p>我们将在layout的初始化方法中初始化我们的dynamic animator。还要设置一些属于父类UICollectionViewFlowLayout中的property:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+- (id)init 
+{
+    if (!(self = [super init])) return nil;
 
+    self.minimumInteritemSpacing = 10;
+    self.minimumLineSpacing = 10;
+    self.itemSize = CGSizeMake(44, 44);
+    self.sectionInset = UIEdgeInsetsMake(10, 10, 10, 10);
+
+    self.dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
+
+    return self;
+
+}
+
+</code></pre></div>
 <p>我们将实现的下一个方法是prepareLayout。我们首先需要调用父类的方法。因为我们是继承<code>UICollectionViewFlowLayout</code>类，所以在调用父类的prepareLayout的时，可以使collection view layout attribute都放置在合适的位置。我们可以依靠基类<code>UICollectionViewFlowLayout</code>的<code>prepareLayout</code>方法来提供一个默认的排布，并且能够使用<code>[super layoutAttributesForElementsInRect:visibleRect];</code>方法得到指定rect内的所有item的layout attributes。</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+[super prepareLayout];
 
-<p><div>
-    <pre><code class='objc'>[super prepareLayout];</p>
-
-<p>CGSize contentSize = self.collectionView.contentSize;
+CGSize contentSize = self.collectionView.contentSize;
 NSArray *items = [super layoutAttributesForElementsInRect:
-    CGRectMake(0.0f, 0.0f, contentSize.width, contentSize.height)];</code></pre>
-  </div></p>
+    CGRectMake(0.0f, 0.0f, contentSize.width, contentSize.height)];
 
+</code></pre></div>
 <p>这真的是效率低下的代码。因为我们的collection view中可能会有成千上万个cell，一次性加载所有的cell是一个可能会产生难以置信的内存紧张的操作。我们要在一段时间内遍历所有的元素，这也成为耗时的操作。这真的是效率的双重打击！别担心--我们是负责任的开发者，所以我们会很快解决这个问题的。我们先暂时继续使用简单、粗暴的实现方式。</p>
 
 <p>当加载完我们所有的collection view layout attribute之后，我们需要检查他们是否都已经被加载到我们的animator里了。如果一个behavior已经在animator中存在，那么我们就不能重新添加，否则就会得到一个非常难懂的运行异常提示:</p>
-
-<p><div>
-    <pre><code class='objc'>&lt;UIDynamicAnimator: 0xa5ba280&gt; (0.004987s) in 
-&lt;ASHSpringyCollectionViewFlowLayout: 0xa5b9e60&gt; {{0, 0}, {0, 0}}: 
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+&lt;UIDynamicAnimator: 0xa5ba280&gt; (0.004987s) in 
+&lt;ASHSpringyCollectionViewFlowLayout: 0xa5b9e60&gt; \{\{0, 0}, \{0, 0\}\}: 
 body &lt;PKPhysicsBody&gt; type:&lt;Rectangle&gt; representedObject:
 [&lt;UICollectionViewLayoutAttributes: 0xa281880&gt; 
 index path: (&lt;NSIndexPath: 0xa281850&gt; {length = 2, path = 0 - 0}); 
-frame = (10 10; 300 44); ] 0xa2877c0<br>
+frame = (10 10; 300 44); ] 0xa2877c0  
 PO:(159.999985,32.000000) AN:(0.000000) VE:(0.000000,0.000000) AV:(0.000000) 
 dy:(1) cc:(0) ar:(1) rs:(0) fr:(0.200000) re:(0.200000) de:(1.054650) gr:(0) 
 without representedObject for item &lt;UICollectionViewLayoutAttributes: 0xa3833e0&gt; 
 index path: (&lt;NSIndexPath: 0xa382410&gt; {length = 2, path = 0 - 0}); 
-frame = (10 10; 300 44);</code></pre>
-  </div></p>
+frame = (10 10; 300 44);
 
+</code></pre></div>
 <p>如果看到了这个错误，那么这基本表明你添加了两个behavior给同一个<code>UICollectionViewLayoutAttribute</code>，这使得系统不知道该怎么处理。</p>
 
 <p>无论如何，一旦我们已经检查好我们是否已经将behavior添加到dynamic animator之后，我们就需要遍历每个collection view layout attribute来创建和添加新的dynamic animator:</p>
-
-<p><div>
-    <pre><code class='objc'>if (self.dynamicAnimator.behaviors.count == 0) {
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+if (self.dynamicAnimator.behaviors.count == 0) {
     [items enumerateObjectsUsingBlock:^(id&lt;UIDynamicItem&gt; obj, NSUInteger idx, BOOL *stop) {
         UIAttachmentBehavior *behaviour = [[UIAttachmentBehavior alloc] initWithItem:obj 
-                                                                    attachedToAnchor:[obj center]];</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">    behaviour.length = 0.0f;
-    behaviour.damping = 0.8f;
-    behaviour.frequency = 1.0f;
+                                                                    attachedToAnchor:[obj center]];
 
-    [self.dynamicAnimator addBehavior:behaviour];
+        behaviour.length = 0.0f;
+        behaviour.damping = 0.8f;
+        behaviour.frequency = 1.0f;
 
-}];
+        [self.dynamicAnimator addBehavior:behaviour];
+
+    }];
+
+}
+
 </code></pre></div>
-<p>}</code></pre>
-  </div></p>
-
 <p>这段代码非常简单。我们为每个item创建了一个以物体的中心为附着点的<code>UIAttachmentBehavior</code>对象。然后又设置了我们的attachment behavior的length为0以便约束这个cell能一直以behavior的附着点为中心。然后又给<code>damping</code>和<code>frequency</code>这两个参数设置一个比较合适的值。</p>
 
 <p>这就是<code>prepareLayout</code>。我们现在需要实现<code>layoutAttributesForElementsInRect:</code> 和 <code>layoutAttributesForItemAtIndexPath:</code>这两个方法，UIKit会调用它们来询问collection view每一个item的布局信息。我们写的代码会把这些查询交给专门做这些事的dynamic animator:</p>
-
-<p><div>
-    <pre><code class='objc'>-(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect 
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+-(NSArray *)layoutAttributesForElementsInRect:(CGRect)rect 
 {
-    return [self.dynamicAnimator itemsInRect:rect];</p>
+    return [self.dynamicAnimator itemsInRect:rect];
 
-<p>}</p>
+}
 
-<p>-(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath 
+-(UICollectionViewLayoutAttributes *)layoutAttributesForItemAtIndexPath:(NSIndexPath *)indexPath 
 {
-    return [self.dynamicAnimator layoutAttributesForCellAtIndexPath:indexPath];</p>
+    return [self.dynamicAnimator layoutAttributesForCellAtIndexPath:indexPath];
 
-<p>}</code></pre>
-  </div></p>
+}
 
+</code></pre></div>
 <h1>响应滚动事件</h1>
 
 <p>我们目前实现的代码给我们展示的只是一个在正常滑动下只有静态感觉的<code>UICollectionView</code>运行起来没什么特别的。看上去很好，但不是真的动态，不是么？</p>
 
 <p>为了使它表现地动态点，我们需要layout和dynamic animator能够对collection view中滑动位置的变化做出反应。幸好这里有个非常适合这个要求的方法<code>shouldInvalidateLayoutForBoundsChange:</code>。这个方法会在collection view 的bound发生改变的时候被调用，根据最新的<code>content offset</code>调整我们的dynamic animator中的behaviors的参数。在重新调整这些behavior的item之后，我们在这个方法中返回NO；因为dynamic animator会关心layout的无效问题，所以在这种情况下，它不需要去主动使其无效:</p>
-
-<p><div>
-    <pre><code class='objc'>-(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds 
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+-(BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds 
 {
     UIScrollView *scrollView = self.collectionView;
-    CGFloat delta = newBounds.origin.y - scrollView.bounds.origin.y;</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
+    CGFloat delta = newBounds.origin.y - scrollView.bounds.origin.y;
 
-[self.dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
-    CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
-    CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
-    CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1500.0f;
+    CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
 
-    UICollectionViewLayoutAttributes *item = springBehaviour.items.firstObject;
-    CGPoint center = item.center;
-if (delta &amp;lt; 0) {
-        center.y += MAX(delta, delta*scrollResistance);
+    [self.dynamicAnimator.behaviors enumerateObjectsUsingBlock:^(UIAttachmentBehavior *springBehaviour, NSUInteger idx, BOOL *stop) {
+        CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
+        CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
+        CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1500.0f;
+
+        UICollectionViewLayoutAttributes *item = springBehaviour.items.firstObject;
+        CGPoint center = item.center;
+    if (delta &lt; 0) {
+            center.y += MAX(delta, delta*scrollResistance);
+
+    }
+    else {
+            center.y += MIN(delta, delta*scrollResistance);
+
+    }
+        item.center = center;
+
+        [self.dynamicAnimator updateItemUsingCurrentState:item];
+
+    }];
+
+    return NO;
 
 }
-else {
-        center.y += MIN(delta, delta*scrollResistance);
 
-}
-    item.center = center;
-
-    [self.dynamicAnimator updateItemUsingCurrentState:item];
-
-}];
-
-return NO;
 </code></pre></div>
-<p>}</code></pre>
-  </div></p>
-
 <p>让我们仔细查看这个代码的细节。首先我们得到了这个scroll view(这是我们的collection view)，然后计算它的content offset中y的变化(在这个例子中，我们的collection view是垂直滑动的)。一旦我们得到这个增量，我们需要得到用户接触的位置。这是非常重要的，因为我们希望离接触位置比较近的那些物体能移动地更迅速些，而离接触位置比较远的那些物体则应该滞后些。</p>
 
 <p>对于dynamic animator中的每个behavior，我们将接触点到该behavior物体的x和y的距离之和除以1500，1500是我根据经验设的。分母越小，这个collection view的的交互就越有弹簧的感觉。因为我们有了这种“滑动阻力”，我们根据它的增量乘上<code>scrollResistance</code>这个变量来指定这个behavior物体的中心的y。最后，我们在滑动阻力大于增量的情况下对增量和滑动阻力的结果进行了选择。 (这意味着物体开始往错误的方向移动了)。如果我们用了这么大的分母，那么这种情况是不可能的，但是在一些更具弹性的collection view layout中还是需要注意的。</p>
@@ -375,27 +371,24 @@ return NO;
 <p>除了在<code>prepareLayout</code>中加载所有的物体，如果我们能更聪明地知道哪些物体会加载那该多好啊。是的，就是这些显示的或即将显示的物体。这就是我们要采取的办法。</p>
 
 <p>我们需要做的第一件事就是是跟踪dynamic animator中的所有behavior物体的index path。我在collection view 中添加一个property来做这件事:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+@property (nonatomic, strong) NSMutableSet *visibleIndexPathsSet;
 
-<p><div>
-    <pre><code class='objc'>@property (nonatomic, strong) NSMutableSet *visibleIndexPathsSet;</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>我们用set是因为它具有常数复杂度的查找效率，并且我们经常地查找<code>visibleIndexPathsSet</code>中是否已经包含了某个index path。</p>
 
 <p>在我们实现全新的<code>prepareLayout</code>方法之前--有一个问题就是什么是tiles behavior--理解tiling的意思是非常重要的。当我们title behavior的时候，我们会在这些item离开collection view 的可视范围的时候删除对应的behavior，在这些item进入可视范围的时候又添加对应的behavior。这是一个大麻烦:我们需要在滚动中创建新的behavior。这就意味着让人觉得创建它们就好像它们本来就已经在dynamic animator里了一样，并且它们是在<code>shouldInvalidateLayoutForBoundsChange:</code>方法被修改的。</p>
 
 <p>因为我们是在滚动中创建这些新的behavior，所以我们需要维持现在collection view 的一些状态。尤其我们需要跟踪最近一次我们<code>bound</code>变化的增量。我们会在滚动时用这个状态去创建我们的behavior:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+@property (nonatomic, assign) CGFloat latestDelta;
 
-<p><div>
-    <pre><code class='objc'>@property (nonatomic, assign) CGFloat latestDelta;</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>添加完这个property后，我们将要在<code>shouldInvalidateLayoutForBoundsChange:</code>方法中添加下面这行代码:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+self.latestDelta = delta;
 
-<p><div>
-    <pre><code class='objc'>self.latestDelta = delta;</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>这就是我们需要修改我们的方法来响应滚动事件。我们的这两个方法是为了将collection view中items的layout信息传给dynamic animator，这种方式没有变化。事实上，当你的collection view实现了dynamic animator的大部分情况下，都需要实现我们上面提到的两个方法<code>layoutAttributesForElementsInRect:</code>和<code>layoutAttributesForItemAtIndexPath:</code>。</p>
 
 <p>这里最难懂的部分就是tiling mechanism。我们将要完全重写我们的prepareLayout。</p>
@@ -407,93 +400,88 @@ return NO;
 <p>像以前一样，我们要调用<code>super prepareLayout</code>，这样我们就能依赖父类<code>UICollectionViewFlowLayout</code>提供的默认排布。还像以前一样，我们通过父类获取一个矩形内的所有元素的layout attribute。不同的是我们不是获取整个collection view 中的元素属性，而只是获取显示范围内的。</p>
 
 <p>所以我们需要计算这个显示矩形。但是别着急！有件事要记住。我们的用户可能会非常快地滑动collection view，导致了dynamic animator不能跟上，所以我们需要稍微扩大显示范围，这样就能包含到那些将要显示的物体了。否则，在滑动很快的时候就会出现频闪现象了。让我们计算一下显示范围:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+CGRect originalRect = (CGRect){.origin = self.collectionView.bounds.origin, .size = self.collectionView.frame.size};
+CGRect visibleRect = CGRectInset(originalRect, -100, -100);
 
-<p><div>
-    <pre><code class='objc'>CGRect originalRect = (CGRect){.origin = self.collectionView.bounds.origin, .size = self.collectionView.frame.size};
-CGRect visibleRect = CGRectInset(originalRect, -100, -100);</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>我确信在实际显示矩形上的每个方向都扩大100个像素对我的demo来说是可行的。仔细查看这些值是否适合你们的collection view，尤其是当你们的cell很小的情况下。</p>
 
 <p>接下来我们就需要收集在显示范围内的collection view layout attributes。还有它们的index paths:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+NSArray *itemsInVisibleRectArray = [super layoutAttributesForElementsInRect:visibleRect];
 
-<p><div>
-    <pre><code class='objc'>NSArray *itemsInVisibleRectArray = [super layoutAttributesForElementsInRect:visibleRect];</p>
+NSSet *itemsIndexPathsInVisibleRectSet = [NSSet setWithArray:[itemsInVisibleRectArray valueForKey:@&quot;indexPath&quot;]];
 
-<p>NSSet *itemsIndexPathsInVisibleRectSet = [NSSet setWithArray:[itemsInVisibleRectArray valueForKey:@&quot;indexPath&quot;]];</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>注意我们是在用一个NSSet。这是因为它具有常数复杂度的查找效率，并且我们经常的查找visibleIndexPathsSet是否已经包含了某个index path:</p>
 
 <p>接下来我们要做的就是遍历dynamic animator 的behaviors，过滤掉那些已经在<code>itemsIndexPathsInVisibleRectSet</code>中的item。因为我们已经过滤掉我们的behavior，所以我们将要遍历的这些item都是不在显示范围里的，我们就可以将这些item从animator中删除掉(连同<code>visibleIndexPathsSet</code>属性中的index path):</p>
-
-<p><div>
-    <pre><code class='objc'>NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UIAttachmentBehavior *behaviour, NSDictionary *bindings) {
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UIAttachmentBehavior *behaviour, NSDictionary *bindings) {
     BOOL currentlyVisible = [itemsIndexPathsInVisibleRectSet member:[[[behaviour items] firstObject] indexPath]] != nil;
     return !currentlyVisible;
-}]</p>
+}]
 
-<p>NSArray *noLongerVisibleBehaviours = [self.dynamicAnimator.behaviors filteredArrayUsingPredicate:predicate];</p>
+NSArray *noLongerVisibleBehaviours = [self.dynamicAnimator.behaviors filteredArrayUsingPredicate:predicate];
 
-<p>[noLongerVisibleBehaviours enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop) {
+[noLongerVisibleBehaviours enumerateObjectsUsingBlock:^(id obj, NSUInteger index, BOOL *stop) {
     [self.dynamicAnimator removeBehavior:obj];
-    [self.visibleIndexPathsSet removeObject:[[[obj items] firstObject] indexPath]];</p>
+    [self.visibleIndexPathsSet removeObject:[[[obj items] firstObject] indexPath]];
 
-<p>}];</code></pre>
-  </div></p>
+}];
 
+</code></pre></div>
 <p>下一步就是要得到新出现item的<code>UICollectionViewLayoutAttributes</code>数组--那些item的index path在<code>itemsIndexPathsInVisibleRectSet</code>而不在<code>visibleIndexPathsSet</code>:</p>
-
-<p><div>
-    <pre><code class='objc'>NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UICollectionViewLayoutAttributes *item, NSDictionary *bindings) {
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+NSPredicate *predicate = [NSPredicate predicateWithBlock:^BOOL(UICollectionViewLayoutAttributes *item, NSDictionary *bindings) {
     BOOL currentlyVisible = [self.visibleIndexPathsSet member:item.indexPath] != nil;
-    return !currentlyVisible;</p>
+    return !currentlyVisible;
 
-<p>}];
-NSArray *newlyVisibleItems = [itemsInVisibleRectArray filteredArrayUsingPredicate:predicate];</code></pre>
-  </div></p>
+}];
+NSArray *newlyVisibleItems = [itemsInVisibleRectArray filteredArrayUsingPredicate:predicate];
 
+</code></pre></div>
 <p>一旦我们有新的layout attribute出现，我就可以遍历他们来创建新的behavior，并且将他们的index path添加到<code>visibleIndexPathsSet</code>中。首先，无论如何，我都需要获取到用户手指触碰的位置。如果它是<code>CGPointZero</code>的话，那就表示这个用户没有在滑动collection view，我就不需要在滚动时创建新的behavior:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];
 
-<p><div>
-    <pre><code class='objc'>CGPoint touchLocation = [self.collectionView.panGestureRecognizer locationInView:self.collectionView];</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>这是一个潜在的威胁。如果用户很快地滑动了collection view 之后释放了他的手指呢？这个collection view 就会一直滚动，但是我们的方法就不会在滚动时创建新的behavior了。幸运的是，那也就意味这scroll view滚动太快很难被注意到！好哇！这可能会是个问题，但是，只是针对那些拥有大量cell的collection view。在这种情况下，增加你的显示范围的界限就可以加载更多物体了。</p>
 
 <p>现在我们需要枚举我们刚显示的item，为他们创建behavior，再将他们的index path 添加到<code>visibleIndexPathsSet</code>。我们还需要在滚动时做些运算来创建behavior:</p>
-
-<p><div>
-    <pre><code class='objc'>[newlyVisibleItems enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *item, NSUInteger idx, BOOL *stop) {
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+[newlyVisibleItems enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes *item, NSUInteger idx, BOOL *stop) {
     CGPoint center = item.center;
-    UIAttachmentBehavior *springBehaviour = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:center];</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">springBehaviour.length = 0.0f;
-springBehaviour.damping = 0.8f;
-springBehaviour.frequency = 1.0f;
+    UIAttachmentBehavior *springBehaviour = [[UIAttachmentBehavior alloc] initWithItem:item attachedToAnchor:center];
 
-if (!CGPointEqualToPoint(CGPointZero, touchLocation)) {
-    CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
-    CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
-    CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1500.0f;
+    springBehaviour.length = 0.0f;
+    springBehaviour.damping = 0.8f;
+    springBehaviour.frequency = 1.0f;
 
-if (self.latestDelta &amp;lt; 0) {
-        center.y += MAX(self.latestDelta, self.latestDelta*scrollResistance);
+    if (!CGPointEqualToPoint(CGPointZero, touchLocation)) {
+        CGFloat yDistanceFromTouch = fabsf(touchLocation.y - springBehaviour.anchorPoint.y);
+        CGFloat xDistanceFromTouch = fabsf(touchLocation.x - springBehaviour.anchorPoint.x);
+        CGFloat scrollResistance = (yDistanceFromTouch + xDistanceFromTouch) / 1500.0f;
 
-}
-else {
-        center.y += MIN(self.latestDelta, self.latestDelta*scrollResistance);
+    if (self.latestDelta &lt; 0) {
+            center.y += MAX(self.latestDelta, self.latestDelta*scrollResistance);
 
-}
-    item.center = center;
+    }
+    else {
+            center.y += MIN(self.latestDelta, self.latestDelta*scrollResistance);
 
-}
+    }
+        item.center = center;
 
-[self.dynamicAnimator addBehavior:springBehaviour];
-[self.visibleIndexPathsSet addObject:item.indexPath];
+    }
+
+    [self.dynamicAnimator addBehavior:springBehaviour];
+    [self.visibleIndexPathsSet addObject:item.indexPath];
+
+}];
+
 </code></pre></div>
-<p>}];</code></pre>
-  </div></p>
-
 <p>大部分代码看起来还是挺熟悉的。大概有一半是来自没有实现tiling的<code>prepareLayout</code>。另一半是来自<code>shouldInvalidateLayoutForBoundsChange</code>方法。我们用latestDelta这个property来表示<code>bound</code>变化的增量，适当地调整<code>UICollectionViewLayoutAttributes</code>使这些cell表现地就像被attachment behavior拉着一样。</p>
 
 <p>就是这样，真的！我已经在真机上测试过显示上千个cell的情况了，它运行地非常完美。<a href="https://github.com/objcio/issue-5-springy-collection-view">去试试吧</a>。</p>
@@ -505,48 +493,47 @@ else {
 <p>当处理UIKit Dynamic的时候也是适用的。</p>
 
 <p>让我们继承<code>UICollectionViewLayout</code>。当继承<code>UICollectionViewLayout</code>的时候需要实现<code>collectionViewContentSize</code>方法，这点非常重要。否则这个collection view就不知道如果去显示自己，也不会有显示任何东西。因为我们想要我们的collection view不要再滑动，我们将会返回我们的collection view的frame的尺寸，减去它的<code>contentInset.top</code>:</p>
-
-<p><div>
-    <pre><code class='objc'>-(CGSize)collectionViewContentSize 
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+-(CGSize)collectionViewContentSize 
 {
     return CGSizeMake(self.collectionView.frame.size.width, 
-        self.collectionView.frame.size.height - self.collectionView.contentInset.top);</p>
+        self.collectionView.frame.size.height - self.collectionView.contentInset.top);
 
-<p>}</code></pre>
-  </div></p>
+}
 
+</code></pre></div>
 <p>在这个(有教育意义)的例子中，我们的collection view总是会以零个cell开始，物体通过<code>performBatchUpdates:</code>方法添加。这就意味着我们必须使用<code>-[UICollectionViewLayout prepareForCollectionViewUpdates:]</code>方法来添加我们的behavior(即这个collection view的数据源总是以零开始)。</p>
 
 <p>除了给各个物体添加附着behavior外，我们还将保留另外两个behavior:重力和碰撞。对于添加在这个collection view中的每个item来说，我们必须把这些item添加到我们的碰撞和附着behavior中。最后一步就是设置这些item的初始位置为屏幕外的某些地方，这样就有被附着behavior拉入到屏幕内的效果了:</p>
-
-<p><div>
-    <pre><code class='objc'>-(void)prepareForCollectionViewUpdates:(NSArray *)updateItems
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+-(void)prepareForCollectionViewUpdates:(NSArray *)updateItems
 {
-    [super prepareForCollectionViewUpdates:updateItems];</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">[updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger idx, BOOL *stop) {
-    if (updateItem.updateAction == UICollectionUpdateActionInsert) {
-        UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes 
-            layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
+    [super prepareForCollectionViewUpdates:updateItems];
 
-        attributes.frame = CGRectMake(CGRectGetMaxX(self.collectionView.frame) + kItemSize, 300, kItemSize, kItemSize);
+    [updateItems enumerateObjectsUsingBlock:^(UICollectionViewUpdateItem *updateItem, NSUInteger idx, BOOL *stop) {
+        if (updateItem.updateAction == UICollectionUpdateActionInsert) {
+            UICollectionViewLayoutAttributes *attributes = [UICollectionViewLayoutAttributes 
+                layoutAttributesForCellWithIndexPath:updateItem.indexPathAfterUpdate];
 
-        UIAttachmentBehavior *attachmentBehaviour = [[UIAttachmentBehavior alloc] initWithItem:attributes 
-                                                                              attachedToAnchor:attachmentPoint];
-        attachmentBehaviour.length = 300.0f;
-        attachmentBehaviour.damping = 0.4f;
-        attachmentBehaviour.frequency = 1.0f;
-        [self.dynamicAnimator addBehavior:attachmentBehaviour];
+            attributes.frame = CGRectMake(CGRectGetMaxX(self.collectionView.frame) + kItemSize, 300, kItemSize, kItemSize);
 
-        [self.gravityBehaviour addItem:attributes];
-        [self.collisionBehaviour addItem:attributes];
+            UIAttachmentBehavior *attachmentBehaviour = [[UIAttachmentBehavior alloc] initWithItem:attributes 
+                                                                                  attachedToAnchor:attachmentPoint];
+            attachmentBehaviour.length = 300.0f;
+            attachmentBehaviour.damping = 0.4f;
+            attachmentBehaviour.frequency = 1.0f;
+            [self.dynamicAnimator addBehavior:attachmentBehaviour];
 
-    }
+            [self.gravityBehaviour addItem:attributes];
+            [self.collisionBehaviour addItem:attributes];
 
-}];
+        }
+
+    }];
+
+}
+
 </code></pre></div>
-<p>}</code></pre>
-  </div></p>
-
 <p><img src="http://www.objc.io/images/issue-5/newtonianCollectionView@2x.gif" alt="Example"></p>
 
 <p>删除就有点复杂了。我们希望这些物体有&quot;掉落&quot;的效果而不是简单的消失。这就不仅仅是从collection view 中删除这个cell这么简单了，因为我们希望在它离开了屏幕之前还是保留它。我已经在代码中实现了这样的效果，但是有点坑爹。</p>

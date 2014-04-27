@@ -180,44 +180,36 @@
 <p>我曾在这个博客上多次提过Objective-C是直接建立在C语言之上的，一个重要的原因是Objective-C和C语言共用一个类型系统，他们都要求标识符是全局唯一的。</p>
 
 <p>你可以自己定义一个和<code>@interface</code>同名的静态变量，编译之后你会得到一个错误：</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@interface XXObject : NSObject
+@end
 
-<p><div>
-    <pre><code class='objc'>@interface XXObject : NSObject
-@end</p>
-
-<p>static char * XXObject;//将“XXObject”重新定义为不同的符号</code></pre>
-  </div></p>
-
+static char * XXObject;//将“XXObject”重新定义为不同的符号
+</code></pre></div>
 <p>也就是说，Objective-C的runtime在C语言的类型系统上又创建了一个抽象层，它甚至可以允许下面这段代码被编译:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@protocol Foo
+@end
 
-<p><div>
-    <pre><code class='objc'>@protocol Foo
-@end</p>
-
-<p>@interface Foo : NSObject &lt;Foo&gt; {
+@interface Foo : NSObject &lt;Foo&gt; {
     id Foo;
-}</p>
+}
 
-<p>@property id Foo;
+@property id Foo;
 + (id)Foo;
 - (id)Foo;
-@end</p>
+@end
 
-<p>@interface Foo (Foo)
-@end</p>
+@interface Foo (Foo)
+@end
 
-<p>@implementation Foo
-@synthesize Foo;</p>
+@implementation Foo
+@synthesize Foo;
 
-<ul>
-<li>(id)Foo {
-id Foo = @&quot;Foo&quot;;
-return Foo;
++ (id)Foo {
+    id Foo = @&quot;Foo&quot;;
+    return Foo;
 }
-@end</code></pre>
-</div></li>
-</ul>
-
+@end
+</code></pre></div>
 <ol>
 <li>通过Objective-C的环境，程序能区别所有相同名字的类，协议，类别，实例变量，实例方法和类方法。</li>
 </ol>
@@ -322,23 +314,17 @@ return Foo;
 
 <p>不仅是类容易造成命名冲突，selectors也很容易造成命名冲突，甚至方法比类会有更多的问题。
 考虑一下这个category：</p>
-
-<p><div>
-    <pre><code class='objc'>@interface NSString (PigLatin)
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@interface NSString (PigLatin)
 - (NSString *)pigLatinString;
-@end</code></pre>
-  </div></p>
-
+@end
+</code></pre></div>
 <p>如果 <code>-pigLatinString</code>方法被另一个category实现了（或者以后版本的iOS或者Mac OS X 在NSString类中也添加了同样名字的方法），那么调用这个方法就会得到未定义的行为错误，因为我们不能保证在runtime中哪个方法会先被定义。</p>
 
 <p>我们可以通过在方法名前加前缀来避免这个问题，就像加这个类名一样（在类别名前加前缀也是个好办法）：</p>
-
-<p><div>
-    <pre><code class='objc'>@interface NSString (XXXPigLatin)
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@interface NSString (XXXPigLatin)
 - (NSString *)xxx_pigLatinString;
-@end</code></pre>
-  </div></p>
-
+@end
+</code></pre></div>
 <p>苹果官方建议<a href="https://developer.apple.com/library/ios/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html#//apple_ref/doc/uid/TP40011210-CH6-SW4">所有category方法都要使用前缀</a>，这个建议比类名需要加前缀的规定更加广为人知和接受。</p>
 
 <p>很多开发者都在热情地讨论着这个规定的某一方面。然而，无论是通过成本角度还是效益角度来衡量命名冲突风险的可能性都是是不全面的:</p>
@@ -356,19 +342,14 @@ return Foo;
 <h3>Swizzling</h3>
 
 <p>在Swizzling时，方法名加前缀或者后缀也是非常有必要的，这个我在上周关于<a href="http://nshipster.com/method-swizzling/">swizzling</a>的文章中提到过。</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@implementation UIViewController (Swizzling)
 
-<p><div>
-    <pre><code class='objc'>@implementation UIViewController (Swizzling)</p>
+- (void)xxx_viewDidLoad {
+    [self xxx_viewDidLoad];
 
-<ul>
-<li><p>(void)xxx<em>viewDidLoad {
-[self xxx</em>viewDidLoad];</p>
-
-<p>// Swizzled implementation
-}</code></pre>
-</div></p></li>
-</ul>
-
+    // Swizzled implementation
+}
+</code></pre></div>
 <h2>我们真的需要命名空间么？</h2>
 
 <p>在最近关于Objective-C替换、改造和重塑的讨论中，我可以明显地发现命名空间是未来的一个趋势。但是它到底给我们带来了什么呢？</p>
@@ -378,23 +359,20 @@ return Foo;
 <p><strong>语义学</strong>？让我们比较一下其他的语言，看看他们是怎么用命名空间的，那么你就会意识到命名空间不能解决所有不明确的问题。可能在某些额外环境的情况下，那些命名空间会出现更多问题。</p>
 
 <p>你还是不赞同，那么你想象一下Objective-C的命名空间的实现可能会像这个样子，你会觉得怎么样:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@namespace XX
+    @implementation Object
 
-<p><div>
-    <pre><code class='objc'>@namespace XX
-    @implementation Object</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">@using F: Foundation;
+    @using F: Foundation;
 
-- (void)foo {
-    F:Array *array = @[@1,@2, @3];
+    - (void)foo {
+        F:Array *array = @[@1,@2, @3];
 
-    // ...
-}
+        // ...
+    }
 
+    @end
 @end
 </code></pre></div>
-<p>@end</code></pre>
-  </div></p>
-
 <p>虽然Objective-C有繁琐的代码但也有容易理解的明显优点。我们作为开发者去讨论<code>NSString</code>的时候，我们不会把它理解成别的意思，编译器也是一样。当我们在阅读代码时，我们不需要过多地去考虑这些代码是什么作用的。并且最重要的是，NSString这个类名在google这些搜索引擎中<a href="http://lmgtfy.com/?q=NSString">很容易就可以找到， 你不会得到其他结果</a>。</p>
 
 <p>不管怎样，如果你对这个讨论感兴趣的话，我强烈建议你看一下<a href="http://optshiftk.com/">Kyle Sluder</a>的<a href="http://optshiftk.com/2012/04/draft-proposal-for-namespaces-in-objective-c/">this namespace feature proposal</a>。非常值得一看。</p>
@@ -417,53 +395,45 @@ return Foo;
 <h3>多行注释</h3>
 
 <p>格式:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">/**
 
-<p><div>
-    <pre><code class='objc'>/**</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">          注释内容
+              注释内容
+*/
 </code></pre></div>
-<p>*/</code></pre>
-  </div></p>
-
 <h3>单行注释</h3>
 
 <p>格式:</p>
-
-<p><div>
-    <pre><code class='objc'>///在对文件、类、函数进行注释时推荐使用多行注释，在函数体内对代码块进行注释时，使用单行注释</code></pre>
-  </div></p>
-
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">///在对文件、类、函数进行注释时推荐使用多行注释，在函数体内对代码块进行注释时，使用单行注释
+</code></pre></div>
 <h3>函数的注释</h3>
 
 <p>函数注释的格式为</p>
-
-<p><div>
-    <pre><code class='objc'>/**
- *  @brief<br>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">/**
+ *  @brief  
  *  @param
  *  @return
- <strong>/
+ **/
  在brief中需要写明函数的主要功能、注意事项
  在param中需要写明函数的变量类型、变量的作用
  在return中需要写明函数的返回类型、返回值的作用
  如有其他需要说明的地方，可以在@return后面添加新项。如
- /</strong>
- *  @brief<br>
+ /**
+ *  @brief  
  *  @param
  *  @return
  *  @warning
- **/</p>
+ **/
 
-<p>/**
+/**
  *  @brief      上传图片。上传成功后会自动将图片放入缓存，缓存的key为图片的url
  *  @param      UIImage，需要上传的图片
  *  @return     void
  *  @blocks
  *              success:返回的NSDictionary中包含服务器的response信息，包括图片id（id）,url(url),宽度(width),高度(height)。使用括号中的名称从NSDictionary中获取。
  *              failed:返回error
- **/</code></pre>
-  </div></p>
+ **/
 
+</code></pre></div>
 <h2>命名</h2>
 
 <h3>常量的命名</h3>
@@ -473,12 +443,9 @@ return Foo;
 <h3>函数的命名</h3>
 
 <p>函数名应该已小写字母开头，并混合大小写，其中的每个参数都应该是小写字母开头，读起来应该像句子一样，访问器方法应该与他们getting的成员变量的名字一样，但不应该以get作为前缀，如：</p>
-
-<p><div>
-    <pre><code class='objc'>- (id)getDelegate;  //avoid
-    - (id)delegate;     //good</code></pre>
-  </div></p>
-
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">  - (id)getDelegate;    //avoid
+    - (id)delegate;     //good
+</code></pre></div>
 <h3>变量的命名</h3>
 
 <p>成员变量应该已小写字母开头，并以下划线作为后缀，如usernameTextField_,使用KVO/KVC绑定成员变量时，可以以一个下划线为前缀。</p>
@@ -498,110 +465,97 @@ return Foo;
 <h3>图片的命名</h3>
 
 <p>应该已“模块+功能+作用+样式”的形式</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+如:message_private_at_button_bg_normal.png
 
-<p><div>
-    <pre><code class='objc'>如:message<em>private</em>at<em>button</em>bg_normal.png</code></pre>
-  </div></p>
-
+</code></pre></div>
 <h3>类的命名</h3>
 
 <p>类名、分类名、协议名应该以大写字母开始，并混合小写字母来分隔单词，应该已“模块+功能+子功能”的方式：</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+如:MessagePrivateAtsomebody
 
-<p><div>
-    <pre><code class='objc'>如:MessagePrivateAtsomebody</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>应用级的类，应避免不用前缀，跨应用级的类，应使用前缀，
-  <div>
-    <pre><code class='objc'>如:GTMSendMessage</code></pre>
-  </div></p>
+```objc</p>
 
-<h2>分类名</h2>
+<p>如:GTMSendMessage</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">
+##分类名
 
-<p>类别名应该有两三个字母作为前缀已表示为某项目的一部分，并且包含所扩展的类的名字，如我们要创建一个NSString的类别以解析，我们将类别放在一个名为GTMNSString+Parsing.h的文件中。类别名本身为GTMStringParsingAdditions(类别名与文件名不同是为了让文件可以包含更多相同功能的扩展)类名与包含类别名之间应一个空格分隔。</p>
+类别名应该有两三个字母作为前缀已表示为某项目的一部分，并且包含所扩展的类的名字，如我们要创建一个NSString的类别以解析，我们将类别放在一个名为GTMNSString+Parsing.h的文件中。类别名本身为GTMStringParsingAdditions(类别名与文件名不同是为了让文件可以包含更多相同功能的扩展)类名与包含类别名之间应一个空格分隔。
 
-<p><div>
-    <pre><code class='objc'>如:
+```objc
+如:
 //NSString 为要扩展的类名, GTMStringParsingAdditions为类别名
 @interface NSString (GTMStringParsingAdditions)
         - (NSString *)gtm_foobarString;
-        @end</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">    @interface FoobarViewController ()
-    @property(nonatomic, retain) NSView *dongleView;
-    - (void)performLayout;
-    @end&lt;/code&gt;&lt;/pre&gt;
-</code></pre></div>
-<p></div></p>
+        @end
 
+        @interface FoobarViewController ()
+        @property(nonatomic, retain) NSView *dongleView;
+        - (void)performLayout;
+        @end
+</code></pre></div>
 <h2>注意事项</h2>
 
 <h3>条件语句</h3>
 
 <p>为避免错误，条件语句体必须使用大括号，即便语句体中的语句可以不必使用大括号（比如只有一行语句）。常见的错误包括在不使用大括号的情况下添加第二行语句，以为它属于if语句的一部分。此外，更可怕的事情是，如果条件语句中的代码行被注释，则本不术语条件语句的下一行代码将变成条件语句的一部分。此外，这种编码风格和所有其它条件语句均保持一致。</p>
-
-<p><div>
-    <pre><code class='objc'>如:
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
 if (!error) {
     return success;
-}</code></pre>
-  </div></p>
-
+}
+</code></pre></div>
 <h3>变量</h3>
 
 <p>变量的命名应尽可能具有自解释性。除了在for()循环语句中，应避免使用单个字母变量名称。
 除非是常量，星号应紧贴变量名称表示指向变量的指针，
-  <div>
-    <pre><code class='objc'>如:
-NSString *text;</code></pre>
-  </div></p>
+<code>objc
+如:
+NSString *text;
+</code></p>
 
 <p>应尽可能使用属性定义替代单一的实例变量。避免在初始化方法,dealloc方法和自定义的setter和getter方法中直接读取实例变量参数（init,initWithCoder:，等等）</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
+@interface NYTSection: NSObject
 
-<p><div>
-    <pre><code class='objc'>如:
-@interface NYTSection: NSObject</p>
+@property (nonatomic) NSString *headline;
 
-<p>@property (nonatomic) NSString *headline;</p>
+@end
 
-<p>@end</p>
+应尽量避免下面的方式:
 
-<p>应尽量避免下面的方式:</p>
-
-<p>@interface NYTSection : NSObject {
+@interface NYTSection : NSObject {
     NSString *headline;
-}</code></pre>
-  </div></p>
-
+}
+</code></pre></div>
 <h3>下划线</h3>
 
 <p>当使用属性变量时，应通过self.来获取和更改实例变量。这就意味着所有的属性将是独特的，因为它们的名称前会加上self。本地变量名称中不应包含下划线</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
+self.imgView.backgroundColor = [UIColor black];
 
-<p><div>
-    <pre><code class='objc'>如:
-self.imgView.backgroundColor = [UIColor black];</p>
+而尽量避免:
 
-<p>而尽量避免:</p>
+_imgView.backgroundColor = [UIColor black];
 
-<p>_imgView.backgroundColor = [UIColor black];</code></pre>
-  </div></p>
-
+</code></pre></div>
 <h3>Immutable实例初始化</h3>
 
 <p>在创建NSString,NSDictionary,NSArray和NSNumber等对象的immutable实例时，应使用字面量。需要注意的是，不应将<strong><em>nil</em></strong>传递给NSArray和NSDictionary字面量，否则会引起程序崩溃。所以在存入数据到NSArray和NSDictionary时也要判断一下数据是否是nil。</p>
-
-<p><div>
-    <pre><code class='objc'>NSArray *names = @[@&quot;Brian&quot;, @&quot;Matt&quot;, @&quot;Chris&quot;, @&quot;Alex&quot;, @&quot;Steve&quot;, @&quot;Paul&quot;];
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">NSArray *names = @[@&quot;Brian&quot;, @&quot;Matt&quot;, @&quot;Chris&quot;, @&quot;Alex&quot;, @&quot;Steve&quot;, @&quot;Paul&quot;];
 NSDictionary *productManagers = @{@&quot;iPhone&quot; : @&quot;Kate&quot;, @&quot;iPad&quot; : @&quot;Kamal&quot;, @&quot;Mobile Web&quot; : @&quot;Bill&quot;};
 NSNumber *shouldUseLiterals = @YES;
-NSNumber *buildingZIPCode = @10018;</p>
+NSNumber *buildingZIPCode = @10018;
 
-<p>不恰当:
+不恰当:
 NSArray *names = [NSArray arrayWithObjects:@&quot;Brian&quot;, @&quot;Matt&quot;, @&quot;Chris&quot;, @&quot;Alex&quot;, @&quot;Steve&quot;, @&quot;Paul&quot;, nil];
 NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @&quot;Kate&quot;, @&quot;iPhone&quot;, @&quot;Kamal&quot;, @&quot;iPad&quot;, @&quot;Bill&quot;, @&quot;Mobile Web&quot;, nil];
 NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
-NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];</code></pre>
-  </div></p>
+NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];
 
+</code></pre></div>
 <h3>类型</h3>
 
 <p>最好用NSInteger和NSUInteger而不是用int，long。其他的float同理。</p>
@@ -609,98 +563,84 @@ NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];</code></pre>
 <h3>CGRect函数</h3>
 
 <p>当需要获取一个CGRect矩形的x,y,width,height属性时，应使用CGGeometry函数，而非直接访问结构体成员。</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如：
+CGRect frame = self.view.frame;
 
-<p><div>
-    <pre><code class='objc'>如：
-CGRect frame = self.view.frame;</p>
-
-<p>CGFloat x = CGRectGetMinX(frame);
+CGFloat x = CGRectGetMinX(frame);
 CGFloat y = CGRectGetMinY(frame);
 CGFloat width = CGRectGetWidth(frame);
-CGFloat height = CGRectGetHeight(frame);</p>
+CGFloat height = CGRectGetHeight(frame);
 
-<p>不恰当：
-CGRect frame = self.view.frame;</p>
+不恰当：
+CGRect frame = self.view.frame;
 
-<p>CGFloat x = frame.origin.x;
+CGFloat x = frame.origin.x;
 CGFloat y = frame.origin.y;
 CGFloat width = frame.size.width;
-CGFloat height = frame.size.height;</code></pre>
-  </div></p>
-
+CGFloat height = frame.size.height;
+</code></pre></div>
 <h3>常量</h3>
 
 <p>相对字符串字面量或数字，我们更推荐适用常量。应使用static方式声明常量，而非使用#define的方式来定义宏。</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">例如：
+static NSString * const NYTAboutViewControllerCompanyName = @&quot;The New York Times Company&quot;;  
+static const CGFloat NYTImageThumbnailHeight = 50.0;
 
-<p><div>
-    <pre><code class='objc'>例如：
-static NSString * const NYTAboutViewControllerCompanyName = @&quot;The New York Times Company&quot;;<br>
-static const CGFloat NYTImageThumbnailHeight = 50.0;</p>
-
-<p>不恰当:
+不恰当:
 //#define CompanyName @&quot;The New York Times Company&quot;
-//#define thumbnailHeight 2</code></pre>
-  </div></p>
+//#define thumbnailHeight 2
 
+</code></pre></div>
 <h3>枚举类型</h3>
 
 <p>在使用enum的时候，推荐适用最新的fixed underlying type(WWDC 2012 session 405- Modern Objective-C)规范，因为它具备更强的类型检查和代码完成功能。</p>
-
-<p><div>
-    <pre><code class='objc'>如：
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如：
 typedef NS_ENUM(NSInteger, NYTAdRequestState) {
     NYTAdRequestStateInactive,
     NYTAdRequestStateLoading
-};</code></pre>
-  </div></p>
+};
 
+</code></pre></div>
 <h3>布尔变量</h3>
 
 <p>因为nil将被解析为NO，因此没有必要在条件语句中进行比较。永远不要将任何东西和YES进行直接比较，因为YES被定义为1，而一个BOOL变量可以有8个字节。</p>
-
-<p><div>
-    <pre><code class='objc'>如：
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如：
 if (!someObject) {
-}</p>
+}
 
-<p>if (isAwesome)</p>
+if (isAwesome)
 
-<p>if (![someObject boolValue])</p>
+if (![someObject boolValue])
 
-<p>不恰当：
+不恰当：
 if (someObject == nil) {
-}</p>
+}
 
-<p>if ([someObject boolValue] == NO)</p>
+if ([someObject boolValue] == NO)
 
-<p>if (isAwesome == YES) // Never do this.</code></pre>
-  </div></p>
+if (isAwesome == YES) // Never do this.
 
+</code></pre></div>
 <p>如果一个BOOL属性使用形容词来表达，属性将忽略’is’前缀，但会强调惯用名称。
 例如：</p>
-
-<p><div>
-    <pre><code class='objc'>@property (assign, getter=isEditable) BOOL editable;</code></pre>
-  </div></p>
-
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@property (assign, getter=isEditable) BOOL editable;
+</code></pre></div>
 <h3>单例</h3>
 
 <p>在创建单例对象的共享实例时，应使用线程安全模式。</p>
-
-<p><div>
-    <pre><code class='objc'>如：
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如：
 (instancetype)sharedInstance {
-   static id sharedInstance = nil;</p>
+   static id sharedInstance = nil;
 
-<p>static dispatch<em>once</em>t onceToken;
+   static dispatch_once_t onceToken;
    dispatch_once(&amp;onceToken, ^{
       sharedInstance = [[self alloc] init];
-   });</p>
+   });
 
-<p>return sharedInstance;
-}</code></pre>
-  </div></p>
+   return sharedInstance;
+}
 
+</code></pre></div>
 <h3>数字</h3>
 
 <p>尽量避免数字固定为某个类型如:写5而不写5.0，5.3而不写5.3f)</p>
@@ -708,129 +648,109 @@ if (someObject == nil) {
 <h3>代码组织</h3>
 
 <p>用 <code>#pragma mark</code>来将方法分类，这个非常有效，当你用快捷键<code>Control+6</code>可以高效的寻找到自己想要跳转到的方法</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">//#pragma mark Properties
 
-<p><div>
-    <pre><code class='objc'>//#pragma mark Properties</p>
+@dynamic someProperty;
 
-<p>@dynamic someProperty;</p>
+- (void)setCustomProperty:(id)value {}
 
-<ul>
-<li>(void)setCustomProperty:(id)value {}</li>
-</ul>
+#pragma mark Lifecycle
 
-<p>//#pragma mark Lifecycle</p>
++ (id)objectWithThing:(id)thing {}
+- (id)init {}
 
-<ul>
-<li>(id)objectWithThing:(id)thing {}</li>
-<li>(id)init {}</li>
-</ul>
+#pragma mark Drawing
 
-<p>//#pragma mark Drawing</p>
+#pragma mark UItableView delegate
 
-<p>//#pragma mark UItableView delegate</p>
+#pragma mark UITableView datasource
 
-<p>//#pragma mark UITableView datasource</p>
+- (void)drawRect:(CGRect) {}
 
-<ul>
-<li>(void)drawRect:(CGRect) {}</li>
-</ul>
+#pragma mark Another functional grouping
 
-<p>//#pragma mark Another functional grouping</p>
+#pragma mark GHSuperclass
 
-<p>//#pragma mark GHSuperclass</p>
+- (void)someOverriddenMethod {}
 
-<ul>
-<li>(void)someOverriddenMethod {}</li>
-</ul>
+#pragma mark NSCopying
 
-<p>//#pragma mark NSCopying</p>
+- (id)copyWithZone:(NSZone *)zone {}
 
-<ul>
-<li>(id)copyWithZone:(NSZone *)zone {}</li>
-</ul>
+#pragma mark NSObject
 
-<p>//#pragma mark NSObject</p>
+- (NSString *)description {}
 
-<ul>
-<li>(NSString *)description {}</code></pre>
-</div></li>
-</ul>
-
+</code></pre></div>
 <h3>判断语句</h3>
 
 <p>if和else应该和左大括号在同一行</p>
-
-<p><div>
-    <pre><code class='objc'>如:
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
 if (button.enabled) {
     // Stuff
 } else if (otherButton.enabled) {
     // Other stuff
 } else {
     // More stuf
-}</code></pre>
-  </div></p>
+}
 
+</code></pre></div>
 <p>Switch 也是一样</p>
-
-<p><div>
-    <pre><code class='objc'>如:
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
 switch (something.state) {
     case 0: {
         // Something
         break;
-    }</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">case 1: {
-    // Something
-    break;
+    }
+
+    case 1: {
+        // Something
+        break;
+    }
+
+    case 2:
+    case 3: {
+        // Something
+        break;
+    }
+
+    default: {
+        // Something
+        break;
+    }
 }
 
-case 2:
-case 3: {
-    // Something
-    break;
-}
-
-default: {
-    // Something
-    break;
-}
 </code></pre></div>
-<p>}</code></pre>
-  </div></p>
-
 <h3>Import</h3>
 
 <p>在类的头文件中需要引用其他的类的时候，需要用<code>@class</code>这个关键字，这样能减少类与类之间的依赖。</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
+store.h:
 
-<p><div>
-    <pre><code class='objc'>如:
-store.h:</p>
+#import &lt;Foundation/Foundation.h&gt;
+#import &lt;CoreData/CoreData.h&gt;
 
-<p>//#import &lt;Foundation/Foundation.h&gt;
-//#import &lt;CoreData/CoreData.h&gt;</p>
+@class User;
 
-<p>@class User;</p>
+@interface Store : NSManagedObject
 
-<p>@interface Store : NSManagedObject</p>
+@property (nonatomic, retain) User *user;
 
-<p>@property (nonatomic, retain) User *user;</p>
+@end
 
-<p>@end</p>
+Store.m:
 
-<p>Store.m:</p>
+#import &quot;Store.h&quot;
 
-<p>//#import &quot;Store.h&quot;</p>
+#import &quot;User.h&quot;
 
-<p>//#import &quot;User.h&quot;</p>
+@implementation Store
 
-<p>@implementation Store</p>
+//doSomething
 
-<p>//doSomething</p>
+@end
 
-<p>@end</code></pre>
-  </div></p>
-
+</code></pre></div>
 <h3>私有方法</h3>
 
 <p>关于私有方法，苹果官方建议呢是是使用统一的前缀来分组和辨识。但是千万不用用下划线来作为前缀来命名，或者你可以在前缀前添加一些特殊的标识。</p>
@@ -845,19 +765,21 @@ store.h:</p>
 <li><strong>添加了新功能</strong> <code>feat(大模块+子模块):#例如实现了某个具体功能</code></li>
 <li><strong>修改了某些功能</strong>  <code>change(大模块+子模块):#例如修改了某个具体的功能</code></li>
 <li><strong>修复了某个Bug</strong>  <code>fix_bug(大模块+子模块):#修复了什么的bug，最好写上*原因*和*解决方法*。</code></li>
-<li><p><strong>比较大的改动</strong>  </p>
+<li><strong>比较大的改动</strong><br></li>
+</ol>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+   broken_change():
+   before: 
 
-<div>
-<pre><code class='objc'>broken_change():
-before: 
+   after:
 
-after:</code></pre>
-</div></li>
-<li><p><strong>修改了文档</strong> <code>docs():</code></p></li>
-<li><p><strong>修改了格式</strong> <code>style():</code></p></li>
-<li><p><strong>添加了一些测试</strong> <code>test(大模块+子模块):</code></p></li>
-<li><p><strong>一些杂项，比如像解决工程编译错误等问题之后的修改</strong> <code>chore():</code></p></li>
-<li><p><strong>对又有代码的重构</strong> <code>refactor(大模块+子模块):</code></p></li>
+</code></pre></div>
+<ol>
+<li><strong>修改了文档</strong> <code>docs():</code></li>
+<li><strong>修改了格式</strong> <code>style():</code></li>
+<li><strong>添加了一些测试</strong> <code>test(大模块+子模块):</code></li>
+<li><strong>一些杂项，比如像解决工程编译错误等问题之后的修改</strong> <code>chore():</code></li>
+<li><strong>对又有代码的重构</strong> <code>refactor(大模块+子模块):</code></li>
 </ol>
 
 <h2>格式</h2>
@@ -867,121 +789,100 @@ after:</code></pre>
 <p><strong>函数声明和定义:</strong></p>
 
 <p>“-”或“+”和返回类型之间应该有一个空格</p>
-
-<p><div>
-    <pre><code class='objc'>如:
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
 - (void)doSomethingWithString:(NSString *)theString {
   ...
-}</code></pre>
-  </div></p>
+}
 
+</code></pre></div>
 <p>方法大括号和其它大括号（比如if/else/switch/while等等）应在语句的同一行开始，而在新的一行关闭。</p>
-
-<p><div>
-    <pre><code class='objc'>if (user.isHappy) {
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+if (user.isHappy) {
 //Do something
 }
 else {
 //Do something else
-}</code></pre>
-  </div></p>
+}
 
+</code></pre></div>
 <p>当有多个参数的时，如果参数太多超过一行，则应该将每个参数分行，并且冒号对齐</p>
-
-<p><div>
-    <pre><code class='objc'>如:
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
 - (void)doSomethingWith:(GTMFoo *)theFoo
                    rect:(NSRect)theRect
                interval:(float)theInterval {
   ...
-}</code></pre>
-  </div></p>
+}
 
+</code></pre></div>
 <p>当第一个参数短于其他参数的时候，分行时每行至少要缩进4个空格</p>
-
-<p><div>
-    <pre><code class='objc'>longKeyword:(NSRect)theRect
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+             longKeyword:(NSRect)theRect
        evenLongerKeyword:(float)theInterval
                    error:(NSError **)theError {
           ...
-}</code></pre>
-  </div></p>
-
+}
+</code></pre></div>
 <h3>方法调用</h3>
 
 <p>方法调用应该和方法声明的时候一个格式,要么所有参数放在一行里:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+[myObject doFooWith:arg1 name:arg2 error:arg3];
 
-<p><div>
-    <pre><code class='objc'>[myObject doFooWith:arg1 name:arg2 error:arg3];</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>要么每一行一个参数:</p>
-
-<p><div>
-    <pre><code class='objc'>如:
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+如:
 [myObject doFooWith:arg1
                name:arg2
-              error:arg3];</code></pre>
-  </div></p>
-
+              error:arg3];
+</code></pre></div>
 <p>当第一个参数短语其他参数的时候，分行是每行至少要缩进4个空格:</p>
-
-<p><div>
-    <pre><code class='objc'>如:
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
 [myObj short:arg1
           longKeyword:arg2
     evenLongerKeyword:arg3
-                error:arg4];</code></pre>
-  </div></p>
+                error:arg4];
 
+</code></pre></div>
 <p>@public 和 @private前面为一个空格</p>
-
-<p><div>
-    <pre><code class='objc'>如:
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
 @interface MyClass : NSObject{
  @public
  …
  @private
 }
-@end</code></pre>
-  </div></p>
+@end
 
+</code></pre></div>
 <h3>协议</h3>
 
 <p>类型与协议名之间不要空格</p>
-
-<p><div>
-    <pre><code class='objc'>如:
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
 @interface MyProtocoledClass : NsObject&lt;NSWindowDelegate&gt; {
  @private
   id&lt;MyFancyDelegate&gt; _delegate;
 }
 -  (void)setDelegate:(id&lt;MyFancyDelegate&gt;)aDelegate;
-@end</code></pre>
-  </div></p>
+@end
 
+</code></pre></div>
 <h3>Blocks</h3>
-
-<p><div>
-    <pre><code class='objc'>在一行的情况
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">在一行的情况
 如:
-[operation setCompletionBlock:^{ [self onOperationDone]; }];</p>
+[operation setCompletionBlock:^{ [self onOperationDone]; }];
 
-<p>//block 在新的行里，需要缩进四个空格
+//block 在新的行里，需要缩进四个空格
 [operation setCompletionBlock:^{
       [self.delegate newDataAvailable];
-}];</p>
+}];
 
-<p>dispatch<em>async(</em>fileIOQueue, ^{
+dispatch_async(_fileIOQueue, ^{
       NSString* path = [self sessionFilePath];
       if (path) {
         // ...
       }
-});</code></pre>
-  </div></p>
-
-<p><div>
-    <pre><code class='objc'>//有参数的block,|(SessionWindow *window)|与|{|之间有一个空格
+});
+</code></pre></div><div class="highlight"><pre><code class="objc language-objc" data-lang="objc">//有参数的block,|(SessionWindow *window)|与|{|之间有一个空格
 如:
 [[SessionService sharedService]
     loadWindowWithCompletionBlock:^(SessionWindow *window) {
@@ -990,9 +891,9 @@ else {
         } else {
           [self errorLoadingWindow];
         }
-    }];</p>
+    }];
 
-<p>//block 中有参数且不能在一行中显示
+//block 中有参数且不能在一行中显示
 //要行与行之间要相对有四个空格
 [[SessionService sharedService]
       loadWindowWithCompletionBlock:
@@ -1002,15 +903,15 @@ else {
                    } else {
                      [self errorLoadingWindow];
                    }
-            }];</p>
+            }];
 
-<p>//很长的block可以被定义不在一行里
+//很长的block可以被定义不在一行里
 void (^largeBlock)(void) = ^{
     // ...
 };
-[_operationQueue addOperationWithBlock:largeBlock];</code></pre>
-  </div></p>
+[_operationQueue addOperationWithBlock:largeBlock];
 
+</code></pre></div>
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 
@@ -1023,25 +924,26 @@ void (^largeBlock)(void) = ^{
   </header>
   <div class="entry-content">
     <p><code>assign</code>:指定setter方法用简单的赋值，这是默认操作。你可以对标量类型（如int）使用这个属性。你可以想象一个float，它不是一个对象，所以它不能retain、copy。可以简单赋值，不更改索引计数(Reference Counting)。使用assign: 对基础数据类型 （NSInteger）和C数据类型（int, float, double, char,等）</p>
-<div class="highlight"><pre><code class="retain```:指定retain应该在后面的对象上调用，前一个值发送一条release消息。你可以想象一个NSString实例，它是一个对象，而且你可能想要retain它。 language-retain```:指定retain应该在后面的对象上调用，前一个值发送一条release消息。你可以想象一个NSString实例，它是一个对象，而且你可能想要retain它。" data-lang="retain```:指定retain应该在后面的对象上调用，前一个值发送一条release消息。你可以想象一个NSString实例，它是一个对象，而且你可能想要retain它。"> 释放旧的对象，将旧对象的值赋予输入对象，再提高输入对象的索引计数为1 ，使用retain： 对其他NSObject和其子类 ，retain，是说明该属性在赋值的时候，先release之前的值，然后再赋新值给属性，引用再加1。
 
+<p><code>retain</code>:指定retain应该在后面的对象上调用，前一个值发送一条release消息。你可以想象一个NSString实例，它是一个对象，而且你可能想要retain它。
+ 释放旧的对象，将旧对象的值赋予输入对象，再提高输入对象的索引计数为1 ，使用retain： 对其他NSObject和其子类 ，retain，是说明该属性在赋值的时候，先release之前的值，然后再赋新值给属性，引用再加1。</p>
 
-```copy```:指定应该使用对象的副本（深度复制），前一个值发送一条release消息。基本上像retain，但是没有增加引用计数，是分配一块新的内存来放置它。copy是创建一个新对象，retain是创建一个指针，引用对象计数加1。copy：建立一个索引计数为1的对象，然后释放旧对象，copy是创建一个新对象，retain是创建一个指针，引用对象计数加1。
+<p><code>copy</code>:指定应该使用对象的副本（深度复制），前一个值发送一条release消息。基本上像retain，但是没有增加引用计数，是分配一块新的内存来放置它。copy是创建一个新对象，retain是创建一个指针，引用对象计数加1。copy：建立一个索引计数为1的对象，然后释放旧对象，copy是创建一个新对象，retain是创建一个指针，引用对象计数加1。</p>
 
-``readonly``:将只生成getter方法而不生成setter方法（getter方法没有get前缀)。
+<p><code>readonly:</code>将只生成getter方法而不生成setter方法（getter方法没有get前缀)。</p>
 
-```readwrite```:默认属性，将生成不带额外参数的getter和setter方法（setter方法只有一个参数）。
+<p><code>readwrite</code>:默认属性，将生成不带额外参数的getter和setter方法（setter方法只有一个参数）。</p>
 
-```atomic```:对于对象的默认属性，就是setter/getter生成的方法是一个原子操作。如果有多个线程同时调用setter的话，不会出现某一个线程执行setter全部语句之前，另一个线程开始执行setter的情况，相关于方法头尾加了锁一样。
+<p><code>atomic</code>:对于对象的默认属性，就是setter/getter生成的方法是一个原子操作。如果有多个线程同时调用setter的话，不会出现某一个线程执行setter全部语句之前，另一个线程开始执行setter的情况，相关于方法头尾加了锁一样。</p>
 
-```nonatomic```:不保证setter/getter的原子性，多线程情况下数据可能会有问题。nonatomic，非原子性访问，不加同步，多线程并发访问会提高性能。先释放原先变量，再将新变量retain然后赋值；
+<p><code>nonatomic</code>:不保证setter/getter的原子性，多线程情况下数据可能会有问题。nonatomic，非原子性访问，不加同步，多线程并发访问会提高性能。先释放原先变量，再将新变量retain然后赋值；</p>
 
-```strong```:ARC中默认的方式是Strong，所以一般情况下，你是不需要写Strong的，strong关键字与retain关似，用了它，引用计数自动＋1。
+<p><code>strong</code>:ARC中默认的方式是Strong，所以一般情况下，你是不需要写Strong的，strong关键字与retain关似，用了它，引用计数自动＋1。</p>
 
-```weak```:weak所指向的指针顾名思义，只有很多的引用关系，当指向的内存地址被释放掉，weak指针也就会被释放掉了，这些指针都将被赋值为nil，这样的好处能有效的防止野指针
+<p><code>weak</code>:weak所指向的指针顾名思义，只有很多的引用关系，当指向的内存地址被释放掉，weak指针也就会被释放掉了，这些指针都将被赋值为nil，这样的好处能有效的防止野指针</p>
 
-```unsafe_unretained```:unsafe_unretained与weak有点类似，但是当所指向的指针被释放后，这些指针不会被赋值为nil，而成为野指针。
-</code></pre></div>
+<p><code>unsafe_unretained</code>:unsafe_unretained与weak有点类似，但是当所指向的指针被释放后，这些指针不会被赋值为nil，而成为野指针。</p>
+
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 
@@ -1105,52 +1007,46 @@ void (^largeBlock)(void) = ^{
 <p>Smalltalk才是实至名归的第一种面向对象语言，它用“从一个对象发送信息给另一个对象”的新概念取代了“调用函数”的旧概念，对后面的语言发展产生了深远的影响。</p>
 
 <p>你可以在Ruby中通过这样写来实现消息的发送：</p>
+<div class="highlight"><pre><code class="ruby language-ruby" data-lang="ruby">
+receiver.the_message argument
 
-<p><div>
-    <pre><code class='ruby'>receiver.the_message argument</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>Objective-C的实现方式和Ruby的差不多：</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+[receiver theMessage:argument];
 
-<p><div>
-    <pre><code class='objc'>[receiver theMessage:argument];</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>这些消息实现了鸭子类型的方式，也就是说关注的不是这个对象的类型或类本身，而是这个对象能否对一个消息做出反应。</p>
 
 <p>发送消息真的是非常棒的事，但是只有当消息在传送数据时，它的价值才会被发挥地更大：</p>
+<div class="highlight"><pre><code class="ruby language-ruby" data-lang="ruby">
+receiver.send(:the_message, argument)
 
-<p><div>
-    <pre><code class='ruby'>receiver.send(:the_message, argument)</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>和</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+[receiver performSelector:@selector(theMessage:) 
+withObject:argument];
 
-<p><div>
-    <pre><code class='objc'>[receiver performSelector:@selector(theMessage:) 
-withObject:argument];</code></pre>
-  </div></p>
-
+</code></pre></div>
 <p>正如Ruby中方法需要symbol支持一样，Objective-C中selector也需要string来支持。（在Objective-C中没有symbol。）这样就可以让你通过动态的方式使用一个方法。你甚至可以通过<code>NSSelectorFromString</code>方法来使用string创建一个selector，并在一个对象里执行它。同样的，我们可以在Ruby中也可以创建一个string或symbol，并把传给<code>Object#send</code>方法。</p>
 
 <p>当然，无论是哪种语言，一旦你将一个消息发送给不能处理该消息的对象，那么默认情况下就会抛出一个异常，还会导致应用的崩溃。</p>
 
 <p>当你想在调用一个方法前判断一下这个对象是否能够执行这个方法，你可以用Ruby中的<code>respond_to？</code>方法来检查：</p>
-
-<p><div>
-    <pre><code class='ruby'>if receiver.respond<em>to? :the</em>message
+<div class="highlight"><pre><code class="ruby language-ruby" data-lang="ruby">
+if receiver.respond_to? :the_message
   receiver.the_message argument
-end</code></pre>
-  </div></p>
+end
 
+</code></pre></div>
 <p>Objective-C中也有差不多的方法：</p>
-
-<p><div>
-    <pre><code class='objc'>if ([receiver respondsToSelector:@selector(theMessage:)]) {
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+if ([receiver respondsToSelector:@selector(theMessage:)]) {
     [receiver theMessage:someThing];
-}</code></pre>
-  </div></p>
+}
 
+</code></pre></div>
 <hr>
 
 <p><a id='getting_metaer_and_metaer' name='getting_metaer_and_metaer'> </a></p>
@@ -1160,64 +1056,59 @@ end</code></pre>
 <p>如果你想在一个不能修改的类（像系统类）中添加你想要的方法，那么Objective-C里的category一定不会让你失望 -- 很像Ruby中的“开放类”。</p>
 
 <p>举个例子，如果你想将Rails中的<code>to_sentence</code>方法添加到<code>NSArray</code>类中，我们只需要对<code>NSArray</code>这个类进行扩展就好了：</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
+@interface NSArray (ToSentence)
 
-<p><div>
-    <pre><code class='objc'>@interface NSArray (ToSentence)</p>
+- (NSString *)toSentence;
 
-<ul>
-<li>(NSString *)toSentence;</li>
-</ul>
+@end
 
-<p>@end</p>
 
-<p>@implementation NSArray (ToSentence)</p>
+@implementation NSArray (ToSentence)
 
-<ul>
-<li>(NSString *)toSentence {
-if (self.count == 0) return @&amp;quot;&amp;quot;;
-if (self.count == 1) return [self lastObject];
-NSArray *allButLastObject = [self subarrayWithRange:NSMakeRange(0, self.count-1)];
-NSString *result = [allButLastObject componentsJoinedByString:@&amp;quot;, &amp;quot;];
-BOOL showComma = self.count &amp;gt; 2;
-result = [result stringByAppendingFormat:@&amp;quot;%@ and &amp;quot;, showComma ? @&amp;quot;,&amp;quot; : @&amp;quot;&amp;quot;];
-result = [result stringByAppendingString:[self lastObject]];
-return result;
-}</li>
-</ul>
+- (NSString *)toSentence {
+    if (self.count == 0) return @&amp;quot;&amp;quot;;
+    if (self.count == 1) return [self lastObject];
+    NSArray *allButLastObject = [self subarrayWithRange:NSMakeRange(0, self.count-1)];
+    NSString *result = [allButLastObject componentsJoinedByString:@&amp;quot;, &amp;quot;];
+    BOOL showComma = self.count &amp;gt; 2;
+    result = [result stringByAppendingFormat:@&amp;quot;%@ and &amp;quot;, showComma ? @&amp;quot;,&amp;quot; : @&amp;quot;&amp;quot;];
+    result = [result stringByAppendingString:[self lastObject]];
+    return result;
+}
 
-<p>@end</code></pre>
-  </div></p>
+@end
 
+</code></pre></div>
 <p>Category是在编译的时候将方法添加到程序中 -- 让我们在runtime中动态捕捉它们怎么样？</p>
 
 <p>有些消息可以嵌套数据，就像Rails的dynamic finders。Ruby通过对<code>method_missing</code> 和 <code>respond_to</code>这两个方法的重写，先匹配模式，再将新方法的定义添加到这个对象中。</p>
 
 <p>Objective-C中的流程是差不多，但我们不是重写<code>doesNotRecognizeSelector:</code>方法（相当于Ruby中的<code>method_missing</code>方法），而是在<code>resolveClassMethod:</code>方法中捕捉Category添加的方法。假设我们有一个叫<code>+findWhere:equals:</code>的类方法，它可以得到property的名称和值，那么通过正则表达式就可以很容易实现找到property的名字，并通过block来注册这个selector。</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
++ (BOOL)resolveClassMethod:(SEL)sel {
+    NSString *selectorName = NSStringFromSelector(sel);
 
-<p><div>
-    <pre><code class='objc'>+ (BOOL)resolveClassMethod:(SEL)sel {
-    NSString *selectorName = NSStringFromSelector(sel);</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@&amp;amp;quot;^findWhere(\\w+)Equals:$&amp;amp;quot; options:0 error:nil];
-NSTextCheckingResult *result = [regex firstMatchInString:selectorName options:0 range:NSMakeRange(0, selectorName.length)];
-if (result) {
-    NSRange propertyNameRange = [result rangeAtIndex:1];
-    NSString *propertyName = [selectorName substringWithRange:propertyNameRange];
+    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@&amp;quot;^findWhere(\\w+)Equals:$&amp;quot; options:0 error:nil];
+    NSTextCheckingResult *result = [regex firstMatchInString:selectorName options:0 range:NSMakeRange(0, selectorName.length)];
+    if (result) {
+        NSRange propertyNameRange = [result rangeAtIndex:1];
+        NSString *propertyName = [selectorName substringWithRange:propertyNameRange];
 
-    IMP implementation  = imp_implementationWithBlock((id) ^(id self, id arg1) {
-        return [self findWhere:propertyName equals:arg1];
-    });
+        IMP implementation  = imp_implementationWithBlock((id) ^(id self, id arg1) {
+            return [self findWhere:propertyName equals:arg1];
+        });
 
-    Class metaClass = object_getClass(self);
+        Class metaClass = object_getClass(self);
 
-    class_addMethod(metaClass, sel, implementation, &amp;amp;quot;@@:@@&amp;amp;quot;);
-    return YES;
+        class_addMethod(metaClass, sel, implementation, &amp;quot;@@:@@&amp;quot;);
+        return YES;
+    }
+
+    return [super resolveClassMethod:sel];
 }
 
-return [super resolveClassMethod:sel];
 </code></pre></div>
-<p>}</code></pre>
-  </div></p>
-
 <p>这个方法的优点就是我们不需要去重写<code>respondsToSelector:</code>，因为每个在类中注册过的selector都会去调用这个方法。现在让我们调用<code>[RGSong findWhereTitleEquals:@“Mercy”]</code>。当<code>findWhereTitleEquals:</code>第一次被调用的时候，runtime并不知道这个方法，所以它会调用<code>resolveClassMethod:</code>，这时我们就将<code>findWhereTitleEquals:</code>这个方法动态添加进去，当第二次调用<code>findWhereTitleEquals:</code>的时候，因为它已经被添加过了，所以就不会再调用<code>resolveClassMethod:</code>了。</p>
 
 <p>这里还有一些别的方法来实现捕捉动态方法。你可以通过重写<code>resolveClassMethod:</code> 和 <code>resolveInstanceMethod:</code>方法（就像上面的一样），可以将消息传递给不同的对象或全权接管这个“调用”，并在消息传递之前，做你想这个消息要完成的任何事。这些方法都会导致运行成本的增加，特别在<code>-forwardInvocation:</code>中会达到顶峰，在这种情况下我们必须要实例化一个对象才能去执行它们。<code>-forwardInvocation:</code>方法中默认调用<code>doesNotRecognizeSelector</code>方法，这导致了应用的频繁异常或崩溃。</p>

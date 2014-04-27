@@ -167,44 +167,36 @@
 <p>我曾在这个博客上多次提过Objective-C是直接建立在C语言之上的，一个重要的原因是Objective-C和C语言共用一个类型系统，他们都要求标识符是全局唯一的。</p>
 
 <p>你可以自己定义一个和<code>@interface</code>同名的静态变量，编译之后你会得到一个错误：</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@interface XXObject : NSObject
+@end
 
-<p><div>
-    <pre><code class='objc'>@interface XXObject : NSObject
-@end</p>
-
-<p>static char * XXObject;//将“XXObject”重新定义为不同的符号</code></pre>
-  </div></p>
-
+static char * XXObject;//将“XXObject”重新定义为不同的符号
+</code></pre></div>
 <p>也就是说，Objective-C的runtime在C语言的类型系统上又创建了一个抽象层，它甚至可以允许下面这段代码被编译:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@protocol Foo
+@end
 
-<p><div>
-    <pre><code class='objc'>@protocol Foo
-@end</p>
-
-<p>@interface Foo : NSObject &lt;Foo&gt; {
+@interface Foo : NSObject &lt;Foo&gt; {
     id Foo;
-}</p>
+}
 
-<p>@property id Foo;
+@property id Foo;
 + (id)Foo;
 - (id)Foo;
-@end</p>
+@end
 
-<p>@interface Foo (Foo)
-@end</p>
+@interface Foo (Foo)
+@end
 
-<p>@implementation Foo
-@synthesize Foo;</p>
+@implementation Foo
+@synthesize Foo;
 
-<ul>
-<li>(id)Foo {
-id Foo = @&quot;Foo&quot;;
-return Foo;
++ (id)Foo {
+    id Foo = @&quot;Foo&quot;;
+    return Foo;
 }
-@end</code></pre>
-</div></li>
-</ul>
-
+@end
+</code></pre></div>
 <ol>
 <li>通过Objective-C的环境，程序能区别所有相同名字的类，协议，类别，实例变量，实例方法和类方法。</li>
 </ol>
@@ -309,23 +301,17 @@ return Foo;
 
 <p>不仅是类容易造成命名冲突，selectors也很容易造成命名冲突，甚至方法比类会有更多的问题。
 考虑一下这个category：</p>
-
-<p><div>
-    <pre><code class='objc'>@interface NSString (PigLatin)
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@interface NSString (PigLatin)
 - (NSString *)pigLatinString;
-@end</code></pre>
-  </div></p>
-
+@end
+</code></pre></div>
 <p>如果 <code>-pigLatinString</code>方法被另一个category实现了（或者以后版本的iOS或者Mac OS X 在NSString类中也添加了同样名字的方法），那么调用这个方法就会得到未定义的行为错误，因为我们不能保证在runtime中哪个方法会先被定义。</p>
 
 <p>我们可以通过在方法名前加前缀来避免这个问题，就像加这个类名一样（在类别名前加前缀也是个好办法）：</p>
-
-<p><div>
-    <pre><code class='objc'>@interface NSString (XXXPigLatin)
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@interface NSString (XXXPigLatin)
 - (NSString *)xxx_pigLatinString;
-@end</code></pre>
-  </div></p>
-
+@end
+</code></pre></div>
 <p>苹果官方建议<a href="https://developer.apple.com/library/ios/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html#//apple_ref/doc/uid/TP40011210-CH6-SW4">所有category方法都要使用前缀</a>，这个建议比类名需要加前缀的规定更加广为人知和接受。</p>
 
 <p>很多开发者都在热情地讨论着这个规定的某一方面。然而，无论是通过成本角度还是效益角度来衡量命名冲突风险的可能性都是是不全面的:</p>
@@ -343,19 +329,14 @@ return Foo;
 <h3>Swizzling</h3>
 
 <p>在Swizzling时，方法名加前缀或者后缀也是非常有必要的，这个我在上周关于<a href="http://nshipster.com/method-swizzling/">swizzling</a>的文章中提到过。</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@implementation UIViewController (Swizzling)
 
-<p><div>
-    <pre><code class='objc'>@implementation UIViewController (Swizzling)</p>
+- (void)xxx_viewDidLoad {
+    [self xxx_viewDidLoad];
 
-<ul>
-<li><p>(void)xxx<em>viewDidLoad {
-[self xxx</em>viewDidLoad];</p>
-
-<p>// Swizzled implementation
-}</code></pre>
-</div></p></li>
-</ul>
-
+    // Swizzled implementation
+}
+</code></pre></div>
 <h2>我们真的需要命名空间么？</h2>
 
 <p>在最近关于Objective-C替换、改造和重塑的讨论中，我可以明显地发现命名空间是未来的一个趋势。但是它到底给我们带来了什么呢？</p>
@@ -365,23 +346,20 @@ return Foo;
 <p><strong>语义学</strong>？让我们比较一下其他的语言，看看他们是怎么用命名空间的，那么你就会意识到命名空间不能解决所有不明确的问题。可能在某些额外环境的情况下，那些命名空间会出现更多问题。</p>
 
 <p>你还是不赞同，那么你想象一下Objective-C的命名空间的实现可能会像这个样子，你会觉得怎么样:</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@namespace XX
+    @implementation Object
 
-<p><div>
-    <pre><code class='objc'>@namespace XX
-    @implementation Object</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">@using F: Foundation;
+    @using F: Foundation;
 
-- (void)foo {
-    F:Array *array = @[@1,@2, @3];
+    - (void)foo {
+        F:Array *array = @[@1,@2, @3];
 
-    // ...
-}
+        // ...
+    }
 
+    @end
 @end
 </code></pre></div>
-<p>@end</code></pre>
-  </div></p>
-
 <p>虽然Objective-C有繁琐的代码但也有容易理解的明显优点。我们作为开发者去讨论<code>NSString</code>的时候，我们不会把它理解成别的意思，编译器也是一样。当我们在阅读代码时，我们不需要过多地去考虑这些代码是什么作用的。并且最重要的是，NSString这个类名在google这些搜索引擎中<a href="http://lmgtfy.com/?q=NSString">很容易就可以找到， 你不会得到其他结果</a>。</p>
 
 <p>不管怎样，如果你对这个讨论感兴趣的话，我强烈建议你看一下<a href="http://optshiftk.com/">Kyle Sluder</a>的<a href="http://optshiftk.com/2012/04/draft-proposal-for-namespaces-in-objective-c/">this namespace feature proposal</a>。非常值得一看。</p>
@@ -418,7 +396,7 @@ var duoshuoQuery = {short_name:"morisunshne"};
         </div><!-- /.read-more-header -->
         <div class="read-more-content">
           <h3><a href="http://localhost:4000/ios/ios_code_standards/" title="iOS编码规范参考">iOS编码规范参考</a></h3>
-          <p>注释建议使用VVDocumenter插件多行注释格式:    /**          注释内容*/  单行注释格式:    ///在对文件、类、函数进行注释时推荐使用多行注释，在函数体内对代码块进行注释时，使用单行注释  函数的注释函数注释的格式为    /** *  @...&hellip; <a href="http://localhost:4000/ios/ios_code_standards/">Continue reading</a></p>
+          <p>注释建议使用VVDocumenter插件多行注释格式:/**              注释内容*/单行注释格式:///在对文件、类、函数进行注释时推荐使用多行注释，在函数体内对代码块进行注释时，使用单行注释函数的注释函数注释的格式为/** *  @brief   *  @...&hellip; <a href="http://localhost:4000/ios/ios_code_standards/">Continue reading</a></p>
         </div><!-- /.read-more-content -->
       
       <div class="read-more-list">
