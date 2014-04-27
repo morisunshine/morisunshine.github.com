@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml" />
 <link rel="alternate" type="text/html" href="http://localhost:4000" />
-<updated>2014-04-27T13:14:38+08:00</updated>
+<updated>2014-04-27T13:19:02+08:00</updated>
 <id>http://localhost:4000/</id>
 <author>
   <name>Sheldon</name>
@@ -2096,129 +2096,117 @@ Run options:&lt;/p&gt;
 @end
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;AbstractCellPhone也就是结构图中的Component，然后，我再来实现Nokia和Moto的手机类，这类要继承AbstractCellPhone，也就是图中ConcreteComponent类要继承Component，实现代码如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;div&gt;
-    &lt;pre&gt;&lt;code class=&#39;objc&#39;&gt;#import &amp;quot;AbstractCellPhone.h&amp;quot;&lt;br&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
+#import &amp;quot;AbstractCellPhone.h&amp;quot;   
 @interface NokiaPhone : AbstractCellPhone
-@end&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+@end
 
-&lt;p&gt;&lt;div&gt;
-    &lt;pre&gt;&lt;code class=&#39;objc&#39;&gt;#import &amp;quot;NokiaPhone.h&amp;quot;&lt;/p&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
+#import &amp;quot;NokiaPhone.h&amp;quot;
 
-&lt;p&gt;@implementation NokiaPhone&lt;/p&gt;
+@implementation NokiaPhone
 
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;(NSString *)callNumber
+- (NSString *)callNumber
 {
-return @&amp;quot;NokiaPhone call somebody&amp;quot;;
-}&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;(NSString *)sendMessage
-{
-return @&amp;quot;NokiaPhone send Message to Somebody&amp;quot;;
-}&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;@end&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;接下来我需要一个Decorator接口或者抽象类，实现代码如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;div&gt;
-    &lt;pre&gt;&lt;code class=&#39;objc&#39;&gt;#import &amp;quot;AbstractCellPhone.h&amp;quot;&lt;/p&gt;
-
-&lt;p&gt;@interface Decorator : AbstractCellPhone
-{
-@protected AbstractCellPhone &lt;em&gt;abstractCellPhone;
+    return @&amp;quot;NokiaPhone call somebody&amp;quot;;
 }
--(void)SetComponents:(Components&lt;/em&gt;)component;
-@end&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;div&gt;
-    &lt;pre&gt;&lt;code class=&#39;objc&#39;&gt;#import &amp;quot;Decorator.h&amp;quot;&lt;/p&gt;
+- (NSString *)sendMessage
+{
+    return @&amp;quot;NokiaPhone send Message to Somebody&amp;quot;;
+}
 
-&lt;p&gt;@implementation Decorator
+@end
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;接下来我需要一个Decorator接口或者抽象类，实现代码如下：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
+#import &amp;quot;AbstractCellPhone.h&amp;quot;
+
+@interface Decorator : AbstractCellPhone
+{
+@protected AbstractCellPhone *abstractCellPhone;
+}
+-(void)SetComponents:(Components*)component;
+@end
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
+#import &amp;quot;Decorator.h&amp;quot;
+
+@implementation Decorator
 -(void)SetComponents:(Components*)component{
     components = component;
-}&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;(NSString *)callNumber
-{
-return components.callNumber;
-}&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;(NSString *)sendMessage
-{
-return components.sendMessage;
 }
-@end&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
 
-&lt;p&gt;正如结构图中，这个Decorator即继承了AbstractCellPhone，又包含了一个私有的AbstractCellPhone的对象。这样做的意义是：Decorator类又使用了另外一个Component类。我们可以使用一个或多个Decorator对象来“装饰”一个Component对象，且装饰后的对象仍然是一个Component对象。在下来，我要实现GSP和蓝牙的功能扩展，它们要继承自Decorator，代码如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;div&gt;
-    &lt;pre&gt;&lt;code class=&#39;objc&#39;&gt;#import &amp;quot;Decorator.h&amp;quot;&lt;/p&gt;
-
-&lt;p&gt;@interface DecoratorGPS : Decorator&lt;/p&gt;
-
-&lt;p&gt;@end&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;div&gt;
-    &lt;pre&gt;&lt;code class=&#39;objc&#39;&gt;#import &amp;quot;DecoratorGPS.h&amp;quot;&lt;/p&gt;
-
-&lt;p&gt;@implementation DecoratorGPS&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;(NSString *)callNumber
+- (NSString *)callNumber
 {
-return [NSString stringWithFormat:@&amp;quot;%@ with GPS&amp;quot;, [super callNumber]];
-}&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;(NSString *)sendMessage
-{
-return [NSString stringWithFormat:@&amp;quot;%@ with GPS&amp;quot;, [super sendMessage]];
-}&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;@end&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
-
-&lt;p&gt;最后，用客户端程序验证一下：&lt;/p&gt;
-
-&lt;p&gt;&lt;div&gt;
-    &lt;pre&gt;&lt;code class=&#39;objc&#39;&gt;int main(int argc, const char *argv[])
-{
-    @autoreleasepool {&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;    Components *phone = [[ConcreteComponent alloc] init];
-    NSLog(@&amp;amp;quot;%@&amp;amp;quot;,phone.callNumber);
-    NSLog(@&amp;amp;quot;%@&amp;amp;quot;,phone.sendMessage);
-    ConcreteDecoratorA *GPS = [[ConcreteDecoratorA alloc] init];
-    [GPS SetComponents:phone];
-    NSLog(@&amp;amp;quot;%@&amp;amp;quot;,GPS.callNumber);
-    NSLog(@&amp;amp;quot;%@&amp;amp;quot;,GPS.sendMessage);
-    ConcreteDecoratorB *bluetooth = [[ConcreteDecoratorB alloc] init];
-    [bluetooth SetComponents:phone];
-    NSLog(@&amp;amp;quot;%@&amp;amp;quot;,bluetooth.callNumber);
-    NSLog(@&amp;amp;quot;%@&amp;amp;quot;,bluetooth.sendMessage);
+    return components.callNumber;
 }
-return 0;
+
+- (NSString *)sendMessage
+{
+    return components.sendMessage;
+}
+@end
+
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;p&gt;}&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+&lt;p&gt;正如结构图中，这个Decorator即继承了AbstractCellPhone，又包含了一个私有的AbstractCellPhone的对象。这样做的意义是：Decorator类又使用了另外一个Component类。我们可以使用一个或多个Decorator对象来“装饰”一个Component对象，且装饰后的对象仍然是一个Component对象。在下来，我要实现GSP和蓝牙的功能扩展，它们要继承自Decorator，代码如下：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
+#import &amp;quot;Decorator.h&amp;quot;
 
+@interface DecoratorGPS : Decorator
+
+@end
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
+#import &amp;quot;DecoratorGPS.h&amp;quot;
+
+@implementation DecoratorGPS
+
+- (NSString *)callNumber
+{
+    return [NSString stringWithFormat:@&amp;quot;%@ with GPS&amp;quot;, [super callNumber]];
+}
+
+- (NSString *)sendMessage
+{
+    return [NSString stringWithFormat:@&amp;quot;%@ with GPS&amp;quot;, [super sendMessage]];
+}
+
+@end
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;最后，用客户端程序验证一下：&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
+int main(int argc, const char *argv[])
+{
+    @autoreleasepool {
+
+        Components *phone = [[ConcreteComponent alloc] init];
+        NSLog(@&amp;quot;%@&amp;quot;,phone.callNumber);
+        NSLog(@&amp;quot;%@&amp;quot;,phone.sendMessage);
+        ConcreteDecoratorA *GPS = [[ConcreteDecoratorA alloc] init];
+        [GPS SetComponents:phone];
+        NSLog(@&amp;quot;%@&amp;quot;,GPS.callNumber);
+        NSLog(@&amp;quot;%@&amp;quot;,GPS.sendMessage);
+        ConcreteDecoratorB *bluetooth = [[ConcreteDecoratorB alloc] init];
+        [bluetooth SetComponents:phone];
+        NSLog(@&amp;quot;%@&amp;quot;,bluetooth.callNumber);
+        NSLog(@&amp;quot;%@&amp;quot;,bluetooth.sendMessage);
+    }
+    return 0;
+}
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;执行结果：&lt;/p&gt;
-
-&lt;p&gt;&lt;div&gt;
-    &lt;pre&gt;&lt;code class=&#39;objc&#39;&gt;NokiaPhone call somebody
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt; NokiaPhone call somebody
  NokiaPhone send Message to Somebody
  NokiaPhone call somebody with GPS
  NokiaPhone send Message to Somebody with GPS
  NokiaPhone call somebody with BlueTooth
- NokiaPhone send Message to Somebody with BlueTooth&lt;/code&gt;&lt;/pre&gt;
-  &lt;/div&gt;&lt;/p&gt;
+ NokiaPhone send Message to Somebody with BlueTooth
 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;p&gt;&lt;a href=&quot;http://localhost:4000/ios/iOS_Decorator/&quot;&gt;iOS设计模式学习---装饰模式&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on July 14, 2013.&lt;/p&gt;</content>
 </entry>
 
