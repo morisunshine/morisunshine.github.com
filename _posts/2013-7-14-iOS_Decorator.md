@@ -21,18 +21,14 @@ comments: true
 首先，我们需要一个手机的接口或者抽象类，我这里就用抽象类来实现，代码如下：
 
 
-{% highlight objc %}
-
+```objc
 @interface AbstractCellPhone : NSObject
 - (NSString *)callNumber;
 - (NSString *)sendMessage;
 @end
+```
 
-
-{% endhighlight %}
-
-{% highlight objc %}
-
+```objc
 #import "AbstractCellPhone.h"
 
 @implementation AbstractCellPhone
@@ -47,8 +43,7 @@ comments: true
     return @"phone send a message to somebody";
 }
 @end
-
-{% endhighlight %}
+```
 
 AbstractCellPhone也就是结构图中的Component，然后，我再来实现Nokia和Moto的手机类，这类要继承AbstractCellPhone，也就是图中ConcreteComponent类要继承Component，实现代码如下：
 
