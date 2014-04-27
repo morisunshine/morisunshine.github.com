@@ -11,7 +11,7 @@
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://morisunshine.com/images/">
+<meta name="twitter:image" content="http://localhost:4000/images/">
 <meta name="twitter:title" content="@property中attribute的整理">
 <meta name="twitter:description" content="">
 <meta name="twitter:creator" content="@morisunshine">
@@ -21,15 +21,15 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="@property中attribute的整理">
 <meta property="og:description" content="">
-<meta property="og:url" content="http://morisunshine.com/ios/Property_of_Objective_C/">
+<meta property="og:url" content="http://localhost:4000/ios/Property_of_Objective_C/">
 <meta property="og:site_name" content="Morisunshine's Blog">
 
 
 
 
 
-<link rel="canonical" href="http://morisunshine.com/ios/Property_of_Objective_C/">
-<link href="http://morisunshine.com/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
+<link rel="canonical" href="http://localhost:4000/ios/Property_of_Objective_C/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
 
 
 <!-- http://t.co/dKP3o1e -->
@@ -38,32 +38,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="http://morisunshine.com/assets/css/main.min.css">
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.min.css">
 <!-- Webfonts -->
 <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
 
 <meta http-equiv="cleartype" content="on">
 
 <!-- Load Modernizr -->
-<script src="http://morisunshine.com/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
 
 <!-- Icons -->
 <!-- 16x16 -->
-<link rel="shortcut icon" href="http://morisunshine.com/favicon.ico">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
 <!-- 32x32 -->
-<link rel="shortcut icon" href="http://morisunshine.com/favicon.png">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
 <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
-<link rel="apple-touch-icon-precomposed" href="http://morisunshine.com/images/apple-touch-icon-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
 <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://morisunshine.com/images/apple-touch-icon-72x72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
 <!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://morisunshine.com/images/apple-touch-icon-114x114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
 <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://morisunshine.com/images/apple-touch-icon-144x144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
 
 
 
 </head>
+
+<link rel="stylesheet" href="assets/css/solarized_dark.css">
+<script src="assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 <body id="post" >
 
@@ -71,16 +75,16 @@
 <nav id="dl-menu" class="dl-menuwrapper" role="navigation">
 	<button class="dl-trigger">Open Menu</button>
 	<ul class="dl-menu">
-		<li><a href="http://morisunshine.com">Home</a></li>
+		<li><a href="http://localhost:4000">Home</a></li>
 		<li>
 			<a href="#">About</a>
 			<ul class="dl-submenu">
 				<li>
-					<img src="http://morisunshine.com/images/avatar.png" alt="Sheldon photo" class="author-photo">
+					<img src="http://localhost:4000/images/avatar.png" alt="Sheldon photo" class="author-photo">
 					<h4>Sheldon</h4>
 					<p>1991-12-10</p>
 				</li>
-				<li><a href="http://morisunshine.com/about/">Know More</a></li>
+				<li><a href="http://localhost:4000/about/">Know More</a></li>
 				<li>
 					<a href="mailto:sheldon.zen@gmail.com"><i class="icon-envelope"></i> Email</a>
 				</li>
@@ -111,11 +115,11 @@
 		<li>
 			<a href="#">Posts</a>
 			<ul class="dl-submenu">
-				<li><a href="http://morisunshine.com/posts/">All Posts</a></li>
-				<li><a href="http://morisunshine.com/tags/">All Tags</a></li>
+				<li><a href="http://localhost:4000/posts/">All Posts</a></li>
+				<li><a href="http://localhost:4000/tags/">All Tags</a></li>
 			</ul>
 		</li>
-		<li><a href="http://morisunshine.com/feed">Feed</a></li>
+		<li><a href="http://localhost:4000/feed">Feed</a></li>
 		
 	</ul><!-- /.dl-menu -->
 </nav><!-- /.dl-menuwrapper -->
@@ -128,38 +132,37 @@
     <header class="header-title">
       <div class="header-title-wrap">
         
-          <h1 class="entry-title"><a href="http://morisunshine.com/ios/Property_of_Objective_C/" rel="bookmark" title="@property中attribute的整理">@property中attribute的整理</a></h1>
+          <h1 class="entry-title"><a href="http://localhost:4000/ios/Property_of_Objective_C/" rel="bookmark" title="@property中attribute的整理">@property中attribute的整理</a></h1>
         
         <h2>April 16, 2014</h2>
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
       <p><code>assign</code>:指定setter方法用简单的赋值，这是默认操作。你可以对标量类型（如int）使用这个属性。你可以想象一个float，它不是一个对象，所以它不能retain、copy。可以简单赋值，不更改索引计数(Reference Counting)。使用assign: 对基础数据类型 （NSInteger）和C数据类型（int, float, double, char,等）</p>
+<div class="highlight"><pre><code class="retain```:指定retain应该在后面的对象上调用，前一个值发送一条release消息。你可以想象一个NSString实例，它是一个对象，而且你可能想要retain它。 language-retain```:指定retain应该在后面的对象上调用，前一个值发送一条release消息。你可以想象一个NSString实例，它是一个对象，而且你可能想要retain它。" data-lang="retain```:指定retain应该在后面的对象上调用，前一个值发送一条release消息。你可以想象一个NSString实例，它是一个对象，而且你可能想要retain它。"> 释放旧的对象，将旧对象的值赋予输入对象，再提高输入对象的索引计数为1 ，使用retain： 对其他NSObject和其子类 ，retain，是说明该属性在赋值的时候，先release之前的值，然后再赋新值给属性，引用再加1。
 
-<p><code>retain</code>:指定retain应该在后面的对象上调用，前一个值发送一条release消息。你可以想象一个NSString实例，它是一个对象，而且你可能想要retain它。
- 释放旧的对象，将旧对象的值赋予输入对象，再提高输入对象的索引计数为1 ，使用retain： 对其他NSObject和其子类 ，retain，是说明该属性在赋值的时候，先release之前的值，然后再赋新值给属性，引用再加1。</p>
 
-<p><code>copy</code>:指定应该使用对象的副本（深度复制），前一个值发送一条release消息。基本上像retain，但是没有增加引用计数，是分配一块新的内存来放置它。copy是创建一个新对象，retain是创建一个指针，引用对象计数加1。copy：建立一个索引计数为1的对象，然后释放旧对象，copy是创建一个新对象，retain是创建一个指针，引用对象计数加1。</p>
+```copy```:指定应该使用对象的副本（深度复制），前一个值发送一条release消息。基本上像retain，但是没有增加引用计数，是分配一块新的内存来放置它。copy是创建一个新对象，retain是创建一个指针，引用对象计数加1。copy：建立一个索引计数为1的对象，然后释放旧对象，copy是创建一个新对象，retain是创建一个指针，引用对象计数加1。
 
-<p><code>readonly</code>:将只生成getter方法而不生成setter方法（getter方法没有get前缀)。</p>
+``readonly``:将只生成getter方法而不生成setter方法（getter方法没有get前缀)。
 
-<p><code>readwrite</code>:默认属性，将生成不带额外参数的getter和setter方法（setter方法只有一个参数）。</p>
+```readwrite```:默认属性，将生成不带额外参数的getter和setter方法（setter方法只有一个参数）。
 
-<p><code>atomic</code>:对于对象的默认属性，就是setter/getter生成的方法是一个原子操作。如果有多个线程同时调用setter的话，不会出现某一个线程执行setter全部语句之前，另一个线程开始执行setter的情况，相关于方法头尾加了锁一样。</p>
+```atomic```:对于对象的默认属性，就是setter/getter生成的方法是一个原子操作。如果有多个线程同时调用setter的话，不会出现某一个线程执行setter全部语句之前，另一个线程开始执行setter的情况，相关于方法头尾加了锁一样。
 
-<p><code>nonatomic</code>:不保证setter/getter的原子性，多线程情况下数据可能会有问题。nonatomic，非原子性访问，不加同步，多线程并发访问会提高性能。先释放原先变量，再将新变量retain然后赋值；</p>
+```nonatomic```:不保证setter/getter的原子性，多线程情况下数据可能会有问题。nonatomic，非原子性访问，不加同步，多线程并发访问会提高性能。先释放原先变量，再将新变量retain然后赋值；
 
-<p><code>strong</code>:ARC中默认的方式是Strong，所以一般情况下，你是不需要写Strong的，strong关键字与retain关似，用了它，引用计数自动＋1。</p>
+```strong```:ARC中默认的方式是Strong，所以一般情况下，你是不需要写Strong的，strong关键字与retain关似，用了它，引用计数自动＋1。
 
-<p><code>weak</code>:weak所指向的指针顾名思义，只有很多的引用关系，当指向的内存地址被释放掉，weak指针也就会被释放掉了，这些指针都将被赋值为nil，这样的好处能有效的防止野指针</p>
+```weak```:weak所指向的指针顾名思义，只有很多的引用关系，当指向的内存地址被释放掉，weak指针也就会被释放掉了，这些指针都将被赋值为nil，这样的好处能有效的防止野指针
 
-<p><code>unsafe_unretained</code>:unsafe_unretained与weak有点类似，但是当所指向的指针被释放后，这些指针不会被赋值为nil，而成为野指针。</p>
-
+```unsafe_unretained```:unsafe_unretained与weak有点类似，但是当所指向的指针被释放后，这些指针不会被赋值为nil，而成为野指针。
+</code></pre></div>
       <footer class="entry-meta">
-        <span class="entry-tags"><a href="http://morisunshine.com/tags/#iOS" title="Pages tagged iOS" class="tag">iOS</a></span>
-        <span><a href="http://morisunshine.com/ios/Property_of_Objective_C/" rel="bookmark" title="@property中attribute的整理">@property中attribute的整理</a> was published on <span class="entry-date date published updated"><time datetime="2014-04-16T00:00:00+08:00">April 16, 2014</time></span></span>
+        <span class="entry-tags"><a href="http://localhost:4000/tags/#iOS" title="Pages tagged iOS" class="tag">iOS</a></span>
+        <span><a href="http://localhost:4000/ios/Property_of_Objective_C/" rel="bookmark" title="@property中attribute的整理">@property中attribute的整理</a> was published on <span class="entry-date date published updated"><time datetime="2014-04-16T00:00:00+08:00">April 16, 2014</time></span></span>
         
-        <span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>
+        <span class="author vcard"><span class="fn"><a href="http://localhost:4000/about/" title="About Sheldon">Sheldon</a></span></span>
         
       </footer>
     </div><!-- /.entry-content -->
@@ -183,22 +186,22 @@ var duoshuoQuery = {short_name:"morisunshne"};
     <div class="read-more">
       
         <div class="read-more-header">
-          <a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/" class="read-more-btn">Read More</a>
+          <a href="http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/" class="read-more-btn">Read More</a>
         </div><!-- /.read-more-header -->
         <div class="read-more-content">
-          <h3><a href="http://morisunshine.com/ios/namespacing/" title="Objective-C的命名空间">Objective-C的命名空间</a></h3>
-          <p>本文由[morisunshine](http://morisunshine.com/)译自["Namespacing"](http://nshipster.com/namespacing/)。转载请注明出处！>为什么Objecive-C中的很多类名都是`NS`开头的呢？我保...&hellip; <a href="http://morisunshine.com/ios/namespacing/">Continue reading</a></p>
+          <h3><a href="http://localhost:4000/ios/namespacing/" title="Objective-C的命名空间">Objective-C的命名空间</a></h3>
+          <p>本文由[morisunshine](http://morisunshine.com/)译自["Namespacing"](http://nshipster.com/namespacing/)。转载请注明出处！>为什么Objecive-C中的很多类名都是`NS`开头的呢？我保...&hellip; <a href="http://localhost:4000/ios/namespacing/">Continue reading</a></p>
         </div><!-- /.read-more-content -->
       
       <div class="read-more-list">
         
           <div class="list-item">
-            <h4><a href="http://morisunshine.com/ios/ios_code_standards/" title="iOS编码规范参考">iOS编码规范参考</a></h4>
+            <h4><a href="http://localhost:4000/ios/ios_code_standards/" title="iOS编码规范参考">iOS编码规范参考</a></h4>
             <span>Published on April 22, 2014</span>
           </div><!-- /.list-item -->
         
           <div class="list-item">
-            <h4><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/" title="我的时间观---活在当下">我的时间观---活在当下</a></h4>
+            <h4><a href="http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/" title="我的时间观---活在当下">我的时间观---活在当下</a></h4>
             <span>Published on March 24, 2014</span>
           </div><!-- /.list-item -->
         
@@ -215,8 +218,8 @@ var duoshuoQuery = {short_name:"morisunshne"};
 </div><!-- /.footer-wrapper -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="http://morisunshine.com/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="http://morisunshine.com/assets/js/scripts.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
 
 <!-- Asynchronous Google Analytics snippet -->
 <script>

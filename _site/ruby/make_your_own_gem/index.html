@@ -11,7 +11,7 @@
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://morisunshine.com/images/">
+<meta name="twitter:image" content="http://localhost:4000/images/">
 <meta name="twitter:title" content="制作自己的Gem">
 <meta name="twitter:description" content="">
 <meta name="twitter:creator" content="@morisunshine">
@@ -21,15 +21,15 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="制作自己的Gem">
 <meta property="og:description" content="">
-<meta property="og:url" content="http://morisunshine.com/ruby/make_your_own_gem/">
+<meta property="og:url" content="http://localhost:4000/ruby/make_your_own_gem/">
 <meta property="og:site_name" content="Morisunshine's Blog">
 
 
 
 
 
-<link rel="canonical" href="http://morisunshine.com/ruby/make_your_own_gem/">
-<link href="http://morisunshine.com/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
+<link rel="canonical" href="http://localhost:4000/ruby/make_your_own_gem/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
 
 
 <!-- http://t.co/dKP3o1e -->
@@ -38,32 +38,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="http://morisunshine.com/assets/css/main.min.css">
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.min.css">
 <!-- Webfonts -->
 <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
 
 <meta http-equiv="cleartype" content="on">
 
 <!-- Load Modernizr -->
-<script src="http://morisunshine.com/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
 
 <!-- Icons -->
 <!-- 16x16 -->
-<link rel="shortcut icon" href="http://morisunshine.com/favicon.ico">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
 <!-- 32x32 -->
-<link rel="shortcut icon" href="http://morisunshine.com/favicon.png">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
 <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
-<link rel="apple-touch-icon-precomposed" href="http://morisunshine.com/images/apple-touch-icon-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
 <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://morisunshine.com/images/apple-touch-icon-72x72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
 <!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://morisunshine.com/images/apple-touch-icon-114x114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
 <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://morisunshine.com/images/apple-touch-icon-144x144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
 
 
 
 </head>
+
+<link rel="stylesheet" href="assets/css/solarized_dark.css">
+<script src="assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 <body id="post" >
 
@@ -71,16 +75,16 @@
 <nav id="dl-menu" class="dl-menuwrapper" role="navigation">
 	<button class="dl-trigger">Open Menu</button>
 	<ul class="dl-menu">
-		<li><a href="http://morisunshine.com">Home</a></li>
+		<li><a href="http://localhost:4000">Home</a></li>
 		<li>
 			<a href="#">About</a>
 			<ul class="dl-submenu">
 				<li>
-					<img src="http://morisunshine.com/images/avatar.png" alt="Sheldon photo" class="author-photo">
+					<img src="http://localhost:4000/images/avatar.png" alt="Sheldon photo" class="author-photo">
 					<h4>Sheldon</h4>
 					<p>1991-12-10</p>
 				</li>
-				<li><a href="http://morisunshine.com/about/">Know More</a></li>
+				<li><a href="http://localhost:4000/about/">Know More</a></li>
 				<li>
 					<a href="mailto:sheldon.zen@gmail.com"><i class="icon-envelope"></i> Email</a>
 				</li>
@@ -111,11 +115,11 @@
 		<li>
 			<a href="#">Posts</a>
 			<ul class="dl-submenu">
-				<li><a href="http://morisunshine.com/posts/">All Posts</a></li>
-				<li><a href="http://morisunshine.com/tags/">All Tags</a></li>
+				<li><a href="http://localhost:4000/posts/">All Posts</a></li>
+				<li><a href="http://localhost:4000/tags/">All Tags</a></li>
 			</ul>
 		</li>
-		<li><a href="http://morisunshine.com/feed">Feed</a></li>
+		<li><a href="http://localhost:4000/feed">Feed</a></li>
 		
 	</ul><!-- /.dl-menu -->
 </nav><!-- /.dl-menuwrapper -->
@@ -128,187 +132,198 @@
     <header class="header-title">
       <div class="header-title-wrap">
         
-          <h1 class="entry-title"><a href="http://morisunshine.com/ruby/make_your_own_gem/" rel="bookmark" title="制作自己的Gem">制作自己的Gem</a></h1>
+          <h1 class="entry-title"><a href="http://localhost:4000/ruby/make_your_own_gem/" rel="bookmark" title="制作自己的Gem">制作自己的Gem</a></h1>
         
         <h2>February 19, 2014</h2>
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
-      <p> <a href="#introduce"><strong>什么是Gem？</strong></a>     <br />
- <a href="#first_gem"><strong>第一个Gem</strong></a><br />
- <a href="#include_more_files"><strong>包含更多文件</strong></a><br />
- <a href="#adding_an_executable"><strong>添加可执行文件</strong></a><br />
- <a href="#writing_tests"><strong>测试</strong></a><br />
- <a href="#documenting_your_code"><strong>文档</strong></a>  </p>
+      <p>&nbsp;<a href="#introduce"><strong>什么是Gem？</strong></a><br>
+&nbsp;<a href="#first_gem"><strong>第一个Gem</strong></a><br>
+&nbsp;<a href="#include_more_files"><strong>包含更多文件</strong></a><br>
+&nbsp;<a href="#adding_an_executable"><strong>添加可执行文件</strong></a><br>
+&nbsp;<a href="#writing_tests"><strong>测试</strong></a><br>
+&nbsp;<a href="#documenting_your_code"><strong>文档</strong></a>  </p>
 
-<p><a id="introduce" name="introduce"> </a></p>
+<p><a id='introduce' name='introduce'> </a></p>
 
-<h2 id="gem">什么是Gem?</h2>
+<h2>什么是Gem?</h2>
 
 <p>RubyGems是一个方便而强大的Ruby程序包管理器，Ruby的第三方插件是用gem方式来管理，非常容易发布和共享，一个简单的命令就可以安装上第三方的扩展库。特点：能远程安装包，包之间依赖关系的管理，简单可靠的卸载，查询机制，能查询本地和远程服务器的包信息，能保持一个包的不同版本，基于Web的查看接口，能查看你安装的gem的信息。</p>
 
-<hr />
+<hr>
 
-<p><a id="first_gem" name="first_gem"> </a></p>
+<p><a id='first_gem' name='first_gem'> </a></p>
 
-<h2 id="gem-1">第一个Gem</h2>
+<h2>第一个Gem</h2>
 
-<p>我们要创建一个名叫<code>moondemo</code>的gem，首先，就要创建一个名字为<code>moondemo_yourname</code>的目录，这个是为了后面的发布，如果你想发布的话，就要检查一下你的gem名字是否已经被人使用了，如果已经被人使用，那就要换个名字了。  <br />
+<p>我们要创建一个名叫<code>moondemo</code>的gem，首先，就要创建一个名字为<code>moondemo_yourname</code>的目录，这个是为了后面的发布，如果你想发布的话，就要检查一下你的gem名字是否已经被人使用了，如果已经被人使用，那就要换个名字了。<br>
 然后这个目录里的基本文件结构应该是这样的。 </p>
 
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span>  <span class="n">tree</span>  
-<span class="o">.</span>  
-<span class="err">├──</span> <span class="n">moondemo</span><span class="o">.</span><span class="n">gemspec</span>    
-<span class="err">├──</span> <span class="n">lib</span>  
-<span class="err">│  </span> <span class="err">└──</span> <span class="n">moondemo</span><span class="o">.</span><span class="n">rb</span>  
-</code></pre></div>
+<p><div>
+    <pre><code class='ruby'>➜  tree<br>
+.<br>
+├── moondemo.gemspec<br>
+├── lib<br>
+│   └── moondemo.rb</code></pre>
+  </div></p>
 
-<p>gem中的代码被放在<code>lib</code>目录中，这里有个约定就是<code>lib</code>中必须有个和gem同名的ruby文件，这样当<code>require 'moondemo'</code>运行的时候，这个gem就会被加载，这个文件就是负责配置你的gem的代码和API。</p>
+<p>gem中的代码被放在<code>lib</code>目录中，这里有个约定就是<code>lib</code>中必须有个和gem同名的ruby文件，这样当<code>require &#39;moondemo&#39;</code>运行的时候，这个gem就会被加载，这个文件就是负责配置你的gem的代码和API。</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span>  <span class="n">cat</span> <span class="n">lib</span><span class="o">/</span><span class="n">moondemo</span><span class="o">.</span><span class="n">rb</span>
-<span class="k">class</span> <span class="n">moondemo</span>
-  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">hi</span>
-    <span class="nb">puts</span> <span class="s2">&quot;Hello world!&quot;</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='ruby'>➜  cat lib/moondemo.rb
+class moondemo
+  def self.hi
+    puts &quot;Hello world!&quot;
+  end
+end</code></pre>
+  </div></p>
 
 <p>而<code>.gemspec</code>文件是定义了这个gem的信息，比如是这个gem的功能，作者等，并且当这个gem发布的时候，会将这些信息显示到这个gem的主页上(就像<a href="http://rubygems.org/gems/jekyll">jekyll</a>)。</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span>  <span class="n">cat</span> <span class="n">moondemo</span><span class="o">.</span><span class="n">gemspec</span>
-<span class="no">Gem</span><span class="o">::</span><span class="no">Specification</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">s</span><span class="o">|</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">name</span>        <span class="o">=</span> <span class="s1">&#39;moondemo&#39;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">version</span>     <span class="o">=</span> <span class="s1">&#39;0.0.0&#39;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">date</span>        <span class="o">=</span> <span class="s1">&#39;2014-02-19&#39;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">summary</span>     <span class="o">=</span> <span class="s2">&quot;moondemo!&quot;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">description</span> <span class="o">=</span> <span class="s2">&quot;A simple hello world gem&quot;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">authors</span>     <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;sheldon huang&quot;</span><span class="o">]</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">email</span>       <span class="o">=</span> <span class="s1">&#39;allenwenzhou@gmail.com&#39;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">files</span>       <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;lib/moondemo.rb&quot;</span><span class="o">]</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">homepage</span>    <span class="o">=</span>
-    <span class="s1">&#39;http://rubygems.org/gems/moondemo&#39;</span>
-  <span class="n">s</span><span class="o">.</span><span class="n">license</span>       <span class="o">=</span> <span class="s1">&#39;MIT&#39;</span>
-<span class="k">end</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='ruby'>➜  cat moondemo.gemspec
+Gem::Specification.new do |s|
+  s.name        = &#39;moondemo&#39;
+  s.version     = &#39;0.0.0&#39;
+  s.date        = &#39;2014-02-19&#39;
+  s.summary     = &quot;moondemo!&quot;
+  s.description = &quot;A simple hello world gem&quot;
+  s.authors     = [&quot;sheldon huang&quot;]
+  s.email       = &#39;allenwenzhou@gmail.com&#39;
+  s.files       = [&quot;lib/moondemo.rb&quot;]
+  s.homepage    =
+    &#39;http://rubygems.org/gems/moondemo&#39;
+  s.license       = &#39;MIT&#39;
+end</code></pre>
+  </div></p>
 
 <p>这里有很多选项，一看名字就知道他们是要代表什么内容的，如果你还想知道更多就看一些这个<a href="http://guides.rubygems.org/specification-reference/">文档</a></p>
 
 <p>当我们创建完成了一个.gemspec，就可以编译出一个gem了，是不是有点小激动啊。但如果想要测试它就必须要在本地安装编译好的gem。</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">gem</span> <span class="n">build</span> <span class="n">moondemo</span><span class="o">.</span><span class="n">gemspec</span>
-  <span class="no">Successfully</span> <span class="n">built</span> <span class="no">RubyGem</span>
-  <span class="ss">Name</span><span class="p">:</span> <span class="n">moondemo</span>
-  <span class="ss">Version</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-  <span class="ss">File</span><span class="p">:</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="n">gem</span>
-  
-<span class="err">➜</span> <span class="n">gem</span> <span class="n">install</span> <span class="o">.</span><span class="n">/moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="n">gem</span>
-<span class="no">Successfully</span> <span class="n">installed</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-<span class="no">Parsing</span> <span class="n">documentation</span> <span class="k">for</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-<span class="no">Installing</span> <span class="n">ri</span> <span class="n">documentation</span> <span class="k">for</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-<span class="mi">1</span> <span class="n">gem</span> <span class="n">installed</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='ruby'>➜ gem build moondemo.gemspec
+  Successfully built RubyGem
+  Name: moondemo
+  Version: 0.0.1
+  File: moondemo-0.0.1.gem</p>
+
+<p>➜ gem install ./moondemo-0.0.1.gem
+Successfully installed moondemo-0.0.1
+Parsing documentation for moondemo-0.0.1
+Installing ri documentation for moondemo-0.0.1
+1 gem installed</code></pre>
+  </div></p>
 
 <p>上面这些步骤，只能是在本地已经装好了我们自己的gem，但还没有使用它，
 我们需要<code>require</code>这个gem然后根据自己定义的方法来使用它。</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">irb</span>
-<span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="nb">require</span> <span class="s1">&#39;moondemo&#39;</span>
- <span class="o">=&gt;</span> <span class="kp">true</span>
-<span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span>
-<span class="no">Hello</span> <span class="n">world!</span>
- <span class="o">=&gt;</span> <span class="kp">nil</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='ruby'>➜ irb
+2.0.0-p353 :001 &gt; require &#39;moondemo&#39;
+ =&gt; true
+2.0.0-p353 :002 &gt; MoonDemo.hi
+Hello world!
+ =&gt; nil</code></pre>
+  </div></p>
 
 <p>现在就可以将你的gem发布到Ruby社区上了，当在发布之前需要将你的帐号安装在电脑上，如果你在RubyGems.org上注册了帐号，那就只需要输入一个命令,再输入自己的密码就可以了</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">curl</span> <span class="o">-</span><span class="n">u</span> <span class="err">你的帐号名</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="o">/</span><span class="n">api</span><span class="o">/</span><span class="n">v1</span><span class="o">/</span><span class="n">api_key</span><span class="o">.</span><span class="n">yaml</span> <span class="o">&gt;</span> <span class="o">~</span><span class="sr">/.gem/</span><span class="n">credentials</span><span class="p">;</span> <span class="n">chmod</span> <span class="mo">0600</span> <span class="o">~</span><span class="sr">/.gem/</span><span class="n">credentials</span>
+<p><div>
+    <pre><code class='ruby'>➜ curl -u 你的帐号名 https://rubygems.org/api/v1/api_key.yaml &gt; ~/.gem/credentials; chmod 0600 ~/.gem/credentials</p>
 
-<span class="no">Enter</span> <span class="n">host</span> <span class="n">password</span> <span class="k">for</span> <span class="n">user</span> <span class="s1">&#39;你的帐号名&#39;</span><span class="p">:</span>
-</code></pre></div>
+<p>Enter host password for user &#39;你的帐号名&#39;:</code></pre>
+  </div></p>
 
 <p>一旦你的用户名已经被安装了，就可以直接发布你的gem了。</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">gem</span> <span class="n">push</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="o">.</span><span class="n">gem</span>
-<span class="no">Pushing</span> <span class="n">gem</span> <span class="n">to</span> <span class="ss">https</span><span class="p">:</span><span class="sr">//</span><span class="n">rubygems</span><span class="o">.</span><span class="n">org</span><span class="o">.</span><span class="n">.</span><span class="o">.</span>
-<span class="no">Successfully</span> <span class="n">registered</span> <span class="ss">gem</span><span class="p">:</span> <span class="n">moondemo</span> <span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span><span class="p">)</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='ruby'>➜ gem push moondemo-0.0.1.gem
+Pushing gem to https://rubygems.org...
+Successfully registered gem: moondemo (0.0.1)</code></pre>
+  </div></p>
 
 <p>很快的，你的gem就可以被任何人使用了</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">gem</span> <span class="n">install</span> <span class="n">moondemo</span>
-<span class="no">Successfully</span> <span class="n">installed</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-<span class="no">Parsing</span> <span class="n">documentation</span> <span class="k">for</span> <span class="n">moondemo</span><span class="o">-</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">1</span>
-<span class="mi">1</span> <span class="n">gem</span> <span class="n">installed</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='ruby'>➜ gem install moondemo
+Successfully installed moondemo-0.0.1
+Parsing documentation for moondemo-0.0.1
+1 gem installed</code></pre>
+  </div></p>
 
 <p>用Ruby和RubyGems来分享代码是不是很简单。</p>
 
-<hr />
+<hr>
 
-<p><a id="include_more_files" name="include_more_files"> </a></p>
+<p><a id='include_more_files' name='include_more_files'> </a></p>
 
-<h2 id="section">包含更多文件</h2>
+<h2>包含更多文件</h2>
 
-<p>我们以后代码当然不会这么简单，如果代码变得非常多了之后，该怎么办呢，当然是要是要将代码分到不同的文件中了。<br />
-比如我们想在刚才的gem中添加根据不同语言来输出不同语言的”Hello world”。<br />
+<p>我们以后代码当然不会这么简单，如果代码变得非常多了之后，该怎么办呢，当然是要是要将代码分到不同的文件中了。<br>
+比如我们想在刚才的gem中添加根据不同语言来输出不同语言的&quot;Hello world&quot;。<br>
 我们就可以添加一个<code>Translator</code>文件，刚才提到过，gem的根文件是负责加载代码的，所以其他的功能的文件就需要放在<code>lib</code>中和gem同名的目录中，我们可以这样分:</p>
 
-<div class="highlight"><pre><code class="bash">➜ tree
+<p><div>
+    <pre><code class='bash'>➜ tree
 .
 ├── lib
 │   ├── moondemo
 │   │   └── translator.rb
 │   └── moondemo.rb
-├── moondemo-0.0.1.gem
-</code></pre></div>
+├── moondemo-0.0.1.gem</code></pre>
+  </div></p>
 
 <p><code>Translator</code>中的内容是:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">Translator</span>
-  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
-    <span class="vi">@language</span> <span class="o">=</span> <span class="n">language</span>
-  <span class="k">end</span>
+<p><div>
+    <pre><code class='ruby'>class Translator
+  def initialize(language)
+    @language = language
+  end</p>
 
-  <span class="k">def</span> <span class="nf">hi</span>
-    <span class="k">case</span> <span class="vi">@language</span>
-      <span class="k">when</span> <span class="s2">&quot;chinese&quot;</span>
-        <span class="s2">&quot;你好，世界!&quot;</span>
-      <span class="k">else</span>
-        <span class="s2">&quot;Hello world!&quot;</span>
-      <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<p>def hi
+    case @language
+      when &quot;chinese&quot;
+        &quot;你好，世界!&quot;
+      else
+        &quot;Hello world!&quot;
+      end
+  end
+end</code></pre>
+  </div></p>
 
 <p>所以接下来，<code>moondemo.rb</code>中需要加载<code>Translator</code>:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="k">class</span> <span class="nc">MoonDemo</span>
-  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">hi</span><span class="p">(</span><span class="n">language</span> <span class="o">=</span> <span class="s2">&quot;english&quot;</span><span class="p">)</span>
-    <span class="n">translator</span> <span class="o">=</span> <span class="no">Translator</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">language</span><span class="p">)</span>
-    <span class="n">translator</span><span class="o">.</span><span class="n">hi</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='ruby'>class MoonDemo
+  def self.hi(language = &quot;english&quot;)
+    translator = Translator.new(language)
+    translator.hi
+  end
+end</code></pre>
+  </div></p>
 
 <p><em>注意:每次新建了一个目录或者文件，都不要忘记加到.gemspec文件中，就像这样</em></p>
 
-<div class="highlight"><pre><code class="ruby"> <span class="n">s</span><span class="o">.</span><span class="n">authors</span>     <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;Sheldon&quot;</span><span class="o">]</span>
- <span class="n">s</span><span class="o">.</span><span class="n">email</span>       <span class="o">=</span> <span class="s1">&#39;allenwenzhou@gmial.com&#39;</span>
- <span class="n">s</span><span class="o">.</span><span class="n">files</span>       <span class="o">=</span> <span class="o">[</span><span class="s2">&quot;lib/moondemo.rb&quot;</span><span class="p">,</span><span class="s2">&quot;lib/moondemo/translator.rb&quot;</span><span class="o">]</span>
-  
-</code></pre></div>
+<p><div>
+    <pre><code class='ruby'>s.authors     = [&quot;Sheldon&quot;]
+ s.email       = &#39;allenwenzhou@gmial.com&#39;
+ s.files       = [&quot;lib/moondemo.rb&quot;,&quot;lib/moondemo/translator.rb&quot;]</code></pre>
+  </div></p>
 
 <p><em>如果没有上面的修改的话，这个新建的目录是不会被加载到已安装的gem里的</em></p>
 
 <p>让我们再运行一篇</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="err">➜</span> <span class="n">irb</span> <span class="o">-</span><span class="no">Ilib</span> <span class="o">-</span><span class="n">rmoondemo</span>
-<span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">001</span> <span class="o">&gt;</span> <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">)</span>
- <span class="o">=&gt;</span> <span class="s2">&quot;Hello world!&quot;</span>
-<span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">p353</span> <span class="p">:</span><span class="mo">002</span> <span class="o">&gt;</span> <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="s2">&quot;chinese&quot;</span><span class="p">)</span>
- <span class="o">=&gt;</span> <span class="s2">&quot;你好，世界!&quot;</span>
- 
-</code></pre></div>
+<p><div>
+    <pre><code class='ruby'>➜ irb -Ilib -rmoondemo
+2.0.0-p353 :001 &gt; MoonDemo.hi(&quot;english&quot;)
+ =&gt; &quot;Hello world!&quot;
+2.0.0-p353 :002 &gt; MoonDemo.hi(&quot;chinese&quot;)
+ =&gt; &quot;你好，世界!&quot;</code></pre>
+  </div></p>
 
 <p>这里我们使用了一个新的命令行<code>-Ilib</code>,通常RubyGems会为你包含了<code>lib</code>路径，所以很多时候，我们不需要去考虑配置它们的加载路径，但是，如果你把代码运行在RubyGems的项目之外，你就要自己去配置这些了。</p>
 
@@ -316,54 +331,59 @@
 
 <p>添加更多的目录也都是按照上面一样的步骤，我们要将我们的文件结构分布合理，这样对于我们以后的维护和未来开发人员来说就不会是一件头疼的事儿了。</p>
 
-<p><a id="adding_an_executable" name="adding_an_executable"> </a></p>
+<p><a id='adding_an_executable' name='adding_an_executable'> </a></p>
 
-<h2 id="section-1">添加可执行文件</h2>
+<h2>添加可执行文件</h2>
 
 <p>gem除了可以提供Ruby代码库外，还可以在你的可执行文件路径里提供很多可执行可执行文件文件。可能最有名的就是<code>rake</code>，
 添加一个可执行可执行可执行文件文件其实很简单，你只需要将你的可执行文件放在你的gem的<code>bin</code>目录下，然后在将这个文件添加到<code>.gemspec</code>文件中<code>executables</code>的列表里就可以了，让我们试一下:</p>
 
-<div class="highlight"><pre><code class="bash">➜  mkdir bin
+<p><div>
+    <pre><code class='bash'>➜  mkdir bin
 ➜  touch bin/moondemo
-➜  chmod a+x bin/moondemo
-</code></pre></div>
+➜  chmod a+x bin/moondemo</code></pre>
+  </div></p>
 
 <p>这个可执行文件只需要在开头用<a href="http://www.catb.org/jargon/html/S/shebang.html">shebang</a>来表明这是用程序来运行的，下面就是这个可执行文件的内容:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="c1">#!/usr/bin/env ruby</span>
+<p><div>
+    <pre><code class='ruby'>#!/usr/bin/env ruby</p>
 
-<span class="nb">require</span> <span class="s1">&#39;moondemo&#39;</span>
-<span class="nb">puts</span> <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="no">ARGV</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span><span class="p">)</span>
-</code></pre></div>
+<p>require &#39;moondemo&#39;
+puts MoonDemo.hi(ARGV[0])</code></pre>
+  </div></p>
 
-<p>这个可执行文件的内容很简单，它只是加载了moondemo这个gem，然后在命令行中通过输入一个参数来判断是用哪个国家的语言来说”hello, world”。下面就是运行的例子:</p>
+<p>这个可执行文件的内容很简单，它只是加载了moondemo这个gem，然后在命令行中通过输入一个参数来判断是用哪个国家的语言来说&quot;hello, world&quot;。下面就是运行的例子:</p>
 
-<div class="highlight"><pre><code class="bash">➜  ruby -Ilib ./bin/moondemo
+<p><div>
+    <pre><code class='bash'>➜  ruby -Ilib ./bin/moondemo
 Hello world!
 ➜  ruby -Ilib ./bin/moondemo chinese
-你好，世界!
-</code></pre></div>
+你好，世界!</code></pre>
+  </div></p>
 
 <p>最后，我们要将这个可执行文件添加到<code>.gemspec</code></p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">s</span><span class="o">.</span><span class="n">executables</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;moondemo&#39;</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='ruby'>s.executables &lt;&lt; &#39;moondemo&#39;</code></pre>
+  </div></p>
 
 <p>更新你的gem，上传到官网上，这样你就可以在命令行中有自己的命令了，是不是很帅啊。这里要提醒一下，上传新的gem时，要记得修改<code>.gemspec</code>中的版本号。详情看<a href="http://guides.rubygems.org/patterns/#semantic-versioning">这儿</a></p>
 
 <p>在看一下用我们自己定义的命令行吧:</p>
 
-<div class="highlight"><pre><code class="bash">➜  ~  moondemo
+<p><div>
+    <pre><code class='bash'>➜  ~  moondemo
 Hello world!
 ➜  ~  moondemo chinese
-你好，世界!
-</code></pre></div>
+你好，世界!</code></pre>
+  </div></p>
 
 <p>世界在向我们招手呢。哈哈哈~~~</p>
 
-<p><a id="writing_tests" name="writing_tests"> </a></p>
+<p><a id='writing_tests' name='writing_tests'> </a></p>
 
-<h1 id="section-2">测试</h1>
+<h1>测试</h1>
 
 <p>测试我们的gem是非常重要的，它不仅保证了这个gem是正常的，也保证了别人能知道你的gem是正常的。当我们评价一个gem的时候，很多Ruby开发者会倾向于通过查看测试用例来做为主要依据。</p>
 
@@ -374,7 +394,8 @@ Hello world!
 
 <p>我们需要在原来的基础上再添加一些文件，一个名为<code>Rakefile</code>的文件和一个名为<code>test</code>的目录:</p>
 
-<div class="highlight"><pre><code class="bash">.
+<p><div>
+    <pre><code class='bash'>.
 ├── Rakefile
 ├── bin
 │   └── moondemo
@@ -385,73 +406,75 @@ Hello world!
 ├── moondemo-0.0.1.gem
 ├── moondemo.gemspec
 ├── npm-debug.log
-└── <span class="nb">test</span>
-    └── test_moondemo.rb
-</code></pre></div>
+└── test
+    └── test_moondemo.rb</code></pre>
+  </div></p>
 
 <p><code>Rakefile</code>文件是为了实现自动化的测试:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;rake/testtask&#39;</span>
+<p><div>
+    <pre><code class='ruby'>require &#39;rake/testtask&#39;</p>
 
-<span class="no">Rake</span><span class="o">::</span><span class="no">TestTask</span><span class="o">.</span><span class="n">new</span> <span class="k">do</span> <span class="o">|</span><span class="n">t</span><span class="o">|</span>
-        <span class="n">t</span><span class="o">.</span><span class="n">libs</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;test&#39;</span>
-<span class="k">end</span>
+<p>Rake::TestTask.new do |t|
+        t.libs &lt;&lt; &#39;test&#39;
+end</p>
 
-<span class="n">desc</span> <span class="s2">&quot;Run tests&quot;</span>
-<span class="n">task</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="ss">:test</span>
-<span class="o">~</span>
-</code></pre></div>
+<p>desc &quot;Run tests&quot;
+task :default =&gt; :test
+~</code></pre>
+  </div></p>
 
 <p>下面就是一个简单的测试用例了:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;test/unit&#39;</span>
-<span class="nb">require</span> <span class="s1">&#39;moondemo&#39;</span>
+<p><div>
+    <pre><code class='ruby'>require &#39;test/unit&#39;
+require &#39;moondemo&#39;</p>
 
-<span class="k">class</span> <span class="nc">MoonDemoTest</span> <span class="o">&lt;</span> <span class="no">Test</span><span class="o">::</span><span class="no">Unit</span><span class="o">::</span><span class="no">TestCase</span>
-  <span class="k">def</span> <span class="nf">test_english_hello</span>
-    <span class="n">assert_equal</span> <span class="s2">&quot;Hello world!&quot;</span><span class="p">,</span>
-      <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="s2">&quot;english&quot;</span><span class="p">)</span>
-  <span class="k">end</span>
+<p>class MoonDemoTest &lt; Test::Unit::TestCase
+  def test<em>english</em>hello
+    assert_equal &quot;Hello world!&quot;,
+      MoonDemo.hi(&quot;english&quot;)
+  end</p>
 
-  <span class="k">def</span> <span class="nf">test_any_hello</span>
-    <span class="n">assert_equal</span> <span class="s2">&quot;Hello world!&quot;</span><span class="p">,</span>
-      <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="s2">&quot;ruby&quot;</span><span class="p">)</span>
-  <span class="k">end</span>
+<p>def test<em>any</em>hello
+    assert_equal &quot;Hello world!&quot;,
+      MoonDemo.hi(&quot;ruby&quot;)
+  end</p>
 
-  <span class="k">def</span> <span class="nf">test_spanish_hello</span>
-    <span class="n">assert_equal</span> <span class="s2">&quot;你好，世界!&quot;</span><span class="p">,</span>
-      <span class="no">MoonDemo</span><span class="o">.</span><span class="n">hi</span><span class="p">(</span><span class="s2">&quot;chinese&quot;</span><span class="p">)</span>
-  <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<p>def test<em>spanish</em>hello
+    assert_equal &quot;你好，世界!&quot;,
+      MoonDemo.hi(&quot;chinese&quot;)
+  end
+end</code></pre>
+  </div></p>
 
 <p>最后，让我们运行这个测试:</p>
 
-<div class="highlight"><pre><code class="bash">➜  rake <span class="nb">test</span>
-Run options:
+<p><div>
+    <pre><code class='bash'>➜  rake test
+Run options:</p>
 
-<span class="c"># Running tests:</span>
+<h1>Running tests:</h1>
 
-Finished tests in 0.006151s, 487.7256 tests/s, 487.7256 assertions/s.
-3 tests, 3 assertions, 0 failures, 0 errors, 0 skips
-</code></pre></div>
+<p>Finished tests in 0.006151s, 487.7256 tests/s, 487.7256 assertions/s.
+3 tests, 3 assertions, 0 failures, 0 errors, 0 skips</code></pre>
+  </div></p>
 
 <p>很好，全部都通过了！</p>
 
-<p><a id="documenting_your_code" name="documenting_your_code"> </a></p>
+<p><a id='documenting_your_code' name='documenting_your_code'> </a></p>
 
-<h1 id="section-3">文档</h1>
+<h1>文档</h1>
 
 <p>文档和测试是一样重要的，大部分gem都是用RDoc来生成文档的，这里有很多<a href="http://docs.seattlerb.org/rdoc/RDoc/Markup.html">教程</a>.
 很简单，先切换到gem的根目录下，再命令行中输入<code>rdoc</code>，你就会发现多出了一个名为<code>doc</code>的目录，里面就是我们的文档了，当然你可以自己再进行一些调整。
 除了RDoc呢，我们还有另外的选择<a href="http://yardoc.org/">YARD</a>，当我们发布了gem的时候呢，<a href="http://rubydoc.info/">RubyDoc.info</a>会根据你的gem自动生成YARDocs，并且它是可以向下兼容RDoc。</p>
 
-
       <footer class="entry-meta">
-        <span class="entry-tags"><a href="http://morisunshine.com/tags/#ruby" title="Pages tagged ruby" class="tag">ruby</a><a href="http://morisunshine.com/tags/#技术" title="Pages tagged 技术" class="tag">技术</a></span>
-        <span><a href="http://morisunshine.com/ruby/make_your_own_gem/" rel="bookmark" title="制作自己的Gem">制作自己的Gem</a> was published on <span class="entry-date date published updated"><time datetime="2014-02-19T00:00:00+08:00">February 19, 2014</time></span></span>
+        <span class="entry-tags"><a href="http://localhost:4000/tags/#ruby" title="Pages tagged ruby" class="tag">ruby</a><a href="http://localhost:4000/tags/#技术" title="Pages tagged 技术" class="tag">技术</a></span>
+        <span><a href="http://localhost:4000/ruby/make_your_own_gem/" rel="bookmark" title="制作自己的Gem">制作自己的Gem</a> was published on <span class="entry-date date published updated"><time datetime="2014-02-19T00:00:00+08:00">February 19, 2014</time></span></span>
         
-        <span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>
+        <span class="author vcard"><span class="fn"><a href="http://localhost:4000/about/" title="About Sheldon">Sheldon</a></span></span>
         
       </footer>
     </div><!-- /.entry-content -->
@@ -475,22 +498,22 @@ var duoshuoQuery = {short_name:"morisunshne"};
     <div class="read-more">
       
         <div class="read-more-header">
-          <a href="http://morisunshine.com/%E6%8A%98%E8%85%BE/my_first_blog/" class="read-more-btn">Read More</a>
+          <a href="http://localhost:4000/%E6%8A%98%E8%85%BE/my_first_blog/" class="read-more-btn">Read More</a>
         </div><!-- /.read-more-header -->
         <div class="read-more-content">
-          <h3><a href="http://morisunshine.com/ios/namespacing/" title="Objective-C的命名空间">Objective-C的命名空间</a></h3>
-          <p>本文由[morisunshine](http://morisunshine.com/)译自["Namespacing"](http://nshipster.com/namespacing/)。转载请注明出处！>为什么Objecive-C中的很多类名都是`NS`开头的呢？我保...&hellip; <a href="http://morisunshine.com/ios/namespacing/">Continue reading</a></p>
+          <h3><a href="http://localhost:4000/ios/namespacing/" title="Objective-C的命名空间">Objective-C的命名空间</a></h3>
+          <p>本文由[morisunshine](http://morisunshine.com/)译自["Namespacing"](http://nshipster.com/namespacing/)。转载请注明出处！>为什么Objecive-C中的很多类名都是`NS`开头的呢？我保...&hellip; <a href="http://localhost:4000/ios/namespacing/">Continue reading</a></p>
         </div><!-- /.read-more-content -->
       
       <div class="read-more-list">
         
           <div class="list-item">
-            <h4><a href="http://morisunshine.com/ios/ios_code_standards/" title="iOS编码规范参考">iOS编码规范参考</a></h4>
+            <h4><a href="http://localhost:4000/ios/ios_code_standards/" title="iOS编码规范参考">iOS编码规范参考</a></h4>
             <span>Published on April 22, 2014</span>
           </div><!-- /.list-item -->
         
           <div class="list-item">
-            <h4><a href="http://morisunshine.com/ios/Property_of_Objective_C/" title="@property中attribute的整理">@property中attribute的整理</a></h4>
+            <h4><a href="http://localhost:4000/ios/Property_of_Objective_C/" title="@property中attribute的整理">@property中attribute的整理</a></h4>
             <span>Published on April 16, 2014</span>
           </div><!-- /.list-item -->
         
@@ -507,8 +530,8 @@ var duoshuoQuery = {short_name:"morisunshne"};
 </div><!-- /.footer-wrapper -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="http://morisunshine.com/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="http://morisunshine.com/assets/js/scripts.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
 
 <!-- Asynchronous Google Analytics snippet -->
 <script>

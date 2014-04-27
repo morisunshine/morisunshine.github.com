@@ -11,7 +11,7 @@
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://morisunshine.com/images/">
+<meta name="twitter:image" content="http://localhost:4000/images/">
 <meta name="twitter:title" content="iOS编码规范参考">
 <meta name="twitter:description" content="">
 <meta name="twitter:creator" content="@morisunshine">
@@ -21,15 +21,15 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS编码规范参考">
 <meta property="og:description" content="">
-<meta property="og:url" content="http://morisunshine.com/ios/ios_code_standards/">
+<meta property="og:url" content="http://localhost:4000/ios/ios_code_standards/">
 <meta property="og:site_name" content="Morisunshine's Blog">
 
 
 
 
 
-<link rel="canonical" href="http://morisunshine.com/ios/ios_code_standards/">
-<link href="http://morisunshine.com/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
+<link rel="canonical" href="http://localhost:4000/ios/ios_code_standards/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
 
 
 <!-- http://t.co/dKP3o1e -->
@@ -38,32 +38,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="http://morisunshine.com/assets/css/main.min.css">
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.min.css">
 <!-- Webfonts -->
 <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
 
 <meta http-equiv="cleartype" content="on">
 
 <!-- Load Modernizr -->
-<script src="http://morisunshine.com/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
 
 <!-- Icons -->
 <!-- 16x16 -->
-<link rel="shortcut icon" href="http://morisunshine.com/favicon.ico">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
 <!-- 32x32 -->
-<link rel="shortcut icon" href="http://morisunshine.com/favicon.png">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
 <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
-<link rel="apple-touch-icon-precomposed" href="http://morisunshine.com/images/apple-touch-icon-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
 <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://morisunshine.com/images/apple-touch-icon-72x72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
 <!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://morisunshine.com/images/apple-touch-icon-114x114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
 <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://morisunshine.com/images/apple-touch-icon-144x144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
 
 
 
 </head>
+
+<link rel="stylesheet" href="assets/css/solarized_dark.css">
+<script src="assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 <body id="post" >
 
@@ -71,16 +75,16 @@
 <nav id="dl-menu" class="dl-menuwrapper" role="navigation">
 	<button class="dl-trigger">Open Menu</button>
 	<ul class="dl-menu">
-		<li><a href="http://morisunshine.com">Home</a></li>
+		<li><a href="http://localhost:4000">Home</a></li>
 		<li>
 			<a href="#">About</a>
 			<ul class="dl-submenu">
 				<li>
-					<img src="http://morisunshine.com/images/avatar.png" alt="Sheldon photo" class="author-photo">
+					<img src="http://localhost:4000/images/avatar.png" alt="Sheldon photo" class="author-photo">
 					<h4>Sheldon</h4>
 					<p>1991-12-10</p>
 				</li>
-				<li><a href="http://morisunshine.com/about/">Know More</a></li>
+				<li><a href="http://localhost:4000/about/">Know More</a></li>
 				<li>
 					<a href="mailto:sheldon.zen@gmail.com"><i class="icon-envelope"></i> Email</a>
 				</li>
@@ -111,11 +115,11 @@
 		<li>
 			<a href="#">Posts</a>
 			<ul class="dl-submenu">
-				<li><a href="http://morisunshine.com/posts/">All Posts</a></li>
-				<li><a href="http://morisunshine.com/tags/">All Tags</a></li>
+				<li><a href="http://localhost:4000/posts/">All Posts</a></li>
+				<li><a href="http://localhost:4000/tags/">All Tags</a></li>
 			</ul>
 		</li>
-		<li><a href="http://morisunshine.com/feed">Feed</a></li>
+		<li><a href="http://localhost:4000/feed">Feed</a></li>
 		
 	</ul><!-- /.dl-menu -->
 </nav><!-- /.dl-menuwrapper -->
@@ -128,79 +132,82 @@
     <header class="header-title">
       <div class="header-title-wrap">
         
-          <h1 class="entry-title"><a href="http://morisunshine.com/ios/ios_code_standards/" rel="bookmark" title="iOS编码规范参考">iOS编码规范参考</a></h1>
+          <h1 class="entry-title"><a href="http://localhost:4000/ios/ios_code_standards/" rel="bookmark" title="iOS编码规范参考">iOS编码规范参考</a></h1>
         
         <h2>April 22, 2014</h2>
       </div><!-- /.header-title-wrap -->
     </header>
     <div class="entry-content">
-      <h2 id="section">注释</h2>
+      <h2>注释</h2>
 
 <p>建议使用<a href="https://github.com/onevcat/VVDocumenter-Xcode">VVDocumenter</a>插件</p>
 
-<h3 id="section-1">多行注释</h3>
+<h3>多行注释</h3>
 
 <p>格式:</p>
 
-<div class="highlight"><pre><code class="objc"><span class="cm">/**</span>
-
-<span class="cm">              注释内容</span>
-<span class="cm">*/</span>
+<p><div>
+    <pre><code class='objc'>/**</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">          注释内容
 </code></pre></div>
+<p>*/</code></pre>
+  </div></p>
 
-<h3 id="section-2">单行注释</h3>
+<h3>单行注释</h3>
 
 <p>格式:</p>
 
-<div class="highlight"><pre><code class="objc"><span class="c1">///在对文件、类、函数进行注释时推荐使用多行注释，在函数体内对代码块进行注释时，使用单行注释</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>///在对文件、类、函数进行注释时推荐使用多行注释，在函数体内对代码块进行注释时，使用单行注释</code></pre>
+  </div></p>
 
-<h3 id="section-3">函数的注释</h3>
+<h3>函数的注释</h3>
 
 <p>函数注释的格式为</p>
 
-<div class="highlight"><pre><code class="objc"><span class="cm">/**</span>
-<span class="cm"> *  @brief  </span>
-<span class="cm"> *  @param</span>
-<span class="cm"> *  @return</span>
-<span class="cm"> **/</span>
- <span class="err">在</span><span class="n">brief</span><span class="err">中需要写明函数的主要功能、注意事项</span>
- <span class="err">在</span><span class="n">param</span><span class="err">中需要写明函数的变量类型、变量的作用</span>
- <span class="err">在</span><span class="k">return</span><span class="err">中需要写明函数的返回类型、返回值的作用</span>
- <span class="err">如有其他需要说明的地方，可以在</span><span class="p">@</span><span class="k">return</span><span class="err">后面添加新项。如</span>
- <span class="cm">/**</span>
-<span class="cm"> *  @brief  </span>
-<span class="cm"> *  @param</span>
-<span class="cm"> *  @return</span>
-<span class="cm"> *  @warning</span>
-<span class="cm"> **/</span>
+<p><div>
+    <pre><code class='objc'>/**
+ *  @brief<br>
+ *  @param
+ *  @return
+ <strong>/
+ 在brief中需要写明函数的主要功能、注意事项
+ 在param中需要写明函数的变量类型、变量的作用
+ 在return中需要写明函数的返回类型、返回值的作用
+ 如有其他需要说明的地方，可以在@return后面添加新项。如
+ /</strong>
+ *  @brief<br>
+ *  @param
+ *  @return
+ *  @warning
+ **/</p>
 
-<span class="cm">/**</span>
-<span class="cm"> *  @brief      上传图片。上传成功后会自动将图片放入缓存，缓存的key为图片的url</span>
-<span class="cm"> *  @param      UIImage，需要上传的图片</span>
-<span class="cm"> *  @return     void</span>
-<span class="cm"> *  @blocks</span>
-<span class="cm"> *              success:返回的NSDictionary中包含服务器的response信息，包括图片id（id）,url(url),宽度(width),高度(height)。使用括号中的名称从NSDictionary中获取。</span>
-<span class="cm"> *              failed:返回error</span>
-<span class="cm"> **/</span>
- 
-</code></pre></div>
+<p>/**
+ *  @brief      上传图片。上传成功后会自动将图片放入缓存，缓存的key为图片的url
+ *  @param      UIImage，需要上传的图片
+ *  @return     void
+ *  @blocks
+ *              success:返回的NSDictionary中包含服务器的response信息，包括图片id（id）,url(url),宽度(width),高度(height)。使用括号中的名称从NSDictionary中获取。
+ *              failed:返回error
+ **/</code></pre>
+  </div></p>
 
-<h2 id="section-4">命名</h2>
+<h2>命名</h2>
 
-<h3 id="section-5">常量的命名</h3>
+<h3>常量的命名</h3>
 
 <p>(如宏、枚举、静态局部变量等)应该以小写字母k开头，使用混合大小写的格式来分隔单词。</p>
 
-<h3 id="section-6">函数的命名</h3>
+<h3>函数的命名</h3>
 
 <p>函数名应该已小写字母开头，并混合大小写，其中的每个参数都应该是小写字母开头，读起来应该像句子一样，访问器方法应该与他们getting的成员变量的名字一样，但不应该以get作为前缀，如：</p>
 
-<div class="highlight"><pre><code class="objc">  <span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">getDelegate</span><span class="p">;</span>	<span class="c1">//avoid</span>
-	<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">delegate</span><span class="p">;</span>   	<span class="c1">//good</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>- (id)getDelegate;  //avoid
+    - (id)delegate;     //good</code></pre>
+  </div></p>
 
-<h3 id="section-7">变量的命名</h3>
+<h3>变量的命名</h3>
 
 <p>成员变量应该已小写字母开头，并以下划线作为后缀，如usernameTextField_,使用KVO/KVC绑定成员变量时，可以以一个下划线为前缀。</p>
 
@@ -216,486 +223,527 @@
 <p><em>常量命名:</em>
 以小写k开头，混合大小写。如:kInvalidHandle, kWritePerm</p>
 
-<h3 id="section-8">图片的命名</h3>
+<h3>图片的命名</h3>
 
 <p>应该已“模块+功能+作用+样式”的形式</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span><span class="n">message_private_at_button_bg_normal</span><span class="p">.</span><span class="n">png</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如:message<em>private</em>at<em>button</em>bg_normal.png</code></pre>
+  </div></p>
 
-<h3 id="section-9">类的命名</h3>
+<h3>类的命名</h3>
 
 <p>类名、分类名、协议名应该以大写字母开始，并混合小写字母来分隔单词，应该已“模块+功能+子功能”的方式：</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span><span class="n">MessagePrivateAtsomebody</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如:MessagePrivateAtsomebody</code></pre>
+  </div></p>
 
-<p>应用级的类，应避免不用前缀，跨应用级的类，应使用前缀，</p>
+<p>应用级的类，应避免不用前缀，跨应用级的类，应使用前缀，
+  <div>
+    <pre><code class='objc'>如:GTMSendMessage</code></pre>
+  </div></p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span><span class="n">GTMSendMessage</span>
-</code></pre></div>
-
-<h2 id="section-10">分类名</h2>
+<h2>分类名</h2>
 
 <p>类别名应该有两三个字母作为前缀已表示为某项目的一部分，并且包含所扩展的类的名字，如我们要创建一个NSString的类别以解析，我们将类别放在一个名为GTMNSString+Parsing.h的文件中。类别名本身为GTMStringParsingAdditions(类别名与文件名不同是为了让文件可以包含更多相同功能的扩展)类名与包含类别名之间应一个空格分隔。</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="c1">//NSString 为要扩展的类名, GTMStringParsingAdditions为类别名</span>
-<span class="k">@interface</span> <span class="nc">NSString</span> <span class="nl">(GTMStringParsingAdditions)</span>
- 	    <span class="o">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">gtm_foobarString</span><span class="p">;</span>
- 	    <span class="k">@end</span>
-
- 	    <span class="k">@interface</span> <span class="nc">FoobarViewController</span> <span class="p">()</span>
- 	    <span class="k">@property</span><span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="n">NSView</span> <span class="o">*</span><span class="n">dongleView</span><span class="p">;</span>
- 	    <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">performLayout</span><span class="p">;</span>
- 	    <span class="k">@end</span>
+<p><div>
+    <pre><code class='objc'>如:
+//NSString 为要扩展的类名, GTMStringParsingAdditions为类别名
+@interface NSString (GTMStringParsingAdditions)
+        - (NSString *)gtm_foobarString;
+        @end</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">    @interface FoobarViewController ()
+    @property(nonatomic, retain) NSView *dongleView;
+    - (void)performLayout;
+    @end&lt;/code&gt;&lt;/pre&gt;
 </code></pre></div>
+<p></div></p>
 
-<h2 id="section-11">注意事项</h2>
+<h2>注意事项</h2>
 
-<h3 id="section-12">条件语句</h3>
+<h3>条件语句</h3>
 
 <p>为避免错误，条件语句体必须使用大括号，即便语句体中的语句可以不必使用大括号（比如只有一行语句）。常见的错误包括在不使用大括号的情况下添加第二行语句，以为它属于if语句的一部分。此外，更可怕的事情是，如果条件语句中的代码行被注释，则本不术语条件语句的下一行代码将变成条件语句的一部分。此外，这种编码风格和所有其它条件语句均保持一致。</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">error</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">success</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如:
+if (!error) {
+    return success;
+}</code></pre>
+  </div></p>
 
-<h3 id="section-13">变量</h3>
+<h3>变量</h3>
 
 <p>变量的命名应尽可能具有自解释性。除了在for()循环语句中，应避免使用单个字母变量名称。
-除非是常量，星号应紧贴变量名称表示指向变量的指针，</p>
-
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="n">NSString</span> <span class="o">*</span><span class="n">text</span><span class="p">;</span>
-</code></pre></div>
+除非是常量，星号应紧贴变量名称表示指向变量的指针，
+  <div>
+    <pre><code class='objc'>如:
+NSString *text;</code></pre>
+  </div></p>
 
 <p>应尽可能使用属性定义替代单一的实例变量。避免在初始化方法,dealloc方法和自定义的setter和getter方法中直接读取实例变量参数（init,initWithCoder:，等等）</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="k">@interface</span> <span class="nc">NYTSection</span>: <span class="nc">NSObject</span>
- 
-<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">)</span> <span class="n">NSString</span> <span class="o">*</span><span class="n">headline</span><span class="p">;</span>
- 
-<span class="k">@end</span>
+<p><div>
+    <pre><code class='objc'>如:
+@interface NYTSection: NSObject</p>
 
-<span class="err">应尽量避免下面的方式</span><span class="o">:</span>
+<p>@property (nonatomic) NSString *headline;</p>
 
-<span class="k">@interface</span> <span class="nc">NYTSection</span> : <span class="nc">NSObject</span> <span class="p">{</span>
-    <span class="n">NSString</span> <span class="o">*</span><span class="n">headline</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
+<p>@end</p>
 
-<h3 id="section-14">下划线</h3>
+<p>应尽量避免下面的方式:</p>
+
+<p>@interface NYTSection : NSObject {
+    NSString *headline;
+}</code></pre>
+  </div></p>
+
+<h3>下划线</h3>
+
 <p>当使用属性变量时，应通过self.来获取和更改实例变量。这就意味着所有的属性将是独特的，因为它们的名称前会加上self。本地变量名称中不应包含下划线</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="n">self</span><span class="p">.</span><span class="n">imgView</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">black</span><span class="p">];</span>
+<p><div>
+    <pre><code class='objc'>如:
+self.imgView.backgroundColor = [UIColor black];</p>
 
-<span class="err">而尽量避免</span><span class="o">:</span>
+<p>而尽量避免:</p>
 
-<span class="n">_imgView</span><span class="p">.</span><span class="n">backgroundColor</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIColor</span> <span class="n">black</span><span class="p">];</span>
-</code></pre></div>
+<p>_imgView.backgroundColor = [UIColor black];</code></pre>
+  </div></p>
 
-<h3 id="immutable">Immutable实例初始化</h3>
+<h3>Immutable实例初始化</h3>
+
 <p>在创建NSString,NSDictionary,NSArray和NSNumber等对象的immutable实例时，应使用字面量。需要注意的是，不应将<strong><em>nil</em></strong>传递给NSArray和NSDictionary字面量，否则会引起程序崩溃。所以在存入数据到NSArray和NSDictionary时也要判断一下数据是否是nil。</p>
 
-<div class="highlight"><pre><code class="objc"><span class="n">NSArray</span> <span class="o">*</span><span class="n">names</span> <span class="o">=</span> <span class="p">@[</span><span class="s">@&quot;Brian&quot;</span><span class="p">,</span> <span class="s">@&quot;Matt&quot;</span><span class="p">,</span> <span class="s">@&quot;Chris&quot;</span><span class="p">,</span> <span class="s">@&quot;Alex&quot;</span><span class="p">,</span> <span class="s">@&quot;Steve&quot;</span><span class="p">,</span> <span class="s">@&quot;Paul&quot;</span><span class="p">];</span>
-<span class="n">NSDictionary</span> <span class="o">*</span><span class="n">productManagers</span> <span class="o">=</span> <span class="p">@{</span><span class="s">@&quot;iPhone&quot;</span> <span class="o">:</span> <span class="s">@&quot;Kate&quot;</span><span class="p">,</span> <span class="s">@&quot;iPad&quot;</span> <span class="o">:</span> <span class="s">@&quot;Kamal&quot;</span><span class="p">,</span> <span class="s">@&quot;Mobile Web&quot;</span> <span class="o">:</span> <span class="s">@&quot;Bill&quot;</span><span class="p">};</span>
-<span class="n">NSNumber</span> <span class="o">*</span><span class="n">shouldUseLiterals</span> <span class="o">=</span> <span class="p">@</span><span class="nb">YES</span><span class="p">;</span>
-<span class="n">NSNumber</span> <span class="o">*</span><span class="n">buildingZIPCode</span> <span class="o">=</span> <span class="mi">@10018</span><span class="p">;</span>
+<p><div>
+    <pre><code class='objc'>NSArray *names = @[@&quot;Brian&quot;, @&quot;Matt&quot;, @&quot;Chris&quot;, @&quot;Alex&quot;, @&quot;Steve&quot;, @&quot;Paul&quot;];
+NSDictionary *productManagers = @{@&quot;iPhone&quot; : @&quot;Kate&quot;, @&quot;iPad&quot; : @&quot;Kamal&quot;, @&quot;Mobile Web&quot; : @&quot;Bill&quot;};
+NSNumber *shouldUseLiterals = @YES;
+NSNumber *buildingZIPCode = @10018;</p>
 
-<span class="err">不恰当</span><span class="o">:</span>
-<span class="n">NSArray</span> <span class="o">*</span><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSArray</span> <span class="n">arrayWithObjects</span><span class="o">:</span><span class="s">@&quot;Brian&quot;</span><span class="p">,</span> <span class="s">@&quot;Matt&quot;</span><span class="p">,</span> <span class="s">@&quot;Chris&quot;</span><span class="p">,</span> <span class="s">@&quot;Alex&quot;</span><span class="p">,</span> <span class="s">@&quot;Steve&quot;</span><span class="p">,</span> <span class="s">@&quot;Paul&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
-<span class="n">NSDictionary</span> <span class="o">*</span><span class="n">productManagers</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDictionary</span> <span class="n">dictionaryWithObjectsAndKeys</span><span class="o">:</span> <span class="s">@&quot;Kate&quot;</span><span class="p">,</span> <span class="s">@&quot;iPhone&quot;</span><span class="p">,</span> <span class="s">@&quot;Kamal&quot;</span><span class="p">,</span> <span class="s">@&quot;iPad&quot;</span><span class="p">,</span> <span class="s">@&quot;Bill&quot;</span><span class="p">,</span> <span class="s">@&quot;Mobile Web&quot;</span><span class="p">,</span> <span class="nb">nil</span><span class="p">];</span>
-<span class="n">NSNumber</span> <span class="o">*</span><span class="n">shouldUseLiterals</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="n">numberWithBool</span><span class="o">:</span><span class="nb">YES</span><span class="p">];</span>
-<span class="n">NSNumber</span> <span class="o">*</span><span class="n">ZIPCode</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="n">numberWithInteger</span><span class="o">:</span><span class="mi">10018</span><span class="p">];</span>
-</code></pre></div>
+<p>不恰当:
+NSArray *names = [NSArray arrayWithObjects:@&quot;Brian&quot;, @&quot;Matt&quot;, @&quot;Chris&quot;, @&quot;Alex&quot;, @&quot;Steve&quot;, @&quot;Paul&quot;, nil];
+NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @&quot;Kate&quot;, @&quot;iPhone&quot;, @&quot;Kamal&quot;, @&quot;iPad&quot;, @&quot;Bill&quot;, @&quot;Mobile Web&quot;, nil];
+NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
+NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];</code></pre>
+  </div></p>
 
-<h3 id="section-15">类型</h3>
+<h3>类型</h3>
 
 <p>最好用NSInteger和NSUInteger而不是用int，long。其他的float同理。</p>
 
-<h3 id="cgrect">CGRect函数</h3>
+<h3>CGRect函数</h3>
+
 <p>当需要获取一个CGRect矩形的x,y,width,height属性时，应使用CGGeometry函数，而非直接访问结构体成员。</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如：</span>
-<span class="n">CGRect</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">frame</span><span class="p">;</span>
- 
-<span class="n">CGFloat</span> <span class="n">x</span> <span class="o">=</span> <span class="n">CGRectGetMinX</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
-<span class="n">CGFloat</span> <span class="n">y</span> <span class="o">=</span> <span class="n">CGRectGetMinY</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
-<span class="n">CGFloat</span> <span class="n">width</span> <span class="o">=</span> <span class="n">CGRectGetWidth</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
-<span class="n">CGFloat</span> <span class="n">height</span> <span class="o">=</span> <span class="n">CGRectGetHeight</span><span class="p">(</span><span class="n">frame</span><span class="p">);</span>
- 
-<span class="err">不恰当：</span>
-<span class="n">CGRect</span> <span class="n">frame</span> <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">view</span><span class="p">.</span><span class="n">frame</span><span class="p">;</span>
- 
-<span class="n">CGFloat</span> <span class="n">x</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">x</span><span class="p">;</span>
-<span class="n">CGFloat</span> <span class="n">y</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">origin</span><span class="p">.</span><span class="n">y</span><span class="p">;</span>
-<span class="n">CGFloat</span> <span class="n">width</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">;</span>
-<span class="n">CGFloat</span> <span class="n">height</span> <span class="o">=</span> <span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">;</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如：
+CGRect frame = self.view.frame;</p>
 
-<h3 id="section-16">常量</h3>
+<p>CGFloat x = CGRectGetMinX(frame);
+CGFloat y = CGRectGetMinY(frame);
+CGFloat width = CGRectGetWidth(frame);
+CGFloat height = CGRectGetHeight(frame);</p>
+
+<p>不恰当：
+CGRect frame = self.view.frame;</p>
+
+<p>CGFloat x = frame.origin.x;
+CGFloat y = frame.origin.y;
+CGFloat width = frame.size.width;
+CGFloat height = frame.size.height;</code></pre>
+  </div></p>
+
+<h3>常量</h3>
 
 <p>相对字符串字面量或数字，我们更推荐适用常量。应使用static方式声明常量，而非使用#define的方式来定义宏。</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">例如：</span>
-<span class="k">static</span> <span class="n">NSString</span> <span class="o">*</span> <span class="k">const</span> <span class="n">NYTAboutViewControllerCompanyName</span> <span class="o">=</span> <span class="s">@&quot;The New York Times Company&quot;</span><span class="p">;</span>  
-<span class="k">static</span> <span class="k">const</span> <span class="n">CGFloat</span> <span class="n">NYTImageThumbnailHeight</span> <span class="o">=</span> <span class="mf">50.0</span><span class="p">;</span>
- 
-<span class="err">不恰当</span><span class="o">:</span>
-<span class="c1">//#define CompanyName @&quot;The New York Times Company&quot;</span>
-<span class="c1">//#define thumbnailHeight 2</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>例如：
+static NSString * const NYTAboutViewControllerCompanyName = @&quot;The New York Times Company&quot;;<br>
+static const CGFloat NYTImageThumbnailHeight = 50.0;</p>
 
-<h3 id="section-17">枚举类型</h3>
+<p>不恰当:
+//#define CompanyName @&quot;The New York Times Company&quot;
+//#define thumbnailHeight 2</code></pre>
+  </div></p>
+
+<h3>枚举类型</h3>
 
 <p>在使用enum的时候，推荐适用最新的fixed underlying type(WWDC 2012 session 405- Modern Objective-C)规范，因为它具备更强的类型检查和代码完成功能。</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如：</span>
-<span class="k">typedef</span> <span class="n">NS_ENUM</span><span class="p">(</span><span class="n">NSInteger</span><span class="p">,</span> <span class="n">NYTAdRequestState</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">NYTAdRequestStateInactive</span><span class="p">,</span>
-    <span class="n">NYTAdRequestStateLoading</span>
-<span class="p">};</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如：
+typedef NS_ENUM(NSInteger, NYTAdRequestState) {
+    NYTAdRequestStateInactive,
+    NYTAdRequestStateLoading
+};</code></pre>
+  </div></p>
 
-<h3 id="section-18">布尔变量</h3>
+<h3>布尔变量</h3>
 
 <p>因为nil将被解析为NO，因此没有必要在条件语句中进行比较。永远不要将任何东西和YES进行直接比较，因为YES被定义为1，而一个BOOL变量可以有8个字节。</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如：</span>
-<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">someObject</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">}</span>
+<p><div>
+    <pre><code class='objc'>如：
+if (!someObject) {
+}</p>
 
-<span class="k">if</span> <span class="p">(</span><span class="n">isAwesome</span><span class="p">)</span>
+<p>if (isAwesome)</p>
 
-<span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">[</span><span class="n">someObject</span> <span class="n">boolValue</span><span class="p">])</span>
- 
-<span class="err">不恰当：</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">someObject</span> <span class="o">==</span> <span class="nb">nil</span><span class="p">)</span> <span class="p">{</span>
-<span class="p">}</span>
+<p>if (![someObject boolValue])</p>
 
-<span class="k">if</span> <span class="p">([</span><span class="n">someObject</span> <span class="n">boolValue</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NO</span><span class="p">)</span>
+<p>不恰当：
+if (someObject == nil) {
+}</p>
 
-<span class="k">if</span> <span class="p">(</span><span class="n">isAwesome</span> <span class="o">==</span> <span class="nb">YES</span><span class="p">)</span> <span class="c1">// Never do this.</span>
-</code></pre></div>
+<p>if ([someObject boolValue] == NO)</p>
+
+<p>if (isAwesome == YES) // Never do this.</code></pre>
+  </div></p>
 
 <p>如果一个BOOL属性使用形容词来表达，属性将忽略’is’前缀，但会强调惯用名称。
 例如：</p>
 
-<div class="highlight"><pre><code class="objc"><span class="k">@property</span> <span class="p">(</span><span class="n">assign</span><span class="p">,</span> <span class="n">getter</span><span class="o">=</span><span class="n">isEditable</span><span class="p">)</span> <span class="kt">BOOL</span> <span class="n">editable</span><span class="p">;</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>@property (assign, getter=isEditable) BOOL editable;</code></pre>
+  </div></p>
 
-<h3 id="section-19">单例</h3>
+<h3>单例</h3>
+
 <p>在创建单例对象的共享实例时，应使用线程安全模式。</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如：</span>
-<span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="n">sharedInstance</span> <span class="p">{</span>
-   <span class="k">static</span> <span class="kt">id</span> <span class="n">sharedInstance</span> <span class="o">=</span> <span class="nb">nil</span><span class="p">;</span>
- 
-   <span class="k">static</span> <span class="kt">dispatch_once_t</span> <span class="n">onceToken</span><span class="p">;</span>
-   <span class="n">dispatch_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">onceToken</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
-      <span class="n">sharedInstance</span> <span class="o">=</span> <span class="p">[[</span><span class="n">self</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
-   <span class="p">});</span>
- 
-   <span class="k">return</span> <span class="n">sharedInstance</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如：
+(instancetype)sharedInstance {
+   static id sharedInstance = nil;</p>
 
-<h3 id="section-20">数字</h3>
+<p>static dispatch<em>once</em>t onceToken;
+   dispatch_once(&amp;onceToken, ^{
+      sharedInstance = [[self alloc] init];
+   });</p>
+
+<p>return sharedInstance;
+}</code></pre>
+  </div></p>
+
+<h3>数字</h3>
 
 <p>尽量避免数字固定为某个类型如:写5而不写5.0，5.3而不写5.3f)</p>
 
-<h3 id="section-21">代码组织</h3>
+<h3>代码组织</h3>
 
 <p>用 <code>#pragma mark</code>来将方法分类，这个非常有效，当你用快捷键<code>Control+6</code>可以高效的寻找到自己想要跳转到的方法</p>
 
-<div class="highlight"><pre><code class="objc"><span class="c1">//#pragma mark Properties</span>
+<p><div>
+    <pre><code class='objc'>//#pragma mark Properties</p>
 
-<span class="k">@dynamic</span> <span class="n">someProperty</span><span class="p">;</span>
+<p>@dynamic someProperty;</p>
 
-<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">setCustomProperty:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">value</span> <span class="p">{}</span>
+<ul>
+<li>(void)setCustomProperty:(id)value {}</li>
+</ul>
 
-<span class="c1">//#pragma mark Lifecycle</span>
+<p>//#pragma mark Lifecycle</p>
 
-<span class="k">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">objectWithThing:</span><span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nv">thing</span> <span class="p">{}</span>
-<span class="k">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">init</span> <span class="p">{}</span>
+<ul>
+<li>(id)objectWithThing:(id)thing {}</li>
+<li>(id)init {}</li>
+</ul>
 
-<span class="c1">//#pragma mark Drawing</span>
+<p>//#pragma mark Drawing</p>
 
-<span class="c1">//#pragma mark UItableView delegate</span>
+<p>//#pragma mark UItableView delegate</p>
 
-<span class="c1">//#pragma mark UITableView datasource</span>
+<p>//#pragma mark UITableView datasource</p>
 
-<span class="k">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">drawRect:</span><span class="p">(</span><span class="n">CGRect</span><span class="p">)</span> <span class="p">{}</span>
+<ul>
+<li>(void)drawRect:(CGRect) {}</li>
+</ul>
 
-<span class="c1">//#pragma mark Another functional grouping</span>
+<p>//#pragma mark Another functional grouping</p>
 
-<span class="c1">//#pragma mark GHSuperclass</span>
+<p>//#pragma mark GHSuperclass</p>
 
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">someOverriddenMethod</span> <span class="p">{}</span>
+<ul>
+<li>(void)someOverriddenMethod {}</li>
+</ul>
 
-<span class="c1">//#pragma mark NSCopying</span>
+<p>//#pragma mark NSCopying</p>
 
-<span class="o">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="n">copyWithZone</span><span class="o">:</span><span class="p">(</span><span class="n">NSZone</span> <span class="o">*</span><span class="p">)</span><span class="n">zone</span> <span class="p">{}</span>
+<ul>
+<li>(id)copyWithZone:(NSZone *)zone {}</li>
+</ul>
 
-<span class="c1">//#pragma mark NSObject</span>
+<p>//#pragma mark NSObject</p>
 
-<span class="o">-</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">description</span> <span class="p">{}</span>
-</code></pre></div>
+<ul>
+<li>(NSString *)description {}</code></pre>
+</div></li>
+</ul>
 
-<h3 id="section-22">判断语句</h3>
+<h3>判断语句</h3>
 
 <p>if和else应该和左大括号在同一行</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="k">if</span> <span class="p">(</span><span class="n">button</span><span class="p">.</span><span class="n">enabled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Stuff</span>
-<span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">otherButton</span><span class="p">.</span><span class="n">enabled</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Other stuff</span>
-<span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-    <span class="c1">// More stuf</span>
-<span class="p">}</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如:
+if (button.enabled) {
+    // Stuff
+} else if (otherButton.enabled) {
+    // Other stuff
+} else {
+    // More stuf
+}</code></pre>
+  </div></p>
 
 <p>Switch 也是一样</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="k">switch</span> <span class="p">(</span><span class="n">something</span><span class="p">.</span><span class="n">state</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">case</span> <span class="mi">0</span>: <span class="p">{</span>
-        <span class="c1">// Something</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="p">}</span>
+<p><div>
+    <pre><code class='objc'>如:
+switch (something.state) {
+    case 0: {
+        // Something
+        break;
+    }</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">case 1: {
+    // Something
+    break;
+}
 
-    <span class="k">case</span> <span class="mi">1</span>: <span class="p">{</span>
-        <span class="c1">// Something</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="p">}</span>
+case 2:
+case 3: {
+    // Something
+    break;
+}
 
-    <span class="k">case</span> <span class="mi">2</span>:
-    <span class="k">case</span> <span class="mi">3</span>: <span class="p">{</span>
-        <span class="c1">// Something</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="nl">default:</span> <span class="p">{</span>
-        <span class="c1">// Something</span>
-        <span class="k">break</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+default: {
+    // Something
+    break;
+}
 </code></pre></div>
+<p>}</code></pre>
+  </div></p>
 
-<h3 id="import">Import</h3>
+<h3>Import</h3>
 
 <p>在类的头文件中需要引用其他的类的时候，需要用<code>@class</code>这个关键字，这样能减少类与类之间的依赖。</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="n">store</span><span class="p">.</span><span class="n">h</span><span class="o">:</span>
+<p><div>
+    <pre><code class='objc'>如:
+store.h:</p>
 
-<span class="c1">//#import &lt;Foundation/Foundation.h&gt;</span>
-<span class="c1">//#import &lt;CoreData/CoreData.h&gt;</span>
+<p>//#import &lt;Foundation/Foundation.h&gt;
+//#import &lt;CoreData/CoreData.h&gt;</p>
 
-<span class="k">@class</span> <span class="nc">User</span>;
+<p>@class User;</p>
 
-<span class="k">@interface</span> <span class="nc">Store</span> : <span class="nc">NSManagedObject</span>
+<p>@interface Store : NSManagedObject</p>
 
-<span class="k">@property</span> <span class="p">(</span><span class="n">nonatomic</span><span class="p">,</span> <span class="n">retain</span><span class="p">)</span> <span class="n">User</span> <span class="o">*</span><span class="n">user</span><span class="p">;</span>
+<p>@property (nonatomic, retain) User *user;</p>
 
-<span class="k">@end</span>
+<p>@end</p>
 
-<span class="n">Store</span><span class="p">.</span><span class="n">m</span><span class="o">:</span>
+<p>Store.m:</p>
 
-<span class="c1">//#import &quot;Store.h&quot;</span>
+<p>//#import &quot;Store.h&quot;</p>
 
-<span class="c1">//#import &quot;User.h&quot;</span>
+<p>//#import &quot;User.h&quot;</p>
 
-<span class="k">@implementation</span> <span class="nc">Store</span>
+<p>@implementation Store</p>
 
-<span class="c1">//doSomething</span>
+<p>//doSomething</p>
 
-<span class="k">@end</span>
-</code></pre></div>
+<p>@end</code></pre>
+  </div></p>
 
-<h3 id="section-23">私有方法</h3>
+<h3>私有方法</h3>
 
 <p>关于私有方法，苹果官方建议呢是是使用统一的前缀来分组和辨识。但是千万不用用下划线来作为前缀来命名，或者你可以在前缀前添加一些特殊的标识。</p>
 
-<h2 id="git-commit-">git commit 格式</h2>
+<h2>git commit 格式</h2>
 
 <p>可以参考<a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#">google开源项目的Commit 规范</a></p>
 
 <p>参考规范:</p>
 
 <ol>
-  <li><strong>添加了新功能</strong> <code>feat(大模块+子模块):#例如实现了某个具体功能</code></li>
-  <li><strong>修改了某些功能</strong>  <code>change(大模块+子模块):#例如修改了某个具体的功能</code></li>
-  <li><strong>修复了某个Bug</strong>  <code>fix_bug(大模块+子模块):#修复了什么的bug，最好写上*原因*和*解决方法*。</code></li>
-  <li><strong>比较大的改动</strong>  </li>
+<li><strong>添加了新功能</strong> <code>feat(大模块+子模块):#例如实现了某个具体功能</code></li>
+<li><strong>修改了某些功能</strong>  <code>change(大模块+子模块):#例如修改了某个具体的功能</code></li>
+<li><strong>修复了某个Bug</strong>  <code>fix_bug(大模块+子模块):#修复了什么的bug，最好写上*原因*和*解决方法*。</code></li>
+<li><p><strong>比较大的改动</strong>  </p>
+
+<div>
+<pre><code class='objc'>broken_change():
+before: 
+
+after:</code></pre>
+</div></li>
+<li><p><strong>修改了文档</strong> <code>docs():</code></p></li>
+<li><p><strong>修改了格式</strong> <code>style():</code></p></li>
+<li><p><strong>添加了一些测试</strong> <code>test(大模块+子模块):</code></p></li>
+<li><p><strong>一些杂项，比如像解决工程编译错误等问题之后的修改</strong> <code>chore():</code></p></li>
+<li><p><strong>对又有代码的重构</strong> <code>refactor(大模块+子模块):</code></p></li>
 </ol>
 
-<div class="highlight"><pre><code class="objc">   <span class="n">broken_change</span><span class="p">()</span><span class="o">:</span>
-   <span class="nl">before:</span> 
-   
-   <span class="n">after</span><span class="o">:</span>
-   
-</code></pre></div>
+<h2>格式</h2>
 
-<ol>
-  <li><strong>修改了文档</strong> <code>docs():</code></li>
-  <li><strong>修改了格式</strong> <code>style():</code></li>
-  <li><strong>添加了一些测试</strong> <code>test(大模块+子模块):</code></li>
-  <li><strong>一些杂项，比如像解决工程编译错误等问题之后的修改</strong> <code>chore():</code></li>
-  <li><strong>对又有代码的重构</strong> <code>refactor(大模块+子模块):</code></li>
-</ol>
-
-<h2 id="section-24">格式</h2>
 <p>一行代码的长度不能超过80个字母</p>
 
 <p><strong>函数声明和定义:</strong></p>
 
 <p>“-”或“+”和返回类型之间应该有一个空格</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">doSomethingWithString</span><span class="o">:</span><span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">theString</span> <span class="p">{</span>
-  <span class="p">...</span>
-<span class="p">}</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如:
+- (void)doSomethingWithString:(NSString *)theString {
+  ...
+}</code></pre>
+  </div></p>
 
 <p>方法大括号和其它大括号（比如if/else/switch/while等等）应在语句的同一行开始，而在新的一行关闭。</p>
 
-<div class="highlight"><pre><code class="objc"><span class="k">if</span> <span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">isHappy</span><span class="p">)</span> <span class="p">{</span>
-<span class="c1">//Do something</span>
-<span class="p">}</span>
-<span class="k">else</span> <span class="p">{</span>
-<span class="c1">//Do something else</span>
-<span class="p">}</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>if (user.isHappy) {
+//Do something
+}
+else {
+//Do something else
+}</code></pre>
+  </div></p>
 
 <p>当有多个参数的时，如果参数太多超过一行，则应该将每个参数分行，并且冒号对齐</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">doSomethingWith</span><span class="o">:</span><span class="p">(</span><span class="n">GTMFoo</span> <span class="o">*</span><span class="p">)</span><span class="n">theFoo</span>
-                   <span class="nl">rect:</span><span class="p">(</span><span class="n">NSRect</span><span class="p">)</span><span class="n">theRect</span>
-               <span class="nl">interval:</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">theInterval</span> <span class="p">{</span>
-  <span class="p">...</span>
-<span class="p">}</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如:
+- (void)doSomethingWith:(GTMFoo *)theFoo
+                   rect:(NSRect)theRect
+               interval:(float)theInterval {
+  ...
+}</code></pre>
+  </div></p>
 
 <p>当第一个参数短于其他参数的时候，分行时每行至少要缩进4个空格</p>
 
-<div class="highlight"><pre><code class="objc">             <span class="nl">longKeyword:</span><span class="p">(</span><span class="n">NSRect</span><span class="p">)</span><span class="n">theRect</span>
-       <span class="nl">evenLongerKeyword:</span><span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">theInterval</span>
-                   <span class="nl">error:</span><span class="p">(</span><span class="n">NSError</span> <span class="o">**</span><span class="p">)</span><span class="n">theError</span> <span class="p">{</span>
-          <span class="p">...</span>
-<span class="p">}</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>longKeyword:(NSRect)theRect
+       evenLongerKeyword:(float)theInterval
+                   error:(NSError **)theError {
+          ...
+}</code></pre>
+  </div></p>
 
-<h3 id="section-25">方法调用</h3>
+<h3>方法调用</h3>
 
 <p>方法调用应该和方法声明的时候一个格式,要么所有参数放在一行里:</p>
 
-<div class="highlight"><pre><code class="objc"><span class="p">[</span><span class="n">myObject</span> <span class="n">doFooWith</span><span class="o">:</span><span class="n">arg1</span> <span class="n">name</span><span class="o">:</span><span class="n">arg2</span> <span class="n">error</span><span class="o">:</span><span class="n">arg3</span><span class="p">];</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>[myObject doFooWith:arg1 name:arg2 error:arg3];</code></pre>
+  </div></p>
 
 <p>要么每一行一个参数:</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="p">[</span><span class="n">myObject</span> <span class="n">doFooWith</span><span class="o">:</span><span class="n">arg1</span>
-               <span class="nl">name:</span><span class="n">arg2</span>
-              <span class="nl">error:</span><span class="n">arg3</span><span class="p">];</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如:
+[myObject doFooWith:arg1
+               name:arg2
+              error:arg3];</code></pre>
+  </div></p>
 
 <p>当第一个参数短语其他参数的时候，分行是每行至少要缩进4个空格:</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="p">[</span><span class="n">myObj</span> <span class="kt">short</span><span class="o">:</span><span class="n">arg1</span>
-          <span class="nl">longKeyword:</span><span class="n">arg2</span>
-    <span class="nl">evenLongerKeyword:</span><span class="n">arg3</span>
-                <span class="nl">error:</span><span class="n">arg4</span><span class="p">];</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如:
+[myObj short:arg1
+          longKeyword:arg2
+    evenLongerKeyword:arg3
+                error:arg4];</code></pre>
+  </div></p>
 
 <p>@public 和 @private前面为一个空格</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="k">@interface</span> <span class="nc">MyClass</span> : <span class="nc">NSObject</span><span class="p">{</span>
- <span class="k">@public</span>
- <span class="err">…</span>
- <span class="k">@private</span>
-<span class="p">}</span>
-<span class="k">@end</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如:
+@interface MyClass : NSObject{
+ @public
+ …
+ @private
+}
+@end</code></pre>
+  </div></p>
 
-<h3 id="section-26">协议</h3>
+<h3>协议</h3>
 
 <p>类型与协议名之间不要空格</p>
 
-<div class="highlight"><pre><code class="objc"><span class="err">如</span><span class="o">:</span>
-<span class="k">@interface</span> <span class="nc">MyProtocoledClass</span> : <span class="nc">NsObject</span><span class="o">&lt;</span><span class="n">NSWindowDelegate</span><span class="o">&gt;</span> <span class="p">{</span>
- <span class="k">@private</span>
-  <span class="kt">id</span><span class="o">&lt;</span><span class="n">MyFancyDelegate</span><span class="o">&gt;</span> <span class="n">_delegate</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="o">-</span>  <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">setDelegate</span><span class="o">:</span><span class="p">(</span><span class="kt">id</span><span class="o">&lt;</span><span class="n">MyFancyDelegate</span><span class="o">&gt;</span><span class="p">)</span><span class="n">aDelegate</span><span class="p">;</span>
-<span class="k">@end</span>
-</code></pre></div>
+<p><div>
+    <pre><code class='objc'>如:
+@interface MyProtocoledClass : NsObject&lt;NSWindowDelegate&gt; {
+ @private
+  id&lt;MyFancyDelegate&gt; _delegate;
+}
+-  (void)setDelegate:(id&lt;MyFancyDelegate&gt;)aDelegate;
+@end</code></pre>
+  </div></p>
 
-<h3 id="blocks">Blocks</h3>
+<h3>Blocks</h3>
 
-<div class="highlight"><pre><code class="objc"><span class="err">在一行的情况</span>
-<span class="err">如</span><span class="o">:</span>
-<span class="p">[</span><span class="n">operation</span> <span class="n">setCompletionBlock</span><span class="o">:^</span><span class="p">{</span> <span class="p">[</span><span class="n">self</span> <span class="n">onOperationDone</span><span class="p">];</span> <span class="p">}];</span>
+<p><div>
+    <pre><code class='objc'>在一行的情况
+如:
+[operation setCompletionBlock:^{ [self onOperationDone]; }];</p>
 
-<span class="c1">//block 在新的行里，需要缩进四个空格</span>
-<span class="p">[</span><span class="n">operation</span> <span class="n">setCompletionBlock</span><span class="o">:^</span><span class="p">{</span>
-      <span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">delegate</span> <span class="n">newDataAvailable</span><span class="p">];</span>
-<span class="p">}];</span>
+<p>//block 在新的行里，需要缩进四个空格
+[operation setCompletionBlock:^{
+      [self.delegate newDataAvailable];
+}];</p>
 
-<span class="n">dispatch_async</span><span class="p">(</span><span class="n">_fileIOQueue</span><span class="p">,</span> <span class="o">^</span><span class="p">{</span>
-      <span class="n">NSString</span><span class="o">*</span> <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="n">sessionFilePath</span><span class="p">];</span>
-      <span class="k">if</span> <span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="p">{</span>
-        <span class="c1">// ...</span>
-      <span class="p">}</span>
-<span class="p">});</span>
-</code></pre></div>
+<p>dispatch<em>async(</em>fileIOQueue, ^{
+      NSString* path = [self sessionFilePath];
+      if (path) {
+        // ...
+      }
+});</code></pre>
+  </div></p>
 
-<div class="highlight"><pre><code class="objc"><span class="c1">//有参数的block,|(SessionWindow *window)|与|{|之间有一个空格</span>
-<span class="err">如</span><span class="o">:</span>
-<span class="p">[[</span><span class="n">SessionService</span> <span class="n">sharedService</span><span class="p">]</span>
-    <span class="nl">loadWindowWithCompletionBlock:</span><span class="o">^</span><span class="p">(</span><span class="n">SessionWindow</span> <span class="o">*</span><span class="n">window</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">window</span><span class="p">)</span> <span class="p">{</span>
-          <span class="p">[</span><span class="n">self</span> <span class="n">windowDidLoad</span><span class="o">:</span><span class="n">window</span><span class="p">];</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-          <span class="p">[</span><span class="n">self</span> <span class="n">errorLoadingWindow</span><span class="p">];</span>
-        <span class="p">}</span>
-    <span class="p">}];</span>
+<p><div>
+    <pre><code class='objc'>//有参数的block,|(SessionWindow *window)|与|{|之间有一个空格
+如:
+[[SessionService sharedService]
+    loadWindowWithCompletionBlock:^(SessionWindow *window) {
+        if (window) {
+          [self windowDidLoad:window];
+        } else {
+          [self errorLoadingWindow];
+        }
+    }];</p>
 
-<span class="c1">//block 中有参数且不能在一行中显示</span>
-<span class="c1">//要行与行之间要相对有四个空格</span>
-<span class="p">[[</span><span class="n">SessionService</span> <span class="n">sharedService</span><span class="p">]</span>
-      <span class="nl">loadWindowWithCompletionBlock:</span>
-            <span class="o">^</span><span class="p">(</span><span class="n">SessionWindow</span> <span class="o">*</span><span class="n">window</span><span class="p">)</span> <span class="p">{</span>
-                   <span class="k">if</span> <span class="p">(</span><span class="n">window</span><span class="p">)</span> <span class="p">{</span>
-                     <span class="p">[</span><span class="n">self</span> <span class="n">windowDidLoad</span><span class="o">:</span><span class="n">window</span><span class="p">];</span>
-                   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-                     <span class="p">[</span><span class="n">self</span> <span class="n">errorLoadingWindow</span><span class="p">];</span>
-                   <span class="p">}</span>
-            <span class="p">}];</span>
+<p>//block 中有参数且不能在一行中显示
+//要行与行之间要相对有四个空格
+[[SessionService sharedService]
+      loadWindowWithCompletionBlock:
+            ^(SessionWindow *window) {
+                   if (window) {
+                     [self windowDidLoad:window];
+                   } else {
+                     [self errorLoadingWindow];
+                   }
+            }];</p>
 
-<span class="c1">//很长的block可以被定义不在一行里</span>
-<span class="kt">void</span> <span class="p">(</span><span class="o">^</span><span class="n">largeBlock</span><span class="p">)(</span><span class="kt">void</span><span class="p">)</span> <span class="o">=</span> <span class="o">^</span><span class="p">{</span>
-    <span class="c1">// ...</span>
-<span class="p">};</span>
-<span class="p">[</span><span class="n">_operationQueue</span> <span class="n">addOperationWithBlock</span><span class="o">:</span><span class="n">largeBlock</span><span class="p">];</span>
-</code></pre></div>
-
+<p>//很长的block可以被定义不在一行里
+void (^largeBlock)(void) = ^{
+    // ...
+};
+[_operationQueue addOperationWithBlock:largeBlock];</code></pre>
+  </div></p>
 
       <footer class="entry-meta">
-        <span class="entry-tags"><a href="http://morisunshine.com/tags/#iOS" title="Pages tagged iOS" class="tag">iOS</a></span>
-        <span><a href="http://morisunshine.com/ios/ios_code_standards/" rel="bookmark" title="iOS编码规范参考">iOS编码规范参考</a> was published on <span class="entry-date date published updated"><time datetime="2014-04-22T00:00:00+08:00">April 22, 2014</time></span></span>
+        <span class="entry-tags"><a href="http://localhost:4000/tags/#iOS" title="Pages tagged iOS" class="tag">iOS</a></span>
+        <span><a href="http://localhost:4000/ios/ios_code_standards/" rel="bookmark" title="iOS编码规范参考">iOS编码规范参考</a> was published on <span class="entry-date date published updated"><time datetime="2014-04-22T00:00:00+08:00">April 22, 2014</time></span></span>
         
-        <span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>
+        <span class="author vcard"><span class="fn"><a href="http://localhost:4000/about/" title="About Sheldon">Sheldon</a></span></span>
         
       </footer>
     </div><!-- /.entry-content -->
@@ -719,22 +767,22 @@ var duoshuoQuery = {short_name:"morisunshne"};
     <div class="read-more">
       
         <div class="read-more-header">
-          <a href="http://morisunshine.com/ios/Property_of_Objective_C/" class="read-more-btn">Read More</a>
+          <a href="http://localhost:4000/ios/Property_of_Objective_C/" class="read-more-btn">Read More</a>
         </div><!-- /.read-more-header -->
         <div class="read-more-content">
-          <h3><a href="http://morisunshine.com/ios/namespacing/" title="Objective-C的命名空间">Objective-C的命名空间</a></h3>
-          <p>本文由[morisunshine](http://morisunshine.com/)译自["Namespacing"](http://nshipster.com/namespacing/)。转载请注明出处！>为什么Objecive-C中的很多类名都是`NS`开头的呢？我保...&hellip; <a href="http://morisunshine.com/ios/namespacing/">Continue reading</a></p>
+          <h3><a href="http://localhost:4000/ios/namespacing/" title="Objective-C的命名空间">Objective-C的命名空间</a></h3>
+          <p>本文由[morisunshine](http://morisunshine.com/)译自["Namespacing"](http://nshipster.com/namespacing/)。转载请注明出处！>为什么Objecive-C中的很多类名都是`NS`开头的呢？我保...&hellip; <a href="http://localhost:4000/ios/namespacing/">Continue reading</a></p>
         </div><!-- /.read-more-content -->
       
       <div class="read-more-list">
         
           <div class="list-item">
-            <h4><a href="http://morisunshine.com/ios/Property_of_Objective_C/" title="@property中attribute的整理">@property中attribute的整理</a></h4>
+            <h4><a href="http://localhost:4000/ios/Property_of_Objective_C/" title="@property中attribute的整理">@property中attribute的整理</a></h4>
             <span>Published on April 16, 2014</span>
           </div><!-- /.list-item -->
         
           <div class="list-item">
-            <h4><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/" title="我的时间观---活在当下">我的时间观---活在当下</a></h4>
+            <h4><a href="http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/" title="我的时间观---活在当下">我的时间观---活在当下</a></h4>
             <span>Published on March 24, 2014</span>
           </div><!-- /.list-item -->
         
@@ -751,8 +799,8 @@ var duoshuoQuery = {short_name:"morisunshne"};
 </div><!-- /.footer-wrapper -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="http://morisunshine.com/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="http://morisunshine.com/assets/js/scripts.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
 
 <!-- Asynchronous Google Analytics snippet -->
 <script>

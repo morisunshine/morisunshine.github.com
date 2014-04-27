@@ -11,7 +11,7 @@
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://morisunshine.com/images/">
+<meta name="twitter:image" content="http://localhost:4000/images/">
 <meta name="twitter:title" content="All Posts">
 <meta name="twitter:description" content="An archive of posts.">
 <meta name="twitter:creator" content="@morisunshine">
@@ -21,15 +21,15 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="All Posts">
 <meta property="og:description" content="An archive of posts.">
-<meta property="og:url" content="http://morisunshine.com/posts/">
+<meta property="og:url" content="http://localhost:4000/posts/">
 <meta property="og:site_name" content="Morisunshine's Blog">
 
 
 
 
 
-<link rel="canonical" href="http://morisunshine.com/posts/">
-<link href="http://morisunshine.com/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
+<link rel="canonical" href="http://localhost:4000/posts/">
+<link href="http://localhost:4000/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
 
 
 <!-- http://t.co/dKP3o1e -->
@@ -38,32 +38,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <!-- For all browsers -->
-<link rel="stylesheet" href="http://morisunshine.com/assets/css/main.min.css">
+<link rel="stylesheet" href="http://localhost:4000/assets/css/main.min.css">
 <!-- Webfonts -->
 <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic" rel="stylesheet" type="text/css">
 
 <meta http-equiv="cleartype" content="on">
 
 <!-- Load Modernizr -->
-<script src="http://morisunshine.com/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
+<script src="http://localhost:4000/assets/js/vendor/modernizr-2.6.2.custom.min.js"></script>
 
 <!-- Icons -->
 <!-- 16x16 -->
-<link rel="shortcut icon" href="http://morisunshine.com/favicon.ico">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.ico">
 <!-- 32x32 -->
-<link rel="shortcut icon" href="http://morisunshine.com/favicon.png">
+<link rel="shortcut icon" href="http://localhost:4000/favicon.png">
 <!-- 57x57 (precomposed) for iPhone 3GS, pre-2011 iPod Touch and older Android devices -->
-<link rel="apple-touch-icon-precomposed" href="http://morisunshine.com/images/apple-touch-icon-precomposed.png">
+<link rel="apple-touch-icon-precomposed" href="http://localhost:4000/images/apple-touch-icon-precomposed.png">
 <!-- 72x72 (precomposed) for 1st generation iPad, iPad 2 and iPad mini -->
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://morisunshine.com/images/apple-touch-icon-72x72-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="72x72" href="http://localhost:4000/images/apple-touch-icon-72x72-precomposed.png">
 <!-- 114x114 (precomposed) for iPhone 4, 4S, 5 and post-2011 iPod Touch -->
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://morisunshine.com/images/apple-touch-icon-114x114-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="114x114" href="http://localhost:4000/images/apple-touch-icon-114x114-precomposed.png">
 <!-- 144x144 (precomposed) for iPad 3rd and 4th generation -->
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://morisunshine.com/images/apple-touch-icon-144x144-precomposed.png">
+<link rel="apple-touch-icon-precomposed" sizes="144x144" href="http://localhost:4000/images/apple-touch-icon-144x144-precomposed.png">
 
 
 
 </head>
+
+<link rel="stylesheet" href="assets/css/solarized_dark.css">
+<script src="assets/highlight.pack.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
 
 <body id="post-index" >
 
@@ -71,16 +75,16 @@
 <nav id="dl-menu" class="dl-menuwrapper" role="navigation">
 	<button class="dl-trigger">Open Menu</button>
 	<ul class="dl-menu">
-		<li><a href="http://morisunshine.com">Home</a></li>
+		<li><a href="http://localhost:4000">Home</a></li>
 		<li>
 			<a href="#">About</a>
 			<ul class="dl-submenu">
 				<li>
-					<img src="http://morisunshine.com/images/avatar.png" alt="Sheldon photo" class="author-photo">
+					<img src="http://localhost:4000/images/avatar.png" alt="Sheldon photo" class="author-photo">
 					<h4>Sheldon</h4>
 					<p>1991-12-10</p>
 				</li>
-				<li><a href="http://morisunshine.com/about/">Know More</a></li>
+				<li><a href="http://localhost:4000/about/">Know More</a></li>
 				<li>
 					<a href="mailto:sheldon.zen@gmail.com"><i class="icon-envelope"></i> Email</a>
 				</li>
@@ -111,11 +115,11 @@
 		<li>
 			<a href="#">Posts</a>
 			<ul class="dl-submenu">
-				<li><a href="http://morisunshine.com/posts/">All Posts</a></li>
-				<li><a href="http://morisunshine.com/tags/">All Tags</a></li>
+				<li><a href="http://localhost:4000/posts/">All Posts</a></li>
+				<li><a href="http://localhost:4000/tags/">All Tags</a></li>
 			</ul>
 		</li>
-		<li><a href="http://morisunshine.com/feed">Feed</a></li>
+		<li><a href="http://localhost:4000/feed">Feed</a></li>
 		
 	</ul><!-- /.dl-menu -->
 </nav><!-- /.dl-menuwrapper -->
@@ -143,7 +147,7 @@
       <ul>
     
 
-        <li class="entry-title"><a href="http://morisunshine.com/ios/namespacing/" title="Objective-C的命名空间">Objective-C的命名空间</a></li>
+        <li class="entry-title"><a href="http://localhost:4000/ios/namespacing/" title="Objective-C的命名空间">Objective-C的命名空间</a></li>
 
     
         
@@ -154,7 +158,7 @@
 
     
 
-        <li class="entry-title"><a href="http://morisunshine.com/ios/ios_code_standards/" title="iOS编码规范参考">iOS编码规范参考</a></li>
+        <li class="entry-title"><a href="http://localhost:4000/ios/ios_code_standards/" title="iOS编码规范参考">iOS编码规范参考</a></li>
 
     
         
@@ -165,7 +169,7 @@
 
     
 
-        <li class="entry-title"><a href="http://morisunshine.com/ios/Property_of_Objective_C/" title="@property中attribute的整理">@property中attribute的整理</a></li>
+        <li class="entry-title"><a href="http://localhost:4000/ios/Property_of_Objective_C/" title="@property中attribute的整理">@property中attribute的整理</a></li>
 
     
         
@@ -176,7 +180,7 @@
 
     
 
-        <li class="entry-title"><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/" title="我的时间观---活在当下">我的时间观---活在当下</a></li>
+        <li class="entry-title"><a href="http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/" title="我的时间观---活在当下">我的时间观---活在当下</a></li>
 
     
         
@@ -187,7 +191,7 @@
 
     
 
-        <li class="entry-title"><a href="http://morisunshine.com/ios/objc_is_not_what_you_think_it_is/" title="Objective-C 不是你想的那样">Objective-C 不是你想的那样</a></li>
+        <li class="entry-title"><a href="http://localhost:4000/ios/objc_is_not_what_you_think_it_is/" title="Objective-C 不是你想的那样">Objective-C 不是你想的那样</a></li>
 
     
         
@@ -198,7 +202,7 @@
 
     
 
-        <li class="entry-title"><a href="http://morisunshine.com/%E5%BC%80%E5%8F%91/experience_of_develop/" title="我的开发经验漫谈">我的开发经验漫谈</a></li>
+        <li class="entry-title"><a href="http://localhost:4000/%E5%BC%80%E5%8F%91/experience_of_develop/" title="我的开发经验漫谈">我的开发经验漫谈</a></li>
 
     
         
@@ -209,7 +213,7 @@
 
     
 
-        <li class="entry-title"><a href="http://morisunshine.com/ios/UICollectionView_UIKit_Dynamics/" title="UICollectionView+UIKit Dynamics">UICollectionView+UIKit Dynamics</a></li>
+        <li class="entry-title"><a href="http://localhost:4000/ios/UICollectionView_UIKit_Dynamics/" title="UICollectionView+UIKit Dynamics">UICollectionView+UIKit Dynamics</a></li>
 
     
         
@@ -220,7 +224,7 @@
 
     
 
-        <li class="entry-title"><a href="http://morisunshine.com/ruby/make_your_own_gem/" title="制作自己的Gem">制作自己的Gem</a></li>
+        <li class="entry-title"><a href="http://localhost:4000/ruby/make_your_own_gem/" title="制作自己的Gem">制作自己的Gem</a></li>
 
     
         
@@ -231,7 +235,7 @@
 
     
 
-        <li class="entry-title"><a href="http://morisunshine.com/%E6%8A%98%E8%85%BE/my_first_blog/" title="第一篇博客">第一篇博客</a></li>
+        <li class="entry-title"><a href="http://localhost:4000/%E6%8A%98%E8%85%BE/my_first_blog/" title="第一篇博客">第一篇博客</a></li>
 
     
         
@@ -248,7 +252,7 @@
 
     
 
-        <li class="entry-title"><a href="http://morisunshine.com/ios/iOS_Decorator/" title="iOS设计模式学习---装饰模式">iOS设计模式学习---装饰模式</a></li>
+        <li class="entry-title"><a href="http://localhost:4000/ios/iOS_Decorator/" title="iOS设计模式学习---装饰模式">iOS设计模式学习---装饰模式</a></li>
 
     
         
@@ -259,7 +263,7 @@
 
     
 
-        <li class="entry-title"><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/travel-to-qinghai/" title="站在原地, 心存远方">站在原地, 心存远方</a></li>
+        <li class="entry-title"><a href="http://localhost:4000/%E7%94%9F%E6%B4%BB/travel-to-qinghai/" title="站在原地, 心存远方">站在原地, 心存远方</a></li>
 
     
       </ul>
@@ -275,8 +279,8 @@
 </div><!-- /.footer-wrapper -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>window.jQuery || document.write('<script src="http://morisunshine.com/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
-<script src="http://morisunshine.com/assets/js/scripts.min.js"></script>
+<script>window.jQuery || document.write('<script src="http://localhost:4000/assets/js/vendor/jquery-1.9.1.min.js"><\/script>')</script>
+<script src="http://localhost:4000/assets/js/scripts.min.js"></script>
 
 <!-- Asynchronous Google Analytics snippet -->
 <script>
