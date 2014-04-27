@@ -180,7 +180,6 @@
  *              success:返回的NSDictionary中包含服务器的response信息，包括图片id（id）,url(url),宽度(width),高度(height)。使用括号中的名称从NSDictionary中获取。
  *              failed:返回error
  **/
-
 </code></pre></div>
 <h2>命名</h2>
 
@@ -192,49 +191,44 @@
 
 <p>函数名应该已小写字母开头，并混合大小写，其中的每个参数都应该是小写字母开头，读起来应该像句子一样，访问器方法应该与他们getting的成员变量的名字一样，但不应该以get作为前缀，如：</p>
 <div class="highlight"><pre><code class="objc language-objc" data-lang="objc">  - (id)getDelegate;    //avoid
-    - (id)delegate;     //good
+  - (id)delegate;       //good
 </code></pre></div>
 <h3>变量的命名</h3>
 
 <p>成员变量应该已小写字母开头，并以下划线作为后缀，如usernameTextField_,使用KVO/KVC绑定成员变量时，可以以一个下划线为前缀。</p>
 
-<p><em>公共变量命名:</em></p>
+<blockquote>
+<p>公共变量命名:
+小写字母开头。如:imageView;</p>
 
-<p>小写字母开头。如:imageView;</p>
+<p>实例变量命名:</p>
 
-<p><em>实例变量命名:</em></p>
-
-<p><em>私有变量:</em>
+<p>私有变量:
 应该以下划线开头。如:_addButton</p>
 
-<p><em>常量命名:</em>
+<p>常量命名:
 以小写k开头，混合大小写。如:kInvalidHandle, kWritePerm</p>
+</blockquote>
 
 <h3>图片的命名</h3>
 
 <p>应该已“模块+功能+作用+样式”的形式</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-如:message_private_at_button_bg_normal.png
-
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:message_private_at_button_bg_normal.png
 </code></pre></div>
 <h3>类的命名</h3>
 
 <p>类名、分类名、协议名应该以大写字母开始，并混合小写字母来分隔单词，应该已“模块+功能+子功能”的方式：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-如:MessagePrivateAtsomebody
-
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:MessagePrivateAtsomebody
 </code></pre></div>
 <p>应用级的类，应避免不用前缀，跨应用级的类，应使用前缀，
-```objc</p>
+<code>objc
+如:GTMSendMessage
+</code></p>
 
-<p>如:GTMSendMessage</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">
-##分类名
+<h2>分类名</h2>
 
-类别名应该有两三个字母作为前缀已表示为某项目的一部分，并且包含所扩展的类的名字，如我们要创建一个NSString的类别以解析，我们将类别放在一个名为GTMNSString+Parsing.h的文件中。类别名本身为GTMStringParsingAdditions(类别名与文件名不同是为了让文件可以包含更多相同功能的扩展)类名与包含类别名之间应一个空格分隔。
-
-```objc
-如:
+<p>类别名应该有两三个字母作为前缀已表示为某项目的一部分，并且包含所扩展的类的名字，如我们要创建一个NSString的类别以解析，我们将类别放在一个名为GTMNSString+Parsing.h的文件中。类别名本身为GTMStringParsingAdditions(类别名与文件名不同是为了让文件可以包含更多相同功能的扩展)类名与包含类别名之间应一个空格分隔。</p>
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
 //NSString 为要扩展的类名, GTMStringParsingAdditions为类别名
 @interface NSString (GTMStringParsingAdditions)
         - (NSString *)gtm_foobarString;
@@ -287,7 +281,6 @@ self.imgView.backgroundColor = [UIColor black];
 而尽量避免:
 
 _imgView.backgroundColor = [UIColor black];
-
 </code></pre></div>
 <h3>Immutable实例初始化</h3>
 
@@ -302,7 +295,6 @@ NSArray *names = [NSArray arrayWithObjects:@&quot;Brian&quot;, @&quot;Matt&quot;
 NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @&quot;Kate&quot;, @&quot;iPhone&quot;, @&quot;Kamal&quot;, @&quot;iPad&quot;, @&quot;Bill&quot;, @&quot;Mobile Web&quot;, nil];
 NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
 NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];
-
 </code></pre></div>
 <h3>类型</h3>
 
@@ -337,7 +329,6 @@ static const CGFloat NYTImageThumbnailHeight = 50.0;
 不恰当:
 //#define CompanyName @&quot;The New York Times Company&quot;
 //#define thumbnailHeight 2
-
 </code></pre></div>
 <h3>枚举类型</h3>
 
@@ -347,7 +338,6 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
     NYTAdRequestStateInactive,
     NYTAdRequestStateLoading
 };
-
 </code></pre></div>
 <h3>布尔变量</h3>
 
@@ -367,7 +357,6 @@ if (someObject == nil) {
 if ([someObject boolValue] == NO)
 
 if (isAwesome == YES) // Never do this.
-
 </code></pre></div>
 <p>如果一个BOOL属性使用形容词来表达，属性将忽略’is’前缀，但会强调惯用名称。
 例如：</p>
@@ -387,7 +376,6 @@ if (isAwesome == YES) // Never do this.
 
    return sharedInstance;
 }
-
 </code></pre></div>
 <h3>数字</h3>
 
@@ -428,7 +416,6 @@ if (isAwesome == YES) // Never do this.
 #pragma mark NSObject
 
 - (NSString *)description {}
-
 </code></pre></div>
 <h3>判断语句</h3>
 
@@ -441,7 +428,6 @@ if (button.enabled) {
 } else {
     // More stuf
 }
-
 </code></pre></div>
 <p>Switch 也是一样</p>
 <div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
@@ -467,7 +453,6 @@ switch (something.state) {
         break;
     }
 }
-
 </code></pre></div>
 <h3>Import</h3>
 
@@ -497,7 +482,6 @@ Store.m:
 //doSomething
 
 @end
-
 </code></pre></div>
 <h3>私有方法</h3>
 
@@ -513,21 +497,18 @@ Store.m:
 <li><strong>添加了新功能</strong> <code>feat(大模块+子模块):#例如实现了某个具体功能</code></li>
 <li><strong>修改了某些功能</strong>  <code>change(大模块+子模块):#例如修改了某个具体的功能</code></li>
 <li><strong>修复了某个Bug</strong>  <code>fix_bug(大模块+子模块):#修复了什么的bug，最好写上*原因*和*解决方法*。</code></li>
-<li><strong>比较大的改动</strong><br></li>
-</ol>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-   broken_change():
-   before: 
+<li><p><strong>比较大的改动</strong>
+```
+broken_change():
+before: </p>
 
-   after:
-
-</code></pre></div>
-<ol>
-<li><strong>修改了文档</strong> <code>docs():</code></li>
-<li><strong>修改了格式</strong> <code>style():</code></li>
-<li><strong>添加了一些测试</strong> <code>test(大模块+子模块):</code></li>
-<li><strong>一些杂项，比如像解决工程编译错误等问题之后的修改</strong> <code>chore():</code></li>
-<li><strong>对又有代码的重构</strong> <code>refactor(大模块+子模块):</code></li>
+<p>after:
+```</p></li>
+<li><p><strong>修改了文档</strong> <code>docs():</code></p></li>
+<li><p><strong>修改了格式</strong> <code>style():</code></p></li>
+<li><p><strong>添加了一些测试</strong> <code>test(大模块+子模块):</code></p></li>
+<li><p><strong>一些杂项，比如像解决工程编译错误等问题之后的修改</strong> <code>chore():</code></p></li>
+<li><p><strong>对又有代码的重构</strong> <code>refactor(大模块+子模块):</code></p></li>
 </ol>
 
 <h2>格式</h2>
@@ -541,17 +522,14 @@ Store.m:
 - (void)doSomethingWithString:(NSString *)theString {
   ...
 }
-
 </code></pre></div>
 <p>方法大括号和其它大括号（比如if/else/switch/while等等）应在语句的同一行开始，而在新的一行关闭。</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-if (user.isHappy) {
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">if (user.isHappy) {
 //Do something
 }
 else {
 //Do something else
 }
-
 </code></pre></div>
 <p>当有多个参数的时，如果参数太多超过一行，则应该将每个参数分行，并且冒号对齐</p>
 <div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
@@ -560,11 +538,9 @@ else {
                interval:(float)theInterval {
   ...
 }
-
 </code></pre></div>
 <p>当第一个参数短于其他参数的时候，分行时每行至少要缩进4个空格</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-             longKeyword:(NSRect)theRect
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">             longKeyword:(NSRect)theRect
        evenLongerKeyword:(float)theInterval
                    error:(NSError **)theError {
           ...
@@ -573,13 +549,10 @@ else {
 <h3>方法调用</h3>
 
 <p>方法调用应该和方法声明的时候一个格式,要么所有参数放在一行里:</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-[myObject doFooWith:arg1 name:arg2 error:arg3];
-
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">[myObject doFooWith:arg1 name:arg2 error:arg3];
 </code></pre></div>
 <p>要么每一行一个参数:</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-如:
+<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">如:
 [myObject doFooWith:arg1
                name:arg2
               error:arg3];
@@ -600,7 +573,6 @@ else {
  @private
 }
 @end
-
 </code></pre></div>
 <h3>协议</h3>
 
@@ -612,7 +584,6 @@ else {
 }
 -  (void)setDelegate:(id&lt;MyFancyDelegate&gt;)aDelegate;
 @end
-
 </code></pre></div>
 <h3>Blocks</h3>
 <div class="highlight"><pre><code class="objc language-objc" data-lang="objc">在一行的情况
@@ -658,7 +629,6 @@ void (^largeBlock)(void) = ^{
     // ...
 };
 [_operationQueue addOperationWithBlock:largeBlock];
-
 </code></pre></div>
       <footer class="entry-meta">
         <span class="entry-tags"><a href="http://morisunshine.com/tags/#iOS" title="Pages tagged iOS" class="tag">iOS</a></span>

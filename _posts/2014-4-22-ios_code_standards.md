@@ -57,7 +57,6 @@ tags: [iOS]
  *              success:返回的NSDictionary中包含服务器的response信息，包括图片id（id）,url(url),宽度(width),高度(height)。使用括号中的名称从NSDictionary中获取。
  *              failed:返回error
  **/
- 
 ```
 
 ##命名
@@ -72,23 +71,22 @@ tags: [iOS]
 
 ```objc
   - (id)getDelegate;	//avoid
-	- (id)delegate;   	//good
+  - (id)delegate;   	//good
 ```
 
 ###变量的命名
 
 成员变量应该已小写字母开头，并以下划线作为后缀，如usernameTextField_,使用KVO/KVC绑定成员变量时，可以以一个下划线为前缀。
 
-*公共变量命名:*
-
+>公共变量命名:
 小写字母开头。如:imageView;
 
-*实例变量命名:*
+>实例变量命名:
 
-*私有变量:*
+>私有变量:
 应该以下划线开头。如:_addButton
 
-*常量命名:*
+>常量命名:
 以小写k开头，混合大小写。如:kInvalidHandle, kWritePerm
 
 
@@ -97,9 +95,7 @@ tags: [iOS]
 应该已“模块+功能+作用+样式”的形式
 
 ```objc
-
 如:message_private_at_button_bg_normal.png
-
 ```
 
 ###类的命名
@@ -107,15 +103,11 @@ tags: [iOS]
 类名、分类名、协议名应该以大写字母开始，并混合小写字母来分隔单词，应该已“模块+功能+子功能”的方式：
 
 ```objc
-
 如:MessagePrivateAtsomebody
-
 ```
 应用级的类，应避免不用前缀，跨应用级的类，应使用前缀，
 ```objc
-
 如:GTMSendMessage
-
 ```
 
 ##分类名
@@ -184,7 +176,6 @@ self.imgView.backgroundColor = [UIColor black];
 而尽量避免:
 
 _imgView.backgroundColor = [UIColor black];
-
 ```
 
 ###Immutable实例初始化
@@ -201,7 +192,6 @@ NSArray *names = [NSArray arrayWithObjects:@"Brian", @"Matt", @"Chris", @"Alex",
 NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @"Kate", @"iPhone", @"Kamal", @"iPad", @"Bill", @"Mobile Web", nil];
 NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
 NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];
-
 ```
 ###类型
 
@@ -241,7 +231,6 @@ static const CGFloat NYTImageThumbnailHeight = 50.0;
 不恰当:
 //#define CompanyName @"The New York Times Company"
 //#define thumbnailHeight 2
-
 ```
 
 ###枚举类型
@@ -254,7 +243,6 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
     NYTAdRequestStateInactive,
     NYTAdRequestStateLoading
 };
-
 ```
 
 ###布尔变量
@@ -277,7 +265,6 @@ if (someObject == nil) {
 if ([someObject boolValue] == NO)
 
 if (isAwesome == YES) // Never do this.
-
 ```
 
 如果一个BOOL属性使用形容词来表达，属性将忽略’is’前缀，但会强调惯用名称。
@@ -302,7 +289,6 @@ if (isAwesome == YES) // Never do this.
  
    return sharedInstance;
 }
-
 ```
 
 ###数字
@@ -346,7 +332,6 @@ if (isAwesome == YES) // Never do this.
 #pragma mark NSObject
 
 - (NSString *)description {}
-
 ```
 
 ###判断语句
@@ -362,7 +347,6 @@ if (button.enabled) {
 } else {
     // More stuf
 }
-
 ```
 
 Switch 也是一样
@@ -391,7 +375,6 @@ switch (something.state) {
         break;
     }
 }
-
 ```
 
 ###Import
@@ -424,7 +407,6 @@ Store.m:
 //doSomething
 
 @end
-
 ```
 
 ###私有方法
@@ -442,15 +424,12 @@ git commit 格式
 1. **添加了新功能** ``` feat(大模块+子模块):#例如实现了某个具体功能 ```
 2. **修改了某些功能**  ``` change(大模块+子模块):#例如修改了某个具体的功能 ```
 3. **修复了某个Bug**  ``` fix_bug(大模块+子模块):#修复了什么的bug，最好写上*原因*和*解决方法*。```
-4. **比较大的改动**  
-
-```objc
-
+4. **比较大的改动**
+```
    broken_change():
    before: 
    
    after:
-   
 ```
    
 5. **修改了文档** ```docs():```
@@ -472,19 +451,16 @@ git commit 格式
 - (void)doSomethingWithString:(NSString *)theString {
   ...
 }
-
 ```
 方法大括号和其它大括号（比如if/else/switch/while等等）应在语句的同一行开始，而在新的一行关闭。
 
 ```objc
-
 if (user.isHappy) {
 //Do something
 }
 else {
 //Do something else
 }
-
 ```
 
 当有多个参数的时，如果参数太多超过一行，则应该将每个参数分行，并且冒号对齐
@@ -496,13 +472,11 @@ else {
                interval:(float)theInterval {
   ...
 }
-
 ```
 
 当第一个参数短于其他参数的时候，分行时每行至少要缩进4个空格
 
 ```objc
-
              longKeyword:(NSRect)theRect
        evenLongerKeyword:(float)theInterval
                    error:(NSError **)theError {
@@ -514,14 +488,11 @@ else {
 方法调用应该和方法声明的时候一个格式,要么所有参数放在一行里:
 
 ```objc
-
 [myObject doFooWith:arg1 name:arg2 error:arg3];
-
 ```
 要么每一行一个参数:
 
 ```objc
-
 如:
 [myObject doFooWith:arg1
                name:arg2
@@ -549,7 +520,6 @@ else {
  @private
 }
 @end
-
 ```
 
 ###协议
@@ -564,7 +534,6 @@ else {
 }
 -  (void)setDelegate:(id<MyFancyDelegate>)aDelegate;
 @end
-
 ```
 
 ###Blocks
@@ -616,7 +585,6 @@ void (^largeBlock)(void) = ^{
     // ...
 };
 [_operationQueue addOperationWithBlock:largeBlock];
-
 ```
 
 

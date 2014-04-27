@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://morisunshine.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://morisunshine.com" />
-<updated>2014-04-27T14:06:15+08:00</updated>
+<updated>2014-04-27T14:15:20+08:00</updated>
 <id>http://morisunshine.com/</id>
 <author>
   <name>Sheldon</name>
@@ -311,7 +311,6 @@ static char * XXObject;//将“XXObject”重新定义为不同的符号
  *              success:返回的NSDictionary中包含服务器的response信息，包括图片id（id）,url(url),宽度(width),高度(height)。使用括号中的名称从NSDictionary中获取。
  *              failed:返回error
  **/
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h2&gt;命名&lt;/h2&gt;
 
@@ -323,49 +322,44 @@ static char * XXObject;//将“XXObject”重新定义为不同的符号
 
 &lt;p&gt;函数名应该已小写字母开头，并混合大小写，其中的每个参数都应该是小写字母开头，读起来应该像句子一样，访问器方法应该与他们getting的成员变量的名字一样，但不应该以get作为前缀，如：&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;  - (id)getDelegate;    //avoid
-    - (id)delegate;     //good
+  - (id)delegate;       //good
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;变量的命名&lt;/h3&gt;
 
 &lt;p&gt;成员变量应该已小写字母开头，并以下划线作为后缀，如usernameTextField_,使用KVO/KVC绑定成员变量时，可以以一个下划线为前缀。&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;公共变量命名:&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;公共变量命名:
+小写字母开头。如:imageView;&lt;/p&gt;
 
-&lt;p&gt;小写字母开头。如:imageView;&lt;/p&gt;
+&lt;p&gt;实例变量命名:&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;实例变量命名:&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;私有变量:&lt;/em&gt;
+&lt;p&gt;私有变量:
 应该以下划线开头。如:_addButton&lt;/p&gt;
 
-&lt;p&gt;&lt;em&gt;常量命名:&lt;/em&gt;
+&lt;p&gt;常量命名:
 以小写k开头，混合大小写。如:kInvalidHandle, kWritePerm&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;h3&gt;图片的命名&lt;/h3&gt;
 
 &lt;p&gt;应该已“模块+功能+作用+样式”的形式&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
-如:message_private_at_button_bg_normal.png
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;如:message_private_at_button_bg_normal.png
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;类的命名&lt;/h3&gt;
 
 &lt;p&gt;类名、分类名、协议名应该以大写字母开始，并混合小写字母来分隔单词，应该已“模块+功能+子功能”的方式：&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
-如:MessagePrivateAtsomebody
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;如:MessagePrivateAtsomebody
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;应用级的类，应避免不用前缀，跨应用级的类，应使用前缀，
-```objc&lt;/p&gt;
+&lt;code&gt;objc
+如:GTMSendMessage
+&lt;/code&gt;&lt;/p&gt;
 
-&lt;p&gt;如:GTMSendMessage&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;text language-text&quot; data-lang=&quot;text&quot;&gt;
-##分类名
+&lt;h2&gt;分类名&lt;/h2&gt;
 
-类别名应该有两三个字母作为前缀已表示为某项目的一部分，并且包含所扩展的类的名字，如我们要创建一个NSString的类别以解析，我们将类别放在一个名为GTMNSString+Parsing.h的文件中。类别名本身为GTMStringParsingAdditions(类别名与文件名不同是为了让文件可以包含更多相同功能的扩展)类名与包含类别名之间应一个空格分隔。
-
-```objc
-如:
+&lt;p&gt;类别名应该有两三个字母作为前缀已表示为某项目的一部分，并且包含所扩展的类的名字，如我们要创建一个NSString的类别以解析，我们将类别放在一个名为GTMNSString+Parsing.h的文件中。类别名本身为GTMStringParsingAdditions(类别名与文件名不同是为了让文件可以包含更多相同功能的扩展)类名与包含类别名之间应一个空格分隔。&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;如:
 //NSString 为要扩展的类名, GTMStringParsingAdditions为类别名
 @interface NSString (GTMStringParsingAdditions)
         - (NSString *)gtm_foobarString;
@@ -418,7 +412,6 @@ self.imgView.backgroundColor = [UIColor black];
 而尽量避免:
 
 _imgView.backgroundColor = [UIColor black];
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;Immutable实例初始化&lt;/h3&gt;
 
@@ -433,7 +426,6 @@ NSArray *names = [NSArray arrayWithObjects:@&amp;quot;Brian&amp;quot;, @&amp;quo
 NSDictionary *productManagers = [NSDictionary dictionaryWithObjectsAndKeys: @&amp;quot;Kate&amp;quot;, @&amp;quot;iPhone&amp;quot;, @&amp;quot;Kamal&amp;quot;, @&amp;quot;iPad&amp;quot;, @&amp;quot;Bill&amp;quot;, @&amp;quot;Mobile Web&amp;quot;, nil];
 NSNumber *shouldUseLiterals = [NSNumber numberWithBool:YES];
 NSNumber *ZIPCode = [NSNumber numberWithInteger:10018];
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;类型&lt;/h3&gt;
 
@@ -468,7 +460,6 @@ static const CGFloat NYTImageThumbnailHeight = 50.0;
 不恰当:
 //#define CompanyName @&amp;quot;The New York Times Company&amp;quot;
 //#define thumbnailHeight 2
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;枚举类型&lt;/h3&gt;
 
@@ -478,7 +469,6 @@ typedef NS_ENUM(NSInteger, NYTAdRequestState) {
     NYTAdRequestStateInactive,
     NYTAdRequestStateLoading
 };
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;布尔变量&lt;/h3&gt;
 
@@ -498,7 +488,6 @@ if (someObject == nil) {
 if ([someObject boolValue] == NO)
 
 if (isAwesome == YES) // Never do this.
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;如果一个BOOL属性使用形容词来表达，属性将忽略’is’前缀，但会强调惯用名称。
 例如：&lt;/p&gt;
@@ -518,7 +507,6 @@ if (isAwesome == YES) // Never do this.
 
    return sharedInstance;
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;数字&lt;/h3&gt;
 
@@ -559,7 +547,6 @@ if (isAwesome == YES) // Never do this.
 #pragma mark NSObject
 
 - (NSString *)description {}
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;判断语句&lt;/h3&gt;
 
@@ -572,7 +559,6 @@ if (button.enabled) {
 } else {
     // More stuf
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Switch 也是一样&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;如:
@@ -598,7 +584,6 @@ switch (something.state) {
         break;
     }
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;Import&lt;/h3&gt;
 
@@ -628,7 +613,6 @@ Store.m:
 //doSomething
 
 @end
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;私有方法&lt;/h3&gt;
 
@@ -644,21 +628,18 @@ Store.m:
 &lt;li&gt;&lt;strong&gt;添加了新功能&lt;/strong&gt; &lt;code&gt;feat(大模块+子模块):#例如实现了某个具体功能&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;修改了某些功能&lt;/strong&gt;  &lt;code&gt;change(大模块+子模块):#例如修改了某个具体的功能&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;修复了某个Bug&lt;/strong&gt;  &lt;code&gt;fix_bug(大模块+子模块):#修复了什么的bug，最好写上*原因*和*解决方法*。&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;比较大的改动&lt;/strong&gt;&lt;br&gt;&lt;/li&gt;
-&lt;/ol&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
-   broken_change():
-   before: 
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;比较大的改动&lt;/strong&gt;
+```
+broken_change():
+before: &lt;/p&gt;
 
-   after:
-
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;strong&gt;修改了文档&lt;/strong&gt; &lt;code&gt;docs():&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;修改了格式&lt;/strong&gt; &lt;code&gt;style():&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;添加了一些测试&lt;/strong&gt; &lt;code&gt;test(大模块+子模块):&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;一些杂项，比如像解决工程编译错误等问题之后的修改&lt;/strong&gt; &lt;code&gt;chore():&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;对又有代码的重构&lt;/strong&gt; &lt;code&gt;refactor(大模块+子模块):&lt;/code&gt;&lt;/li&gt;
+&lt;p&gt;after:
+```&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;修改了文档&lt;/strong&gt; &lt;code&gt;docs():&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;修改了格式&lt;/strong&gt; &lt;code&gt;style():&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;添加了一些测试&lt;/strong&gt; &lt;code&gt;test(大模块+子模块):&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;一些杂项，比如像解决工程编译错误等问题之后的修改&lt;/strong&gt; &lt;code&gt;chore():&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;strong&gt;对又有代码的重构&lt;/strong&gt; &lt;code&gt;refactor(大模块+子模块):&lt;/code&gt;&lt;/p&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2&gt;格式&lt;/h2&gt;
@@ -672,17 +653,14 @@ Store.m:
 - (void)doSomethingWithString:(NSString *)theString {
   ...
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;方法大括号和其它大括号（比如if/else/switch/while等等）应在语句的同一行开始，而在新的一行关闭。&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
-if (user.isHappy) {
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;if (user.isHappy) {
 //Do something
 }
 else {
 //Do something else
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;当有多个参数的时，如果参数太多超过一行，则应该将每个参数分行，并且冒号对齐&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;如:
@@ -691,11 +669,9 @@ else {
                interval:(float)theInterval {
   ...
 }
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;当第一个参数短于其他参数的时候，分行时每行至少要缩进4个空格&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
-             longKeyword:(NSRect)theRect
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;             longKeyword:(NSRect)theRect
        evenLongerKeyword:(float)theInterval
                    error:(NSError **)theError {
           ...
@@ -704,13 +680,10 @@ else {
 &lt;h3&gt;方法调用&lt;/h3&gt;
 
 &lt;p&gt;方法调用应该和方法声明的时候一个格式,要么所有参数放在一行里:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
-[myObject doFooWith:arg1 name:arg2 error:arg3];
-
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;[myObject doFooWith:arg1 name:arg2 error:arg3];
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;要么每一行一个参数:&lt;/p&gt;
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;
-如:
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;如:
 [myObject doFooWith:arg1
                name:arg2
               error:arg3];
@@ -731,7 +704,6 @@ else {
  @private
 }
 @end
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;协议&lt;/h3&gt;
 
@@ -743,7 +715,6 @@ else {
 }
 -  (void)setDelegate:(id&amp;lt;MyFancyDelegate&amp;gt;)aDelegate;
 @end
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;h3&gt;Blocks&lt;/h3&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;objc language-objc&quot; data-lang=&quot;objc&quot;&gt;在一行的情况
@@ -789,7 +760,6 @@ void (^largeBlock)(void) = ^{
     // ...
 };
 [_operationQueue addOperationWithBlock:largeBlock];
-
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/ios_code_standards/&quot;&gt;iOS编码规范参考&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 22, 2014.&lt;/p&gt;</content>
 </entry>
