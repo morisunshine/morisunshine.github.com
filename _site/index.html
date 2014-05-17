@@ -143,6 +143,357 @@
   
 <article class="hentry">
   <header>
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-05-17T00:00:00+08:00"><a href="http://morisunshine.com/ios/interactive_animations/">May 17, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/ios/interactive_animations/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="http://morisunshine.com/ios/interactive_animations/" rel="bookmark" title="交互式动画" itemprop="url">交互式动画</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    <p><a href="http://www.objc.io/issue-12/interactive-animations.html">原文</a>作者<a href="https://twitter.com/chriseidhof">Chris Eidhof</a>和<a href="https://twitter.com/floriankugler">Florian Kugler</a>。转载请注明出处！</p>
+
+<p>在2007年，斯蒂芬乔布斯在第一次介绍iPhone的时候，iPhone的触摸屏交互简直就像是一种魔法。最好的例子就是在他<a href="https://www.youtube.com/watch?v=t4OEsI0Sc_s&amp;t=16m9s">第一次滑动TableView的展示上</a>。你可以感受到当时观众的反应是多么惊讶，但是对于现在的我们来说早已习以为常。在展示的后面一部分，他特别指出当他给别人看了这个滑动例子，别人说的一句话: <a href="https://www.youtube.com/watch?v=t4OEsI0Sc_s&amp;t=16m9s">“当这个界面滑动的时候我就已经被征服了”</a>.</p>
+
+<p>是什么样的滑动能让人有‘哇哦’的效果呢？</p>
+
+<p>滑动是最完美地展示了通过触摸屏直接操作的例子。滚动视图遵从于你的手指，当你的手指离开屏幕的时它，视图会自然地继续滑动直到该停止的时候停止。它用自然的方式减速，甚至在快到界限的时候也能表现出细腻的弹力效果。</p>
+
+<h2>动画的状态</h2>
+
+<p>在iOS中的大部分动画仍然没有按照最初iPhone指定的滑动标准实现。这里有很多动画一旦他们运行就不能交互（比如说解锁动画，主界面中打开文件夹和关闭文件夹的动画，和导航栏切换的动画，还有很多）。</p>
+
+<p>然而现在有一些apps给我一种始终在控制动画的体验，我们可以直接操作那些我在用的动画。当我们将这些应用和其他的应用相比较之后，我们就能感觉到明显的区别。这些应用中最优秀的有最初的Twitter iPad app， 和现在的facebook paper。但目前，使用直接操作为主并且可以中断动画的应用仍然很少。这就给我们做出更好的应用提供了机会，让我们的应用有更不同的，更高质量的体验。</p>
+
+<h2>真实交互式动画的挑战</h2>
+
+<p>当我们用UIView 或者 CAAnimation 来实现交互式动画时会有两个大问题: 这些动画会将屏幕上的试图和layer上的实际动画内容分离开来，并且他们直接操作这些实际动画内容。</p>
+
+<h3>分离模型和表示</h3>
+
+<p>Core Animation 是通过分离layer的模型和屏幕上的界面(表示层)的方式来实现，这就导致我们很难去创建一个可以在任何时候能交互的动画，因为在动画时，模型和界面已经不能匹配了。这时，我们不得不通过手动的方式来同步这两个的状态，来达到改变动画的效果:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">view.layer.center = view.layer.presentationLayer.center;
+[view.layer removeAnimationForKey:@&quot;animation&quot;];
+// 添加新动画
+</code></pre></div>
+<h3>直接控制 vs 间接控制</h3>
+
+<p>更大的问题是<code>CAAnimation</code> 是直接在实际动画层上进行操作的。这意味着什么呢？比如我们想指定一个layer从坐标为（100，100）的位置运动到（300，300）的位置，但是我突然在它运动到中间的时候，我们想它停下来并且让它回到它原来的位置，如果用CAAnimation来实现的话这个过程就非常复杂了。如果你只是简单地删除当前的动画然后再添加一个新的，那么这个layer的速率就会不连续。</p>
+
+<p><img src="http://www.objc.io/images/issue-12/abrupt.png" alt="image"></p>
+
+<p>我们想要的只不过是一个漂亮的，流畅地减速和加速的动画。</p>
+
+<p><img src="http://www.objc.io/images/issue-12/smooth.png" alt="image"></p>
+
+<p>只有通过间接操作动画才能达到上面的效果，比如通过模拟力在界面上的表现。新的动画需要用layer的当前速率矢量作为参数传入来达到流畅的效果。</p>
+
+<p>看一下UIView 中关于spring animations 的动画API （<code>animateWithDuration:delay:usingSpringWithDamping:initialSpringVelocity:options:animations:completion:</code>），你会注意到这个速率是个CGFloat。所以当我们给一个动画运动的方向上加一个初始的速率，这个动画根本不知道这个速率是在界面的哪个位置开始的，就好像我们现在沿着新动画方向的垂直方向移动。为了使这个方式成为可能，这个速率需要用矩形来表示。</p>
+
+<h2>解决方案</h2>
+
+<p>让我们看一下我们怎样来实现一个可交互并且可以中断的动画。为了实现这个效果，我们要做一个类似于控制中心板的东西:</p>
+
+<p><video controls="1" style="display:block;max-width:100%;height:auto;border:0;">
+  <source src="http://www.objc.io/images/issue-12/interactive-animation.mov">
+</video></p>
+
+<p>这个控制板有两个状态：打开和关闭。你可以通过点击来切换这两个状态，或者通过上下拖动来调调整它向上或向下。我要将这个控制板中每个东西都做到可以交互，甚至是在动画的过程中也可以，这是一个很大的挑战。比如，当你在这个控制板还没有切换到打开状态的动画过程中，你点击了它，那么它应该从现在这个点的位置马上回到关闭状态的位置。在现在很多的应用中，大部分都是用默认的动画API，你必须要等一个动画结束之后你才能做自己想做的事情。或者，你不需要等，但是你会看到一个不连续的速率曲线。我们要解决这个问题。</p>
+
+<h3>UIKit 力学</h3>
+
+<p>随着iOS7的发布，苹果向我们展示了一个叫UIKit 力学的动画框架(可以参见WWDC 2013 sessions <a href="https://developer.apple.com/videos/wwdc/2013/index.php?id=206">206</a> and <a href="https://developer.apple.com/videos/wwdc/2013/index.php?id=221">221</a>)。UIKit 力学是一个基于模拟物理引擎的框架，只要你添加指定的行为到动画对象上来实现<a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UIDynamicItem_Protocol/Reference/Reference.html">UIDynamicItem</a>协议就能实现很多动画。这个框架非常强大并且它能够将很多物体像附着行为和碰撞行为一样结合起来，让我们简单地看一下<a href="https://developer.apple.com/library/ios/samplecode/DynamicsCatalog/Introduction/Intro.html">动力学目录</a>，看看有什么可以给我们启发。</p>
+
+<p>因为UIKit动力学中的的动画是被间接驱动的，就像我在上面提到的，这为我们实现真实的交互式动画成为可能，它能在任何时候被中断并且可以展示流畅的动画。同时，UIKit动力学在物理层的抽象上能完全胜任我们一般情况下在用户界面中的所需要的所有动画。其实在大部分情况下，我们只会用到其中的一小部分功能。</p>
+
+<h4>定义行为</h4>
+
+<p>为了实现我们的控制板的行为，我们将使用UIkit动力学中的两个不同行为:<a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UIAttachmentBehavior_Class/Reference/Reference.html">UIAttachmentBehavior</a> 和 <a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UIDynamicItemBehavior_Class/Reference/Reference.html">UIDynamicItemBehavior</a>。这个连接行为用来实现弹簧行为，拖动我们的界面会朝向它的目标点运动。在另一方面，我们用动态item behvaior定义了界面的内置属性，像它的摩擦系数。</p>
+
+<p>我创建了一个我们自己的行为子类，并将这两个行为封装到我们的控制板上:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">@interface PaneBehavior : UIDynamicBehavior
+
+@property (nonatomic) CGPoint targetPoint;
+@property (nonatomic) CGPoint velocity;
+
+- (instancetype)initWithItem:(id &lt;UIDynamicItem&gt;)item;
+
+@end
+</code></pre></div>
+<p>我们通过一个dynamic item 来初始化这个行为，然后就可以设置他的目标点和我们想要的任何速率。再深入的话，我们创建了连接行为和dynamic item 行为，并且将这些行为添加到我们自定义的行为中:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)setup
+{
+    UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:self.item attachedToAnchor:CGPointZero];
+    attachmentBehavior.frequency = 3.5;
+    attachmentBehavior.damping = .4;
+    attachmentBehavior.length = 0;
+    [self addChildBehavior:attachmentBehavior];
+    self.attachmentBehavior = attachmentBehavior;
+
+    UIDynamicItemBehavior *itemBehavior = [[UIDynamicItemBehavior alloc] initWithItems:@[self.item]];
+    itemBehavior.density = 100;
+    itemBehavior.resistance = 10;
+    [self addChildBehavior:itemBehavior];
+    self.itemBehavior = itemBehavior;
+}
+</code></pre></div>
+<p>为了用<code>targetPoint</code> 和 <code>velocity</code>来影响这些dynamic item的behavior，我们需要重写他们的setters方法，并且修改在连接行为中对应的property和还有item behaviors。我们对目标点的Setter方法做了简单的修改:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)setTargetPoint:(CGPoint)targetPoint
+{
+    _targetPoint = targetPoint;
+    self.attachmentBehavior.anchorPoint = targetPoint;
+}
+</code></pre></div>
+<p>对于<code>velocity</code>这个property，我们需要多做一些工作，因为dynamic item behavior 只允许改变相对速度。这就意味如果我们要设置这个<code>velocity</code>为绝对值，首先我们就需要得到当前的速度，然后再加上速度差才能得到我们的目标速度。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)setVelocity:(CGPoint)velocity
+{
+    _velocity = velocity;
+    CGPoint currentVelocity = [self.itemBehavior linearVelocityForItem:self.item];
+    CGPoint velocityDelta = CGPointMake(velocity.x - currentVelocity.x, velocity.y - currentVelocity.y);
+    [self.itemBehavior addLinearVelocity:velocityDelta forItem:self.item];
+}
+</code></pre></div>
+<h3>将Behavior投入使用</h3>
+
+<p>我们的控制板有三个不同状态：在结束位置的静止状态，被用户拖动的状态和在没有用户控制时运动到结束位置的动画状态。</p>
+
+<p>我们还有很多其他的事要做才能将从直接操作状态（用户拖动这个滑动板）过渡到动画状态这个过程做的流畅。但用户停止拖动控制板时，它会发送一个消息到它的delegate。根据这个方法，我们可以知道这个板应该朝哪个方向运动，然后在结束位置上添加我们自定义的<code>PaneBehavior</code>，为了确保从拖动操作到动画状态这个过程能够非常流畅，我们需要给它一个初始速度，这一点非常重要。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)draggableView:(DraggableView *)view draggingEndedWithVelocity:(CGPoint)velocity
+{
+    PaneState targetState = velocity.y &gt;= 0 ? PaneStateClosed : PaneStateOpen;
+    [self animatePaneToState:targetState initialVelocity:velocity];
+}
+
+- (void)animatePaneToState:(PaneState)targetState initialVelocity:(CGPoint)velocity
+{
+    if (!self.paneBehavior) {
+        PaneBehavior *behavior = [[PaneBehavior alloc] initWithItem:self.pane];
+        self.paneBehavior = behavior;
+    }
+    self.paneBehavior.targetPoint = [self targetPointForState:targetState];
+    if (!CGPointEqualToPoint(velocity, CGPointZero)) {
+        self.paneBehavior.velocity = velocity;
+    }
+    [self.animator addBehavior:self.paneBehavior];
+    self.paneState = targetState;
+}
+</code></pre></div>
+<p>一旦用户用他的手指再次触动控制板时，我必须要将所有的dynamic behavior从animator删除，这样控制板才能响应拖动手势:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)draggableViewBeganDragging:(DraggableView *)view
+{
+    [self.animator removeAllBehaviors];
+}
+</code></pre></div>
+<p>我不仅仅允许控制板可以被拖动，还要允许它可以被点击，让它可以从一个位置跳转到另一个位置以达到开关的效果。一旦点击事件发生，我们就会立即调整这个滑动板的目标位置。因为我们不能直接控制动画，但是通过弹力和摩擦力，我们的动画可以非常流畅地执行这个动作：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)didTap:(UITapGestureRecognizer *)tapRecognizer
+{
+    PaneState targetState = self.paneState == PaneStateOpen ? PaneStateClosed : PaneStateOpen;
+    [self animatePaneToState:targetState initialVelocity:CGPointZero];
+}
+</code></pre></div>
+<p>这样就实现了我们的大部分功能了。你可以在<a href="https://github.com/objcio/issue-12-interactive-animations-uidynamics">GitHub</a>上查看完整的例子。</p>
+
+<p>重申一点：UIKit 动力学可以通过在界面上模拟力来间接地驱动动画（我们的例子中，使用的是弹力和摩擦力）。这就使我们在流畅动画的过程中与界面交互成为可能。</p>
+
+<p>现在我们已经通过UIKit 动力学来实现了整个交互，让我们回顾一下这个场景。这个例子的动画中我们只用了UIkit动力学中一小部分功能，并且它的实现方式也非常简单。对于我们来说这是一个去理解它其中的过程的很好的例子，但是如果我们使用的环境中没有UIKit 动力学（比如说在Mac上）或者你的使用场景中不能很好的适用UIkit动力学呢。</p>
+
+<h2>自己操作动画</h2>
+
+<p>至于在你的应用中大部分时间会用的动画，比如简单的弹力动画，我们控制它真的不难。我们可以做一个练习，通过举起一个使用UIKit动力学的巨大黑色箱子，看它是如何实现简单的手动交互。这个想法非常简单：我们只要每秒修改这个黑色箱子的frame。每次修改箱子的frame时，我们都要基于当前的速率和当前作用在箱子上的力来调整箱子的frame。</p>
+
+<h3>物理原理</h3>
+
+<p>首先让我们看一下我们需要知道的基础物理知识，这样我们才能实现刚才使用UIKit动力学实现的弹力动画效果。特别指出的是，我们先实现一维的情况（在我们的例子中就是这样的情况）因为直接介绍第二维会很难消化。</p>
+
+<p>这个对象是用来计算控制板的新位置，而新位置是基于控制板的当前位置和从上一次动画开始到现在的时间来决定的。我们可以把它表示成这样：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">y = y0 + Δy
+</code></pre></div>
+<p>这个位置的偏移量可以通过速率和时间的函数来表达：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Δy = v ⋅ Δt
+</code></pre></div>
+<p>这个速率可以通过前一次的速率加上速率偏移量算出来，这个速率是由力在界面上的作用引起的。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">v = v0 + Δv
+</code></pre></div>
+<p>速率的变化可以通过作用在这个界面上的作用力计算出来：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Δv = (F ⋅ Δt) / m
+</code></pre></div>
+<p>现在，让我们看一下作用在这个界面上的力。为了得到弹力效果，我们必须要将摩擦力和弹力结合起来：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">F = F_spring + F_friction
+</code></pre></div>
+<p>弹力的计算方法我们可以从任何一本教科书中得到：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">F_spring = k ⋅ x
+</code></pre></div>
+<p>k是弹力系数，x是界面到目标结束位置的距离（也就是弹力的长度）。因此，我们可以把它写成这样：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">F_spring = k ⋅ abs(y_target - y0)
+</code></pre></div>
+<p>摩擦力和速率成正比：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">F_friction = μ ⋅ v
+</code></pre></div>
+<p>μ是一个简单的摩擦系数。你可以通过别的方式来计算摩擦力，但是这个方法能很好地做出我们想要的动画效果。</p>
+
+<p>将上面的表达式放在一起，我们就可以算出作用在界面上的力：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">F = k ⋅ abs(y_target - y0) + μ ⋅ v
+</code></pre></div>
+<p>为了实现起来更简单点些，我们将view的质量设为1，这样我们就能计算在一维上的变化：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">Δy = (v0 + (k ⋅ abs(y_target - y0) + μ ⋅ v) ⋅ Δt) ⋅ Δt
+</code></pre></div>
+<h3>实现动画</h3>
+
+<p>为了实现这个动画，我们首先需要创建我们自己的<code>Animator</code>类，它将扮演驱动动画的角色。这个类使用了<code>CADisplayLink</code>，<code>CADisplayLink</code>是指定在渲染时同步屏幕的刷新频率的定时器。换句话说，如果你的动画是流畅的，这个定时器就会每秒调用你的方法60次。接下来，我们需要实现<code>Animation</code>协议来和我们的<code>Animator</code>一起工作。这个协议只有一个方法，<code>animationTick:finished:</code>。屏幕每次被刷新时都会调用这个方法，并且在方法中会得到两个参数：第一个参数是前一个frame的持续时间，第二个参数是一个bool值，当我们设置这个bool值为YES时，我们就可以又回到我们刚才已经结束动画的<code>Animator</code>:</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">@protocol Animation &lt;NSObject&gt;
+- (void)animationTick:(CFTimeInterval)dt finished:(BOOL *)finished;
+@end
+</code></pre></div>
+<p>我们会在下面实现这个方法。首先，根据时间间隔我们来计算由弹力和摩擦力的相结合的力。然后根据速率来更新这个力，再调整界面的中心位置。最后，当这个界面开始减速并且即将到达结束位置时，我们就停止这个动画：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)animationTick:(CFTimeInterval)dt finished:(BOOL *)finished
+{
+    static const float frictionConstant = 20;
+    static const float springConstant = 300;
+    CGFloat time = (CGFloat) dt;
+
+    //摩擦力 = 速率 * 摩擦系数
+    CGPoint frictionForce = CGPointMultiply(self.velocity, frictionConstant);
+    //弹力 = (目标位置 - 当前位置) * 弹力系数
+    CGPoint springForce = CGPointMultiply(CGPointSubtract(self.targetPoint, self.view.center), springConstant);
+    //力 = 弹力 - 摩擦力
+    CGPoint force = CGPointSubtract(springForce, frictionForce);
+
+    //速率 = 当前速率 + 力 * 时间 / 质量
+    self.velocity = CGPointAdd(self.velocity, CGPointMultiply(force, time));
+    //位置 = 当前位置 + 速率 * 时间
+    self.view.center = CGPointAdd(self.view.center, CGPointMultiply(self.velocity, time));
+
+    CGFloat speed = CGPointLength(self.velocity);
+    CGFloat distanceToGoal = CGPointLength(CGPointSubtract(self.targetPoint, self.view.center));
+    if (speed &lt; 0.05 &amp;&amp; distanceToGoal &lt; 1) {
+        self.view.center = self.targetPoint;
+        *finished = YES;
+    }
+}
+</code></pre></div>
+<p>这就是这个方法里的全部内容。我们把这个方法封装到一个SpringAnimation对象中。除了这个方法之外，这个对象中还有一个初始化方法，他指定了界面中心的目标位置（在我们的例子中，就是打开状态时界面的中心位置，或者关闭状态时界面的中心位置）和初始的速率。</p>
+
+<h3>将动画添加到界面上</h3>
+
+<p>我们的界面类刚好和使用UIDynamic的例子一样：它有一个拖动手势，并且根据拖动手势来更新中心位置。它也有两个同样的delegate方法，这两个方法会实现动画的初始化。首先，一旦用户开始拖动控制板时，我们就取消所有动画：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)draggableViewBeganDragging:(DraggableView *)view
+{
+    [self cancelSpringAnimation];
+}
+</code></pre></div>
+<p>一旦停止拖动，我们就根据从拖动手势中得到的最后一个速率值来开始我们的动画。我们根据拖动状态计算出动画的结束位置：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)draggableView:(DraggableView *)view draggingEndedWithVelocity:(CGPoint)velocity
+{
+    PaneState targetState = velocity.y &gt;= 0 ? PaneStateClosed : PaneStateOpen;
+    self.paneState = targetState;
+    [self startAnimatingView:view initialVelocity:velocity];
+}
+
+- (void)startAnimatingView:(DraggableView *)view initialVelocity:(CGPoint)velocity
+{
+    [self cancelSpringAnimation];
+    self.springAnimation = [UINTSpringAnimation animationWithView:view target:self.targetPoint velocity:velocity];
+    [view.animator addAnimation:self.springAnimation];
+}
+</code></pre></div>
+<p>剩下来要做的就是添加点击动画了，这很简单。一旦我们触发这个状态，就开始动画。如果这里有个弹力动画，我们就用速率来启动它。如果这个弹力动画是nil，那么这个开始速率就是CGPointZero。想要知道为什么这个动画依然会有，就去看<code>animationTick:finished:</code>里的代码。当这个起始速率为0的时候，弹力就会使速率缓慢地增长，直到拖动到结束位置：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)didTap:(UITapGestureRecognizer *)tapRecognizer
+{
+    PaneState targetState = self.paneState == PaneStateOpen ? PaneStateClosed : PaneStateOpen;
+    self.paneState = targetState;
+    [self startAnimatingView:self.pane initialVelocity:self.springAnimation.velocity];
+}
+</code></pre></div>
+<h3>动画驱动者</h3>
+
+<p>最后，我们需要一个Animator，也就是动画的驱动者。Animator是displayLink的封装者。因为每个displayLink都链接一个指定的<code>UIScreen</code>。我们根据这个指定的UIScreen来初始化我们的Animator。我们初始化一个DisplayLink，并且将它加入到RunLoop。因为现在还没有动画，所以我们是停止状态开始的：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (instancetype)initWithScreen:(UIScreen *)screen
+{
+    self = [super init];
+    if (self) {
+        self.displayLink = [screen displayLinkWithTarget:self selector:@selector(animationTick:)];
+        self.displayLink.paused = YES;
+        [self.displayLink addToRunLoop:[NSRunLoop mainRunLoop] forMode:NSRunLoopCommonModes];
+        self.animations = [NSMutableSet new];
+    }
+    return self;
+}
+</code></pre></div>
+<p>一旦我们添加了这个动画，我们就肯定这个DisplayLink已经不再是停止状态：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)addAnimation:(id&lt;Animation&gt;)animation
+{
+    [self.animations addObject:animation];
+    if (self.animations.count == 1) {
+        self.displayLink.paused = NO;
+    }
+}
+</code></pre></div>
+<p>我们创建了这个DisplayLink来调用<code>animationTick:</code>方法，在每个Tick中，我们都遍历它的动画数组，并且给这些动画数组中的每个动画发送一个消息。如果这个动画数组中已经没有动画了，我们就停止这个DisplayLink。</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text"> - (void)animationTick:(CADisplayLink *)displayLink
+ {
+     CFTimeInterval dt = displayLink.duration;
+     for (id&lt;Animation&gt; a in [self.animations copy]) {
+         BOOL finished = NO;
+         [a animationTick:dt finished:&amp;finished];
+         if (finished) {
+             [self.animations removeObject:a];
+         }
+     }
+     if (self.animations.count == 0) {
+         self.displayLink.paused = YES;
+     }
+ }
+</code></pre></div>
+<p>完整的项目在<a href="https://github.com/objcio/issue-12-interactive-animations">GitHub</a>中。</p>
+
+<h3>权衡</h3>
+
+<p>我们是通过DisplayLink在系统的权衡下来驱动动画，记住这一点非常重要（就像我们刚才演示的例子，或者我们使用UIkit动力学来做的例子，或者像Facebook的Pop框架。就像<a href="https://twitter.com/andy_matuschak/status/464790108072206337">Andy Matuschar指出的</a>UIView和CAAnimation动画比其他任务更少受系统的影响，因为在你的应用中渲染处于更高的优先级。</p>
+
+<h2>回到Mac</h2>
+
+<p>现在Mac中还没有UIKit动力学。如果你想在Mac中创建一个真实的交互式动画，你必须自己去实现这些动画。我们已经向你展示了如何在iOS中实现这些动画，所以在OS X中实现相似的功能也是非常简单的。你可以查看在GitHub中的<a href="https://github.com/objcio/issue-12-interactive-animations-osx">完整项目</a>，如果你想要应用到OS X中，这里还有一些地方需要修改：</p>
+
+<ul>
+<li><p>第一个要修改的就是Animator。在Mac中没有<code>CADisplayLink</code>，但是取而代之的有<code>CVDisplayLink</code>，它是以C语言为基础的API。创建它需要做更多的工作，但也是很简单。</p></li>
+<li><p>iOS中的弹力动画是基于调整界面的中心位置来实现的。而OS X中的<code>NSView</code>类没有中心点这个property，所以我们用fram中的origin来代替。</p></li>
+<li><p>在Mac中是没有手势识别，所以我要在我们自定义的View子类中实现<code>mouseDown:</code>, <code>mouseUp:</code>, 和 <code>mouseDragged</code>方法。</p></li>
+</ul>
+
+<p>上面就是我们需要在Mac中使用我们的动画效果在代码所需要做的修改。对于像这样的简单界面，它能很好的胜任。但对于更复杂的动画，你可能就不会想通过改变界面的frame来实现了，我们可以用transform来代替，浏览Jonathan Willing写的关于<a href="http://jwilling.com/osx-animations">OS X动画</a>的以前博客你会获益良多。</p>
+
+<h3>Facebook的POP框架</h3>
+
+<p>上个星期围绕着Facebook的<a href="https://github.com/facebook/pop">POP框架</a>讨论络绎不绝。POP框架是Paper应用背后支持的动画引擎。它的操作非常像我们上面讲的驱动动画的例子，但是它封装到一个非常灵巧的程序包中。</p>
+
+<p>让我们动手用Pop来驱动我们的动画吧。因为我们自己的类中已经封装了弹力动画，但这些改变和POP相比真的微不足道了。接下来我们所要做的就是用一个POP动画来代替我们刚才做的动画，将下面这段代码加入到界面类中：</p>
+<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)animatePaneWithInitialVelocity:(CGPoint)initialVelocity
+{
+    [self.pane pop_removeAllAnimations];
+    POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];
+    animation.velocity = [NSValue valueWithCGPoint:initialVelocity];
+    animation.toValue = [NSValue valueWithCGPoint:self.targetPoint];
+    animation.springSpeed = 15;
+    animation.springBounciness = 6;
+    [self.pane pop_addAnimation:animation forKey:@&quot;animation&quot;];
+    self.animation = animation;
+}
+</code></pre></div>
+<p>你可以在<a href="https://github.com/objcio/issue-12-interactive-animations-pop">GitHub</a>中找到使用POP框架的完整例子。</p>
+
+<p>使用它非常简单，并且通过它我们可以实现很多更复杂的动画。但是它真正强大的地方在于它能够实现真正的可交互和可中断的动画，就像我们上面提到的那样，因为它支持以速率作为参数来满足需求。如果你打算从一开始到被中断这过程中的任何时候都能交互，像POP这样的框架就能帮你实现这些动画，并且它能始终保持动画的流畅性。</p>
+
+<p>如果你不满足于用<code>POPSpringAnimation</code>和<code>POPDecayAnimation</code>来处理的话，POP来还提供了<code>POPCustomAnimation</code>类，它在每次动画Tick时会调用一个回调block来实现用封装的DisplayLink驱动动画的转变。</p>
+
+<h2>展望未来</h2>
+
+<p>随着iOS7中从对拟物化的关注转变到如今对交互行为的关注，真实交互式动画通向未来的大道变得越来越明显。我们还有很多方法可以将最初iPhone中滑动行为的魔力延伸到交互的每个方面。为了让这些魔力成为现实，我们就不能在开发过程中才想到这些动画，而是应该在设计时就要考虑这些交互，这一点非常重要。</p>
+
+<p>非常感谢<a href="https://twitter.com/lorenb">Loren Brichter</a>给这篇文章提出的一些意见。</p>
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
     <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-04-24T00:00:00+08:00"><a href="http://morisunshine.com/ios/namespacing/">April 24, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/ios/namespacing/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
     
       <h1 class="entry-title"><a href="http://morisunshine.com/ios/namespacing/" rel="bookmark" title="Objective-C的命名空间" itemprop="url">Objective-C的命名空间</a></h1>
@@ -936,194 +1287,6 @@ void (^largeBlock)(void) = ^{
 <p>对于我来说GTD是一个方法，它开始时会给你一些条条框框，你要这样，你要那样，有点让我手足无措，内心无法自由，但当很多人在用了很长时间之后，都可以游刃有余。</p>
 
 <p>所以给自己一点自由，别让自己活在自己营造的压力下，偶尔的拖延症都是可以理解的，我们都不是完美的人，所以当我们没有达到我们想要的程度时，不用着急，给自己一点时间，慢慢积累，努力练习。我一直相信人生是一场慢热积累的过程。所以现在没有成为你想要的样子，也许是你的积分不够吧。</p>
-
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  <header>
-    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-03-13T00:00:00+08:00"><a href="http://morisunshine.com/ios/objc_is_not_what_you_think_it_is/">March 13, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/ios/objc_is_not_what_you_think_it_is/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
-    
-      <h1 class="entry-title"><a href="http://morisunshine.com/ios/objc_is_not_what_you_think_it_is/" rel="bookmark" title="Objective-C 不是你想的那样" itemprop="url">Objective-C 不是你想的那样</a></h1>
-    
-  </header>
-  <div class="entry-content">
-    <p>本文由<a href="http://morisunshine.com/">morisunshine</a>译自<a href="http://news.rapgenius.com/Soroush-khanlou-objective-c-isnt-what-you-think-it-is-if-you-think-like-a-rubyist-annotated">&quot;Objective-C isn&#39;t what you think it is&quot;</a>。转载请注明出处！</p>
-
-<hr>
-
-<p>&nbsp;<a href="#message_in_a_bottle"><strong>消息的传递</strong></a><br>
-&nbsp;<a href="#getting_metaer_and_metaer"><strong>变得越来越动态</strong></a><br>
-&nbsp;<a href="#introspection"><strong>内省</strong></a><br>
-&nbsp;<a href="#cashing_in"><strong>现学现用</strong></a><br>
-&nbsp;<a href="#what_is_comepielur"><strong>什么是编译器？</strong></a>  </p>
-
-<p>Ruby 和 Objective-C 这两种语言看上去好像天南地北：一种是动态语言，另一种则是静态语言；一种是解释型语言，另一种是编译型语言；一种有简洁的语法，另一种则是有点冗长的语法。从优雅的角度来看，Ruby似乎更能给我们一种自由的编程体验，所以很多人都放弃了Objective-C。</p>
-
-<p>但这是一个不幸的笑话。Objective-C其实并不像别人认为的那样是件紧身衣，它和Ruby一样都受Smalltalk影响，它拥有很多Ruby开发者都喜爱的语言功能–动态方法查找、鸭子类型、开放的类和通常情况下高度可变的runtime等这些功能在Objective-C中同样存在，即使那些不出名的技术也是一样。Objective-C的这些功能都要归功于它的IDE和编译器，但也是因为它们才使你不能自由地编写代码</p>
-
-<p>但是等一下，怎么能说Objective-C是动态语言呢？难道它不是建立在C语言的基础上？</p>
-
-<p>你可以在Objective-C代码中包含任何C或C++的代码，但这不意味着Objective-C仅限于C或C++代码。Objective-C中所有有意思的类操作和对象内省都是来自于一个叫Objective-C Runtime的东西。这个Objective-C Runtime可以和Ruby解释器相媲美。它包含了强大的元编程里所需要的所有重要特性。</p>
-
-<p>其实C语言和Ruby一样是支持这些特性的，用<code>property_getAttributes</code>或<code>method_getImplementation</code>方法就能将selector对应到具体实现(一个selector处理一个方法)，并判断这个对象能否对这个selector做出反应，再遍历子类树。在Objective-C的众多方法中，最重要的就是<code>objc_msgSend</code>方法，是它推动了应用中的每次消息发送。</p>
-
-<hr>
-
-<p><a id='message_in_a_bottle' name='message_in_a_bottle'> </a></p>
-
-<h2>消息的传递</h2>
-
-<p>Smalltalk才是实至名归的第一种面向对象语言，它用“从一个对象发送信息给另一个对象”的新概念取代了“调用函数”的旧概念，对后面的语言发展产生了深远的影响。</p>
-
-<p>你可以在Ruby中通过这样写来实现消息的发送：</p>
-<div class="highlight"><pre><code class="ruby language-ruby" data-lang="ruby">
-receiver.the_message argument
-
-</code></pre></div>
-<p>Objective-C的实现方式和Ruby的差不多：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-[receiver theMessage:argument];
-
-</code></pre></div>
-<p>这些消息实现了鸭子类型的方式，也就是说关注的不是这个对象的类型或类本身，而是这个对象能否对一个消息做出反应。</p>
-
-<p>发送消息真的是非常棒的事，但是只有当消息在传送数据时，它的价值才会被发挥地更大：</p>
-<div class="highlight"><pre><code class="ruby language-ruby" data-lang="ruby">
-receiver.send(:the_message, argument)
-
-</code></pre></div>
-<p>和</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-[receiver performSelector:@selector(theMessage:) 
-withObject:argument];
-
-</code></pre></div>
-<p>正如Ruby中方法需要symbol支持一样，Objective-C中selector也需要string来支持。（在Objective-C中没有symbol。）这样就可以让你通过动态的方式使用一个方法。你甚至可以通过<code>NSSelectorFromString</code>方法来使用string创建一个selector，并在一个对象里执行它。同样的，我们可以在Ruby中也可以创建一个string或symbol，并把传给<code>Object#send</code>方法。</p>
-
-<p>当然，无论是哪种语言，一旦你将一个消息发送给不能处理该消息的对象，那么默认情况下就会抛出一个异常，还会导致应用的崩溃。</p>
-
-<p>当你想在调用一个方法前判断一下这个对象是否能够执行这个方法，你可以用Ruby中的<code>respond_to？</code>方法来检查：</p>
-<div class="highlight"><pre><code class="ruby language-ruby" data-lang="ruby">
-if receiver.respond_to? :the_message
-  receiver.the_message argument
-end
-
-</code></pre></div>
-<p>Objective-C中也有差不多的方法：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-if ([receiver respondsToSelector:@selector(theMessage:)]) {
-    [receiver theMessage:someThing];
-}
-
-</code></pre></div>
-<hr>
-
-<p><a id='getting_metaer_and_metaer' name='getting_metaer_and_metaer'> </a></p>
-
-<h2>变得越来越动态</h2>
-
-<p>如果你想在一个不能修改的类（像系统类）中添加你想要的方法，那么Objective-C里的category一定不会让你失望 -- 很像Ruby中的“开放类”。</p>
-
-<p>举个例子，如果你想将Rails中的<code>to_sentence</code>方法添加到<code>NSArray</code>类中，我们只需要对<code>NSArray</code>这个类进行扩展就好了：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-@interface NSArray (ToSentence)
-
-- (NSString *)toSentence;
-
-@end
-
-
-@implementation NSArray (ToSentence)
-
-- (NSString *)toSentence {
-    if (self.count == 0) return @&amp;quot;&amp;quot;;
-    if (self.count == 1) return [self lastObject];
-    NSArray *allButLastObject = [self subarrayWithRange:NSMakeRange(0, self.count-1)];
-    NSString *result = [allButLastObject componentsJoinedByString:@&amp;quot;, &amp;quot;];
-    BOOL showComma = self.count &amp;gt; 2;
-    result = [result stringByAppendingFormat:@&amp;quot;%@ and &amp;quot;, showComma ? @&amp;quot;,&amp;quot; : @&amp;quot;&amp;quot;];
-    result = [result stringByAppendingString:[self lastObject]];
-    return result;
-}
-
-@end
-
-</code></pre></div>
-<p>Category是在编译的时候将方法添加到程序中 -- 让我们在runtime中动态捕捉它们怎么样？</p>
-
-<p>有些消息可以嵌套数据，就像Rails的dynamic finders。Ruby通过对<code>method_missing</code> 和 <code>respond_to</code>这两个方法的重写，先匹配模式，再将新方法的定义添加到这个对象中。</p>
-
-<p>Objective-C中的流程是差不多，但我们不是重写<code>doesNotRecognizeSelector:</code>方法（相当于Ruby中的<code>method_missing</code>方法），而是在<code>resolveClassMethod:</code>方法中捕捉Category添加的方法。假设我们有一个叫<code>+findWhere:equals:</code>的类方法，它可以得到property的名称和值，那么通过正则表达式就可以很容易实现找到property的名字，并通过block来注册这个selector。</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-+ (BOOL)resolveClassMethod:(SEL)sel {
-    NSString *selectorName = NSStringFromSelector(sel);
-
-    NSRegularExpression *regex = [NSRegularExpression regularExpressionWithPattern:@&amp;quot;^findWhere(\\w+)Equals:$&amp;quot; options:0 error:nil];
-    NSTextCheckingResult *result = [regex firstMatchInString:selectorName options:0 range:NSMakeRange(0, selectorName.length)];
-    if (result) {
-        NSRange propertyNameRange = [result rangeAtIndex:1];
-        NSString *propertyName = [selectorName substringWithRange:propertyNameRange];
-
-        IMP implementation  = imp_implementationWithBlock((id) ^(id self, id arg1) {
-            return [self findWhere:propertyName equals:arg1];
-        });
-
-        Class metaClass = object_getClass(self);
-
-        class_addMethod(metaClass, sel, implementation, &amp;quot;@@:@@&amp;quot;);
-        return YES;
-    }
-
-    return [super resolveClassMethod:sel];
-}
-
-</code></pre></div>
-<p>这个方法的优点就是我们不需要去重写<code>respondsToSelector:</code>，因为每个在类中注册过的selector都会去调用这个方法。现在让我们调用<code>[RGSong findWhereTitleEquals:@“Mercy”]</code>。当<code>findWhereTitleEquals:</code>第一次被调用的时候，runtime并不知道这个方法，所以它会调用<code>resolveClassMethod:</code>，这时我们就将<code>findWhereTitleEquals:</code>这个方法动态添加进去，当第二次调用<code>findWhereTitleEquals:</code>的时候，因为它已经被添加过了，所以就不会再调用<code>resolveClassMethod:</code>了。</p>
-
-<p>这里还有一些别的方法来实现捕捉动态方法。你可以通过重写<code>resolveClassMethod:</code> 和 <code>resolveInstanceMethod:</code>方法（就像上面的一样），可以将消息传递给不同的对象或全权接管这个“调用”，并在消息传递之前，做你想这个消息要完成的任何事。这些方法都会导致运行成本的增加，特别在<code>-forwardInvocation:</code>中会达到顶峰，在这种情况下我们必须要实例化一个对象才能去执行它们。<code>-forwardInvocation:</code>方法中默认调用<code>doesNotRecognizeSelector</code>方法，这导致了应用的频繁异常或崩溃。</p>
-
-<hr>
-
-<p><a id='introspection' name='introspection'> </a></p>
-
-<h2>内省</h2>
-
-<p>动态方法决议并不只是像Ruby和Objective-C这样的语言的技术支持。你也可以通过在runtime中用一种有意思的方式去操作这些对象。</p>
-
-<p>就像在Ruby中调用<code>MyClass#instance_methods</code>一样，你可以在Objective-C中调用<code>class_copyMethodList([MyClass class], &amp;amp;numberOfMethods)</code>来得到一个对象中方法的列表。你还可以通过<code>class_copyPropertyList</code>方法得到一个类中property的列表，它能在你的模型中实现不可思议的内省。比如在这个<code>Rap Genius</code>应用中，我们用这个功能来将JSON中的字典映射到本地对象上。</p>
-
-<p>（如果你非常喜欢Ruby中的mixin，那么Objective-C强大的动态支持也能能实现同样的效果。 Vladimir Mitrovic有一个叫<code>Objective-Mixin</code>的库，它能在runtime时将一个类中的实现复制到另一个类中。）</p>
-
-<hr>
-
-<p><a id='cashing_in' name='cashing_in'> </a></p>
-
-<h2>现学现用</h2>
-
-<p>所有的动态工具都可以用来创建像Core Data这样的东西，Core Data是一个有点像ActiveRecord的持久化对象图。在Core Data中，relationship是“有缺陷的”，也就是说他们只有在被别的对象访问时，才会被加载。每个property的accessor和mutator在runtime中都被重写（使用的就是我们上面提到的动态方法决议）。如果我们访问了一个还没有被加载的对象时，框架就会从持久性储存中动态加载这个对象并将它返回。它保持了内存的低利用率，避免了在任何一个物体被获取时，实体对象图表都要被加载到内存中这样情况的发生。</p>
-
-<p>当Core Data实体中的mutator被调用时，系统会将那个对象标记为需要清理，不需要去重写每个property的getter和setter。</p>
-
-<p>这就是元程序，羡慕吧！</p>
-
-<hr>
-
-<p><a id='what_is_comepielur' name='what_is_comepielur'> </a></p>
-
-<h2>什么是编译器？</h2>
-
-<p>很明显，Objective-C和Ruby并不是同一种语言，目前为止最大的不同就是Objective-C是一种编译型语言。</p>
-
-<p>这就是这些技术中最需要注意的地方。在编译时，编译器会先确定你应用使用的每个selector是不是都在应用中。如果你处理的这个对象有类型信息，那么编译器也会检查确保这个selector在头文件有声明过，这样做就是为了防止在对象中调用未声明的selector。有些方法可以绕过这些讨厌的限制，包括关闭相关的编译警告。这里就是实践元程序化的Objective-C最好的练习。</p>
-
-<p>你可以通过将selector的类型储存为不知道的类型或<code>id</code>来从对象中删除这些类型信息。因为编译器不认识这个类型，所以它只能假设你的程序可以接受发给它的任何消息（假设这些消息在应用中的其他地方被声明了，并且相关的编译标识已经打开）。</p>
-
-<p>善意的忠告：如果我们关掉编译器标识和把对象保存成<code>id</code>类型，那么将会非常危险的事！其实Objective-C中最好的东西之一就是编译器（是的，比元程序还要好）。类型检查保证了我们更快的写和重构代码，也是我们在编程时少犯错误。因为没有人会关掉那些警告，所以你很难去分享你那些<code>id</code>类型的代码。大部分Objective-C开发者还是更愿意使用更强的类型而不是元程序。</p>
-
-<p>事实证明Objective-C更受束缚--但因为编译器能提高更多的安全性和速度，所以我们只能选择这样并承担后果。</p>
-
-<p>事实再次告诉我们，这些语言都是差不多的，Ruby开发者应该享受Objective-C，即使那些中括号让我们望而却步。</p>
 
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
