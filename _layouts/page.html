@@ -23,6 +23,8 @@
 </div><!-- /.entry-header -->
 {% endif %}
 
+<style type="text/css">body {background-image:url(/images/witewall_3.png);}</style>
+
 <div id="main" role="main">
   <article class="entry">
     <header class="header-title">
@@ -44,9 +46,11 @@
         </div><!-- /.social-share -->{% endif %}
       </footer>
     </div><!-- /.entry-content -->
+    {% if site.disqus_shortname and page.comments %}
     <section id="disqus_thread">
       {% include comments.md %}
     </section>
+    <!-- /#disqus_thread -->{% endif %}
   </article>
 </div><!-- /#main -->
 
