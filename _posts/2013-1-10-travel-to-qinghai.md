@@ -5,6 +5,7 @@ description: "青海兰州之旅"
 category: 生活  
 tags: [旅行]
 comments: true 
+share: true
 
 ---
 

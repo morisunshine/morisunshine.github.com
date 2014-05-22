@@ -3,6 +3,8 @@ layout: post
 title: "iOS编码规范参考"
 category: iOS
 tags: [iOS]
+comments: true 
+share: true
 
 ---
 

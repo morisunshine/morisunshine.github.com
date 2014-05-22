@@ -5,6 +5,7 @@ description: ""
 category: 折腾  
 tags: [博客]
 comments: true 
+share: true
 
 ---
 

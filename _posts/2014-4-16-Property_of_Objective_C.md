@@ -4,6 +4,8 @@ title: "@property中attribute的整理"
 description: 
 category: iOS   
 tags: [iOS]     
+comments: true 
+share: true
 
 ---
 

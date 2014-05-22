@@ -4,7 +4,8 @@ title: "Objective-C 不是你想的那样"
 description: 如果你觉得你是Ruby开发者   
 category: iOS   
 tags: [iOS, ruby]   
-comments: true   
+comments: true 
+share: true
 
 ---
 

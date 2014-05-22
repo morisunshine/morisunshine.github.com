@@ -4,6 +4,8 @@ title: "Objective-C的命名空间"
 description: 
 category: iOS  
 tags: [iOS]    
+comments: true 
+share: true
 
 ---
 

@@ -5,6 +5,7 @@ description: ""
 category: iOS  
 tags: [iOS]  
 comments: true 
+share: true
 
 ---
 

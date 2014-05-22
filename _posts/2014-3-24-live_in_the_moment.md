@@ -4,7 +4,7 @@ title: "我的时间观---活在当下"
 category: 生活  
 tags: [感悟]  
 comments: true 
-
+share: true
 ---
 
 ![图片](/images/p2014_3_24.jpg)
