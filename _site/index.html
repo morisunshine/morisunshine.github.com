@@ -143,6 +143,108 @@
   
 <article class="hentry">
   <header>
+    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-06-02T00:00:00+08:00"><a href="http://morisunshine.com/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code/">June 02, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
+    
+      <h1 class="entry-title"><a href="http://morisunshine.com/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code/" rel="bookmark" title="《编写可读代码的艺术》读书笔记" itemprop="url">《编写可读代码的艺术》读书笔记</a></h1>
+    
+  </header>
+  <div class="entry-content">
+    <blockquote>
+<p>代码应当写的容易理解</p>
+</blockquote>
+
+<p>这就是为什么要读这本书的原因。代码也是美的，就像文章一样，好的文章能让我们获得很多理念或者想法，并且在阅读的过程中也是那么地愉快与自然。而在编程中，其实我们大部分时间做的事情并不是在写代码，而是在测试、修改还有阅读，如果连我们自己都不能去更好地理解我们当初为什么要写这段代码时，那我们又怎么能让以后去维护这段代码的人更好地去修改它，到时他心里一定在臭骂你，虽然你已经与这个项目没有关系，但是如果你想成为一个优秀的程序员，我想你一定不会希望在别人心里你是这样的人，当别人用你的产品时，别人看不到背后的代码，但这不意味可以随意写，看不到的事情才是最可怕的，如果我们未来想做一些改动，那么你要做的可能就是重构了，而我们现在大部分意义上的重构，最后也只是变成重写。后面我还会再看关于重构的书。</p>
+
+<p>我很确定，我还会再读这本书，因为让代码变得可读，并不是你看一遍书，你就能实现的，它需要我们的练习与实践，并且作者也提供了一个很好的方式来检验我们的代码的可读性，找一个朋友去读你这段代码，看他能否理解你这段代码的真实目的。更何况，要将代码写成艺术，这更是需要时间。</p>
+
+<blockquote>
+<p>把理解代码所需的时间最小化是一个更好的目标</p>
+</blockquote>
+
+<h2>把信息塞入名字</h2>
+
+<p>这句话的意思就是让阅读者（可能是你也可能是其他人）通过名字就可以获得大量的信息</p>
+
+<ul>
+<li>使用专业的单词</li>
+<li>避免空泛的名字</li>
+<li>使用具体的名字来细致地描述事物</li>
+<li>给变量名带上重要的细节</li>
+<li>为作用域大的名字采用更长的名字</li>
+<li>有目的地使用大小写、下划线等</li>
+</ul>
+
+<h2>审美</h2>
+
+<p>这有点像书或者杂志总的排版，让内容更适合阅读。</p>
+
+<ul>
+<li>使用一致的布局，让读者习惯你的代码风格</li>
+<li>让相似的代码看上去相似，比如类似功能的代码就可以同样的格式，这样就容易让人联想这个功能与那个功能应该是类似的。</li>
+<li>把相关的代码行分组，形成代码块。</li>
+<li>一致的风格比“正确”的风格更重要</li>
+</ul>
+
+<h2>注释</h2>
+
+<p>注释的目的是尽量帮助读者了解得和作者一样多。</p>
+
+<ul>
+<li>不要为那些从代码本身就能快速推断的事实写注释</li>
+<li>如果你不能一句话写清楚，那就多提供更多细节</li>
+<li>不要给不好的名字加注释，而是应该把名字改好。这个我之前没有意识到这点。所以还是好名字比一个好注释更重要。</li>
+<li>记录你的思想，比如就像git中的commit，可以写一些这段代码做的事情，你遇到的坑，这样也能你的思想过程记录下来，对后面的维护也有依据。但是别写的太多。</li>
+<li>尽量精确地描述函数的行为。</li>
+</ul>
+
+<h1>简化循环和逻辑</h1>
+
+<blockquote>
+<p>每当你看到一个复杂的逻辑，一个巨大的表达式或者一大推变量，这些都会增加你头脑中的思维包袱。它需要让你考虑得更复杂并且记住更多事情。</p>
+</blockquote>
+
+<h2>拆分超长的表达式</h2>
+
+<ul>
+<li>代码中的表达式越长，它就越难以理解。</li>
+<li>可以增加一个总结变量来代表一段表达式。</li>
+<li>很多表达式都是一样，那就将它提取出来，作为一个方法---Don&#39;t repeat yourself</li>
+</ul>
+
+<h2>变量与可读性</h2>
+
+<ul>
+<li>变量越多，就越难跟踪它们的动向。</li>
+<li>变量的作用域越大，就需要跟踪它的动向越久。</li>
+<li>变量改变得越频繁，就越难以跟踪它的当前值。</li>
+</ul>
+
+<h1>重新组织代码</h1>
+
+<h2>抽取不相关的子问题</h2>
+
+<ul>
+<li>通用代码很好，因为“它完全从项目的其他部分中解耦出”。像这样的代码容易开发，容易测试，并且容易理解。</li>
+<li>你永远不要安于使用不理想的接口。你总是可以创建你自己的包装函数来隐藏接口的重要细节，让它不再成为你的阻碍。</li>
+<li>应该把代码组织得一次做一件事。</li>
+<li>最可读的代码就是没有代码。</li>
+<li>通过重用库或者减少功能，你可以节省时间并且让你的代码库保持精简节约。</li>
+</ul>
+
+<h1>测试与可读性</h1>
+
+<ul>
+<li>测试应当具有可读性，以便其他程序员可以舒服地改变或者增加测试。</li>
+<li>对使用者隐去不重要的细节，以便更重要的细节会更突出。</li>
+<li>代码时想着测试这件事就能帮助把代码写得更好。</li>
+<li>解耦合最好的那一个往往就是最容易测试的那个。</li>
+</ul>
+
+  </div><!-- /.entry-content -->
+</article><!-- /.hentry -->
+
+<article class="hentry">
+  <header>
     <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-05-17T00:00:00+08:00"><a href="http://morisunshine.com/ios/interactive_animations/">May 17, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/ios/interactive_animations/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
     
       <h1 class="entry-title"><a href="http://morisunshine.com/ios/interactive_animations/" rel="bookmark" title="交互式动画" itemprop="url">交互式动画</a></h1>
@@ -1263,29 +1365,6 @@ void (^largeBlock)(void) = ^{
 <p><code>weak</code>:weak所指向的指针顾名思义，只有很多的引用关系，当指向的内存地址被释放掉，weak指针也就会被释放掉了，这些指针都将被赋值为nil，这样的好处能有效的防止野指针</p>
 
 <p><code>unsafe_unretained</code>:unsafe_unretained与weak有点类似，但是当所指向的指针被释放后，这些指针不会被赋值为nil，而成为野指针。</p>
-
-  </div><!-- /.entry-content -->
-</article><!-- /.hentry -->
-
-<article class="hentry">
-  <header>
-    <div class="entry-meta"><span class="entry-date date published updated"><time datetime="2014-03-24T00:00:00+08:00"><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/">March 24, 2014</a></time></span><span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>&nbsp; &bull; &nbsp;<span class="entry-comments"><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/#disqus_thread">Comment</a></span></div><!-- /.entry-meta -->
-    
-      <h1 class="entry-title"><a href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/" rel="bookmark" title="我的时间观---活在当下" itemprop="url">我的时间观---活在当下</a></h1>
-    
-  </header>
-  <div class="entry-content">
-    <p><img src="/images/p2014_3_24.jpg" alt="图片"></p>
-
-<p>经常有这样的困惑，觉得每天的时间都不够用，对未来做了很多计划，但最终总是证明“计划赶不上变化”，所以那些计划就这样被积压，或者被遗弃，感觉时间真是吝啬。但当自己拥有足够的时间时，却拖延症作祟，什么都不想动，只想坐在那里，什么都不想，让自己放空，但这时内心却是无比挣扎，很想打败拖延症，可是内心总有个懒散的声音在说“好不容易放个假，应该好好休息一下，看什么书啊，多累啊”，好吧，大多数时候总是信了他的话。</p>
-
-<p>后来开始上班，在公司里面接触到了<a href="http://zh.wikipedia.org/wiki/GTD">GTD</a>，也就是一种时间管理方法，它通过将任务记录下来，然后进行整理，再进行检查的方式，来实现集中精力完成正在做的事情。怎么样？听起来很美好吧，这简直就是我的梦想，如果能达到这样的效果，人生该多么美好啊，把每件事情在短时间里做好，你就可以有很多时间去做自己想做的事了。但人生哪有那么容易呢，这里还是回到那个问题---我是拖延症。该怎么让一个拖延症去有效率的做事情呢，还要每天去计划，每天去整理，每天去打勾啊，真是想的太美了。</p>
-
-<p>忘记告诉你了，我喜欢禅学，所以会经常看一些佛学书，在很多书中都提到一句话---“活在当下”，当我第一次看到这句话时，只是轻轻翻过去了，因为实在是太普通的一句话了，但是当这么多本书都在提到时，我觉得我应该好好思考了。“活在当下”是什么呢？其实和GTD的主要目的是一致的，就是专心做好当下这一刻的事。可是禅中的涵义就更深刻多了，我不仅是要做好现在要做的事，还要注重当下的感觉，就像我们总是会去纠结那些自己现在不想做的，却又应该做的事情，这些都是我们对未来未知的不确定。“活在当下”就告诉我们“不要急，先做好现在的事”。为什么这么强调现在？因为现在是过去的未来，是未来的过去，而我们又无法改变过去，而只能通过现在才能改变未来，所以现在才是最重要的。就像佛说“当下是我们唯一拥有的一刻，在当下这一刻快乐地生活，是可以办到的事”。</p>
-
-<p>对于我来说GTD是一个方法，它开始时会给你一些条条框框，你要这样，你要那样，有点让我手足无措，内心无法自由，但当很多人在用了很长时间之后，都可以游刃有余。</p>
-
-<p>所以给自己一点自由，别让自己活在自己营造的压力下，偶尔的拖延症都是可以理解的，我们都不是完美的人，所以当我们没有达到我们想要的程度时，不用着急，给自己一点时间，慢慢积累，努力练习。我一直相信人生是一场慢热积累的过程。所以现在没有成为你想要的样子，也许是你的积分不够吧。</p>
 
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->

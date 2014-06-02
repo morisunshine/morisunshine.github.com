@@ -4,13 +4,119 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://morisunshine.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://morisunshine.com" />
-<updated>2014-05-23T13:21:07+08:00</updated>
+<updated>2014-06-02T13:15:20+08:00</updated>
 <id>http://morisunshine.com/</id>
 <author>
   <name>Sheldon</name>
   <uri>http://morisunshine.com/</uri>
   <email>sheldon.zen@gmail.com</email>
 </author>
+
+
+<entry>
+  <title type="html"><![CDATA[《编写可读代码的艺术》读书笔记]]></title>
+ <link rel="alternate" type="text/html" href="http://morisunshine.com/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code/" />
+  <id>http://morisunshine.com/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code</id>
+  <published>2014-06-02T00:00:00+08:00</published>
+  <updated>2014-06-02T00:00:00+08:00</updated>
+  <author>
+    <name>Sheldon</name>
+    <uri>http://morisunshine.com</uri>
+    <email>sheldon.zen@gmail.com</email>
+  </author>
+  <content type="html">&lt;blockquote&gt;
+&lt;p&gt;代码应当写的容易理解&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这就是为什么要读这本书的原因。代码也是美的，就像文章一样，好的文章能让我们获得很多理念或者想法，并且在阅读的过程中也是那么地愉快与自然。而在编程中，其实我们大部分时间做的事情并不是在写代码，而是在测试、修改还有阅读，如果连我们自己都不能去更好地理解我们当初为什么要写这段代码时，那我们又怎么能让以后去维护这段代码的人更好地去修改它，到时他心里一定在臭骂你，虽然你已经与这个项目没有关系，但是如果你想成为一个优秀的程序员，我想你一定不会希望在别人心里你是这样的人，当别人用你的产品时，别人看不到背后的代码，但这不意味可以随意写，看不到的事情才是最可怕的，如果我们未来想做一些改动，那么你要做的可能就是重构了，而我们现在大部分意义上的重构，最后也只是变成重写。后面我还会再看关于重构的书。&lt;/p&gt;
+
+&lt;p&gt;我很确定，我还会再读这本书，因为让代码变得可读，并不是你看一遍书，你就能实现的，它需要我们的练习与实践，并且作者也提供了一个很好的方式来检验我们的代码的可读性，找一个朋友去读你这段代码，看他能否理解你这段代码的真实目的。更何况，要将代码写成艺术，这更是需要时间。&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;把理解代码所需的时间最小化是一个更好的目标&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2&gt;把信息塞入名字&lt;/h2&gt;
+
+&lt;p&gt;这句话的意思就是让阅读者（可能是你也可能是其他人）通过名字就可以获得大量的信息&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用专业的单词&lt;/li&gt;
+&lt;li&gt;避免空泛的名字&lt;/li&gt;
+&lt;li&gt;使用具体的名字来细致地描述事物&lt;/li&gt;
+&lt;li&gt;给变量名带上重要的细节&lt;/li&gt;
+&lt;li&gt;为作用域大的名字采用更长的名字&lt;/li&gt;
+&lt;li&gt;有目的地使用大小写、下划线等&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;审美&lt;/h2&gt;
+
+&lt;p&gt;这有点像书或者杂志总的排版，让内容更适合阅读。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;使用一致的布局，让读者习惯你的代码风格&lt;/li&gt;
+&lt;li&gt;让相似的代码看上去相似，比如类似功能的代码就可以同样的格式，这样就容易让人联想这个功能与那个功能应该是类似的。&lt;/li&gt;
+&lt;li&gt;把相关的代码行分组，形成代码块。&lt;/li&gt;
+&lt;li&gt;一致的风格比“正确”的风格更重要&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;注释&lt;/h2&gt;
+
+&lt;p&gt;注释的目的是尽量帮助读者了解得和作者一样多。&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;不要为那些从代码本身就能快速推断的事实写注释&lt;/li&gt;
+&lt;li&gt;如果你不能一句话写清楚，那就多提供更多细节&lt;/li&gt;
+&lt;li&gt;不要给不好的名字加注释，而是应该把名字改好。这个我之前没有意识到这点。所以还是好名字比一个好注释更重要。&lt;/li&gt;
+&lt;li&gt;记录你的思想，比如就像git中的commit，可以写一些这段代码做的事情，你遇到的坑，这样也能你的思想过程记录下来，对后面的维护也有依据。但是别写的太多。&lt;/li&gt;
+&lt;li&gt;尽量精确地描述函数的行为。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;简化循环和逻辑&lt;/h1&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;每当你看到一个复杂的逻辑，一个巨大的表达式或者一大推变量，这些都会增加你头脑中的思维包袱。它需要让你考虑得更复杂并且记住更多事情。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2&gt;拆分超长的表达式&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;代码中的表达式越长，它就越难以理解。&lt;/li&gt;
+&lt;li&gt;可以增加一个总结变量来代表一段表达式。&lt;/li&gt;
+&lt;li&gt;很多表达式都是一样，那就将它提取出来，作为一个方法---Don&amp;#39;t repeat yourself&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;变量与可读性&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;变量越多，就越难跟踪它们的动向。&lt;/li&gt;
+&lt;li&gt;变量的作用域越大，就需要跟踪它的动向越久。&lt;/li&gt;
+&lt;li&gt;变量改变得越频繁，就越难以跟踪它的当前值。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;重新组织代码&lt;/h1&gt;
+
+&lt;h2&gt;抽取不相关的子问题&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;通用代码很好，因为“它完全从项目的其他部分中解耦出”。像这样的代码容易开发，容易测试，并且容易理解。&lt;/li&gt;
+&lt;li&gt;你永远不要安于使用不理想的接口。你总是可以创建你自己的包装函数来隐藏接口的重要细节，让它不再成为你的阻碍。&lt;/li&gt;
+&lt;li&gt;应该把代码组织得一次做一件事。&lt;/li&gt;
+&lt;li&gt;最可读的代码就是没有代码。&lt;/li&gt;
+&lt;li&gt;通过重用库或者减少功能，你可以节省时间并且让你的代码库保持精简节约。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h1&gt;测试与可读性&lt;/h1&gt;
+
+&lt;ul&gt;
+&lt;li&gt;测试应当具有可读性，以便其他程序员可以舒服地改变或者增加测试。&lt;/li&gt;
+&lt;li&gt;对使用者隐去不重要的细节，以便更重要的细节会更突出。&lt;/li&gt;
+&lt;li&gt;代码时想着测试这件事就能帮助把代码写得更好。&lt;/li&gt;
+&lt;li&gt;解耦合最好的那一个往往就是最容易测试的那个。&lt;/li&gt;
+&lt;/ul&gt;
+
+  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code/&quot;&gt;《编写可读代码的艺术》读书笔记&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on June 02, 2014.&lt;/p&gt;</content>
+</entry>
 
 
 <entry>
