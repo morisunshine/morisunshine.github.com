@@ -1,98 +1,98 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-        <loc>http://morisunshine.com</loc>
+        <loc>http://localhost:4000</loc>
     </url>
     
     
     <url>
-        <loc>http://morisunshine.com/404.html</loc>
+        <loc>http://localhost:4000/404.html</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/about/</loc>
+        <loc>http://localhost:4000/about/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/feed.xml</loc>
+        <loc>http://localhost:4000/feed.xml</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/index.html</loc>
+        <loc>http://localhost:4000/index.html</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/posts/</loc>
+        <loc>http://localhost:4000/posts/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/sitemap.xml</loc>
+        <loc>http://localhost:4000/sitemap.xml</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/tags/</loc>
+        <loc>http://localhost:4000/tags/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/page2/index.html</loc>
+        <loc>http://localhost:4000/page2/index.html</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/page3/index.html</loc>
+        <loc>http://localhost:4000/page3/index.html</loc>
     </url>
     
 
     
     <url>
-        <loc>http://morisunshine.com/reading/the_art_of_readable_code/</loc>
+        <loc>http://localhost:4000/reading/the_art_of_readable_code/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/ios/interactive_animations/</loc>
+        <loc>http://localhost:4000/ios/interactive_animations/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/ios/namespacing/</loc>
+        <loc>http://localhost:4000/ios/namespacing/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/ios/ios_code_standards/</loc>
+        <loc>http://localhost:4000/ios/ios_code_standards/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/ios/Property_of_Objective_C/</loc>
+        <loc>http://localhost:4000/ios/Property_of_Objective_C/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/life/live_in_the_moment/</loc>
+        <loc>http://localhost:4000/life/live_in_the_moment/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/ios/objc_is_not_what_you_think_it_is/</loc>
+        <loc>http://localhost:4000/ios/objc_is_not_what_you_think_it_is/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/develop/experience_of_develop/</loc>
+        <loc>http://localhost:4000/develop/experience_of_develop/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/ios/UICollectionView_UIKit_Dynamics/</loc>
+        <loc>http://localhost:4000/ios/UICollectionView_UIKit_Dynamics/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/ruby/make_your_own_gem/</loc>
+        <loc>http://localhost:4000/ruby/make_your_own_gem/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/hacker/my_first_blog/</loc>
+        <loc>http://localhost:4000/hacker/my_first_blog/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/ios/ios_decorator/</loc>
+        <loc>http://localhost:4000/ios/ios_decorator/</loc>
     </url>
     
     <url>
-        <loc>http://morisunshine.com/life/travel-to-qinghai/</loc>
+        <loc>http://localhost:4000/life/travel-to-qinghai/</loc>
     </url>
     
 </urlset>
