@@ -2,26 +2,26 @@
 <feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en">
 <title type="text">Morisunshine's Blog</title>
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
-<link rel="self" type="application/atom+xml" href="http://morisunshine.com/feed.xml" />
-<link rel="alternate" type="text/html" href="http://morisunshine.com" />
-<updated>2014-06-07T11:37:28+08:00</updated>
-<id>http://morisunshine.com/</id>
+<link rel="self" type="application/atom+xml" href="http://localhost:4000/feed.xml" />
+<link rel="alternate" type="text/html" href="http://localhost:4000" />
+<updated>2014-06-07T13:26:27+08:00</updated>
+<id>http://localhost:4000/</id>
 <author>
   <name>Sheldon</name>
-  <uri>http://morisunshine.com/</uri>
+  <uri>http://localhost:4000/</uri>
   <email>sheldon.zen@gmail.com</email>
 </author>
 
 
 <entry>
   <title type="html"><![CDATA[《编写可读代码的艺术》读书笔记]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code/" />
-  <id>http://morisunshine.com/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code/" />
+  <id>http://localhost:4000/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code</id>
   <published>2014-06-02T00:00:00+08:00</published>
   <updated>2014-06-02T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;blockquote&gt;
@@ -121,19 +121,19 @@
 
 &lt;p&gt;如何将编写代码当做艺术看待，这与我们的追求有关，但是艺术是什么呢，其实就是每天的积累与进步，当我们每天花一些时间去思考这样的命名适不适合，这样的结构合不合理，也许我们也能成为自己代码的艺术家，这真的很像《黑客与画家》中说的手工艺人，“如切如磋 如琢如磨”，正是如此。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code/&quot;&gt;《编写可读代码的艺术》读书笔记&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on June 02, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/%E8%AF%BB%E4%B9%A6/the_art_of_readable_code/&quot;&gt;《编写可读代码的艺术》读书笔记&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on June 02, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[交互式动画]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/ios/interactive_animations/" />
-  <id>http://morisunshine.com/ios/interactive_animations</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/ios/interactive_animations/" />
+  <id>http://localhost:4000/ios/interactive_animations</id>
   <published>2014-05-17T00:00:00+08:00</published>
   <updated>2014-05-17T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;&lt;a href=&quot;http://www.objc.io/issue-12/interactive-animations.html&quot;&gt;原文&lt;/a&gt;作者&lt;a href=&quot;https://twitter.com/chriseidhof&quot;&gt;Chris Eidhof&lt;/a&gt;和&lt;a href=&quot;https://twitter.com/floriankugler&quot;&gt;Florian Kugler&lt;/a&gt;。转载请注明出处！&lt;/p&gt;
@@ -475,19 +475,19 @@
 
 &lt;p&gt;随着 iOS7 中从对拟物化的视觉效果的远离，以及对 UI 行为的关注，真实的交互式动画通向未来的大道变得越来越明显。它们也是将初代 iPhone 中滑动行为的魔力延续到交互的各个方面的一条康庄大道。为了让这些魔力成为现实，我们就不能在开发过程中才想到这些动画，而是应该在设计时就要考虑这些交互，这一点非常重要。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/interactive_animations/&quot;&gt;交互式动画&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on May 17, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/ios/interactive_animations/&quot;&gt;交互式动画&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on May 17, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Objective-C的命名空间]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/ios/namespacing/" />
-  <id>http://morisunshine.com/ios/namespacing</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/ios/namespacing/" />
+  <id>http://localhost:4000/ios/namespacing</id>
   <published>2014-04-24T00:00:00+08:00</published>
   <updated>2014-04-24T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;本文由&lt;a href=&quot;http://morisunshine.com/&quot;&gt;morisunshine&lt;/a&gt;译自&lt;a href=&quot;http://nshipster.com/namespacing/&quot;&gt;&amp;quot;Namespacing&amp;quot;&lt;/a&gt;。转载请注明出处！&lt;/p&gt;
@@ -718,19 +718,19 @@ static char * XXObject;//将“XXObject”重新定义为不同的符号
 
 &lt;p&gt;不管怎样，如果你对这个讨论感兴趣的话，我强烈建议你看一下&lt;a href=&quot;http://optshiftk.com/&quot;&gt;Kyle Sluder&lt;/a&gt;的&lt;a href=&quot;http://optshiftk.com/2012/04/draft-proposal-for-namespaces-in-objective-c/&quot;&gt;this namespace feature proposal&lt;/a&gt;。非常值得一看。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/namespacing/&quot;&gt;Objective-C的命名空间&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 24, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/ios/namespacing/&quot;&gt;Objective-C的命名空间&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 24, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[iOS编码规范参考]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/ios/ios_code_standards/" />
-  <id>http://morisunshine.com/ios/ios_code_standards</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/ios/ios_code_standards/" />
+  <id>http://localhost:4000/ios/ios_code_standards</id>
   <published>2014-04-22T00:00:00+08:00</published>
   <updated>2014-04-22T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;h2&gt;注释&lt;/h2&gt;
@@ -1227,19 +1227,19 @@ void (^largeBlock)(void) = ^{
 };
 [_operationQueue addOperationWithBlock:largeBlock];
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/ios_code_standards/&quot;&gt;iOS编码规范参考&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 22, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/ios/ios_code_standards/&quot;&gt;iOS编码规范参考&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 22, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[@property中attribute的整理]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/ios/Property_of_Objective_C/" />
-  <id>http://morisunshine.com/ios/Property_of_Objective_C</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/ios/Property_of_Objective_C/" />
+  <id>http://localhost:4000/ios/Property_of_Objective_C</id>
   <published>2014-04-16T00:00:00+08:00</published>
   <updated>2014-04-16T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;&lt;code&gt;assign&lt;/code&gt;:指定setter方法用简单的赋值，这是默认操作。你可以对标量类型（如int）使用这个属性。你可以想象一个float，它不是一个对象，所以它不能retain、copy。可以简单赋值，不更改索引计数(Reference Counting)。使用assign: 对基础数据类型 （NSInteger）和C数据类型（int, float, double, char,等）&lt;/p&gt;
@@ -1263,19 +1263,19 @@ void (^largeBlock)(void) = ^{
 
 &lt;p&gt;&lt;code&gt;unsafe_unretained&lt;/code&gt;:unsafe_unretained与weak有点类似，但是当所指向的指针被释放后，这些指针不会被赋值为nil，而成为野指针。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/Property_of_Objective_C/&quot;&gt;@property中attribute的整理&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 16, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/ios/Property_of_Objective_C/&quot;&gt;@property中attribute的整理&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on April 16, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[我的时间观---活在当下]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/" />
-  <id>http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/" />
+  <id>http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment</id>
   <published>2014-03-24T00:00:00+08:00</published>
   <updated>2014-03-24T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;&lt;img src=&quot;/images/p2014_3_24.jpg&quot; alt=&quot;图片&quot;&gt;&lt;/p&gt;
@@ -1290,19 +1290,19 @@ void (^largeBlock)(void) = ^{
 
 &lt;p&gt;所以给自己一点自由，别让自己活在自己营造的压力下，偶尔的拖延症都是可以理解的，我们都不是完美的人，所以当我们没有达到我们想要的程度时，不用着急，给自己一点时间，慢慢积累，努力练习。我一直相信人生是一场慢热积累的过程。所以现在没有成为你想要的样子，也许是你的积分不够吧。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/%E7%94%9F%E6%B4%BB/live_in_the_moment/&quot;&gt;我的时间观---活在当下&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on March 24, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/%E7%94%9F%E6%B4%BB/live_in_the_moment/&quot;&gt;我的时间观---活在当下&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on March 24, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[Objective-C 不是你想的那样]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/ios/objc_is_not_what_you_think_it_is/" />
-  <id>http://morisunshine.com/ios/objc_is_not_what_you_think_it_is</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/ios/objc_is_not_what_you_think_it_is/" />
+  <id>http://localhost:4000/ios/objc_is_not_what_you_think_it_is</id>
   <published>2014-03-13T00:00:00+08:00</published>
   <updated>2014-03-13T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;本文由&lt;a href=&quot;http://morisunshine.com/&quot;&gt;morisunshine&lt;/a&gt;译自&lt;a href=&quot;http://news.rapgenius.com/Soroush-khanlou-objective-c-isnt-what-you-think-it-is-if-you-think-like-a-rubyist-annotated&quot;&gt;&amp;quot;Objective-C isn&amp;#39;t what you think it is&amp;quot;&lt;/a&gt;。转载请注明出处！&lt;/p&gt;
@@ -1482,19 +1482,19 @@ if ([receiver respondsToSelector:@selector(theMessage:)]) {
 
 &lt;p&gt;事实再次告诉我们，这些语言都是差不多的，Ruby开发者应该享受Objective-C，即使那些中括号让我们望而却步。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/objc_is_not_what_you_think_it_is/&quot;&gt;Objective-C 不是你想的那样&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on March 13, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/ios/objc_is_not_what_you_think_it_is/&quot;&gt;Objective-C 不是你想的那样&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on March 13, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[我的开发经验漫谈]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/%E5%BC%80%E5%8F%91/experience_of_develop/" />
-  <id>http://morisunshine.com/%E5%BC%80%E5%8F%91/experience_of_develop</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/%E5%BC%80%E5%8F%91/experience_of_develop/" />
+  <id>http://localhost:4000/%E5%BC%80%E5%8F%91/experience_of_develop</id>
   <published>2014-03-06T00:00:00+08:00</published>
   <updated>2014-03-06T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;a href=&quot;#begin&quot;&gt;&lt;strong&gt;项目开始之前&lt;/strong&gt;&lt;/a&gt;&lt;br&gt;
@@ -1577,19 +1577,19 @@ if ([receiver respondsToSelector:@selector(theMessage:)]) {
 
 &lt;p&gt;写了这么多，其实也是对自己过去的经验的整理，也是对自己的勉励，博客的意义在于分享，而分享又是为了更好的交流，希望能提出一些宝贵的意见，让我们一起成长。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/%E5%BC%80%E5%8F%91/experience_of_develop/&quot;&gt;我的开发经验漫谈&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on March 06, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/%E5%BC%80%E5%8F%91/experience_of_develop/&quot;&gt;我的开发经验漫谈&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on March 06, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[UICollectionView+UIKit Dynamics]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/ios/UICollectionView_UIKit_Dynamics/" />
-  <id>http://morisunshine.com/ios/UICollectionView_UIKit_Dynamics</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/ios/UICollectionView_UIKit_Dynamics/" />
+  <id>http://localhost:4000/ios/UICollectionView_UIKit_Dynamics</id>
   <published>2014-02-27T00:00:00+08:00</published>
   <updated>2014-02-27T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;&lt;a href=&quot;http://www.objc.io/issue-5/collection-views-and-uidynamics.html&quot;&gt;原文&lt;/a&gt;作者&lt;a href=&quot;https://twitter.com/ashfurrow&quot;&gt;Ash Furrow&lt;/a&gt;。转载请注明出处！&lt;/p&gt;
@@ -1936,19 +1936,19 @@ NSArray *newlyVisibleItems = [itemsInVisibleRectArray filteredArrayUsingPredicat
 
 &lt;hr&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/UICollectionView_UIKit_Dynamics/&quot;&gt;UICollectionView+UIKit Dynamics&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on February 27, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/ios/UICollectionView_UIKit_Dynamics/&quot;&gt;UICollectionView+UIKit Dynamics&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on February 27, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[制作自己的Gem]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/ruby/make_your_own_gem/" />
-  <id>http://morisunshine.com/ruby/make_your_own_gem</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/ruby/make_your_own_gem/" />
+  <id>http://localhost:4000/ruby/make_your_own_gem</id>
   <published>2014-02-19T00:00:00+08:00</published>
   <updated>2014-02-19T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;&amp;nbsp;&lt;a href=&quot;#introduce&quot;&gt;&lt;strong&gt;什么是Gem？&lt;/strong&gt;&lt;/a&gt;&lt;br&gt;
@@ -2242,38 +2242,38 @@ Finished tests in 0.006151s, 487.7256 tests/s, 487.7256 assertions/s.
 很简单，先切换到gem的根目录下，再命令行中输入&lt;code&gt;rdoc&lt;/code&gt;，你就会发现多出了一个名为&lt;code&gt;doc&lt;/code&gt;的目录，里面就是我们的文档了，当然你可以自己再进行一些调整。
 除了RDoc呢，我们还有另外的选择&lt;a href=&quot;http://yardoc.org/&quot;&gt;YARD&lt;/a&gt;，当我们发布了gem的时候呢，&lt;a href=&quot;http://rubydoc.info/&quot;&gt;RubyDoc.info&lt;/a&gt;会根据你的gem自动生成YARDocs，并且它是可以向下兼容RDoc。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ruby/make_your_own_gem/&quot;&gt;制作自己的Gem&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on February 19, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/ruby/make_your_own_gem/&quot;&gt;制作自己的Gem&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on February 19, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[第一篇博客]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/%E6%8A%98%E8%85%BE/my_first_blog/" />
-  <id>http://morisunshine.com/%E6%8A%98%E8%85%BE/my_first_blog</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/%E6%8A%98%E8%85%BE/my_first_blog/" />
+  <id>http://localhost:4000/%E6%8A%98%E8%85%BE/my_first_blog</id>
   <published>2014-02-15T00:00:00+08:00</published>
   <updated>2014-02-15T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;果然生命在于折腾啊，折腾完之后，就会发现之前觉得挺难的事其实也没什么大不了，比如弄这个博客，以前对技术牛人的评判标准就是有个自己域名的博客，崇拜之情如黄河泛滥不可收拾，当自己有勇气去搭建一个的时侯，发现原来这么简单，只要买个域名就可以了，当然那些有些博客是很牛的，但对我来说，这样简单的博客就是我想要的，而内容才是博客最重要的地方。&lt;/p&gt;
 
 &lt;p&gt;至于我会在博客里写什么？在这个问题上，没有很明确的限制，希望它是我成长的记事本，无论是生活的哪个方面。我相信人的一生是一个漫长积累的过程，我希望能在这里见证这个过程。也可以理解为娱乐自己。&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/%E6%8A%98%E8%85%BE/my_first_blog/&quot;&gt;第一篇博客&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on February 15, 2014.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/%E6%8A%98%E8%85%BE/my_first_blog/&quot;&gt;第一篇博客&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on February 15, 2014.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[iOS设计模式学习---装饰模式]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/ios/ios_decorator/" />
-  <id>http://morisunshine.com/ios/ios_decorator</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/ios/ios_decorator/" />
+  <id>http://localhost:4000/ios/ios_decorator</id>
   <published>2013-07-14T00:00:00+08:00</published>
   <updated>2013-07-14T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;h2&gt;定义&lt;/h2&gt;
@@ -2416,19 +2416,19 @@ int main(int argc, const char *argv[])
  NokiaPhone send Message to Somebody with BlueTooth
 
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/ios/ios_decorator/&quot;&gt;iOS设计模式学习---装饰模式&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on July 14, 2013.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/ios/ios_decorator/&quot;&gt;iOS设计模式学习---装饰模式&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on July 14, 2013.&lt;/p&gt;</content>
 </entry>
 
 
 <entry>
   <title type="html"><![CDATA[站在原地, 心存远方]]></title>
- <link rel="alternate" type="text/html" href="http://morisunshine.com/%E7%94%9F%E6%B4%BB/travel-to-qinghai/" />
-  <id>http://morisunshine.com/%E7%94%9F%E6%B4%BB/travel-to-qinghai</id>
+ <link rel="alternate" type="text/html" href="http://localhost:4000/%E7%94%9F%E6%B4%BB/travel-to-qinghai/" />
+  <id>http://localhost:4000/%E7%94%9F%E6%B4%BB/travel-to-qinghai</id>
   <published>2013-01-10T00:00:00+08:00</published>
   <updated>2013-01-10T00:00:00+08:00</updated>
   <author>
     <name>Sheldon</name>
-    <uri>http://morisunshine.com</uri>
+    <uri>http://localhost:4000</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
   <content type="html">&lt;p&gt;&lt;img src=&quot;/images/p7796217.jpg&quot; alt=&quot;图片&quot;&gt;&lt;/p&gt;
@@ -2476,7 +2476,7 @@ int main(int argc, const char *argv[])
 
 &lt;p&gt;&lt;img src=&quot;/images/p7796220.jpg&quot; alt=&quot;图片&quot;&gt;&lt;/p&gt;
 
-  &lt;p&gt;&lt;a href=&quot;http://morisunshine.com/%E7%94%9F%E6%B4%BB/travel-to-qinghai/&quot;&gt;站在原地, 心存远方&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://morisunshine.com&quot;&gt;Morisunshine's Blog&lt;/a&gt; on January 10, 2013.&lt;/p&gt;</content>
+  &lt;p&gt;&lt;a href=&quot;http://localhost:4000/%E7%94%9F%E6%B4%BB/travel-to-qinghai/&quot;&gt;站在原地, 心存远方&lt;/a&gt; was originally published by Sheldon at &lt;a href=&quot;http://localhost:4000&quot;&gt;Morisunshine's Blog&lt;/a&gt; on January 10, 2013.&lt;/p&gt;</content>
 </entry>
 
 </feed>

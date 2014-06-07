@@ -1523,12 +1523,12 @@ svg:not(:root) {
   outline: none;
 }
 
-.dl-menuwrapper li .dl-back > a {
+.dl-menuwrapper li.dl-back > a {
   padding-left: 30px;
   background: rgba(0, 0, 0, 0.2);
 }
 
-.dl-menuwrapper li .dl-back:after,
+.dl-menuwrapper li.dl-back:after,
 .dl-menuwrapper li > a:not(:only-child):after {
   position: absolute;
   top: 0;
@@ -1540,7 +1540,7 @@ svg:not(:root) {
   speak: none;
 }
 
-.dl-menuwrapper li .dl-back:after {
+.dl-menuwrapper li.dl-back:after {
   left: 10px;
   color: rgba(212, 204, 198, 0.5);
   -webkit-transform: rotate(180deg);
@@ -3748,6 +3748,7 @@ body {
 
 .entry,
 .hentry {
+  position: relative;
   *zoom: 1;
 }
 
@@ -3768,6 +3769,7 @@ body {
 .entry-content {
   margin-bottom: 26px;
   margin-bottom: 1.625rem;
+  margin-bottom: 0;
   font-size: 16px;
   font-size: 1rem;
   line-height: 1.625;
@@ -3775,7 +3777,7 @@ body {
 
 .entry-content p > a,
 .entry-content li > a {
-  border-bottom: 1px dotted #a2a2a2;
+  border-bottom: 2px dotted #a2a2a2;
 }
 
 .entry-content p > a:hover,
@@ -3912,6 +3914,7 @@ body {
   right: 0;
   bottom: 0;
   z-index: 10;
+  display: none;
   max-width: 440px;
   padding: 10px 15px;
   margin: 0 auto;
@@ -4281,6 +4284,7 @@ body {
 }
 
 .footer-wrapper {
+  padding: 0 5px;
   margin: 2em auto;
   color: #555555;
   text-align: center;
@@ -4374,4 +4378,64 @@ body {
 #goog-wm-sb:hover {
   color: #222222;
   background-color: #ffffff;
+}
+
+/*jerryni' area*/
+
+.collapse-toggle {
+  margin-top: 20px;
+  margin-left: 50%;
+  cursor: pointer;
+}
+
+.collapse-toggle:after {
+  display: inline-block;
+  margin-left: 5px;
+  font-family: 'fontawesome';
+  font-size: 20px;
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0, #a2a2a2), color-stop(0.3, #a2a2a2), color-stop(0.4, #ffffff), color-stop(0.5, #a2a2a2), color-stop(1, #a2a2a2));
+  content: "\f078";
+  -webkit-animation: slidetounlock 3s infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation-direction: alternate;
+}
+
+.collapse-toggle.collapsed:after {
+  font-size: 20px;
+  content: "\f077";
+}
+
+.collapse-toggle a {
+  color: #a2a2a2;
+  border-bottom: 2px dotted #a2a2a2;
+}
+
+.collapse-toggle a:hover {
+  color: #000;
+  border-bottom-style: solid;
+}
+
+@-webkit-keyframes slidetounlock {
+  0% {
+    background-position: 0 -12px;
+  }
+  100% {
+    background-position: 0 12px;
+  }
+}
+
+.go-top {
+  text-shadow: 0px 4px 2px #ccc;
+}
+
+.go-top:before {
+  margin-right: 5px;
+  font-family: 'fontawesome';
+  content: "\f102";
+}
+
+.go-top:hover {
+  text-shadow: 0px 4px 2px #aaa;
+  cursor: pointer;
 }

@@ -17,7 +17,9 @@ image:
     {% endif %}
   </header>
   <div class="entry-content">
-    {{ post.content }}
+    <div class="full-text">{{ post.content }}</div>
+    <div class="collapse-text"></div>
+    <div class="collapse-toggle"></div>
   </div><!-- /.entry-content -->
 </article><!-- /.hentry -->
 {% endfor %}

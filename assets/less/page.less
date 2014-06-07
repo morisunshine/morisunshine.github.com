@@ -10,13 +10,15 @@ body {
 .entry,
 .hentry {
 	.clearfix();
+	position: relative;
 }
 .entry-content {
 	.font-size(16);
+	margin-bottom: 0; //jerryni edit HACK
 	// Dotted line underlines for links
 	p > a,
 	li > a {
-		border-bottom: 1px dotted lighten(@link-color, 50);
+		border-bottom: 2px dotted lighten(@link-color, 50);
 		&:hover {
 			border-bottom-style: solid;
 		}
@@ -122,6 +124,7 @@ body {
 }
 // Feature Image Caption
 .image-credit {
+	display: none;
 	position: absolute;
 	bottom: 0;
 	right: 0;
@@ -360,6 +363,7 @@ body {
 	.clearfix();
 	margin: 2em auto;
 	text-align: center;
+	padding: 0 5px;
 	color: lighten(@text-color,20);
 	a {
 		color: lighten(@text-color,20);
@@ -417,4 +421,59 @@ body {
 }
 #goog-wm-sb {
 	.btn();
+}
+/*jerryni' area*/
+.collapse-toggle {
+	margin-left: 50%;
+	margin-top: 20px;
+	cursor: pointer;
+	
+	
+	&:after {
+		font-family: 'fontawesome';
+		content: "\f078";
+		margin-left: 5px;
+		font-size: 20px;
+		display: inline-block;
+
+		-webkit-text-fill-color: transparent;
+		-webkit-background-clip: text;
+		-webkit-animation: slidetounlock 3s infinite;
+		-webkit-animation-direction:alternate;
+		background: -webkit-gradient(linear,left top,left bottom,color-stop(0, lighten(@link-color, 50)),
+				color-stop(0.3, lighten(@link-color, 50)),color-stop(0.4, white),color-stop(0.5, lighten(@link-color, 50)),color-stop(1, lighten(@link-color, 50)));
+
+	}
+	&.collapsed:after {
+		content: "\f077";
+		font-size: 20px;
+	}
+	a {
+		border-bottom: 2px dotted lighten(@link-color, 50);
+		color: lighten(@link-color, 50);
+		&:hover {
+			color: #000;
+			border-bottom-style: solid;
+		}
+	}
+}
+@-webkit-keyframes slidetounlock {
+	0% {
+		background-position: 0 -12px;
+	}
+	100%{
+		background-position: 0 12px;
+	}
+}
+.go-top {
+	text-shadow: 0px 4px 2px #ccc;
+	&:before {
+		content: "\f102";
+		font-family: 'fontawesome';
+		margin-right: 5px;
+	}
+	&:hover {
+		text-shadow: 0px 4px 2px #aaa;
+		cursor: pointer;
+	}
 }
