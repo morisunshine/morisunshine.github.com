@@ -2,6 +2,7 @@
 layout: post
 title: "iOS编码规范参考"
 category: iOS
+description: "对编码规范进行了整理"
 tags: [iOS]
 comments: true 
 share: true

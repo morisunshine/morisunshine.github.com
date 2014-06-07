@@ -1,7 +1,10 @@
 ---
 layout: post 
 title: "Objective-C的命名空间"
-description: 
+description: "命名一直是Objective-C的硬伤，和那些优雅的语言相比，Objective-C缺乏标识符容器这点引来了很多不切实际的批评家。
+他们总是说：Objective-C不像其他流行语言一样提供模块化机制来避免类名和方法名的冲突。
+相反地，Objective-C 依靠前缀来确保APP中的方法名不会影响其他有相同名字的代码。
+插入一个关于类型系统的题外话之后我们会继续进入关于命名的讨论。" 
 category: iOS  
 tags: [iOS]    
 comments: true 

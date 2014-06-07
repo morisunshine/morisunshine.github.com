@@ -1,7 +1,7 @@
 ---
 layout: post  
 title: "@property中attribute的整理"  
-description: 
+description: "assign:指定setter方法用简单的赋值，这是默认操作。你可以对标量类型（如int）使用这个属性。你可以想象一个float，它不是一个对象，所以它不能retain、copy。可以简单赋值，不更改索引计数(Reference Counting)。使用assign: 对基础数据类型 （NSInteger）和C数据类型（int, float, double, char,等）"
 category: iOS   
 tags: [iOS]     
 comments: true 

@@ -3,6 +3,7 @@ layout: post
 title: 交互式动画
 category: iOS
 tags: [iOS, 技术]
+description: "随着 iOS7 中从对拟物化的视觉效果的远离，以及对 UI 行为的关注，真实的交互式动画通向未来的大道变得越来越明显。它们也是将初代 iPhone 中滑动行为的魔力延续到交互的各个方面的一条康庄大道。为了让这些魔力成为现实，我们就不能在开发过程中才想到这些动画，而是应该在设计时就要考虑这些交互，这一点非常重要。"
 comments: true 
 share: true
 
