@@ -4,7 +4,7 @@
 <generator uri="https://github.com/mojombo/jekyll">Jekyll</generator>
 <link rel="self" type="application/atom+xml" href="http://morisunshine.com/feed.xml" />
 <link rel="alternate" type="text/html" href="http://morisunshine.com" />
-<updated>2014-06-07T20:31:53+08:00</updated>
+<updated>2014-06-07T21:02:41+08:00</updated>
 <id>http://morisunshine.com/</id>
 <author>
   <name>Sheldon</name>
@@ -734,7 +734,9 @@ static char * XXObject;//将“XXObject”重新定义为不同的符号
     <uri>http://morisunshine.com</uri>
     <email>sheldon.zen@gmail.com</email>
   </author>
-  <content type="html">&lt;h2&gt;注释&lt;/h2&gt;
+  <content type="html">&lt;p&gt;经常说没有最好的风格，只有统一风格，所以编码规范就是为了统一我们的编码风格。而在这里我对我平时使用的编码规范进行了一个总结，希望能给大家提供参考&lt;/p&gt;
+
+&lt;h2&gt;注释&lt;/h2&gt;
 
 &lt;p&gt;建议使用&lt;a href=&quot;https://github.com/onevcat/VVDocumenter-Xcode&quot;&gt;VVDocumenter&lt;/a&gt;插件&lt;/p&gt;
 
