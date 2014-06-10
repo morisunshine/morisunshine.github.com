@@ -7,11 +7,13 @@ description: "这个星期 Ole Begemann 写了一篇很棒的关于UIScrollView 
 
 我们很容易联想到可以在Ole的自定义ScrollView的基础上添加UIScrollview的惯性滑动行为，并且随着最近Facebook发布了POP动画引擎，让我觉得写出一个自然减速的自定义ScrollView会是一个很有趣的周末项目。"  
 category: iOS
-tags: [动画]
+tags: [动画, 译文]
 comments: true 
 share: true
 
 ---
+
+[原文](http://iosdevtips.co/post/84571595353/replicating-uiscrollviews-deceleration-with-facebook?utm_campaign=iOS_Dev_Weekly_Issue_145&utm_medium=email&utm_source=iOS%2BDev%2BWeekly)作者[r0unak](https://twitter.com/r0unak)。转载请注明出处！·
 
 这个星期 Ole Begemann 写了一篇[很棒的关于UIScrollView 是如何工作的教程](http://oleb.net/blog/2014/04/understanding-uiscrollview/)，为了更有效地描述这个UIScrollView的工作机制，他甚至还[自己从头开始写了一个简单的ScrollView。](https://github.com/ole/CustomScrollView)
 
@@ -129,7 +131,7 @@ POP能够这样做是因为它为我们提供了动画进度的常量回调函�
 ```objc
 prop.readBlock = ^(id obj, CGFloat values[]) {
 	    values[0] = [obj bounds].origin.x;
-			    values[1] = [obj bounds].origin.y;
+        values[1] = [obj bounds].origin.y;
 };
 ```
 

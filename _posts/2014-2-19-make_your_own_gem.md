@@ -3,7 +3,7 @@ layout: post
 title: "制作自己的Gem"  
 category: ruby 
 description: "RubyGems是一个方便而强大的Ruby程序包管理器，Ruby的第三方插件是用gem方式来管理，非常容易发布和共享，一个简单的命令就可以安装上第三方的扩展库。特点：能远程安装包，包之间依赖关系的管理，简单可靠的卸载，查询机制，能查询本地和远程服务器的包信息，能保持一个包的不同版本，基于Web的查看接口，能查看你安装的gem的信息。" 
-tags: [ruby,技术]
+tags: [ruby,译文]
 comments: true 
 share: true
 

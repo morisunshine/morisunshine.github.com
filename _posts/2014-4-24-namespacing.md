@@ -6,7 +6,7 @@ description: "命名一直是Objective-C的硬伤，和那些优雅的语言相�
 相反地，Objective-C 依靠前缀来确保APP中的方法名不会影响其他有相同名字的代码。
 插入一个关于类型系统的题外话之后我们会继续进入关于命名的讨论。" 
 category: iOS  
-tags: [iOS]    
+tags: [iOS, 译文]    
 comments: true 
 share: true
 

@@ -4,7 +4,7 @@ title: "Objective-C 不是你想的那样"
 description: "
 Ruby 和 Objective-C 这两种语言看上去好像天南地北：一种是动态语言，另一种则是静态语言；一种是解释型语言，另一种是编译型语言；一种有简洁的语法，另一种则是有点冗长的语法。从优雅的角度来看，Ruby似乎更能给我们一种自由的编程体验，所以很多人都放弃了Objective-C。"   
 category: iOS   
-tags: [iOS, ruby]   
+tags: [iOS, ruby, 译文]   
 comments: true 
 share: true
 

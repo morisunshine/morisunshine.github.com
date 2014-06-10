@@ -4,7 +4,7 @@ title: "UICollectionView+UIKit Dynamics"
 category: iOS  
 description: "UIKit Dynamics 是 iOS 7 中基于物理动画引擎的一个新功能--它被特别设计使其能很好地与 collection views 配合工作，而后者是在 iOS 6 中才被引入的新特性。接下来，我们要好好看看如何将这两个特性结合在一起。 
 这篇文章将讨论两个结合使用 UIkit Dynamics 和 collection view 的例子。第一个例子展示了如何去实现像 iOS 7 里信息 app 中的消息泡泡的弹簧动效，然后再进一步结合平铺机制来实现布局的可伸缩性。第二个例子展现了如何用 UIKit Dynamics 来模拟牛顿摆，这个例子中物体可以一个个地加入到 collection view 中，并和其他物体发生相互作用。"
-tags: [iOS, 技术]  
+tags: [iOS, 译文]  
 comments: true 
 share: true
 
