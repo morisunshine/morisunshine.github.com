@@ -39,22 +39,28 @@ share: true
 
 - 我们通过`velocityInView: `方法得到手势的速率。
 
-	CGPoint velocity = [panGestureRecognizer velocityInView:self];
+```objc
+CGPoint velocity = [panGestureRecognizer velocityInView:self];
+```
 
 - 如果在水平方向或垂直方向没有足够空间那么我就不希望在x或y方向上能移动。所以我们要添加一个判断。
 
-	if (self.bounds.size.width >= self.contentSize.width) {
-		    velocity.x = 0;
-	}
-	if (self.bounds.size.height >= self.contentSize.height) {
-		    velocity.y = 0;
-	}
+```objc
+if (self.bounds.size.width >= self.contentSize.width) {
+	    velocity.x = 0;
+}
+if (self.bounds.size.height >= self.contentSize.height) {
+	    velocity.y = 0;
+}
+```
 
 - 我们发现通过`velocityInView: `方法得到的速率实际上并不是我们想要的，所以我们要修复这个问题。
 
 - 我们想要使界面的bounds（尤其是bound中的原点）动画，所以我们就创建了一个新的带kPOPViewBounds的POPDecayAnimation对象。
 
-	POPDecayAnimation *decayAnimation = [POPDecayAnimation animationWithPropertyNamed:kPOPViewBounds];
+```objc
+POPDecayAnimation *decayAnimation = [POPDecayAnimation animationWithPropertyNamed:kPOPViewBounds]
+```
  
 - Pop希望速率和你希望动画的property在相同的坐标系下。这个值可能是指向透明度的NSNumber（CGFloat），被封装在NSValue的CGPoint来指向界面的中心，被封装在NSValue的CGRect来指向bounds，等等。你可能已经猜到了，在动画过程中，property值的变化就相当于是速率。
 
@@ -62,36 +68,40 @@ share: true
 
 - 我们不想改变bounds中的尺寸，所以就让尺寸的速率一直保持0。将原点的x和y值的速率作为滑动手势的速率输入。把这些值封装到一个NSValue中并将它赋值给decayAnimation.velocity。
 
-	decayAnimation.velocity = [NSValue valueWithCGRect:CGRectMake(velocity.x, velocity.y, 0, 0)];
+```objc
+decayAnimation.velocity = [NSValue valueWithCGRect:CGRectMake(velocity.x, velocity.y, 0, 0)];
+```
 
 - 最后，通过使用`pop_addAnimation: `方法将decayAnimation添加到界面中，并且给界面添加任意想要的键值。
 
-	[self pop_addAnimation:decayAnimation forKey:@"decelerate"];
+```objc
+[self pop_addAnimation:decayAnimation forKey:@"decelerate"];
+```
 
 这里是组合的代码：
 
 ```objc
 
-	//从滑动手势中得到速率
-	if (self.bounds.size.width >= self.contentSize.width) {
-		    //当水平方向没有空间滑动就把平移为0
-		    velocity.x = 0; 
-	}
-	if (self.bounds.size.height >= self.contentSize.height) {
-		    //当垂直方向没有空间滑动就把平移为0
-		    velocity.y = 0; 
-	}
-	 
-	//我们需要将从滑动手势中得到的速率转换成负号，所以我们改变了一下符号。
-	velocity.x = -velocity.x;
-	velocity.y = -velocity.y;
-	 
-	POPDecayAnimation *decayAnimation = [POPDecayAnimation animationWithPropertyNamed:kPOPViewBounds];
-	 
-	//最后两个零代表我们不想变化bound的尺寸
-	decayAnimation.velocity = [NSValue valueWithCGRect:CGRectMake(velocity.x, velocity.y, 0, 0)];
-	 
-	[self pop_addAnimation:decayAnimation forKey:@"decelerate"];
+//从滑动手势中得到速率
+if (self.bounds.size.width >= self.contentSize.width) {
+	    //当水平方向没有空间滑动就把平移为0
+	    velocity.x = 0; 
+}
+if (self.bounds.size.height >= self.contentSize.height) {
+	    //当垂直方向没有空间滑动就把平移为0
+	    velocity.y = 0; 
+}
+ 
+//我们需要将从滑动手势中得到的速率转换成负号，所以我们改变了一下符号。
+velocity.x = -velocity.x;
+velocity.y = -velocity.y;
+ 
+POPDecayAnimation *decayAnimation = [POPDecayAnimation animationWithPropertyNamed:kPOPViewBounds];
+ 
+//最后两个零代表我们不想变化bound的尺寸
+decayAnimation.velocity = [NSValue valueWithCGRect:CGRectMake(velocity.x, velocity.y, 0, 0)];
+ 
+[self pop_addAnimation:decayAnimation forKey:@"decelerate"];
 ```
 
 ![image](http://media.tumblr.com/185a108dfa8a706c90985b18198bd39c/tumblr_inline_n4z4hwnQiv1qh9cw7.gif)
@@ -116,19 +126,23 @@ POP能够这样做是因为它为我们提供了动画进度的常量回调函�
 
 - 在readBlock中我们简单地将bounds的原点x和y分别赋值给values[0]和values[1]。
 
-	prop.readBlock = ^(id obj, CGFloat values[]) {
-		    values[0] = [obj bounds].origin.x;
-				    values[1] = [obj bounds].origin.y;
-	};
+```objc
+prop.readBlock = ^(id obj, CGFloat values[]) {
+	    values[0] = [obj bounds].origin.x;
+			    values[1] = [obj bounds].origin.y;
+};
+```
 
 - 然后在 writeBlock 中，你读取values[0](bounds.origin.x) 和 values[1](bounds.origin.y)，并且更新你界面中的bounds
 
-	prop.writeBlock = ^(id obj, const CGFloat values[]) {
-	    CGRect tempBounds = [obj bounds];
-	    tempBounds.origin.x = values[0];
-	    tempBounds.origin.y = values[1];
-	    [obj setBounds:tempBounds];
-	};
+```objc
+prop.writeBlock = ^(id obj, const CGFloat values[]) {
+    CGRect tempBounds = [obj bounds];
+    tempBounds.origin.x = values[0];
+    tempBounds.origin.y = values[1];
+    [obj setBounds:tempBounds];
+};
+```
 
 - 当writeBlock中的值随着减速（或震荡）曲线被每次调用时，神奇的事情发生了。
 
@@ -138,43 +152,43 @@ POP能够这样做是因为它为我们提供了动画进度的常量回调函�
 
 ```objc
 
-	//从滑动手势中得到速率
-	CGPoint velocity = [panGestureRecognizer velocityInView:self];
-	if (self.bounds.size.width >= self.contentSize.width) {
-	    //当没有水平方向滑动时就让x方向的移动为0
-	    velocity.x = 0;
-	}
-	if (self.bounds.size.height >= self.contentSize.height) {
-	    //当没有垂直方向滑动时就让y方向的移动为0
-	    velocity.y = 0;
-	}
-	 
-	//我的需要从滑动手势中的到速率的负数，所以我们加上了符号。
-	velocity.x = -velocity.x;
-	velocity.y = -velocity.y;
-	 
-	POPDecayAnimation *decayAnimation = [POPDecayAnimation animation];
-	 
-	POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:@"com.rounak.boundsY" initializer:^(POPMutableAnimatableProperty *prop) {
-	    // 读取数据，输入数据给POP
-	    prop.readBlock = ^(id obj, CGFloat values[]) {
-	        values[0] = [obj bounds].origin.x;
-	        values[1] = [obj bounds].origin.y;
-	    };
-	    // 写数据，从POP中得到数据，并且将它应用到视图上。
-	    prop.writeBlock = ^(id obj, const CGFloat values[]) {
-	        CGRect tempBounds = [obj bounds];
-	        tempBounds.origin.x = values[0];
-	        tempBounds.origin.y = values[1];
-	        [obj setBounds:tempBounds];
-	    };
-	    //动态临界值
-	    prop.threshold = 0.01;
-	}];
-	 
-	decayAnimation.property = prop;
-	decayAnimation.velocity = [NSValue valueWithCGPoint:velocity];
-	[self pop_addAnimation:decayAnimation forKey:@"decelerate"];
+//从滑动手势中得到速率
+CGPoint velocity = [panGestureRecognizer velocityInView:self];
+if (self.bounds.size.width >= self.contentSize.width) {
+    //当没有水平方向滑动时就让x方向的移动为0
+    velocity.x = 0;
+}
+if (self.bounds.size.height >= self.contentSize.height) {
+    //当没有垂直方向滑动时就让y方向的移动为0
+    velocity.y = 0;
+}
+ 
+//我的需要从滑动手势中的到速率的负数，所以我们加上了符号。
+velocity.x = -velocity.x;
+velocity.y = -velocity.y;
+ 
+POPDecayAnimation *decayAnimation = [POPDecayAnimation animation];
+ 
+POPAnimatableProperty *prop = [POPAnimatableProperty propertyWithName:@"com.rounak.boundsY" initializer:^(POPMutableAnimatableProperty *prop) {
+    // 读取数据，输入数据给POP
+    prop.readBlock = ^(id obj, CGFloat values[]) {
+        values[0] = [obj bounds].origin.x;
+        values[1] = [obj bounds].origin.y;
+    };
+    // 写数据，从POP中得到数据，并且将它应用到视图上。
+    prop.writeBlock = ^(id obj, const CGFloat values[]) {
+        CGRect tempBounds = [obj bounds];
+        tempBounds.origin.x = values[0];
+        tempBounds.origin.y = values[1];
+        [obj setBounds:tempBounds];
+    };
+    //动态临界值
+    prop.threshold = 0.01;
+}];
+ 
+decayAnimation.property = prop;
+decayAnimation.velocity = [NSValue valueWithCGPoint:velocity];
+[self pop_addAnimation:decayAnimation forKey:@"decelerate"];
 
 ```
 
