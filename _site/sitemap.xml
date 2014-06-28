@@ -22,10 +22,6 @@
     </url>
     
     <url>
-        <loc>http://morisunshine.com/inhouse/</loc>
-    </url>
-    
-    <url>
         <loc>http://morisunshine.com/posts/</loc>
     </url>
     
@@ -46,6 +42,10 @@
     </url>
     
 
+    
+    <url>
+        <loc>http://morisunshine.com/%E5%AD%A6%E4%B9%A0/thiking_of_study/</loc>
+    </url>
     
     <url>
         <loc>http://morisunshine.com/ios/replicating_uiscrollviews_deceleration_with_facebook/</loc>
