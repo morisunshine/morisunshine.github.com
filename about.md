@@ -1,7 +1,7 @@
 ---
 layout: page
 permalink: /about/
-title: About me
+title: About Me
 tags: [me]
 share: true
 ---
