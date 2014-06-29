@@ -6,7 +6,7 @@ tags: [me]
 share: true
 ---
 
-![图片](/images/about.jpg)
+![图片](/images/aboutme.jpg)
 
 >我是谁？
 
