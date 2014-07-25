@@ -159,7 +159,7 @@
 <h3>模型 (Model) 和显示 (Presentation) 的分离</h3>
 
 <p>Core Animation 是通过分离 layer 的模型属性和你在屏幕上看到的界面 (显示层) 的方式来设计的，这就导致我们很难去创建一个可以在任何时候能交互的动画，因为在动画时，模型和界面已经不能匹配了。这时，我们不得不通过手动的方式来同步这两个的状态，来达到改变动画的效果：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">view.layer.center = view.layer.presentationLayer.center;
+<div class="highlight"><pre><code class="language-text" data-lang="text">view.layer.center = view.layer.presentationLayer.center;
 [view.layer removeAnimationForKey:@&quot;animation&quot;];
 // 添加新动画
 </code></pre></div>
@@ -199,7 +199,7 @@
 <p>为了实现我们的控制板的行为，我们将使用 UIkit 力学中的两个不同行为：<a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UIAttachmentBehavior_Class/Reference/Reference.html">UIAttachmentBehavior</a> 和 <a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UIDynamicItemBehavior_Class/Reference/Reference.html">UIDynamicItemBehavior</a>。附着行为用来扮演弹簧的角色，它将界面向目标点拉动。另一方面，我们用动态 item behvaior 定义了比如摩擦系数这样的界面的内置属性。</p>
 
 <p>我创建了一个我们自己的行为子类，以将这两个行为封装到我们的控制板上:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">@interface PaneBehavior : UIDynamicBehavior
+<div class="highlight"><pre><code class="language-text" data-lang="text">@interface PaneBehavior : UIDynamicBehavior
 
 @property (nonatomic) CGPoint targetPoint;
 @property (nonatomic) CGPoint velocity;
@@ -209,7 +209,7 @@
 @end
 </code></pre></div>
 <p>我们通过一个 dynamic item 来初始化这个行为，然后就可以设置它的目标点和我们想要的任何速度。在内部，我们创建了附着行为和 dynamic item 行为，并且将这些行为添加到我们自定义的行为中:</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)setup
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)setup
 {
     UIAttachmentBehavior *attachmentBehavior = [[UIAttachmentBehavior alloc] initWithItem:self.item attachedToAnchor:CGPointZero];
     attachmentBehavior.frequency = 3.5;
@@ -226,14 +226,14 @@
 }
 </code></pre></div>
 <p>为了用 <code>targetPoint</code> 和 <code>velocity</code> 属性来影响 item 的 behavior，我们需要重写它们的 setter 方法，并且分别修改在附着行为和 item behaviors 中的对应的属性。我们对目标点的 setter 方法来说，这个改动很简单：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)setTargetPoint:(CGPoint)targetPoint
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)setTargetPoint:(CGPoint)targetPoint
 {
     _targetPoint = targetPoint;
     self.attachmentBehavior.anchorPoint = targetPoint;
 }
 </code></pre></div>
 <p>对于 <code>velocity</code> 属性，我们需要多做一些工作，因为 dynamic item behavior 只允许相对地改变速度。这就意味如果我们要将 <code>velocity</code> 设置为绝对值，首先我们就需要得到当前的速度，然后再加上速度差才能得到我们的目标速度。</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)setVelocity:(CGPoint)velocity
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)setVelocity:(CGPoint)velocity
 {
     _velocity = velocity;
     CGPoint currentVelocity = [self.itemBehavior linearVelocityForItem:self.item];
@@ -246,7 +246,7 @@
 <p>我们的控制板有三个不同状态：在开始或结束位置的静止状态，正在被用户拖动的状态，以及在没有用户控制时运动到结束位置的动画状态。</p>
 
 <p>为了将从直接操作状态 (用户拖动这个滑动板) 过渡到动画状态这个过程做的流畅，我们还有很多其他的事要做。当用户停止拖动控制板时，它会发送一个消息到它的 delegate。根据这个方法，我们可以知道这个板应该朝哪个方向运动，然后在我们自定义的 <code>PaneBehavior</code> 上设置结束点，以及初始速度 (这非常重要)，并将行为添加到动画器中去，以此确保从拖动操作到动画状态这个过程能够非常流畅。</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)draggableView:(DraggableView *)view draggingEndedWithVelocity:(CGPoint)velocity
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)draggableView:(DraggableView *)view draggingEndedWithVelocity:(CGPoint)velocity
 {
     PaneState targetState = velocity.y &gt;= 0 ? PaneStateClosed : PaneStateOpen;
     [self animatePaneToState:targetState initialVelocity:velocity];
@@ -267,13 +267,13 @@
 }
 </code></pre></div>
 <p>一旦用户用他的手指再次触动控制板时，我必须要将所有的 dynamic behavior 从 animator 删除，这样才不会影响控制板对拖动手势的响应：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)draggableViewBeganDragging:(DraggableView *)view
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)draggableViewBeganDragging:(DraggableView *)view
 {
     [self.animator removeAllBehaviors];
 }
 </code></pre></div>
 <p>我们不仅仅允许控制板可以被拖动，还要允许它可以被点击，让它可以从一个位置跳转到另一个位置以达到开关的效果。一旦点击事件发生，我们就会立即调整这个滑动板的目标位置。因为我们不能直接控制动画，但是通过弹力和摩擦力，我们的动画可以非常流畅地执行这个动作：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)didTap:(UITapGestureRecognizer *)tapRecognizer
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)didTap:(UITapGestureRecognizer *)tapRecognizer
 {
     PaneState targetState = self.paneState == PaneStateOpen ? PaneStateClosed : PaneStateOpen;
     [self animatePaneToState:targetState initialVelocity:CGPointZero];
@@ -294,46 +294,46 @@
 <p>首先让我们看一下我们需要知道的基础物理知识，这样我们才能实现出刚才使用 UIKit 力学实现的那种弹簧动画效果。为了简化问题，虽然引入第二个维度也是很直接的，但我们在这里只关注一维的情况 (在我们的例子中就是这样的情况)。</p>
 
 <p>我们的目标是依据控制面板当前的位置和上一次动画后到现在为止经过的时间，来计算它的新位置。我们可以把它表示成这样：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">y = y0 + Δy
+<div class="highlight"><pre><code class="language-text" data-lang="text">y = y0 + Δy
 </code></pre></div>
 <p>位置的偏移量可以通过速度和时间的函数来表达：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">Δy = v ⋅ Δt
+<div class="highlight"><pre><code class="language-text" data-lang="text">Δy = v ⋅ Δt
 </code></pre></div>
 <p>这个速度可以通过前一次的速度加上速度偏移量算出来，这个速度偏移量是由力在 view 上的作用引起的。</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">v = v0 + Δv
+<div class="highlight"><pre><code class="language-text" data-lang="text">v = v0 + Δv
 </code></pre></div>
 <p>速度的变化可以通过作用在这个 view 上的冲量计算出来：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">Δv = (F ⋅ Δt) / m
+<div class="highlight"><pre><code class="language-text" data-lang="text">Δv = (F ⋅ Δt) / m
 </code></pre></div>
 <p>现在，让我们看一下作用在这个界面上的力。为了得到弹簧效果，我们必须要将摩擦力和弹力结合起来：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">F = F_spring + F_friction
+<div class="highlight"><pre><code class="language-text" data-lang="text">F = F_spring + F_friction
 </code></pre></div>
 <p>弹力的计算方法我们可以从任何一本教科书中得到 (编者注：简单的胡克定律)：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">F_spring = k ⋅ x
+<div class="highlight"><pre><code class="language-text" data-lang="text">F_spring = k ⋅ x
 </code></pre></div>
 <p><code>k</code> 是弹簧的劲度系数，<code>x</code> 是 view 到目标结束位置的距离 (也就是弹簧的长度)。因此，我们可以把它写成这样：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">F_spring = k ⋅ abs(y_target - y0)
+<div class="highlight"><pre><code class="language-text" data-lang="text">F_spring = k ⋅ abs(y_target - y0)
 </code></pre></div>
 <p>摩擦力和 view 的速度成正比：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">F_friction = μ ⋅ v
+<div class="highlight"><pre><code class="language-text" data-lang="text">F_friction = μ ⋅ v
 </code></pre></div>
 <p><code>μ</code> 是一个简单的摩擦系数。你可以通过别的方式来计算摩擦力，但是这个方法能很好地做出我们想要的动画效果。</p>
 
 <p>将上面的表达式放在一起，我们就可以算出作用在界面上的力：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">F = k ⋅ abs(y_target - y0) + μ ⋅ v
+<div class="highlight"><pre><code class="language-text" data-lang="text">F = k ⋅ abs(y_target - y0) + μ ⋅ v
 </code></pre></div>
 <p>为了实现起来更简单点些，我们将 view 的质量设为 1，这样我们就能计算在位置上的变化：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">Δy = (v0 + (k ⋅ abs(y_target - y0) + μ ⋅ v) ⋅ Δt) ⋅ Δt
+<div class="highlight"><pre><code class="language-text" data-lang="text">Δy = (v0 + (k ⋅ abs(y_target - y0) + μ ⋅ v) ⋅ Δt) ⋅ Δt
 </code></pre></div>
 <h3>实现动画</h3>
 
 <p>为了实现这个动画，我们首先需要创建我们自己的 <code>Animator</code> 类，它将扮演驱动动画的角色。这个类使用了 <code>CADisplayLink</code>，<code>CADisplayLink</code> 是专门用来将绘图与屏幕刷新频率相同步的定时器。换句话说，如果你的动画是流畅的，这个定时器就会每秒调用你的方法60次。接下来，我们需要实现 <code>Animation</code> 协议来和我们的 <code>Animator</code> 一起工作。这个协议只有一个方法，<code>animationTick:finished:</code>。屏幕每次被刷新时都会调用这个方法，并且在方法中会得到两个参数：第一个参数是前一个 frame 的持续时间，第二个参数是一个指向 <code>BOOL</code> 的指针。当我们设置这个指针的值为 <code>YES</code> 时，我们就可以与 <code>Animator</code> 取得通讯并汇报动画完成；</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">@protocol Animation &lt;NSObject&gt;
+<div class="highlight"><pre><code class="language-text" data-lang="text">@protocol Animation &lt;NSObject&gt;
 - (void)animationTick:(CFTimeInterval)dt finished:(BOOL *)finished;
 @end
 </code></pre></div>
 <p>我们会在下面实现这个方法。首先，根据时间间隔我们来计算由弹力和摩擦力的合力。然后根据这个力来更新速度，并调整 view 的中心位置。最后，当这个速度降低并且 view 到达结束位置时，我们就停止这个动画：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)animationTick:(CFTimeInterval)dt finished:(BOOL *)finished
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)animationTick:(CFTimeInterval)dt finished:(BOOL *)finished
 {
     static const float frictionConstant = 20;
     static const float springConstant = 300;
@@ -364,13 +364,13 @@
 <h3>将动画添加到 view 上</h3>
 
 <p>我们的 view 类刚好和使用 UIDynamic 的例子一样：它有一个拖动手势，并且根据拖动手势来更新中心位置。它也有两个同样的 delegate 方法，这两个方法会实现动画的初始化。首先，一旦用户开始拖动控制板时，我们就取消所有动画：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)draggableViewBeganDragging:(DraggableView *)view
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)draggableViewBeganDragging:(DraggableView *)view
 {
     [self cancelSpringAnimation];
 }
 </code></pre></div>
 <p>一旦停止拖动，我们就根据从拖动手势中得到的最后一个速率值来开始我们的动画。我们根据拖动状态 <code>paneState</code> 计算出动画的结束位置：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)draggableView:(DraggableView *)view draggingEndedWithVelocity:(CGPoint)velocity
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)draggableView:(DraggableView *)view draggingEndedWithVelocity:(CGPoint)velocity
 {
     PaneState targetState = velocity.y &gt;= 0 ? PaneStateClosed : PaneStateOpen;
     self.paneState = targetState;
@@ -385,7 +385,7 @@
 }
 </code></pre></div>
 <p>剩下来要做的就是添加点击动画了，这很简单。一旦我们触发这个状态，就开始动画。如果这里正在进行弹簧动画，我们就用当时的速度作为开始。如果这个弹簧动画是 nil，那么这个开始速度就是 CGPointZero。想要知道为什么依然可以进行动画，可以看看 <code>animationTick:finished:</code> 里的代码。当这个起始速度为 0 的时候，弹力就会使速度缓慢地增长，直到面板到达目标位置：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)didTap:(UITapGestureRecognizer *)tapRecognizer
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)didTap:(UITapGestureRecognizer *)tapRecognizer
 {
     PaneState targetState = self.paneState == PaneStateOpen ? PaneStateClosed : PaneStateOpen;
     self.paneState = targetState;
@@ -395,7 +395,7 @@
 <h3>动画驱动</h3>
 
 <p>最后，我们需要一个 <code>Animator</code>，也就是动画的驱动者。Animator 封装了 display link。因为每个 display link 都链接一个指定的 <code>UIScreen</code>，所以我们根据这个指定的 UIScreen 来初始化我们的 animator。我们初始化一个 display link，并且将它加入到 run loop 中。因为现在还没有动画，所以我们是从暂停状态开始的：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (instancetype)initWithScreen:(UIScreen *)screen
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (instancetype)initWithScreen:(UIScreen *)screen
 {
     self = [super init];
     if (self) {
@@ -408,7 +408,7 @@
 }
 </code></pre></div>
 <p>一旦我们添加了这个动画，我们要确保这个 display link 不再是停止状态：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)addAnimation:(id&lt;Animation&gt;)animation
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)addAnimation:(id&lt;Animation&gt;)animation
 {
     [self.animations addObject:animation];
     if (self.animations.count == 1) {
@@ -417,7 +417,7 @@
 }
 </code></pre></div>
 <p>我们设置这个 display link 来调用 <code>animationTick:</code> 方法，在每个 Tick 中，我们都遍历它的动画数组，并且给这些动画数组中的每个动画发送一个消息。如果这个动画数组中已经没有动画了，我们就暂停这个 display link。</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text"> - (void)animationTick:(CADisplayLink *)displayLink
+<div class="highlight"><pre><code class="language-text" data-lang="text"> - (void)animationTick:(CADisplayLink *)displayLink
  {
      CFTimeInterval dt = displayLink.duration;
      for (id&lt;Animation&gt; a in [self.animations copy]) {
@@ -456,7 +456,7 @@
 
 <p>让我们动手用 POP 来驱动我们的动画吧。因为我们自己的类中已经封装了弹簧动画，这些改变就非常简单了。我们所要做的就是初始化一个 POP 动画来代替我们刚才自己做的动画，并将下面这段代码加入到 view
  中：</p>
-<div class="highlight"><pre><code class="text language-text" data-lang="text">- (void)animatePaneWithInitialVelocity:(CGPoint)initialVelocity
+<div class="highlight"><pre><code class="language-text" data-lang="text">- (void)animatePaneWithInitialVelocity:(CGPoint)initialVelocity
 {
     [self.pane pop_removeAllAnimations];
     POPSpringAnimation *animation = [POPSpringAnimation animationWithPropertyNamed:kPOPViewCenter];

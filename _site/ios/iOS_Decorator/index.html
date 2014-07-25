@@ -21,14 +21,14 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="iOS设计模式学习---装饰模式">
 <meta property="og:description" content="装饰模式（Decorator），动态地为一个对象添加额外的职责，是继承的替代方案，属于结构型模式。通过装饰模式扩展对象的功能比继承子类方式更灵活，使用继承子类的方式，是在编译时静态决定的，即编译时绑定，而且所有的子类都会继承相同的行为。然而，如果使用组合的方式扩展对象的行为，就可以在运行时动态地进行扩展，将来如果需要也可以动态的撤销，而不会影响原类的行为。">
-<meta property="og:url" content="http://morisunshine.com/ios/ios_decorator/">
+<meta property="og:url" content="http://morisunshine.com/ios/iOS_Decorator/">
 <meta property="og:site_name" content="Morisunshine's Blog">
 
 
 
 
 
-<link rel="canonical" href="http://morisunshine.com/ios/ios_decorator/">
+<link rel="canonical" href="http://morisunshine.com/ios/iOS_Decorator/">
 <link href="http://morisunshine.com/feed.xml" type="application/atom+xml" rel="alternate" title="Morisunshine's Blog Feed">
 
 
@@ -132,7 +132,7 @@
     <header class="header-title">
       <div class="header-title-wrap">
         
-          <h1 class="entry-title"><a href="http://morisunshine.com/ios/ios_decorator/" rel="bookmark" title="iOS设计模式学习---装饰模式">iOS设计模式学习---装饰模式</a></h1>
+          <h1 class="entry-title"><a href="http://morisunshine.com/ios/iOS_Decorator/" rel="bookmark" title="iOS设计模式学习---装饰模式">iOS设计模式学习---装饰模式</a></h1>
         
         <h2>July 14, 2013</h2>
       </div><!-- /.header-title-wrap -->
@@ -147,148 +147,133 @@
 
 <p>接下来，通过Object-C来实践一下，我设想一个场景，用Decorator模式来实现一下对某个手机的GPS和蓝牙功能扩展
 首先，我们需要一个手机的接口或者抽象类，我这里就用抽象类来实现，代码如下：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@interface AbstractCellPhone : NSObject
-- (NSString *)callNumber;
-- (NSString *)sendMessage;
-@end
-</code></pre></div><div class="highlight"><pre><code class="objc language-objc" data-lang="objc">#import &quot;AbstractCellPhone.h&quot;
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">@interface</span> <span class="nc">AbstractCellPhone</span> : <span class="bp">NSObject</span>
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">callNumber</span><span class="p">;</span>
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">sendMessage</span><span class="p">;</span>
+<span class="k">@end</span>
+</code></pre></div><div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#import &quot;AbstractCellPhone.h&quot;</span>
 
-@implementation AbstractCellPhone
+<span class="k">@implementation</span> <span class="nc">AbstractCellPhone</span>
 
-- (NSString *)callNumber
-{
-    return @&quot;phone call somebody&quot;;
-}
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">callNumber</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="s">@&quot;phone call somebody&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-- (NSString *)sendMessage
-{
-    return @&quot;phone send a message to somebody&quot;;
-}
-@end
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">sendMessage</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="s">@&quot;phone send a message to somebody&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@end</span>
 </code></pre></div>
 <p>AbstractCellPhone也就是结构图中的Component，然后，我再来实现Nokia和Moto的手机类，这类要继承AbstractCellPhone，也就是图中ConcreteComponent类要继承Component，实现代码如下：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-#import &quot;AbstractCellPhone.h&quot;   
-@interface NokiaPhone : AbstractCellPhone
-@end
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#import &quot;AbstractCellPhone.h&quot;   </span>
+<span class="k">@interface</span> <span class="nc">NokiaPhone</span> : <span class="nc">AbstractCellPhone</span>
+<span class="k">@end</span>
+</code></pre></div><div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#import &quot;NokiaPhone.h&quot;</span>
 
-</code></pre></div><div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-#import &quot;NokiaPhone.h&quot;
+<span class="k">@implementation</span> <span class="nc">NokiaPhone</span>
 
-@implementation NokiaPhone
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">callNumber</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="s">@&quot;NokiaPhone call somebody&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-- (NSString *)callNumber
-{
-    return @&quot;NokiaPhone call somebody&quot;;
-}
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">sendMessage</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="s">@&quot;NokiaPhone send Message to Somebody&quot;</span><span class="p">;</span>
+<span class="p">}</span>
 
-- (NSString *)sendMessage
-{
-    return @&quot;NokiaPhone send Message to Somebody&quot;;
-}
-
-@end
-
+<span class="k">@end</span>
 </code></pre></div>
 <p>接下来我需要一个Decorator接口或者抽象类，实现代码如下：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-#import &quot;AbstractCellPhone.h&quot;
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#import &quot;AbstractCellPhone.h&quot;</span>
 
-@interface Decorator : AbstractCellPhone
-{
-@protected AbstractCellPhone *abstractCellPhone;
-}
--(void)SetComponents:(Components*)component;
-@end
+<span class="k">@interface</span> <span class="nc">Decorator</span> : <span class="nc">AbstractCellPhone</span>
+<span class="p">{</span>
+<span class="k">@protected</span> <span class="n">AbstractCellPhone</span> <span class="o">*</span><span class="n">abstractCellPhone</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">SetComponents:</span><span class="p">(</span><span class="n">Components</span><span class="o">*</span><span class="p">)</span><span class="nv">component</span><span class="p">;</span>
+<span class="k">@end</span>
+</code></pre></div><div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#import &quot;Decorator.h&quot;</span>
 
-</code></pre></div><div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-#import &quot;Decorator.h&quot;
+<span class="k">@implementation</span> <span class="nc">Decorator</span>
+<span class="p">-(</span><span class="kt">void</span><span class="p">)</span><span class="nf">SetComponents:</span><span class="p">(</span><span class="n">Components</span><span class="o">*</span><span class="p">)</span><span class="nv">component</span><span class="p">{</span>
+    <span class="n">components</span> <span class="o">=</span> <span class="n">component</span><span class="p">;</span>
+<span class="p">}</span>
 
-@implementation Decorator
--(void)SetComponents:(Components*)component{
-    components = component;
-}
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">callNumber</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">components</span><span class="p">.</span><span class="n">callNumber</span><span class="p">;</span>
+<span class="p">}</span>
 
-- (NSString *)callNumber
-{
-    return components.callNumber;
-}
-
-- (NSString *)sendMessage
-{
-    return components.sendMessage;
-}
-@end
-
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">sendMessage</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">components</span><span class="p">.</span><span class="n">sendMessage</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@end</span>
 </code></pre></div>
 <p>正如结构图中，这个Decorator即继承了AbstractCellPhone，又包含了一个私有的AbstractCellPhone的对象。这样做的意义是：Decorator类又使用了另外一个Component类。我们可以使用一个或多个Decorator对象来“装饰”一个Component对象，且装饰后的对象仍然是一个Component对象。在下来，我要实现GSP和蓝牙的功能扩展，它们要继承自Decorator，代码如下：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-#import &quot;Decorator.h&quot;
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#import &quot;Decorator.h&quot;</span>
 
-@interface DecoratorGPS : Decorator
+<span class="k">@interface</span> <span class="nc">DecoratorGPS</span> : <span class="nc">Decorator</span>
 
-@end
+<span class="k">@end</span>
+</code></pre></div><div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="cp">#import &quot;DecoratorGPS.h&quot;</span>
 
-</code></pre></div><div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-#import &quot;DecoratorGPS.h&quot;
+<span class="k">@implementation</span> <span class="nc">DecoratorGPS</span>
 
-@implementation DecoratorGPS
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">callNumber</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="bp">NSString</span> <span class="nl">stringWithFormat</span><span class="p">:</span><span class="s">@&quot;%@ with GPS&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nb">super</span> <span class="n">callNumber</span><span class="p">]];</span>
+<span class="p">}</span>
 
-- (NSString *)callNumber
-{
-    return [NSString stringWithFormat:@&quot;%@ with GPS&quot;, [super callNumber]];
-}
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">sendMessage</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="bp">NSString</span> <span class="nl">stringWithFormat</span><span class="p">:</span><span class="s">@&quot;%@ with GPS&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nb">super</span> <span class="n">sendMessage</span><span class="p">]];</span>
+<span class="p">}</span>
 
-- (NSString *)sendMessage
-{
-    return [NSString stringWithFormat:@&quot;%@ with GPS&quot;, [super sendMessage]];
-}
-
-@end
-
+<span class="k">@end</span>
 </code></pre></div>
 <p>最后，用客户端程序验证一下：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">
-int main(int argc, const char *argv[])
-{
-    @autoreleasepool {
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">int</span> <span class="n">argc</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span> <span class="o">*</span><span class="n">argv</span><span class="p">[])</span>
+<span class="p">{</span>
+    <span class="k">@autoreleasepool</span> <span class="p">{</span>
 
-        Components *phone = [[ConcreteComponent alloc] init];
-        NSLog(@&quot;%@&quot;,phone.callNumber);
-        NSLog(@&quot;%@&quot;,phone.sendMessage);
-        ConcreteDecoratorA *GPS = [[ConcreteDecoratorA alloc] init];
-        [GPS SetComponents:phone];
-        NSLog(@&quot;%@&quot;,GPS.callNumber);
-        NSLog(@&quot;%@&quot;,GPS.sendMessage);
-        ConcreteDecoratorB *bluetooth = [[ConcreteDecoratorB alloc] init];
-        [bluetooth SetComponents:phone];
-        NSLog(@&quot;%@&quot;,bluetooth.callNumber);
-        NSLog(@&quot;%@&quot;,bluetooth.sendMessage);
-    }
-    return 0;
-}
-
+        <span class="n">Components</span> <span class="o">*</span><span class="n">phone</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ConcreteComponent</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">phone</span><span class="p">.</span><span class="n">callNumber</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">phone</span><span class="p">.</span><span class="n">sendMessage</span><span class="p">);</span>
+        <span class="n">ConcreteDecoratorA</span> <span class="o">*</span><span class="n">GPS</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ConcreteDecoratorA</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">GPS</span> <span class="nl">SetComponents</span><span class="p">:</span><span class="n">phone</span><span class="p">];</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">GPS</span><span class="p">.</span><span class="n">callNumber</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">GPS</span><span class="p">.</span><span class="n">sendMessage</span><span class="p">);</span>
+        <span class="n">ConcreteDecoratorB</span> <span class="o">*</span><span class="n">bluetooth</span> <span class="o">=</span> <span class="p">[[</span><span class="n">ConcreteDecoratorB</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">bluetooth</span> <span class="nl">SetComponents</span><span class="p">:</span><span class="n">phone</span><span class="p">];</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">bluetooth</span><span class="p">.</span><span class="n">callNumber</span><span class="p">);</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="s">@&quot;%@&quot;</span><span class="p">,</span><span class="n">bluetooth</span><span class="p">.</span><span class="n">sendMessage</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
 </code></pre></div>
 <p>执行结果：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc"> NokiaPhone call somebody
- NokiaPhone send Message to Somebody
- NokiaPhone call somebody with GPS
- NokiaPhone send Message to Somebody with GPS
- NokiaPhone call somebody with BlueTooth
- NokiaPhone send Message to Somebody with BlueTooth
-
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"> <span class="n">NokiaPhone</span> <span class="n">call</span> <span class="n">somebody</span>
+ <span class="n">NokiaPhone</span> <span class="n">send</span> <span class="n">Message</span> <span class="n">to</span> <span class="n">Somebody</span>
+ <span class="n">NokiaPhone</span> <span class="n">call</span> <span class="n">somebody</span> <span class="n">with</span> <span class="n">GPS</span>
+ <span class="n">NokiaPhone</span> <span class="n">send</span> <span class="n">Message</span> <span class="n">to</span> <span class="n">Somebody</span> <span class="n">with</span> <span class="n">GPS</span>
+ <span class="n">NokiaPhone</span> <span class="n">call</span> <span class="n">somebody</span> <span class="n">with</span> <span class="n">BlueTooth</span>
+ <span class="n">NokiaPhone</span> <span class="n">send</span> <span class="n">Message</span> <span class="n">to</span> <span class="n">Somebody</span> <span class="n">with</span> <span class="n">BlueTooth</span>
 </code></pre></div>
       <footer class="entry-meta">
         <span class="entry-tags"><a href="http://morisunshine.com/tags/#iOS" title="Pages tagged iOS" class="tag">iOS</a></span>
-        <span><a href="http://morisunshine.com/ios/ios_decorator/" rel="bookmark" title="iOS设计模式学习---装饰模式">iOS设计模式学习---装饰模式</a> was published on <span class="entry-date date published updated"><time datetime="2013-07-14T00:00:00+08:00">July 14, 2013</time></span></span>
+        <span><a href="http://morisunshine.com/ios/iOS_Decorator/" rel="bookmark" title="iOS设计模式学习---装饰模式">iOS设计模式学习---装饰模式</a> was published on <span class="entry-date date published updated"><time datetime="2013-07-14T00:00:00+08:00">July 14, 2013</time></span></span>
         
         <span class="author vcard"><span class="fn"><a href="http://morisunshine.com/about/" title="About Sheldon">Sheldon</a></span></span>
         <div class="social-share">
           <ul class="socialcount socialcount-small inline-list">
-            <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http://morisunshine.com/ios/ios_decorator/" title="Share on Facebook"><span class="count"><i class="icon-facebook-sign"></i> Like</span></a></li>
-            <li class="twitter"><a href="https://twitter.com/intent/tweet?text=http://morisunshine.com/ios/ios_decorator/" title="Share on Twitter"><span class="count"><i class="icon-twitter-sign"></i> Tweet</span></a></li>
-            <li class="googleplus"><a href="https://plus.google.com/share?url=http://morisunshine.com/ios/ios_decorator/" title="Share on Google Plus"><span class="count"><i class="icon-google-plus-sign"></i> +1</span></a></li>
-            <li class="weibo"><a href="http://v.t.sina.com.cn/share/share.php?title=http://morisunshine.com/ios/ios_decorator/" title="Share on Weibo"><span class="count"><i class="icon-weibo"></i>weibo</spac></a></li>
+            <li class="facebook"><a href="https://www.facebook.com/sharer/sharer.php?u=http://morisunshine.com/ios/iOS_Decorator/" title="Share on Facebook"><span class="count"><i class="icon-facebook-sign"></i> Like</span></a></li>
+            <li class="twitter"><a href="https://twitter.com/intent/tweet?text=http://morisunshine.com/ios/iOS_Decorator/" title="Share on Twitter"><span class="count"><i class="icon-twitter-sign"></i> Tweet</span></a></li>
+            <li class="googleplus"><a href="https://plus.google.com/share?url=http://morisunshine.com/ios/iOS_Decorator/" title="Share on Google Plus"><span class="count"><i class="icon-google-plus-sign"></i> +1</span></a></li>
+            <li class="weibo"><a href="http://v.t.sina.com.cn/share/share.php?title=http://morisunshine.com/ios/iOS_Decorator/" title="Share on Weibo"><span class="count"><i class="icon-weibo"></i>weibo</spac></a></li>
           </ul>
         </div><!-- /.social-share -->
       </footer>

@@ -169,35 +169,35 @@
 <p>我曾在这个博客上多次提过Objective-C是直接建立在C语言之上的，一个重要的原因是Objective-C和C语言共用一个类型系统，他们都要求标识符是全局唯一的。</p>
 
 <p>你可以自己定义一个和<code>@interface</code>同名的静态变量，编译之后你会得到一个错误：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@interface XXObject : NSObject
-@end
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">@interface</span> <span class="nc">XXObject</span> : <span class="bp">NSObject</span>
+<span class="k">@end</span>
 
-static char * XXObject;//将“XXObject”重新定义为不同的符号
+<span class="k">static</span> <span class="kt">char</span> <span class="o">*</span> <span class="n">XXObject</span><span class="p">;</span><span class="c1">//将“XXObject”重新定义为不同的符号</span>
 </code></pre></div>
 <p>也就是说，Objective-C的runtime在C语言的类型系统上又创建了一个抽象层，它甚至可以允许下面这段代码被编译:</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@protocol Foo
-@end
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">@protocol</span> <span class="nc">Foo</span>
+<span class="k">@end</span>
 
-@interface Foo : NSObject &lt;Foo&gt; {
-    id Foo;
-}
+<span class="k">@interface</span> <span class="nc">Foo</span> : <span class="bp">NSObject</span> <span class="o">&lt;</span><span class="n">Foo</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="kt">id</span> <span class="n">Foo</span><span class="p">;</span>
+<span class="p">}</span>
 
-@property id Foo;
-+ (id)Foo;
-- (id)Foo;
-@end
+<span class="k">@property</span> <span class="kt">id</span> <span class="n">Foo</span><span class="p">;</span>
+<span class="p">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">Foo</span><span class="p">;</span>
+<span class="p">-</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">Foo</span><span class="p">;</span>
+<span class="k">@end</span>
 
-@interface Foo (Foo)
-@end
+<span class="k">@interface</span> <span class="nc">Foo</span> <span class="nl">(Foo)</span>
+<span class="k">@end</span>
 
-@implementation Foo
-@synthesize Foo;
+<span class="k">@implementation</span> <span class="nc">Foo</span>
+<span class="k">@synthesize</span> <span class="n">Foo</span><span class="p">;</span>
 
-+ (id)Foo {
-    id Foo = @&quot;Foo&quot;;
-    return Foo;
-}
-@end
+<span class="p">+</span> <span class="p">(</span><span class="kt">id</span><span class="p">)</span><span class="nf">Foo</span> <span class="p">{</span>
+    <span class="kt">id</span> <span class="n">Foo</span> <span class="o">=</span> <span class="s">@&quot;Foo&quot;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">Foo</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="k">@end</span>
 </code></pre></div>
 <ol>
 <li>通过Objective-C的环境，程序能区别所有相同名字的类，协议，类别，实例变量，实例方法和类方法。</li>
@@ -303,16 +303,16 @@ static char * XXObject;//将“XXObject”重新定义为不同的符号
 
 <p>不仅是类容易造成命名冲突，selectors也很容易造成命名冲突，甚至方法比类会有更多的问题。
 考虑一下这个category：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@interface NSString (PigLatin)
-- (NSString *)pigLatinString;
-@end
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">@interface</span> <span class="bp">NSString</span> <span class="nl">(PigLatin)</span>
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">pigLatinString</span><span class="p">;</span>
+<span class="k">@end</span>
 </code></pre></div>
 <p>如果 <code>-pigLatinString</code>方法被另一个category实现了（或者以后版本的iOS或者Mac OS X 在NSString类中也添加了同样名字的方法），那么调用这个方法就会得到未定义的行为错误，因为我们不能保证在runtime中哪个方法会先被定义。</p>
 
 <p>我们可以通过在方法名前加前缀来避免这个问题，就像加这个类名一样（在类别名前加前缀也是个好办法）：</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@interface NSString (XXXPigLatin)
-- (NSString *)xxx_pigLatinString;
-@end
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">@interface</span> <span class="bp">NSString</span> <span class="nl">(XXXPigLatin)</span>
+<span class="p">-</span> <span class="p">(</span><span class="bp">NSString</span> <span class="o">*</span><span class="p">)</span><span class="nf">xxx_pigLatinString</span><span class="p">;</span>
+<span class="k">@end</span>
 </code></pre></div>
 <p>苹果官方建议<a href="https://developer.apple.com/library/ios/documentation/cocoa/conceptual/ProgrammingWithObjectiveC/CustomizingExistingClasses/CustomizingExistingClasses.html#//apple_ref/doc/uid/TP40011210-CH6-SW4">所有category方法都要使用前缀</a>，这个建议比类名需要加前缀的规定更加广为人知和接受。</p>
 
@@ -331,13 +331,13 @@ static char * XXObject;//将“XXObject”重新定义为不同的符号
 <h3>Swizzling</h3>
 
 <p>在Swizzling时，方法名加前缀或者后缀也是非常有必要的，这个我在上周关于<a href="http://nshipster.com/method-swizzling/">swizzling</a>的文章中提到过。</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@implementation UIViewController (Swizzling)
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="k">@implementation</span> <span class="bp">UIViewController</span> <span class="nl">(Swizzling)</span>
 
-- (void)xxx_viewDidLoad {
-    [self xxx_viewDidLoad];
+<span class="p">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="nf">xxx_viewDidLoad</span> <span class="p">{</span>
+    <span class="p">[</span><span class="nb">self</span> <span class="n">xxx_viewDidLoad</span><span class="p">];</span>
 
-    // Swizzled implementation
-}
+    <span class="c1">// Swizzled implementation</span>
+<span class="p">}</span>
 </code></pre></div>
 <h2>我们真的需要命名空间么？</h2>
 
@@ -348,19 +348,19 @@ static char * XXObject;//将“XXObject”重新定义为不同的符号
 <p><strong>语义学</strong>？让我们比较一下其他的语言，看看他们是怎么用命名空间的，那么你就会意识到命名空间不能解决所有不明确的问题。可能在某些额外环境的情况下，那些命名空间会出现更多问题。</p>
 
 <p>你还是不赞同，那么你想象一下Objective-C的命名空间的实现可能会像这个样子，你会觉得怎么样:</p>
-<div class="highlight"><pre><code class="objc language-objc" data-lang="objc">@namespace XX
-    @implementation Object
+<div class="highlight"><pre><code class="language-objc" data-lang="objc"><span class="p">@</span><span class="n">namespace</span> <span class="n">XX</span>
+    <span class="k">@implementation</span> <span class="nc">Object</span>
 
-    @using F: Foundation;
+    <span class="p">@</span><span class="n">using</span> <span class="nl">F</span><span class="p">:</span> <span class="n">Foundation</span><span class="p">;</span>
 
-    - (void)foo {
-        F:Array *array = @[@1,@2, @3];
+    <span class="o">-</span> <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">foo</span> <span class="p">{</span>
+        <span class="nl">F</span><span class="p">:</span><span class="n">Array</span> <span class="o">*</span><span class="n">array</span> <span class="o">=</span> <span class="l">@[</span><span class="mi">@1</span><span class="p">,</span><span class="mi">@2</span><span class="p">,</span> <span class="mi">@3</span><span class="l">]</span><span class="p">;</span>
 
-        // ...
-    }
+        <span class="c1">// ...</span>
+    <span class="p">}</span>
 
-    @end
-@end
+    <span class="k">@end</span>
+<span class="k">@end</span>
 </code></pre></div>
 <p>虽然Objective-C有繁琐的代码但也有容易理解的明显优点。我们作为开发者去讨论<code>NSString</code>的时候，我们不会把它理解成别的意思，编译器也是一样。当我们在阅读代码时，我们不需要过多地去考虑这些代码是什么作用的。并且最重要的是，NSString这个类名在google这些搜索引擎中<a href="http://lmgtfy.com/?q=NSString">很容易就可以找到， 你不会得到其他结果</a>。</p>
 
