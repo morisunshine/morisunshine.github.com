@@ -1,0 +1,77 @@
+title:            Morisunshine's Blog
+description:      
+#Your site's domain goes here. Leave localhost server or blank when working locally.
+url:              http://morisunshine.com
+#http://morisunshine.com
+#http://localhost:4000
+
+# Owner/author information
+owner:
+  name:           Sheldon
+  avatar:         avatar.png
+  bio:            1991-12-10
+  email:          sheldon.zen@gmail.com
+  twitter:        morisunshine
+  facebook:       
+  github:         morisunshine
+  stackexchange:  http://stackoverflow.com/users/2194236/morisunshine
+  linkedin:       morisunshine
+  instagram:      morisunshine
+  weibo:          1626743220
+  douban:         39009519
+  flickr:         
+  tumblr:         
+  # For Google Authorship https://plus.google.com/authorship
+  google_plus:   
+
+# Background image to be tiled on all pages
+background: 
+
+# Analytics and webmaster tools stuff goes here
+google_analytics: 'UA-47868064-1'
+google_verify:      
+# https://ssl.bing.com/webmaster/configure/verify/ownership Option 2 content= goes here
+bing_verify:         
+
+# Links to include in top navigation
+# For external links add external: true
+
+# http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone:    Asia/Shanghai
+future:      true
+pygments:    false
+markdown:    redcarpet
+redcarpet:
+  extensions: [fenced_code_blocks]
+  render_options:
+
+# https://github.com/mojombo/jekyll/wiki/Permalinks
+permalink:   /:categories/:title/
+
+coderay:
+    coderay_wrap: div
+    coderay_line_numbers: inline
+    coderay_line_numbers_start: 1
+    coderay_tab_width: 4
+    coderay_bold_every: 10
+    coderay_css: style
+
+# Amount of post to show on home page
+paginate: 5
+
+kramdown:
+  auto_ids: true
+  footnote_nr: 1
+  entity_output: as_char
+  toc_levels: 1..6
+  use_coderay: true
+
+  coderay:
+    coderay_line_numbers: yes
+    coderay_line_numbers_start: 1
+    coderay_tab_width: 4
+    coderay_bold_every: 10
+    coderay_css: class
+
+include: [".htaccess"]
+exclude: ["lib", "config.rb", "Capfile", "config", "log", "Rakefile", "Rakefile.rb", "tmp", "less", "*.sublime-project", "*.sublime-workspace", "test", "spec", "Gruntfile.js", "package.json", "node_modules"]
