@@ -4263,10 +4263,6 @@ body {
   padding: 25px 15px;
   margin-bottom: 20px;
   background-color: #ffffff;
-  -webkit-border-radius: 3px;
-     -moz-border-radius: 3px;
-          border-radius: 3px;
-  box-shadow: 0 0 0 0, 0 6px 12px rgba(34, 34, 34, 0.1);
 }
 
 @media only screen and (min-width: 48em) {
