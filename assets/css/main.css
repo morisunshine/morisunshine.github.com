@@ -4251,7 +4251,7 @@ body {
 
 @media only screen and (min-width: 62.5em) {
   #post-index #main {
-    max-width: 800px;
+    max-width: 1000px;
     margin-top: 50px;
     margin-right: auto;
     margin-left: auto;
