@@ -192,7 +192,11 @@ struct _class_ro_t {
 既然编译器不帮他，那让我们看看还有谁可以帮助的呢。
 
 既然我们能帮他实现访问方法，那我们能不能给他添加一个变量呢，于是很多人就会想到用runtime中的`Associated Objects`也就是关联对象，这里看一下[nshipster](http://nshipster.com/associated-objects/)对它的介绍，这里我们从代码出发，在runtime的源码中看看相关代码，我们先看看`objc_getAssociatedObject`这个方法里做了什么，
-我们可以看到最后调用的是`void _object_get_associative_reference(id object, void *key, id value, uintptr_t policy)`这个方法
+我们可以看到最后调用的是
+```
+void _object_get_associative_reference(id object, void *key, id value, uintptr_t policy)
+```
+这个方法
 
 ```
 id value = nil;
