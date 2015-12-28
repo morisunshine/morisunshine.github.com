@@ -21,13 +21,17 @@ share: true
 `- (void)addKeyFrame:(IFTTTAnimationKeyFrame *)keyFrame`将keyFrame添加到KeyFrames的数组中，为了保证时间顺序，要根据时间顺序来排列，并将每个时间段的参数都按顺序排列。
 `- (IFTTTAnimationFrame *)animationFrameForTime:(NSInteger)time`是获取某一时间的keyFramte
 `- (void)animate:(NSInteger)time`在某一个时刻执行相应时刻的动画，这里不同的动画效果是不一样，所以要在继承的子类被实现。
+
 ```
 - (CGFloat)tweenValueForStartTime:(NSInteger)startTime endTime:(NSInteger)endTime startValue:(CGFloat)startValue endValue:(CGFloat)endValue atTime:(CGFloat)time
+
 ```
+
 这个是比较重要的衔接作用，这个方法是计算出当前时间的动画参数的值，
 
 ```
 - (IFTTTAnimationFrame *)frameForTime:(NSInteger)time startKeyFrame:(IFTTTAnimationKeyFrame *)startKeyFrame endKeyFrame:(IFTTTAnimationKeyFrame *)endKeyFrame
+
 ```
 这个获取在某一个时间区间中的某个时间的动画参数
 
@@ -58,6 +62,7 @@ IFTTTTransform3D是其中的一些参数值
 首先是配置动画，上面的labelTransform、tt1、tt2都是动画参数。labelTransform也是动画对象，将上面的动画参数转化成帧参数。并添加到动画对象中。使用`addKeyFrame:`的过程中，首先先将这些`keyFrame`进行排序，再用
 ```
 - (CGFloat)tweenValueForStartTime:(NSInteger)startTime endTime:(NSInteger)endTime startValue:(CGFloat)startValue endValue:(CGFloat)endValue atTime:(CGFloat time
+    
 ```
 计算出每个位置时间对应的动画参数，添加到对应数组中。
 因为`IFTTTJazzHandsViewController`是继承`IFTTTAnimatedScrollViewController`类的，而其中最重要的就是，用了scrollView中的`scrollViewDidScroll`代理方法中，操作`animator`，将他里面的动画对象都按时间来展现出来，也就是用了`- (void)animate:(NSInteger)time`方法。
